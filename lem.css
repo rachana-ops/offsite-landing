@@ -1,13 +1,14 @@
 :root {
-  --pink: #e91e63;
-  --pink-dark: #c2185b;
-  --pink-soft: #fce4ec;
-  --yellow: #ffd54f;
-  --ink: #1f1f1f;
-  --muted: #6b6b6b;
-  --border: #ececec;
-  --bg: #ffffff;
-  --cream: #fff8ef;
+  --pink: #FF30CC;
+  --pink-dark: #D231CB;
+  --pink-soft: #FFEFF9;
+  --yellow: #CCFD28;
+  --yellow-soft: #FFF48D;
+  --ink: #1A1A1A;
+  --muted: #666666;
+  --border: #F0F0F0;
+  --bg: #FFFFFF;
+  --cream: #FCF7ED;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
