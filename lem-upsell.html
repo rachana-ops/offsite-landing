@@ -695,26 +695,21 @@
         <div class="ship-wrap"><div class="ship-note">🚚 Ships free in the same package</div></div>
 
         <div class="thumbs" id="thumbs">
-          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" class="active"><img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem product"/></button>
-          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3323.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3323.jpg" alt=""/></button>
-          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt=""/></button>
-          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt=""/></button>
-          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3326.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3326.jpg" alt=""/></button>
-          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3324.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3324.jpg" alt=""/></button>
+          <button type="button" class="active" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp')"><img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem product"/></button>
+          <button type="button" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/IMG_3323.jpg')"><img src="https://hellonancy.com/cdn/shop/files/IMG_3323.jpg" alt=""/></button>
+          <button type="button" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/IMG_3322.jpg')"><img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt=""/></button>
+          <button type="button" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/IMG_3325.jpg')"><img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt=""/></button>
+          <button type="button" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/IMG_3326.jpg')"><img src="https://hellonancy.com/cdn/shop/files/IMG_3326.jpg" alt=""/></button>
+          <button type="button" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/IMG_3324.jpg')"><img src="https://hellonancy.com/cdn/shop/files/IMG_3324.jpg" alt=""/></button>
         </div>
         <script>
-          (function() {
+          function swapHero(btn, url) {
             var hero = document.getElementById('heroImg');
-            var thumbs = document.getElementById('thumbs');
-            if (!hero || !thumbs) return;
-            thumbs.addEventListener('click', function(e) {
-              var btn = e.target.closest('button');
-              if (!btn) return;
-              hero.src = btn.getAttribute('data-full');
-              thumbs.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); });
-              btn.classList.add('active');
-            });
-          })();
+            if (hero) hero.src = url;
+            var siblings = btn.parentNode.querySelectorAll('button');
+            for (var i = 0; i < siblings.length; i++) siblings[i].classList.remove('active');
+            btn.classList.add('active');
+          }
         </script>
       </div>
     </div>
