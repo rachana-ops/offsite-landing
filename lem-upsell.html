@@ -242,9 +242,21 @@
     margin-top: 22px;
     max-width: 380px;
   }
-  .thumbs img {
+  .thumbs button {
+    padding: 0;
+    background: transparent;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    line-height: 0;
+    transition: border-color 0.15s ease, transform 0.1s ease;
+  }
+  .thumbs button:hover { border-color: var(--pink); transform: translateY(-1px); }
+  .thumbs button.active { border-color: var(--pink); }
+  .thumbs button img {
     width: 58px; height: 58px; object-fit: cover;
-    border: 1px solid var(--border); border-radius: 8px;
+    display: block;
   }
 
   /* Risk-free band */
@@ -662,7 +674,7 @@
     <div class="offer-grid">
       <div class="offer-img">
         <div class="stage">
-          <img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem clitoral massager"/>
+          <img id="heroImg" src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem clitoral massager"/>
         </div>
         <div class="save-badge">
           <span>SAVE</span>
@@ -682,13 +694,28 @@
         <a href="#decline" class="decline">No thanks &mdash; I don't want a second Lem at 58% off.</a>
         <div class="ship-wrap"><div class="ship-note">🚚 Ships free in the same package</div></div>
 
-        <div class="thumbs">
-          <img src="https://hellonancy.com/cdn/shop/files/IMG_3323.jpg" alt=""/>
-          <img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt=""/>
-          <img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt=""/>
-          <img src="https://hellonancy.com/cdn/shop/files/IMG_3326.jpg" alt=""/>
-          <img src="https://hellonancy.com/cdn/shop/files/IMG_3324.jpg" alt=""/>
+        <div class="thumbs" id="thumbs">
+          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" class="active"><img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem product"/></button>
+          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3323.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3323.jpg" alt=""/></button>
+          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt=""/></button>
+          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt=""/></button>
+          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3326.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3326.jpg" alt=""/></button>
+          <button type="button" data-full="https://hellonancy.com/cdn/shop/files/IMG_3324.jpg"><img src="https://hellonancy.com/cdn/shop/files/IMG_3324.jpg" alt=""/></button>
         </div>
+        <script>
+          (function() {
+            var hero = document.getElementById('heroImg');
+            var thumbs = document.getElementById('thumbs');
+            if (!hero || !thumbs) return;
+            thumbs.addEventListener('click', function(e) {
+              var btn = e.target.closest('button');
+              if (!btn) return;
+              hero.src = btn.getAttribute('data-full');
+              thumbs.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); });
+              btn.classList.add('active');
+            });
+          })();
+        </script>
       </div>
     </div>
   </div>
