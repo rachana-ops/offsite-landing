@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nancy — Customize Your Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF30CC;
+    --pink-dark: #D231CB;
+    --pink-soft: #FFEFF9;
+    --pink-banner: #FDEDEC;
+    --neon: #CCFD28;
+    --ink: #1A1A1A;
+    --muted: #666;
+    --border: #F0F0F0;
+    --cream: #FCF7ED;
+    --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.55;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--pink); text-decoration: underline; }
+  img { max-width: 100%; display: block; }
+
+  /* Confirmation top bar */
+  .top-bar {
+    background: var(--pink-soft);
+    border-bottom: 1px solid #f5d8ec;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 18px;
+  }
+  .top-bar .brand-mini { font-weight: 700; color: var(--pink); }
+  .top-bar .check { color: var(--pink); font-weight: 700; }
+  .top-bar a { color: var(--ink); }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 22px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header img { height: 34px; margin: 0 auto; }
+
+  /* Step indicator */
+  .steps {
+    display: flex;
+    justify-content: center;
+    margin: 28px auto 12px;
+    max-width: 620px;
+    padding: 0 16px;
+    gap: 0;
+  }
+  .step {
+    flex: 1;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    text-transform: uppercase;
+  }
+  .step.completed { background: var(--pink-dark); }
+  .step.current { background: var(--pink); }
+  .step::after {
+    content: "";
+    position: absolute;
+    right: -18px;
+    top: 0;
+    border: 21px solid transparent;
+    border-left-color: var(--pink-dark);
+    z-index: 1;
+  }
+  .step.current::after { border-left-color: var(--pink); }
+  .step:last-child::after { display: none; }
+
+  /* Warning */
+  .warning {
+    text-align: center;
+    color: var(--pink);
+    font-weight: 700;
+    font-size: 22px;
+    font-family: var(--font-display);
+    margin: 22px 16px 8px;
+    letter-spacing: -0.01em;
+  }
+  .sub-warning {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+
+  /* Container */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Intro box */
+  .intro {
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 16px 0 24px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #444;
+  }
+  .intro strong { color: var(--ink); }
+
+  /* Pricing teaser */
+  .price-teaser {
+    text-align: center;
+    color: var(--pink);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 1;
+    margin: 28px 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .vip-line {
+    text-align: center;
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+
+  /* Product showcase */
+  .product-block {
+    text-align: center;
+    margin: 12px 0 24px;
+    position: relative;
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 30px 20px 50px;
+  }
+  .lollies {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+  }
+  .lolly {
+    position: relative;
+    flex: 1;
+    max-width: 180px;
+  }
+  .lolly img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 16px rgba(255,48,204,0.18));
+  }
+  .lolly.center {
+    transform: scale(1.18);
+    z-index: 2;
+    max-width: 220px;
+  }
+  .lolly.left, .lolly.right {
+    opacity: 0.95;
+  }
+
+  .save-badge {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: var(--pink);
+    color: #fff;
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border: 4px solid var(--neon);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    transform: rotate(-8deg);
+    text-transform: uppercase;
+  }
+  .save-badge .amt { font-size: 20px; font-family: var(--font-display); }
+
+  .free-ship {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    background: var(--neon);
+    color: var(--ink);
+    padding: 8px 22px;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  }
+
+  /* Pricing */
+  .product-title {
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--ink);
+    margin: 24px 0 16px;
+    letter-spacing: -0.01em;
+  }
+  .price-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    margin: 14px 0 22px;
+    font-size: 15px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .price-row .col { display: flex; flex-direction: column; gap: 4px; }
+  .price-row .label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .strike { text-decoration: line-through; color: var(--muted); font-family: var(--font-display); font-size: 22px; }
+  .vip-price { color: var(--pink); font-weight: 700; font-family: var(--font-display); font-size: 26px; }
+
+  /* CTA button */
+  .cta {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 16px auto;
+    background: var(--pink);
+    color: #fff;
+    text-align: center;
+    padding: 18px 14px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    box-shadow: 0 6px 0 var(--pink-dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--pink-dark); }
+  .cta:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--pink-dark); }
+
+  .decline-link {
+    display: block;
+    text-align: center;
+    margin: 12px 0;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* Payment icons */
+  .payments {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 14px 0;
+    flex-wrap: wrap;
+  }
+  .pay {
+    height: 28px;
+    padding: 0 10px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    min-width: 50px;
+  }
+  .pay.visa { color: #1a1f71; }
+  .pay.mc { background: linear-gradient(90deg, #eb001b 50%, #f79e1b 50%); color: #fff; font-size: 9px; }
+  .pay.amex { background: #2e77bb; color: #fff; }
+  .pay.applepay { color: var(--ink); }
+  .pay.shop { background: #5a31f4; color: #fff; }
+  .pay.paypal { color: #003087; font-style: italic; }
+
+  /* Guarantee badge */
+  .guarantee {
+    text-align: center;
+    margin: 24px 0;
+  }
+  .guarantee-badge {
+    width: 92px;
+    height: 92px;
+    background: radial-gradient(circle, var(--neon) 0%, #b8e520 100%);
+    border-radius: 50%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--pink);
+    font-weight: 700;
+    font-size: 11px;
+    border: 4px solid var(--pink);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .guarantee-badge .big { font-size: 28px; line-height: 1; font-family: var(--font-display); letter-spacing: 0; }
+
+  /* Decline copy */
+  .decline-copy {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin: 14px auto 30px;
+    max-width: 560px;
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  /* Body copy */
+  .body-copy { margin: 18px 0; font-size: 15px; line-height: 1.7; }
+  .body-copy p { margin: 14px 0; }
+  .body-copy .pink { color: var(--pink); font-weight: 700; }
+
+  .story-img {
+    margin: 22px auto;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(204,253,40,0.45) 0%, transparent 45%),
+      radial-gradient(circle at 75% 75%, rgba(255,48,204,0.35) 0%, transparent 50%),
+      linear-gradient(135deg, #ffe2f5 0%, #fff0d2 100%);
+    box-shadow: 0 12px 30px rgba(255,48,204,0.18);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .story-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(255,48,204,0.25));
+  }
+
+  .testimonial {
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 22px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444;
+  }
+  .testimonial .stars { color: var(--pink); font-size: 14px; letter-spacing: 0.1em; margin-bottom: 10px; }
+  .testimonial .quote { font-style: italic; }
+  .testimonial .author { display: block; margin-top: 10px; font-weight: 700; color: var(--ink); font-style: normal; }
+
+  .try-line {
+    font-family: var(--font-display);
+    font-size: 22px;
+    text-align: center;
+    margin: 28px 0 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .try-line .pink { color: var(--pink); }
+
+  /* Reminder */
+  .reminder {
+    background: var(--neon);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 36px 0;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .reminder-title {
+    color: var(--pink);
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .reminder a { color: var(--ink); font-weight: 700; }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 16px 40px;
+    text-align: center;
+    background: var(--pink-soft);
+  }
+  .available {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .badges {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+  .badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink);
+    gap: 8px;
+    font-weight: 500;
+  }
+  .badge-icon { font-size: 26px; }
+
+  @media (max-width: 520px) {
+    .lollies { gap: 2px; }
+    .lolly.center { transform: scale(1.1); }
+    .save-badge { width: 60px; height: 60px; font-size: 9px; }
+    .save-badge .amt { font-size: 15px; }
+    .price-teaser { font-size: 30px; }
+    .product-title { font-size: 22px; }
+    .step { padding: 10px 8px; font-size: 10px; }
+    .step::after { border-width: 18px; right: -16px; }
+    .warning { font-size: 18px; }
+    .price-row { gap: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span class="brand-mini">Nancy</span>
+  <span><span class="check">✓</span> Confirmation #NCY-9X42KB</span>
+  <span>You're all paid up, gorgeous.</span>
+  <a href="#">View order confirmation ›</a>
+</div>
+
+<div class="header">
+  <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy" />
+</div>
+
+<div class="steps">
+  <div class="step completed">Step 1 · Order Received</div>
+  <div class="step current">Step 2 · Customize Order</div>
+</div>
+
+<div class="warning">Wait! Don't close this page yet 💗</div>
+<div class="sub-warning">Hitting "Back" or "Exit" could double-charge your card — let's keep things smooth.</div>
+
+<div class="container">
+  <div class="intro">
+    Because you just picked up <strong>Lem</strong>, you've unlocked one-time VIP access to its perfect partner-in-crime: <strong>Lolly</strong> — our brand-new pinpoint clitoral massager designed to be sweet, small, and obsessively precise. Where Lem brings deep, rumbly air-pulse waves, Lolly delivers fluttery, targeted buzzes right where you want them. Together they're our most-requested pairing — and today only, you can add Lolly to your order for a price you'll <em>never</em> see again.
+  </div>
+
+  <div class="price-teaser">Just £19 — once.</div>
+  <div class="vip-line">Today only, for Nancy VIPs (yes, that's you)</div>
+
+  <div class="product-block">
+    <div class="lollies">
+      <div class="lolly left">
+        <img src="https://hellonancy.com/cdn/shop/files/LOL_3.png?v=1762422962&width=800" alt="Lolly" />
+      </div>
+      <div class="lolly center">
+        <img src="https://hellonancy.com/cdn/shop/files/LOL1_eb49dfb5-0b1b-438d-b41e-dd27c75f2120.png?v=1762422962&width=1000" alt="Lolly Mini Wand" />
+      </div>
+      <div class="lolly right">
+        <img src="https://hellonancy.com/cdn/shop/files/LOL_2.png?v=1762422962&width=800" alt="Lolly" />
+        <div class="save-badge">
+          <div>Save</div>
+          <div class="amt">£50</div>
+        </div>
+      </div>
+    </div>
+    <div class="free-ship">★ Free Shipping Included</div>
+  </div>
+
+  <div class="product-title">Add Lolly — Pinpoint Clitoral Massager</div>
+
+  <div class="price-row">
+    <div class="col">
+      <span class="label">Usually</span>
+      <span class="strike">£69</span>
+    </div>
+    <div class="col">
+      <span class="label">Your VIP price</span>
+      <span class="vip-price">£19</span>
+    </div>
+  </div>
+
+  <a href="#" class="cta">Yes! Add Lolly to my order for £19 →</a>
+
+  <a href="#" class="decline-link">No thanks, I'll pass on this offer</a>
+
+  <div class="payments">
+    <div class="pay visa">VISA</div>
+    <div class="pay mc">MC</div>
+    <div class="pay amex">AMEX</div>
+    <div class="pay applepay">Pay</div>
+    <div class="pay shop">Shop</div>
+    <div class="pay paypal">PayPal</div>
+  </div>
+
+  <div class="guarantee">
+    <div class="guarantee-badge">
+      <div class="big">30</div>
+      <div>Day Promise</div>
+    </div>
+  </div>
+
+  <div class="decline-copy">
+    No thanks — I understand this is my one and only chance to add Lolly at the VIP price, and I'm okay missing it. If I change my mind later, I'll pay full price at £69 or more.
+  </div>
+
+  <div class="body-copy">
+    <p>Picture this: Lem giving you those deep, all-over waves you came here for…</p>
+    <p class="pink">…and Lolly tagging in for the finish.</p>
+    <p>One brings the build-up. The other brings the bullseye. The combo is the reason this pair sells out every time we restock.</p>
+  </div>
+
+  <div class="story-img">
+    <img src="https://hellonancy.com/cdn/shop/files/LOL_5.png?v=1762422962&width=1000" alt="Lolly Mini Wand" />
+  </div>
+
+  <div class="testimonial">
+    <div class="stars">★★★★★</div>
+    <div class="quote">"I bought Lem on a whim and added Lolly at checkout for the laugh. Best £19 I've ever spent. Lem warms me up, Lolly seals the deal. They live in my nightstand together like a little duo. 10/10, would recommend to my group chat — and I have."</div>
+    <span class="author">— Eleanor, London · Verified Buyer</span>
+  </div>
+
+  <div class="body-copy">
+    <p>Here's the honest truth before you decide…</p>
+    <p>Most people who buy Lem come back within a month asking what they should pair it with. We made Lolly <em>specifically</em> as that answer — slim enough to slip between you and Lem, with a tapered tip that goes exactly where Lem can't.</p>
+    <p>Three intensities. Whisper-quiet. Rechargeable. Body-safe silicone. Slips into your bag like, well, a lollipop.</p>
+    <p>Because we only get a handful of restocks each quarter, this VIP price is exclusive to the post-checkout window. After today, Lolly goes back to £69 — and during the next sell-out window, you could be waiting 6–8 weeks for the next batch.</p>
+    <p class="pink">Lock in your Lolly now while it's still here, and at a price you'll never see again.</p>
+    <p>And yes — <strong>shipping is on us, discreetly packaged</strong>, same parcel as your Lem.</p>
+    <p>Covered by our <strong>30-Day Pleasure Promise</strong>. If it doesn't change things for you, we'll refund you — no awkward questions.</p>
+  </div>
+
+  <div class="try-line">
+    Add <strong>Lolly</strong> to your order for <span class="pink">just £19</span>.<br>
+    Sound good?
+  </div>
+
+  <div class="product-block">
+    <div class="lollies">
+      <div class="lolly left">
+        <img src="https://hellonancy.com/cdn/shop/files/LOL_3.png?v=1762422962&width=800" alt="Lolly" />
+      </div>
+      <div class="lolly center">
+        <img src="https://hellonancy.com/cdn/shop/files/LOL1_eb49dfb5-0b1b-438d-b41e-dd27c75f2120.png?v=1762422962&width=1000" alt="Lolly Mini Wand" />
+      </div>
+      <div class="lolly right">
+        <img src="https://hellonancy.com/cdn/shop/files/LOL_2.png?v=1762422962&width=800" alt="Lolly" />
+        <div class="save-badge">
+          <div>Save</div>
+          <div class="amt">£50</div>
+        </div>
+      </div>
+    </div>
+    <div class="free-ship">★ Free Shipping Included</div>
+  </div>
+
+  <div class="product-title">Add Lolly — Pinpoint Clitoral Massager</div>
+
+  <div class="price-row">
+    <div class="col">
+      <span class="label">Usually</span>
+      <span class="strike">£69</span>
+    </div>
+    <div class="col">
+      <span class="label">Your VIP price</span>
+      <span class="vip-price">£19</span>
+    </div>
+  </div>
+
+  <a href="#" class="cta">Yes! Add Lolly to my order for £19 →</a>
+
+  <a href="#" class="decline-link">No thanks, I'll pass on this offer</a>
+
+  <div class="payments">
+    <div class="pay visa">VISA</div>
+    <div class="pay mc">MC</div>
+    <div class="pay amex">AMEX</div>
+    <div class="pay applepay">Pay</div>
+    <div class="pay shop">Shop</div>
+    <div class="pay paypal">PayPal</div>
+  </div>
+
+  <div class="guarantee">
+    <div class="guarantee-badge">
+      <div class="big">30</div>
+      <div>Day Promise</div>
+    </div>
+  </div>
+
+  <div class="decline-copy">
+    No, I don't want to add Lolly to my order for £19. I'm aware I'll never see this price again.
+  </div>
+
+  <div class="reminder">
+    <div class="reminder-title">One-time offer — only on this page</div>
+    Once you leave this page, Lolly goes back to its full £69 price tag. This VIP offer is reserved exclusively for new Lem customers, in this window only. <a href="#">Click the pink button above</a> to lock in your Lolly.
+  </div>
+</div>
+
+<div class="footer">
+  <div class="available">Reserved for Nancy VIPs · One-Time Offer</div>
+  <div class="badges">
+    <div class="badge-item">
+      <div class="badge-icon">🚚</div>
+      <div>Ships in 48 Hours</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon">📦</div>
+      <div>Discreet Packaging</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon">💬</div>
+      <div>Real-Human Support</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

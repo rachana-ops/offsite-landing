@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rosabella - Customize Your Order</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    background: #fff;
+    line-height: 1.5;
+    font-size: 15px;
+  }
+  a { color: #0066cc; text-decoration: underline; }
+
+  /* Confirmation top bar */
+  .top-bar {
+    background: #eaf6ec;
+    border-bottom: 1px solid #cfe5d3;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #444;
+  }
+  .top-bar .brand-mini { font-weight: bold; color: #2a8a3e; }
+  .top-bar .check { color: #2a8a3e; font-weight: bold; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 18px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2a8a3e;
+    font-style: italic;
+  }
+  .logo::before {
+    content: "🌿 ";
+    font-style: normal;
+  }
+  .made-usa {
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .made-usa::before { content: "🛒"; }
+
+  /* Step indicator */
+  .steps {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 24px auto 8px;
+    max-width: 560px;
+    padding: 0 16px;
+  }
+  .step {
+    flex: 1;
+    padding: 10px 18px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+  }
+  .step.completed { background: #2a8a3e; }
+  .step.current { background: #1f6e30; }
+  .step::after {
+    content: "";
+    position: absolute;
+    right: -14px;
+    top: 0;
+    border: 18px solid transparent;
+    border-left-color: #2a8a3e;
+    z-index: 1;
+  }
+  .step.current::after { border-left-color: #1f6e30; }
+  .step:last-child::after { display: none; }
+
+  /* Warning */
+  .warning {
+    text-align: center;
+    color: #c8102e;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 16px 16px 6px;
+  }
+  .sub-warning {
+    text-align: center;
+    color: #c8102e;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* Container */
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Intro box */
+  .intro {
+    border: 1px solid #d6d6d6;
+    padding: 16px;
+    margin: 16px 0;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+  }
+  .intro p + p { margin-top: 10px; opacity: 0.7; }
+
+  /* Pricing teaser */
+  .price-teaser {
+    text-align: center;
+    color: #2a8a3e;
+    font-weight: bold;
+    font-size: 22px;
+    margin: 14px 0 4px;
+  }
+  .vip-line {
+    text-align: center;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 18px;
+  }
+
+  /* Product showcase */
+  .product-block {
+    text-align: center;
+    margin: 12px 0 20px;
+    position: relative;
+  }
+  .bottles {
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+  }
+  .bottle {
+    width: 110px;
+    height: 180px;
+    background: linear-gradient(180deg, #d8e8e8 0%, #6fa6a9 40%, #4a8083 100%);
+    border-radius: 12px 12px 8px 8px;
+    position: relative;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  }
+  .bottle::before {
+    content: "";
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 60px; height: 14px;
+    background: #2c4f52;
+    border-radius: 4px;
+  }
+  .bottle-label {
+    position: absolute;
+    top: 30px;
+    left: 8px;
+    right: 8px;
+    bottom: 30px;
+    background: #fff;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    text-align: center;
+  }
+  .bottle-label .name {
+    font-size: 11px;
+    font-weight: bold;
+    color: #1f5e60;
+    letter-spacing: 0.5px;
+  }
+  .bottle-label .sub {
+    font-size: 7px;
+    color: #666;
+    margin: 3px 0;
+  }
+  .bottle-label .dots {
+    display: flex;
+    gap: 3px;
+    margin-top: 4px;
+  }
+  .bottle-label .dots span {
+    width: 8px; height: 8px;
+    background: #d4a017;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .bottle.middle { width: 130px; height: 200px; }
+
+  .save-badge {
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    background: #c8102e;
+    color: #fff;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transform: rotate(8deg);
+  }
+  .save-badge .amt { font-size: 18px; }
+
+  .free-ship {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-6deg);
+    background: #ffd34d;
+    color: #c8102e;
+    padding: 6px 18px;
+    font-weight: bold;
+    font-size: 13px;
+    border: 2px solid #fff;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    border-radius: 4px;
+  }
+  .usa-flag {
+    position: absolute;
+    top: 12px;
+    left: 6px;
+    width: 24px;
+    height: 16px;
+    background: linear-gradient(to bottom, #b22234 0 33%, #fff 33% 66%, #3c3b6e 66%);
+    border: 1px solid #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border-radius: 2px;
+  }
+
+  /* Pricing */
+  .product-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 24px 0 14px;
+  }
+  .price-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 12px 0 18px;
+    font-size: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .price-row .label { font-weight: bold; color: #c8102e; }
+  .price-row .label.vip { color: #2a8a3e; }
+  .price-row .val { font-weight: bold; }
+  .strike { text-decoration: line-through; color: #c8102e; font-weight: bold; }
+  .vip-price { color: #2a8a3e; font-weight: bold; }
+
+  /* CTA button */
+  .cta {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 14px auto;
+    background: linear-gradient(180deg, #4a8de0 0%, #2a6abf 100%);
+    color: #fff;
+    text-align: center;
+    padding: 16px 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 3px 0 #1f5395;
+  }
+  .cta:hover { filter: brightness(1.05); }
+
+  .decline-link {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #c8102e;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* Payment icons */
+  .payments {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+  }
+  .pay {
+    width: 50px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .pay.visa { color: #1a1f71; }
+  .pay.mc { background: linear-gradient(90deg, #eb001b 50%, #f79e1b 50%); color: #fff; font-size: 9px; }
+  .pay.disc { color: #ff6000; }
+  .pay.amex { background: #2e77bb; color: #fff; }
+  .pay.paypal { color: #003087; font-size: 11px; font-style: italic; }
+
+  /* Guarantee badge */
+  .guarantee {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .guarantee-badge {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #ffd34d 0%, #d4a017 100%);
+    border-radius: 50%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #1a4d8f;
+    font-weight: bold;
+    font-size: 12px;
+    border: 3px solid #b8860b;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  }
+  .guarantee-badge .big { font-size: 20px; line-height: 1; }
+  .guarantee-badge .small { font-size: 10px; }
+
+  /* Decline copy */
+  .decline-copy {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    margin: 14px auto 30px;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
+  /* Story section */
+  .story-heading {
+    font-size: 16px;
+    margin: 18px 0 10px;
+  }
+  .story-heading strong { color: #333; }
+
+  .story-img {
+    margin: 18px auto;
+    width: 260px;
+    height: 260px;
+    background: linear-gradient(135deg, #d4c4b0, #a89580);
+    border-radius: 6px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  .story-img::after {
+    content: "👩";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    filter: grayscale(0.3);
+  }
+
+  .testimonial {
+    font-size: 13px;
+    font-style: italic;
+    color: #555;
+    text-align: center;
+    margin: 14px auto 22px;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
+  /* Body copy */
+  .body-copy {
+    margin: 14px 0;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .body-copy p { margin: 12px 0; }
+  .body-copy .red { color: #c8102e; font-weight: bold; }
+
+  .try-line {
+    font-size: 16px;
+    text-align: center;
+    margin: 22px 0 14px;
+  }
+  .try-line strong { color: #333; }
+  .try-line .red { color: #c8102e; font-weight: bold; }
+
+  /* Reminder section */
+  .reminder {
+    background: #fff8e1;
+    border: 1px solid #f0d97a;
+    padding: 18px 20px;
+    margin: 30px 0;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .reminder-title {
+    color: #c8102e;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .reminder a { color: #1a6dd0; font-weight: bold; }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid #ddd;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .available {
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .badges {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: #555;
+    gap: 6px;
+  }
+  .badge-icon {
+    font-size: 28px;
+    color: #888;
+  }
+
+  @media (max-width: 520px) {
+    .header { gap: 12px; }
+    .bottle { width: 80px; height: 140px; }
+    .bottle.middle { width: 95px; height: 155px; }
+    .save-badge { width: 56px; height: 56px; font-size: 9px; }
+    .save-badge .amt { font-size: 14px; }
+    .steps { font-size: 11px; }
+    .step { padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div><span class="brand-mini">🌿 Rosabella</span></div>
+  <div><span class="check">✓</span> Confirmation #20LIXJ4N_CX</div>
+  <div>You've paid for your order.</div>
+  <div><a href="#">View order confirmation ›</a></div>
+</div>
+
+<div class="header">
+  <div class="logo">Rosabella</div>
+  <div class="made-usa">Made In The USA</div>
+</div>
+
+<div class="steps">
+  <div class="step completed">STEP 1: ORDER RECEIVED</div>
+  <div class="step current">STEP 2: CUSTOMIZE ORDER</div>
+</div>
+
+<div class="warning">Do NOT Close Or Quit This Page!</div>
+<div class="sub-warning">Don't click "Back" or "Exit" or it may cause multiple charges on your card.</div>
+
+<div class="container">
+  <div class="intro">
+    <p>SINCE YOU'VE SHOWN REAL COMMITMENT TO BOOSTING YOUR OVERALL HEALTH AND VITALITY, WE WANT TO OFFER YOU EXCLUSIVE ACCESS TO A POWERFUL NEW SOLUTION—FEATURING SEA MOSS, BLACKSEED OIL, ASHWAGANDHA, AND BURDOCK ROOT—THAT CAN SUPERCHARGE YOUR RESULTS… ALL FOR AN INCREDIBLY LOW PRICE! BY COMBINING THIS POTENT SUPPLEMENT WITH YOUR ROSABELLA MORINGA, YOU CAN ENSURE EVEN GREATER VITALITY AND HEALTH BENEFITS, HELPING YOU FEEL STRONGER AND MORE ENERGIZED THAN EVER!</p>
+    <p>BY COMBINING THIS POTENT SUPPLEMENT WITH YOUR ROSABELLA MORINGA, YOU CAN ENSURE EVEN GREATER VITALITY AND HEALTH BENEFITS, HELPING YOU FEEL STRONGER AND MORE ENERGIZED THAN EVER BY COMBINING THIS POTENT SUPPLEMENT WITH YOUR ROSABELLA MORINGA, YOU CAN ENSURE EVEN GREATER VITALITY AND HEALTH BENEFITS, HELPING YOU FEEL STRONGER AND MORE ENERGIZED THAN EVER</p>
+  </div>
+
+  <div class="price-teaser">Only $16/each</div>
+  <div class="vip-line">Today For Rosabella VIPs (you!)</div>
+
+  <div class="product-block">
+    <div class="bottles">
+      <div class="bottle">
+        <div class="usa-flag"></div>
+        <div class="bottle-label">
+          <div class="name">SEAMOSS</div>
+          <div class="sub">VITALITY BLEND</div>
+          <div class="dots"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="bottle middle">
+        <div class="usa-flag"></div>
+        <div class="bottle-label">
+          <div class="name">SEAMOSS</div>
+          <div class="sub">VITALITY BLEND</div>
+          <div class="dots"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="bottle">
+        <div class="usa-flag"></div>
+        <div class="bottle-label">
+          <div class="name">SEAMOSS</div>
+          <div class="sub">VITALITY BLEND</div>
+          <div class="dots"><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="save-badge">
+          <div>SAVE</div>
+          <div class="amt">$192</div>
+        </div>
+      </div>
+      <div class="free-ship">FREE SHIPPING</div>
+    </div>
+  </div>
+
+  <div class="product-title">3 Months of Sea Moss Vitality Blend</div>
+
+  <div class="price-row">
+    <div><span class="label">REGULARLY:</span> <span class="strike">$240</span></div>
+    <div><span class="label vip">YOUR VIP RATE:</span> <span class="vip-price">$16/ea</span></div>
+  </div>
+
+  <a href="#" class="cta">Send Me 3 Bottles Rosabella Sea Moss Vitality Blend For Only $16/each!</a>
+
+  <a href="#" class="decline-link">No, I'll pass on this offer</a>
+
+  <div class="payments">
+    <div class="pay visa">VISA</div>
+    <div class="pay mc">MC</div>
+    <div class="pay disc">DISCOVER</div>
+    <div class="pay amex">AMEX</div>
+    <div class="pay paypal">PayPal</div>
+  </div>
+
+  <div class="guarantee">
+    <div class="guarantee-badge">
+      <div class="big">180</div>
+      <div class="small">DAYS</div>
+    </div>
+  </div>
+
+  <div class="decline-copy">
+    No, thanks. I understand that this is my only chance to have access to this special offer, and it's okay to miss it. Instead, if I am delighted with my experience with Naar, like thousands of women before me, I will reorder at $49 per bottle or more. I will let this opportunity pass me by forever.
+  </div>
+
+  <div class="body-copy">
+    <p>Imagine combining the powerful Sea Moss Vitality Blend with the Moringa you just ordered…</p>
+    <p><strong>Your results will come in like clockwork!</strong></p>
+    <p>Imagine combining the powerful Sea Moss Vitality Blend with the Moringa you just ordered…</p>
+    <p><strong>Your results will come in like clockwork!</strong></p>
+  </div>
+
+  <div class="story-img"></div>
+
+  <div class="testimonial">
+    "My energy levels were always low, and I struggled with brain fog and sluggishness. I tried countless solutions that didn't work, but everything changed when I found Rosabella Moringa. After just a month and a half, I felt more energized, focused, and vibrant. My skin started to glow, and I noticed a real difference in my overall health. I'm now on my third bottle and highly recommend giving it a try!!" — Mary
+  </div>
+
+  <div class="body-copy">
+    <p>But before you order, there's something you need to know…</p>
+    <p>As you've seen from the studies presented today… the longer you take these natural ingredients, the more significant the benefits become.</p>
+    <p>This gives the powerful ingredients in the Sea Moss Vitality Blend enough time to fully work their magic.</p>
+    <p>By taking advantage of this 3-months supply…</p>
+    <p>You don't just support your energy, immune system, and overall wellness in the short term…</p>
+    <p>You also build lasting improvements in vitality, skin health, and mental clarity.</p>
+    <p>Of course, with so many people choosing to order multiple bottles at a time…</p>
+    <p>It often means demand exceeds supply, and the production of Sea Moss from trusted sources may face delays… Which could leave you waiting up to three months for the next batch. I'd hate for you to miss out on this.</p>
+    <p>So, if you want to fully maximize your results and enjoy the long-term benefits of Moringa and Sea Moss together…</p>
+    <p class="red">Secure your supply now and lock in the lowest price possible, while it's still available.</p>
+    <p>The choice is yours, but you won't have another chance to come back to this exclusive page—so make your decision wisely!</p>
+    <p><strong>Plus, we're covering the shipping cost for you. Yes, it's FREE.</strong></p>
+    <p>Take advantage of this limited-time offer by clicking the button below. This is the lowest price you'll ever see for the Sea Moss Vitality Blend.</p>
+    <p>And don't forget, it's covered by our <strong>180-Day 100% Money-Back Guarantee</strong>, so you have nothing to lose!</p>
+  </div>
+
+  <div class="try-line">
+    Try out <strong>3 Months of Rosabella Sea Moss Vitality</strong> <span class="red">for ONLY $16 each!</span><br>
+    Sounds fair?
+  </div>
+
+  <div class="product-block">
+    <div class="bottles">
+      <div class="bottle">
+        <div class="usa-flag"></div>
+        <div class="bottle-label">
+          <div class="name">SEAMOSS</div>
+          <div class="sub">VITALITY BLEND</div>
+          <div class="dots"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="bottle middle">
+        <div class="usa-flag"></div>
+        <div class="bottle-label">
+          <div class="name">SEAMOSS</div>
+          <div class="sub">VITALITY BLEND</div>
+          <div class="dots"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="bottle">
+        <div class="usa-flag"></div>
+        <div class="bottle-label">
+          <div class="name">SEAMOSS</div>
+          <div class="sub">VITALITY BLEND</div>
+          <div class="dots"><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="save-badge">
+          <div>SAVE</div>
+          <div class="amt">$192</div>
+        </div>
+      </div>
+      <div class="free-ship">FREE SHIPPING</div>
+    </div>
+  </div>
+
+  <div class="product-title">3 Months of Sea Moss Vitality Blend</div>
+
+  <div class="price-row">
+    <div><span class="label">REGULARLY</span><br><span class="strike">$240</span></div>
+    <div><span class="label vip">YOUR VIP RATE</span><br><span class="vip-price">$16/each</span></div>
+  </div>
+
+  <a href="#" class="cta">Send Me 3 Bottles Rosabella Sea Moss Vitality Blend For Only $16/each!</a>
+
+  <a href="#" class="decline-link">No, I'll pass on this offer</a>
+
+  <div class="payments">
+    <div class="pay visa">VISA</div>
+    <div class="pay mc">MC</div>
+    <div class="pay disc">DISCOVER</div>
+    <div class="pay amex">AMEX</div>
+    <div class="pay paypal">PayPal</div>
+  </div>
+
+  <div class="guarantee">
+    <div class="guarantee-badge">
+      <div class="big">180</div>
+      <div class="small">DAYS</div>
+    </div>
+  </div>
+
+  <div class="decline-copy">
+    No, I don't want to ensure my health and wellness with amazing blend for only $16 each for 3 months. I'm aware I will never see this offer be low again.
+  </div>
+
+  <div class="reminder">
+    <div class="reminder-title">Remember, Due to Limited Rosabella Sea Moss Vitality Serum…</div>
+    Once You Exit This Page You Cannot Come Back Here To Take Advantage Of This Offer! This is only being offered to our existing buyers of Rosabella. So take advantage now. <a href="#">Click the blue button above</a> to accept your VIP Rosabella Sea Moss Vitality Blend Bottles.
+  </div>
+</div>
+
+<div class="footer">
+  <div class="available">ONLY AVAILABLE FOR A LIMITED TIME!</div>
+  <div class="badges">
+    <div class="badge-item">
+      <div class="badge-icon">🚚</div>
+      <div>Ship In 48 Hours</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon">🔒</div>
+      <div>100% Secure Payment</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon">📞</div>
+      <div>24/7 Support</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
