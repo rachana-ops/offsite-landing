@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nancy — Customize Your Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #FF30CC;
+    --pink-dark: #D231CB;
+    --pink-soft: #FFEFF9;
+    --pink-softer: #FFEAFA;
+    --pink-banner: #FDEDEC;
+    --neon: #CCFD28;
+    --neon-dark: #B8E61F;
+    --ink: #1A1A1A;
+    --muted: #666666;
+    --border: #F0F0F0;
+    --line: #E6E6E6;
+    --cream: #FCF7ED;
+    --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.5;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  .container { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  /* Confirmation Bar */
+  .confirm-bar {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    font-size: 13px;
+  }
+  .confirm-row { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+  .confirm-row .check {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--pink); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+  }
+  .confirm-bar strong { color: var(--ink); font-weight: 600; }
+  .confirm-bar .small-link { color: var(--pink); text-decoration: none; font-size: 12px; }
+  .confirm-bar .small-link:hover { text-decoration: underline; }
+
+  /* Brand band */
+  .brand-band {
+    background: var(--pink-soft);
+    padding: 18px 20px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 24px;
+  }
+  .brand-band img.logo { height: 30px; width: auto; }
+  .uk-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--ink); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .uk-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); }
+
+  /* Steps */
+  .steps-wrap { padding: 24px 0; background: #fff; }
+  .steps { display: flex; justify-content: center; gap: 0; }
+  .step {
+    position: relative;
+    padding: 12px 36px 12px 28px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    color: #fff;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+  }
+  .step.done { background: #c9c9c9; }
+  .step.current { background: var(--ink); margin-left: -10px; }
+
+  /* Congrats banner */
+  .congrats {
+    background: var(--neon);
+    color: var(--ink);
+    margin: 8px 20px 0;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 4px;
+  }
+  .alert-red {
+    text-align: center;
+    color: var(--pink);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.2;
+    padding: 24px 20px 4px;
+    letter-spacing: -0.01em;
+  }
+  .alert-red em { font-style: italic; }
+
+  /* Hero offer */
+  .offer { padding: 26px 0 36px; }
+  .offer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .offer-img { position: relative; }
+  .offer-img .stage {
+    background: var(--pink-soft);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 320px;
+  }
+  .offer-img .stage img {
+    max-width: 100%; max-height: 360px; height: auto;
+    transform: rotate(-6deg);
+    filter: drop-shadow(0 14px 24px rgba(255,48,204,0.18));
+  }
+  .save-badge {
+    position: absolute;
+    top: 12px; right: 14px;
+    width: 96px; height: 96px;
+    background: var(--neon);
+    color: var(--ink);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 6px 14px rgba(204,253,40,0.45);
+    transform: rotate(-8deg);
+    border: 2px solid var(--ink);
+  }
+  .save-badge span:first-child { font-size: 13px; letter-spacing: 0.04em; }
+  .save-badge span:last-child { font-size: 24px; margin-top: 4px; font-family: var(--font-display); }
+  .ship-badge {
+    position: absolute;
+    bottom: 24px; left: -10px;
+    background: var(--pink);
+    color: #fff;
+    padding: 10px 22px 10px 14px;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%);
+    transform: rotate(-6deg);
+    box-shadow: 0 6px 14px rgba(255,48,204,0.3);
+    text-transform: uppercase;
+  }
+  .offer-copy h2 {
+    font-family: var(--font-display);
+    color: var(--pink);
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 0 0 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .offer-copy p { color: #333; margin: 0 0 18px; font-size: 15px; }
+  .price-row {
+    font-size: 14px;
+    margin-bottom: 18px;
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  }
+  .price-row .label {
+    font-weight: 700; letter-spacing: 0.08em;
+    color: var(--ink); text-transform: uppercase;
+    font-size: 12px;
+  }
+  .price-row .strike { text-decoration: line-through; color: #888; font-size: 16px; }
+  .price-row .now {
+    font-family: var(--font-display);
+    font-weight: 700; color: var(--pink); font-size: 22px;
+  }
+
+  /* Buttons */
+  .btn-cta {
+    display: block;
+    width: 100%;
+    background: var(--pink);
+    color: #fff;
+    text-align: center;
+    padding: 18px 18px;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.05s ease, background 0.15s ease;
+    box-shadow: 0 4px 0 var(--pink-dark);
+  }
+  .btn-cta:hover { background: #e228b3; }
+  .btn-cta:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--pink-dark); }
+  .btn-cta.neon {
+    background: var(--neon); color: var(--ink); box-shadow: 0 4px 0 var(--neon-dark);
+  }
+  .btn-cta.neon:hover { background: #c1f31e; }
+
+  .decline {
+    display: block;
+    text-align: center;
+    color: var(--pink);
+    text-decoration: underline;
+    font-size: 13px;
+    margin-top: 14px;
+  }
+  .ship-note {
+    text-align: center;
+    color: var(--ink);
+    background: var(--neon);
+    display: inline-block;
+    margin: 12px auto 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .ship-wrap { text-align: center; }
+
+  /* Thumbnails */
+  .thumbs {
+    display: flex; gap: 8px; align-items: center;
+    margin-top: 22px;
+    max-width: 380px;
+  }
+  .thumbs img {
+    width: 58px; height: 58px; object-fit: cover;
+    border: 1px solid var(--border); border-radius: 8px;
+  }
+
+  /* Risk-free band */
+  .risk-band {
+    background: var(--pink-soft);
+    padding: 28px 20px;
+    margin-top: 4px;
+  }
+  .risk-band .inner {
+    max-width: 740px; margin: 0 auto;
+    border: 1px dashed var(--pink);
+    background: #fff;
+    padding: 18px 22px;
+    text-align: center;
+    border-radius: 8px;
+  }
+  .risk-band .inner .top {
+    color: var(--ink); font-weight: 600;
+    margin-bottom: 6px; font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  .risk-band .inner .bot {
+    color: var(--pink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  /* Two-col sections */
+  .two-col { padding: 56px 0; }
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .col-img-wrap {
+    background: var(--pink-soft);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 320px;
+  }
+  .col-img-wrap img { max-height: 320px; width: auto; }
+  .col-copy h3 {
+    font-family: var(--font-display);
+    color: var(--pink);
+    font-size: 28px;
+    margin: 0 0 16px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .col-copy p { color: #333; margin: 0 0 12px; font-size: 14px; }
+  .col-copy .btn-cta { margin-top: 14px; }
+
+  .pay-row {
+    display: flex; justify-content: center; gap: 10px; margin: 16px 0 6px;
+    flex-wrap: wrap; align-items: center;
+  }
+  .pay-row img { height: 22px; width: auto; }
+  .decline-center {
+    display: block;
+    text-align: center;
+    color: var(--pink);
+    text-decoration: underline;
+    font-size: 12px;
+    max-width: 320px;
+    margin: 8px auto 0;
+    line-height: 1.4;
+  }
+
+  /* Check list */
+  .check-list { list-style: none; padding: 0; margin: 0 0 18px; }
+  .check-list li {
+    position: relative;
+    padding: 8px 0 8px 32px;
+    font-size: 14px; color: #222;
+  }
+  .check-list li::before {
+    content: ''; position: absolute;
+    left: 0; top: 11px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--pink);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3.5 8.5l3 3 6-7' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* Reviews */
+  .reviews { padding: 50px 0 60px; text-align: center; }
+  .reviews .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+  .rating-card {
+    background: var(--pink);
+    color: #fff;
+    border-radius: 14px;
+    padding: 24px 20px 32px;
+    max-width: 620px;
+    margin: 0 auto 28px;
+  }
+  .rating-card .label {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 500; margin-bottom: 10px;
+  }
+  .rating-card .num {
+    font-family: var(--font-display);
+    font-size: 92px; font-weight: 700; line-height: 1;
+  }
+  .rating-card .stars-line {
+    color: var(--neon); margin-top: 8px; font-size: 18px; letter-spacing: 3px;
+  }
+  .bars { max-width: 600px; margin: 0 auto 28px; }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 1fr 90px;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .bar-track { height: 14px; border-radius: 999px; position: relative; }
+  .bar-fill { height: 100%; border-radius: 999px; }
+  .stars { color: var(--pink); font-size: 14px; letter-spacing: 2px; text-align: left; }
+
+  /* Family / community section */
+  .family {
+    background: var(--neon);
+    padding: 48px 0;
+  }
+  .family-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .family-img .header-bar {
+    background: var(--pink);
+    color: #fff;
+    padding: 18px;
+    font-weight: 800;
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.3;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+  }
+  .family-img .collage {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    background: #fff;
+    padding: 4px;
+  }
+  .family-img .collage img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+  .family-img .footer-logo {
+    text-align: center; padding: 14px; background: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .family-img .footer-logo img { height: 26px; margin: 0 auto; }
+  .family-copy { text-align: center; }
+  .family-copy h3 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-size: 26px;
+    margin: 0 0 12px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .family-copy .lead { font-size: 14px; color: #1a1a1a; margin: 0 0 14px; }
+  .family-copy .reg { font-size: 14px; color: #1a1a1a; }
+  .family-copy .reg .strike { text-decoration: line-through; color: #555; }
+  .family-copy .your-price {
+    color: var(--pink); font-weight: 700; font-size: 18px; margin: 6px 0 18px;
+    font-family: var(--font-display);
+  }
+
+  /* Limited */
+  .limited {
+    text-align: center; padding: 20px 20px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pink);
+    font-weight: 700;
+    background: var(--pink-soft);
+  }
+
+  /* Trust */
+  .trust {
+    padding: 32px 0;
+    display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--ink); font-size: 13px;
+    font-weight: 500;
+  }
+  .trust-item .icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--pink-soft);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--pink);
+  }
+  .trust-item svg { width: 20px; height: 20px; }
+
+  .legal {
+    border-top: 1px solid var(--line);
+    padding: 18px 0 32px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .legal a { color: var(--muted); margin: 0 10px; text-decoration: underline; }
+  .legal a:hover { color: var(--pink); }
+
+  @media (max-width: 760px) {
+    .offer-grid, .two-col-grid, .family-grid { grid-template-columns: 1fr; gap: 26px; }
+    .save-badge { width: 80px; height: 80px; right: 8px; }
+    .save-badge span:last-child { font-size: 20px; }
+    .alert-red { font-size: 24px; }
+    .offer-copy h2 { font-size: 24px; }
+    .col-copy h3 { font-size: 22px; }
+    .rating-card .num { font-size: 72px; }
+    .trust { gap: 22px; }
+    .step { padding: 10px 22px 10px 18px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Confirmation Bar -->
+<div class="confirm-bar">
+  <div class="container">
+    <div class="confirm-row">
+      <span class="check">&#10003;</span>
+      <strong>Nancy</strong>
+    </div>
+    <div style="padding-left: 24px; margin-top: 2px;">
+      <div style="font-size: 12px; color: #666;">Confirmation #LEMXNZ9P2</div>
+      <div style="font-weight: 600; font-size: 13px;">You've paid for your order. 💛</div>
+      <a href="#" class="small-link">View order confirmation &rsaquo;</a>
+    </div>
+  </div>
+</div>
+
+<!-- Brand band -->
+<div class="brand-band">
+  <img class="logo" src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
+  <span class="uk-badge"><span class="dot"></span> Designed in London</span>
+</div>
+
+<!-- Steps -->
+<div class="steps-wrap">
+  <div class="steps">
+    <div class="step done">Step 1: Order Placed</div>
+    <div class="step current">Step 2: Customize Order</div>
+  </div>
+</div>
+
+<!-- Congrats -->
+<div class="container">
+  <div class="congrats">🍋 You've Unlocked a One-Time Offer — Get a 2nd Lem at 58% OFF</div>
+</div>
+
+<!-- Alert -->
+<div class="alert-red">Wait... your order is not complete!</div>
+
+<!-- Hero Offer -->
+<section class="offer">
+  <div class="container">
+    <div class="offer-grid">
+      <div class="offer-img">
+        <div class="stage">
+          <img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem clitoral massager"/>
+        </div>
+        <div class="save-badge">
+          <span>SAVE</span>
+          <span>£40</span>
+        </div>
+        <div class="ship-badge">Free<br/>Shipping</div>
+      </div>
+      <div class="offer-copy">
+        <h2>Add a 2nd Lem to your order &mdash; for £29</h2>
+        <p>One for the nightstand, one for the weekender. Or treat a best friend. Either way, you'll never want to be caught without it again. This one-time offer is only available right now.</p>
+        <div class="price-row">
+          <span class="label">Your price:</span>
+          <span class="strike">£69</span>
+          <span class="now">£29 each</span>
+        </div>
+        <a href="#add" class="btn-cta">Yes, add a 2nd Lem</a>
+        <a href="#decline" class="decline">No thanks &mdash; I don't want a second Lem at 58% off.</a>
+        <div class="ship-wrap"><div class="ship-note">🚚 Ships free in the same package</div></div>
+
+        <div class="thumbs">
+          <img src="https://hellonancy.com/cdn/shop/files/IMG_3323.jpg" alt=""/>
+          <img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt=""/>
+          <img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt=""/>
+          <img src="https://hellonancy.com/cdn/shop/files/IMG_3326.jpg" alt=""/>
+          <img src="https://hellonancy.com/cdn/shop/files/IMG_3324.jpg" alt=""/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Risk band -->
+<div class="risk-band">
+  <div class="inner">
+    <div class="top">This is your only chance to get a second Lem at the lowest price we've ever offered.</div>
+    <div class="bot">An extra 58% off &mdash; plus free shipping.</div>
+  </div>
+</div>
+
+<!-- Why two? -->
+<section class="two-col">
+  <div class="container">
+    <div class="two-col-grid">
+      <div class="col-img-wrap">
+        <img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt="Lem on bedside" style="border-radius:10px;"/>
+      </div>
+      <div class="col-copy">
+        <h3>Why two Lems?</h3>
+        <p>Because once you try one, you'll wish you had backup. Customers tell us the same thing: "I wish I'd bought two." So this is your moment.</p>
+        <p><strong>One for home, one for the handbag.</strong> Travel without the awkward TSA reshuffle. Keep one charged and ready, always.</p>
+        <p><strong>A gift that lands every time.</strong> Birthdays, hen dos, "just because" &mdash; nothing makes a friend gasp like the world's most-loved suction massager turning up in a discreet package.</p>
+        <a href="#add" class="btn-cta">Yes, add a 2nd Lem</a>
+        <div class="pay-row">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" style="height:14px;"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="MC"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/120px-American_Express_logo_%282018%29.svg.png" alt="Amex"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/200px-PayPal.svg.png" alt="PayPal"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/200px-Apple_Pay_logo.svg.png" alt="Apple Pay"/>
+        </div>
+        <a href="#decline" class="decline-center">No thanks &mdash; I don't want a second Lem at 58% off.</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What makes Lem special -->
+<section class="two-col" style="padding-top: 0;">
+  <div class="container">
+    <div class="two-col-grid">
+      <div class="col-copy">
+        <h3>What makes Lem so special?</h3>
+        <ul class="check-list">
+          <li>12 unique intensities &amp; pulse patterns to find your perfect rhythm</li>
+          <li>Air-pulse technology &mdash; never touches the skin directly</li>
+          <li>Whisper-quiet motor (under 50 dB &mdash; quieter than a kettle)</li>
+          <li>Body-safe medical-grade silicone, free from harmful additives</li>
+          <li>Fully waterproof (IPX7) &mdash; bath, shower, beyond</li>
+          <li>30-Day Pleasure Guarantee, no questions asked</li>
+        </ul>
+        <a href="#add" class="btn-cta neon">Yes, add a 2nd Lem</a>
+        <div class="pay-row">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" style="height:14px;"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="MC"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/120px-American_Express_logo_%282018%29.svg.png" alt="Amex"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/200px-PayPal.svg.png" alt="PayPal"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/200px-Apple_Pay_logo.svg.png" alt="Apple Pay"/>
+        </div>
+        <a href="#decline" class="decline-center">No thanks &mdash; I don't want a second Lem at 58% off.</a>
+      </div>
+      <div class="col-img-wrap">
+        <img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt="Lem detail" style="border-radius:10px;"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews">
+  <div class="container">
+    <div class="eyebrow">Loved by 50,000+ happy customers</div>
+    <div class="rating-card">
+      <div class="label">Average Rating</div>
+      <div class="num">4.9</div>
+      <div class="stars-line">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    </div>
+    <div class="bars">
+      <div class="bar-row">
+        <div class="bar-track"><div class="bar-fill" style="width:96%; background: var(--pink);"></div></div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-track"><div class="bar-fill" style="width:28%; background: var(--neon-dark);"></div></div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-track"><div class="bar-fill" style="width:10%; background: #f3d240;"></div></div>
+        <div class="stars">&#9733;&#9733;&#9733;</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-track"><div class="bar-fill" style="width:6%; background: #f2a342;"></div></div>
+        <div class="stars">&#9733;&#9733;</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-track"><div class="bar-fill" style="width:3%; background: #e85b4b;"></div></div>
+        <div class="stars">&#9733;</div>
+      </div>
+    </div>
+    <a href="#add" class="btn-cta" style="max-width:340px; margin: 0 auto;">Yes, add a 2nd Lem</a>
+    <div class="pay-row" style="margin-top: 16px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" style="height:18px;"/>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="MC" style="height:24px;"/>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/120px-American_Express_logo_%282018%29.svg.png" alt="Amex" style="height:24px;"/>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/200px-PayPal.svg.png" alt="PayPal" style="height:24px;"/>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/200px-Apple_Pay_logo.svg.png" alt="Apple Pay" style="height:22px;"/>
+    </div>
+    <a href="#decline" class="decline-center">No thanks &mdash; I don't want a second Lem at 58% off.</a>
+  </div>
+</section>
+
+<!-- Family -->
+<section class="family">
+  <div class="container">
+    <div class="family-grid">
+      <div class="family-img">
+        <div class="header-bar">Join the Nancy Family &mdash; 50,000+ &amp; counting</div>
+        <div class="collage">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=160" alt=""/>
+          <img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=160" alt=""/>
+        </div>
+        <div class="footer-logo">
+          <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
+        </div>
+      </div>
+      <div class="family-copy">
+        <h3>One Lem is great. Two is a love language.</h3>
+        <p class="lead">Add a second Lem to today's order at 58% off. One-time offer only &mdash; it disappears when you leave this page.</p>
+        <div class="reg">Regular price: <span class="strike">£69</span></div>
+        <div class="your-price">Your price £29 each</div>
+        <a href="#add" class="btn-cta">Yes, add a 2nd Lem</a>
+        <a href="#decline" class="decline-center">No thanks &mdash; I'll pay full price later.</a>
+        <div class="ship-wrap" style="margin-top: 10px;"><div class="ship-note">🚚 Ships free in the same package</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Limited -->
+<div class="limited">Only available right now &mdash; offer disappears when you leave</div>
+
+<!-- Trust -->
+<section class="trust">
+  <div class="trust-item">
+    <span class="icon">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7.5 18.5a2 2 0 100-4 2 2 0 000 4zM17.5 18.5a2 2 0 100-4 2 2 0 000 4z"/></svg>
+    </span>
+    Free Shipping
+  </div>
+  <div class="trust-item">
+    <span class="icon">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg>
+    </span>
+    Discreet Packaging
+  </div>
+  <div class="trust-item">
+    <span class="icon">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l4 4L19 7"/></svg>
+    </span>
+    30-Day Pleasure Guarantee
+  </div>
+</section>
+
+<!-- Legal -->
+<div class="legal">
+  <a href="#">Refund policy</a>
+  <a href="#">Privacy policy</a>
+  <a href="#">Terms of service</a>
+  <a href="#">Cancellations</a>
+  <a href="#">Contact</a>
+</div>
+
+</body>
+</html>
