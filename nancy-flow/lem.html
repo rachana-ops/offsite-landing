@@ -78,9 +78,9 @@
       </div>
 
       <div class="price-row">
-        <span class="now-price">£69.00</span>
-        <span class="was-price">£139.00</span>
-        <span class="save-badge">Save £70</span>
+        <span class="now-price">$89.00</span>
+        <span class="was-price">$159.00</span>
+        <span class="save-badge">Save $70</span>
       </div>
 
       <p class="promo-code">Use code <strong>LEM25</strong> for an extra 25% off.</p>
@@ -95,12 +95,12 @@
       </ul>
 
       <div class="addons">
-        <label><input type="checkbox" /> Order Protect <span>+£4</span></label>
-        <label><input type="checkbox" /> Extra Discreet Packaging <span>+£4</span></label>
-        <label><input type="checkbox" /> Add the Pleasure Pouch <span><s>£18</s> £8</span></label>
+        <label><input type="checkbox" class="addon-cb" data-item="protect" /> Order Protect <span>+$4.99</span></label>
+        <label><input type="checkbox" class="addon-cb" data-item="discreet" /> Extra Discreet Packaging <span>+$4.99</span></label>
+        <label><input type="checkbox" class="addon-cb" data-item="pouch" /> Add the Pleasure Pouch <span><s>$19.99</s> $9.99</span></label>
       </div>
 
-      <button class="btn-buy" onclick="document.getElementById('atcModal').classList.add('open')">Add to cart — £69</button>
+      <button class="btn-buy" onclick="goToCart()">Add to cart — $89</button>
 
       <div class="press-logos">
         <p class="press-label">As seen in</p>
@@ -446,28 +446,9 @@
     <img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem" />
     <div class="sticky-info">
       <strong>Lem — Clitoral Massager</strong>
-      <span><span class="now-price">£69</span> <span class="was-price">£139</span></span>
+      <span><span class="now-price">$89</span> <span class="was-price">$159</span></span>
     </div>
-    <button class="btn-buy small" onclick="document.getElementById('atcModal').classList.add('open')">Add to cart</button>
-  </div>
-</div>
-
-<!-- Cart confirmation modal -->
-<div class="atc-modal" id="atcModal">
-  <div class="atc-modal-inner">
-    <button class="atc-modal-close" onclick="document.getElementById('atcModal').classList.remove('open')">×</button>
-    <span class="atc-modal-badge"><span class="dot"></span> HIGH DEMAND</span>
-    <h3>Heads up — your Lem is in high demand</h3>
-    <p>Because of the love we've been getting, Lem orders ship in batches. Here's what to expect:</p>
-    <div class="atc-steps">
-      <div class="atc-step"><span class="icon">📦</span><strong>ORDER</strong><span class="sub">Today</span></div>
-      <div class="atc-line"></div>
-      <div class="atc-step"><span class="icon">🛠</span><strong>PREP</strong><span class="sub">5–10 days</span></div>
-      <div class="atc-line"></div>
-      <div class="atc-step"><span class="icon">🚚</span><strong>DELIVERY</strong><span class="sub">3–5 days</span></div>
-    </div>
-    <button class="btn-buy">I understand — add to cart</button>
-    <button class="atc-modal-back" onclick="document.getElementById('atcModal').classList.remove('open')">Go back</button>
+    <button class="btn-buy small" onclick="goToCart()">Add to cart</button>
   </div>
 </div>
 
@@ -480,6 +461,16 @@ window.addEventListener('scroll', function() {
   var stuck = rect.bottom < 0;
   document.getElementById('stickyAtc').classList.toggle('visible', stuck);
 });
+
+// Build the cart URL from selected add-ons and proceed to the upsell flow
+function goToCart() {
+  var items = ['lem'];
+  document.querySelectorAll('.addon-cb:checked').forEach(function(cb) {
+    var key = cb.getAttribute('data-item');
+    if (key && items.indexOf(key) === -1) items.push(key);
+  });
+  window.location.href = 'lem-upsell.html?items=' + items.join(',');
+}
 </script>
 
 </body>

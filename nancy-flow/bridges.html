@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lem Bridge Pages — 5 Versions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF30CC;
+    --neon: #CCFD28;
+    --ink: #1A1A1A;
+    --muted: #6b6b6b;
+    --bg: #FCF7ED;
+    --font-sans: 'Inter', sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 60px 24px 80px; }
+
+  .head { text-align: center; margin-bottom: 48px; }
+  .eyebrow {
+    display: inline-block;
+    background: var(--neon);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  h1 em { font-style: italic; color: var(--pink); }
+  .sub { color: var(--muted); font-size: 17px; max-width: 560px; margin: 0 auto; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px -12px rgba(0,0,0,0.18); }
+  .frame {
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .frame iframe {
+    border: none;
+    position: absolute;
+    top: 0; left: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: top left;
+    pointer-events: none;
+  }
+  .body { padding: 20px 22px 22px; }
+  .num {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--pink);
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .tag {
+    display: inline-block;
+    background: #FFEFF9;
+    color: var(--pink);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .open {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .open:hover { background: var(--pink); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Bridge Page Concepts</div>
+      <h1>Five ways to <em>introduce</em> Lem.</h1>
+      <p class="sub">Same destination, five different doors. Click any preview to open the full page.</p>
+    </div>
+
+    <div class="grid">
+
+      <a class="card" href="bridge-1-sensual.html">
+        <div class="frame"><iframe src="bridge-1-sensual.html" loading="lazy"></iframe></div>
+        <div class="body">
+          <div class="num">01</div>
+          <div class="title">Sensual / Cinematic</div>
+          <span class="tag">Mood-led</span>
+          <p class="desc">Dark, intimate hero with moody photography. Leans into atmosphere and invitation.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <a class="card" href="bridge-2-quiz.html">
+        <div class="frame"><iframe src="bridge-2-quiz.html" loading="lazy"></iframe></div>
+        <div class="body">
+          <div class="num">02</div>
+          <div class="title">Playful Quiz</div>
+          <span class="tag">Interactive</span>
+          <p class="desc">"What's your vibe tonight?" — tappable options route to the PDP. High engagement on cold traffic.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <a class="card" href="bridge-3-editorial.html">
+        <div class="frame"><iframe src="bridge-3-editorial.html" loading="lazy"></iframe></div>
+        <div class="body">
+          <div class="num">03</div>
+          <div class="title">Editorial / Magazine</div>
+          <span class="tag">Premium</span>
+          <p class="desc">Vogue-style masthead, drop cap, byline. Reframes Lem as a thoughtful object, not an impulse buy.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <a class="card" href="bridge-4-testimonial.html">
+        <div class="frame"><iframe src="bridge-4-testimonial.html" loading="lazy"></iframe></div>
+        <div class="body">
+          <div class="num">04</div>
+          <div class="title">Confession Wall</div>
+          <span class="tag">Social Proof</span>
+          <p class="desc">Masonry of real-feeling reviews. Lets buyers convince buyers — minimal copy from you.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <a class="card" href="bridge-5-manifesto.html">
+        <div class="frame"><iframe src="bridge-5-manifesto.html" loading="lazy"></iframe></div>
+        <div class="body">
+          <div class="num">05</div>
+          <div class="title">Bold Manifesto</div>
+          <span class="tag">Brand-led</span>
+          <p class="desc">Type-driven, neon-on-black, marquee ticker. For warm audiences who already know Nancy.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</body>
+</html>

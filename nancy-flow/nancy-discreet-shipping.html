@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nancy — Add Discreet Shipping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #FF30CC;
+    --pink-dark: #D231CB;
+    --pink-soft: #FFEFF9;
+    --neon: #CCFD28;
+    --neon-dark: #B8E61F;
+    --ink: #1A1A1A;
+    --muted: #666666;
+    --border: #F0F0F0;
+    --line: #E6E6E6;
+    --bg-gray: #FAF7F3;
+    --bg-dark: #1C1C1C;
+    --bg-darker: #141414;
+    --star: #FFB800;
+    --kraft: #D8C5A4;
+    --kraft-dark: #B89B70;
+    --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.5;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  /* Top header */
+  .top-header {
+    background: #fff;
+    padding: 22px 20px 26px;
+    text-align: center;
+  }
+  .top-header .brand {
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .top-header .brand img { height: 26px; }
+  .top-header h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+  .progress-bar {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .progress-bar .track {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    right: 12px;
+    height: 3px;
+    background: var(--line);
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  .progress-bar .track::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 50%;
+    height: 100%;
+    background: var(--pink);
+  }
+  .progress-step {
+    position: relative;
+    z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 4px;
+  }
+  .progress-step .marker {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--pink);
+  }
+  .progress-step.pending .marker { border-color: var(--line); }
+  .progress-step .marker.icon {
+    width: 22px; height: 22px;
+    background: var(--ink);
+    border: none;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .progress-step .lbl {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .progress-step.done .lbl { color: var(--ink); }
+  .progress-step.current .lbl { color: var(--pink); }
+  .progress-step.pending .lbl { color: var(--muted); }
+
+  /* Hero */
+  .hero {
+    background: var(--pink-soft);
+    padding: 60px 20px 24px;
+    text-align: center;
+  }
+  .hero h2 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--pink);
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .hero p {
+    font-size: 15px;
+    color: var(--ink);
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  .hero p strong { font-weight: 700; color: var(--pink); }
+
+  /* Offer */
+  .offer {
+    background: var(--pink-soft);
+    padding: 28px 0 56px;
+  }
+  .offer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+  .offer-img-card {
+    background: linear-gradient(160deg, #F4ECDF 0%, #E6D5B8 100%);
+    border-radius: 18px;
+    min-height: 440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 28px rgba(184,155,112,0.18);
+  }
+  .offer-img-card .kraft-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(184,155,112,0.10) 0,
+        rgba(184,155,112,0.10) 2px,
+        transparent 2px,
+        transparent 8px
+      ),
+      linear-gradient(160deg, #E8D9BE 0%, #D8C5A4 60%, #C8B388 100%);
+    z-index: 1;
+  }
+  .offer-img-card .tape-strip {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 16%;
+    background: rgba(255,255,255,0.55);
+    border-left: 1px dashed rgba(0,0,0,0.10);
+    border-right: 1px dashed rgba(0,0,0,0.10);
+    z-index: 2;
+  }
+  .offer-img-card .corner-stamp {
+    position: absolute;
+    top: 20px; right: 20px;
+    z-index: 3;
+    font-family: var(--font-sans);
+    font-weight: 800;
+    color: rgba(60,40,20,0.55);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    border: 1.5px solid rgba(60,40,20,0.45);
+    padding: 4px 8px;
+    border-radius: 3px;
+    transform: rotate(-6deg);
+    text-transform: uppercase;
+  }
+  .offer-img-card .address-block {
+    position: absolute;
+    top: 28px; left: 28px;
+    z-index: 3;
+    font-family: 'Courier New', monospace;
+    color: rgba(60,40,20,0.65);
+    font-size: 10px;
+    line-height: 1.55;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .discreet-badge {
+    position: relative;
+    z-index: 4;
+    width: 240px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px 18px;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.18);
+    border: 6px solid var(--pink);
+  }
+  .discreet-badge .inner-ring {
+    position: absolute;
+    top: 12px; left: 12px; right: 12px; bottom: 12px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,48,204,0.45);
+    pointer-events: none;
+  }
+  .discreet-badge .top-text {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--pink);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: #fff;
+    padding: 0 6px;
+  }
+  .discreet-badge .box-svg {
+    width: 36px;
+    height: 36px;
+    color: var(--pink);
+    margin: 10px 0 6px;
+  }
+  .discreet-badge .big-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 22px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .discreet-badge .bot-text {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    background: #fff;
+    padding: 0 6px;
+  }
+  .neon-corner {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background: var(--neon);
+    border-radius: 50%;
+    filter: blur(46px);
+    opacity: 0.55;
+    z-index: 2;
+  }
+  .neon-corner.tl { top: -30px; left: -30px; }
+  .neon-corner.br { bottom: -30px; right: -30px; }
+
+  .offer-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    margin-bottom: 16px;
+  }
+  .offer-card .icon-box {
+    width: 60px; height: 60px;
+    border-radius: 12px;
+    background: var(--ink);
+    color: var(--neon);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .offer-card .icon-box svg { width: 30px; height: 30px; }
+  .offer-card .info { flex: 1; min-width: 0; }
+  .offer-card h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .offer-card .price-row {
+    display: flex; align-items: center; gap: 8px;
+    flex-wrap: wrap; margin-bottom: 4px;
+  }
+  .offer-card .price {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--pink);
+  }
+  .offer-card .per {
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .offer-card .off-pill {
+    background: var(--neon);
+    color: var(--ink);
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 4px 8px;
+    border-radius: 999px;
+  }
+  .offer-card .tagline {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 6px 0 0;
+    line-height: 1.45;
+  }
+
+  .features {
+    list-style: none; padding: 0; margin: 0 0 18px;
+  }
+  .features li {
+    display: flex; gap: 12px;
+    padding: 10px 6px;
+    align-items: flex-start;
+  }
+  .features .check {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .features .check svg { width: 12px; height: 12px; }
+  .features .ft-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 2px;
+  }
+  .features .ft-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .tax-row {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink);
+    margin: 6px 0 14px;
+  }
+  .tax-row strong { font-weight: 700; }
+
+  /* Buttons */
+  .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 16px 18px;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: background 0.15s ease, transform 0.05s ease;
+  }
+  .btn-add {
+    background: var(--pink);
+    box-shadow: 0 4px 0 var(--pink-dark);
+  }
+  .btn-add:hover { background: #e228b3; }
+  .btn-add:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--pink-dark); }
+  .btn-no {
+    background: var(--ink);
+    color: #fff;
+  }
+  .btn-no:hover { background: #333; }
+
+  /* Reviews */
+  .reviews {
+    background: var(--bg-dark);
+    color: #fff;
+    padding: 56px 0 64px;
+  }
+  .reviews-head { text-align: center; margin-bottom: 32px; }
+  .reviews-head .small {
+    font-size: 12px;
+    color: #c4c4c4;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .reviews-head .small strong { color: var(--neon); font-weight: 700; }
+  .reviews-head h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .review-card {
+    background: var(--bg-darker);
+    border-radius: 12px;
+    padding: 20px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #2a2a2a;
+  }
+  .review-card .stars {
+    color: var(--star);
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .review-card .quote {
+    margin: 0 0 16px;
+    font-size: 13px;
+    color: #e8e8e8;
+    line-height: 1.55;
+    flex-grow: 1;
+  }
+  .review-card .name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .review-card .verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--neon);
+    font-weight: 500;
+  }
+  .review-card .verified svg { width: 12px; height: 12px; }
+
+  .reviews-cta { max-width: 600px; margin: 0 auto; }
+
+  /* Footer */
+  .footer {
+    background: #0e0e0e;
+    color: #b5b5b5;
+    text-align: center;
+    padding: 16px 20px;
+    font-size: 12px;
+  }
+  .footer-note {
+    text-align: left;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 12px 20px 16px;
+    background: #fff;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .chat-bubble {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    width: 44px; height: 44px;
+    background: var(--pink);
+    border-radius: 50%;
+    box-shadow: 0 4px 14px rgba(255,48,204,0.4);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+  }
+  .chat-bubble svg { width: 22px; height: 22px; color: #fff; }
+
+  @media (max-width: 760px) {
+    .offer-grid { grid-template-columns: 1fr; }
+    .review-grid { grid-template-columns: 1fr; }
+    .hero h2 { font-size: 28px; }
+    .reviews-head h3 { font-size: 26px; }
+    .progress-bar { max-width: 320px; }
+  }
+
+  /* ===== UNIFIED FLOW HEADER ===== */
+  .flow-confirm {
+    background: #FFEFF9;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #1A1A1A;
+    border-bottom: 1px solid #f5d8ec;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .flow-confirm strong { color: #FF30CC; font-weight: 700; }
+  .flow-confirm .flow-check {
+    display: inline-flex; width: 14px; height: 14px;
+    border-radius: 50%; background: #FF30CC; color: #fff;
+    align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; margin-right: 4px;
+    vertical-align: middle;
+  }
+  .flow-confirm .flow-sep { color: #d2a9c8; margin: 0 4px; }
+  .flow-brand { text-align: center; padding: 18px 16px 14px; background: #fff; }
+  .flow-brand img { height: 26px; margin: 0 auto; display: block; }
+  .flow-steps {
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 0 16px 28px; max-width: 700px; margin: 0 auto;
+    background: #fff; border-bottom: 1px solid #f0f0f0;
+  }
+  .flow-step {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    font-family: 'Inter', system-ui, sans-serif; flex: 0 0 auto;
+  }
+  .flow-dot {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 2px solid #e0e0e0; background: #fff; color: #aaa;
+    font-weight: 700; font-size: 13px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .flow-lbl {
+    font-size: 10px; color: #999; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+  }
+  .flow-step.done .flow-dot { background: #FF30CC; border-color: #FF30CC; color: #fff; }
+  .flow-step.done .flow-lbl { color: #1A1A1A; }
+  .flow-step.current .flow-dot {
+    background: #FF30CC; border-color: #FF30CC; color: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 48, 204, 0.18);
+    transform: scale(1.1);
+  }
+  .flow-step.current .flow-lbl { color: #FF30CC; font-weight: 800; }
+  .flow-line {
+    flex: 1 1 auto; height: 2px; background: #e0e0e0;
+    margin: 14px 4px 0; max-width: 60px; min-width: 12px;
+  }
+  .flow-line.done { background: #FF30CC; }
+  @media (max-width: 640px) {
+    .flow-lbl { font-size: 8px; }
+    .flow-line { max-width: 22px; }
+    .flow-dot { width: 24px; height: 24px; font-size: 11px; }
+    .flow-confirm { font-size: 11px; padding: 8px 12px; }
+    .flow-confirm .flow-sep { margin: 0 2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== UNIFIED FLOW HEADER ===== -->
+<div class="flow-confirm">
+  <span class="flow-check">&#10003;</span>
+  <strong>Nancy</strong>
+  <span class="flow-sep">&middot;</span>
+  Confirmation #NCY-9X42KB
+  <span class="flow-sep">&middot;</span>
+  You're all paid up, gorgeous
+</div>
+<div class="flow-brand">
+  <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
+</div>
+<div class="flow-steps">
+  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">2nd Lem</span></div>
+  <div class="flow-line done"></div>
+  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">Lolly</span></div>
+  <div class="flow-line done"></div>
+  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">Bundle</span></div>
+  <div class="flow-line done"></div>
+  <div class="flow-step current"><span class="flow-dot">4</span><span class="flow-lbl">Discreet</span></div>
+  <div class="flow-line"></div>
+  <div class="flow-step"><span class="flow-dot">5</span><span class="flow-lbl">Protect</span></div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <h2>Plain Box. No Logos. No Questions.</h2>
+    <p>Add Discreet Shipping for <strong>just $4.99</strong> — an unmarked outer box, a neutral sender name, and a totally innocent vibe at the door.</p>
+  </div>
+</section>
+
+<section class="offer">
+  <div class="container">
+    <div class="offer-grid">
+      <div class="offer-img-card">
+        <div class="kraft-bg"></div>
+        <div class="tape-strip"></div>
+        <span class="neon-corner tl"></span>
+        <span class="neon-corner br"></span>
+        <div class="address-block">
+          To:<br/>
+          ━━━━━━<br/>
+          ━━━━━━<br/>
+          ━━━━━
+        </div>
+        <div class="corner-stamp">First Class</div>
+        <div class="discreet-badge">
+          <span class="inner-ring"></span>
+          <div class="top-text">Nancy &middot; Promise</div>
+          <svg class="box-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+          <div class="big-text">Discreet<br/>Shipping</div>
+          <div class="bot-text">Plain &middot; Neutral &middot; Sealed</div>
+        </div>
+      </div>
+
+      <div class="offer-right">
+        <div class="offer-card">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <div class="info">
+            <h3>Discreet Shipping</h3>
+            <div class="price-row">
+              <span class="price">$4.99</span>
+              <span class="off-pill">Most Popular</span>
+            </div>
+            <p class="per">One-time add-on for this order</p>
+            <p class="tagline">Looks like a regular parcel. Behaves like a secret.</p>
+          </div>
+        </div>
+
+        <ul class="features">
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div>
+              <p class="ft-title">Unbranded outer box.</p>
+              <p class="ft-desc">No Nancy logo, no pink, no product name — just a plain brown parcel. Pretty in pink stays inside.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div>
+              <p class="ft-title">Neutral sender name.</p>
+              <p class="ft-desc">"HN Fulfilment Ltd" on the label and your card statement — nothing flatmate-, family- or housemate-flagging.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div>
+              <p class="ft-title">Sealed for your eyes only.</p>
+              <p class="ft-desc">Tamper-evident seal so you know it's been untouched from our warehouse to your hands.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="tax-row">Tax included — <strong>$4.99</strong></div>
+
+        <a href="nancy-order-protect.html" class="btn btn-add">Yes, ship it discreetly</a>
+        <a href="nancy-order-protect.html" class="btn btn-no">No thanks</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="container">
+    <div class="reviews-head">
+      <p class="small">More than <strong>1,000,000+</strong> happy customers</p>
+      <h3>Pretty in pink. Quiet at the door.</h3>
+    </div>
+
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"I live with my parents and I literally would not have ordered without this. Box looked like a boring Amazon delivery, mum carried it in for me without a clue. Iconic service."</p>
+        <div class="name">Lola K.</div>
+        <div class="verified">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Verified Customer
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"Honestly worth the $4.99 just for the peace of mind. Sender name on the receipt is super neutral, my partner had no idea it was a treat-yourself parcel until I let him in on the secret 😉"</p>
+        <div class="name">Marie B.</div>
+        <div class="verified">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Verified Customer
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"I work from home and my buzzer is the building's gossip channel. Box arrived to reception, totally plain, totally chic. Whatever this is, keep doing it."</p>
+        <div class="name">Yasmin P.</div>
+        <div class="verified">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Verified Customer
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-cta">
+      <a href="nancy-order-protect.html" class="btn btn-add">Yes, ship it discreetly</a>
+      <a href="nancy-order-protect.html" class="btn btn-no">No thanks</a>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  &copy; 2026 Nancy. All rights reserved.
+</div>
+<div class="footer-note">*Tax included where applicable.</div>
+
+<div class="chat-bubble" aria-label="Chat support">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
+</div>
+
+<script>
+  // ===== FLOW ROUTING =====
+  (function() {
+    var ITEM = 'discreet';
+    var YES_NEXT = 'nancy-order-protect.html';
+    var NO_NEXT = 'nancy-order-protect.html';
+    var YES_SEL = 'a.btn-add';
+    var NO_SEL = 'a.btn-no';
+    var params = new URLSearchParams(window.location.search);
+    var items = (params.get('items') || '').split(',').filter(Boolean);
+    function build(next, add) {
+      var arr = items.slice();
+      if (add && ITEM && arr.indexOf(ITEM) === -1) arr.push(ITEM);
+      return next + (arr.length ? '?items=' + arr.join(',') : '');
+    }
+    document.querySelectorAll(YES_SEL).forEach(function(a) { a.setAttribute('href', build(YES_NEXT, true)); });
+    document.querySelectorAll(NO_SEL).forEach(function(a) { a.setAttribute('href', build(NO_NEXT, false)); });
+  })();
+</script>
+</body>
+</html>
