@@ -4,6 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Lem — PDP Recreation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lem.css" />
 </head>
 <body>
@@ -11,9 +14,9 @@
 <!-- Promo Bar -->
 <div class="promo-bar">
   <div class="promo-track">
-    <span>Free shipping over $65</span>
-    <span>Discreet packaging</span>
-    <span>30-day pleasure guarantee</span>
+    <span>Free Shipping</span>
+    <span>Free Gift</span>
+    <span>30-Day Pleasure Guarantee</span>
   </div>
 </div>
 
@@ -39,9 +42,9 @@
 <!-- Trust strip -->
 <div class="trust-strip">
   <div class="container trust-grid">
-    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/truck.png" alt="" /><span>Free shipping</span></div>
-    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/anonymous.png" alt="" /><span>Discreet packaging</span></div>
-    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/shield.png" alt="" /><span>30-day guarantee</span></div>
+    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/truck.png" alt="" /><span>Free Shipping</span></div>
+    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/anonymous.png" alt="" /><span>Discreet Packaging</span></div>
+    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/shield.png" alt="" /><span>30-Day Guarantee</span></div>
   </div>
 </div>
 
@@ -70,7 +73,7 @@
       <h1>Lem — Clitoral Massager</h1>
 
       <div class="rating">
-        <img src="https://hellonancy.com/cdn/shop/files/stars.svg" alt="5 stars" />
+        <span class="stars-gold">★★★★★</span>
         <span>5/5 · 1,000+ five-star reviews</span>
       </div>
 
@@ -97,7 +100,7 @@
         <label><input type="checkbox" /> Add the Pleasure Pouch <span><s>£18</s> £8</span></label>
       </div>
 
-      <button class="btn-buy">Add to cart — £69</button>
+      <button class="btn-buy" onclick="document.getElementById('atcModal').classList.add('open')">Add to cart — £69</button>
 
       <div class="press-logos">
         <p class="press-label">As seen in</p>
@@ -150,10 +153,35 @@
   </div>
 </section>
 
+<!-- Perfect for Beginners -->
+<section class="beginners">
+  <div class="container">
+    <h2 class="display">Perfect for Beginners ✨</h2>
+    <p class="lede">No experience needed. Lem is designed to be approachable, intuitive, and forgiving — whether it's your first suction toy or your tenth.</p>
+    <div class="beginners-grid">
+      <div class="beginner-card">
+        <span class="emoji">🍋</span>
+        <h4>Approachable design</h4>
+        <p>Looks like a piece of fruit. Feels like a deep breath.</p>
+      </div>
+      <div class="beginner-card">
+        <span class="emoji">🤫</span>
+        <h4>Whisper-quiet</h4>
+        <p>Roommate-proof. Travel-friendly. Genuinely discreet.</p>
+      </div>
+      <div class="beginner-card">
+        <span class="emoji">👌</span>
+        <h4>One-button simple</h4>
+        <p>No app, no manual. Press, cycle, enjoy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- How to use -->
 <section class="how-to">
   <div class="container">
-    <h2 class="section-title">How to use</h2>
+    <h2 class="display center">Simple 5-Step Process</h2>
     <ol class="steps">
       <li><span>1</span><h4>Charge it up</h4><p>90 minutes of charging gives you 120 minutes of play.</p></li>
       <li><span>2</span><h4>Add water-based lube</h4><p>Optional, but it helps create a perfect seal.</p></li>
@@ -161,13 +189,30 @@
       <li><span>4</span><h4>Cycle through patterns</h4><p>Tap to move through the 12 intensities.</p></li>
       <li><span>5</span><h4>Clean &amp; store</h4><p>Rinse with warm water and a gentle body-safe cleaner.</p></li>
     </ol>
+
+    <div class="tips-row">
+      <div class="tips-card">
+        <h3>First-Timer Tips 💛</h3>
+        <ul class="tips-list">
+          <li><strong>Start with Level 1.</strong> The gentlest setting will surprise you.</li>
+          <li><strong>Go slow.</strong> Climb gradually — your body sets the pace.</li>
+          <li><strong>Experiment with placement.</strong> Small movements, big difference.</li>
+          <li><strong>Normalise it.</strong> Pleasure is wellness. Welcome in.</li>
+        </ul>
+      </div>
+      <div class="quote-card">
+        <h4>Real Customer Quote:</h4>
+        <p>"I have literally never been more relaxed in my life. 10/10, would gift to my best friend."</p>
+        <p class="reviewer">— Leia, 28</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- Specs -->
 <section class="specs">
   <div class="container">
-    <h2 class="section-title">Specifications</h2>
+    <h2 class="display center">Specifications</h2>
     <div class="spec-grid">
       <div><strong>Dimensions</strong><span>7.8 cm × 5.1 cm</span></div>
       <div><strong>Material</strong><span>Medical-grade silicone</span></div>
@@ -183,7 +228,7 @@
 <section class="intensity">
   <div class="container intensity-grid">
     <div>
-      <h2 class="section-title left">12 intensities, your tempo.</h2>
+      <h2 class="display">12 intensities, your tempo.</h2>
       <ul class="intensity-list">
         <li><strong>Levels 1–2</strong> Gentle, made for warming up.</li>
         <li><strong>Levels 3–4</strong> Medium — finding your groove.</li>
@@ -200,7 +245,7 @@
 <!-- Discreetness -->
 <section class="discreet">
   <div class="container">
-    <h2 class="section-title">Discreet, by design.</h2>
+    <h2 class="display center">Discreet, by design.</h2>
     <div class="discreet-grid">
       <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/no-sound.svg" alt="" /><h4>Whisper-quiet</h4><p>Under 50 dB — quieter than a normal conversation.</p></div>
       <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/box.svg" alt="" /><h4>Plain packaging</h4><p>No suggestive text. Nothing on the outside.</p></div>
@@ -210,10 +255,43 @@
   </div>
 </section>
 
+<!-- Couples Play -->
+<section class="couples">
+  <div class="container">
+    <h2 class="display center">Better Together 💕</h2>
+    <p class="lede center">Lem isn't just a solo act. Couples report deeper connection, longer sessions, and a whole lot more communication. Here's how to bring it in.</p>
+    <div class="couples-grid">
+      <div class="couples-card">
+        <h3>Best Positions for Couples</h3>
+        <ul>
+          <li><strong>Missionary + Lem.</strong> Position Lem between you for shared sensation.</li>
+          <li><strong>Doggy enhancement.</strong> Hold Lem in place for hands-free intensity.</li>
+          <li><strong>Reverse cowgirl.</strong> You control the angle, you control the rhythm.</li>
+          <li><strong>Oral + Lem combo.</strong> Best of both worlds, simultaneously.</li>
+        </ul>
+      </div>
+      <div class="couples-card">
+        <h3>Communication Tips</h3>
+        <ul>
+          <li><strong>Talk first, then play.</strong> Even one sentence reduces awkwardness.</li>
+          <li><strong>Take turns exploring.</strong> Both partners get to try, both get to ask.</li>
+          <li><strong>Experiment with angles.</strong> A few millimetres changes everything.</li>
+          <li><strong>Check in mid-session.</strong> "More? Less? Slower?" — sexy, not clinical.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote-card center-card">
+      <h4>Real Customer Quote:</h4>
+      <p>"My partner and I had more honest conversations in one night with Lem than the past year combined. Game-changer."</p>
+      <p class="reviewer">— Priya, 31</p>
+    </div>
+  </div>
+</section>
+
 <!-- Comparison -->
 <section class="comparison">
   <div class="container">
-    <h2 class="section-title">How Lem stacks up.</h2>
+    <h2 class="display center">How Lem stacks up.</h2>
     <div class="table-wrap">
       <table class="compare-table">
         <thead>
@@ -238,25 +316,70 @@
   </div>
 </section>
 
+<!-- Air Pulse vs Traditional Vibrators -->
+<section class="air-vs-trad">
+  <div class="container">
+    <h2 class="display center">Air Pulse vs Traditional Vibrators</h2>
+    <p class="lede center">Two completely different technologies. Here's why most first-timers fall in love with air pulse.</p>
+    <div class="vs-grid">
+      <div class="vs-card us">
+        <h3>Air Pulse (Lem)</h3>
+        <ul>
+          <li><strong>Stimulation type:</strong> Gentle suction + air waves</li>
+          <li><strong>Noise:</strong> Whisper-quiet (under 50 dB)</li>
+          <li><strong>Design:</strong> Discreet, lemon-shaped</li>
+          <li><strong>Orgasm quality:</strong> Deeper, longer, more sensitive</li>
+          <li><strong>Skin contact:</strong> Minimal — no numbness</li>
+        </ul>
+      </div>
+      <div class="vs-card them">
+        <h3>Traditional Vibrators</h3>
+        <ul>
+          <li><strong>Stimulation type:</strong> Surface vibration</li>
+          <li><strong>Noise:</strong> Often audible across the room</li>
+          <li><strong>Design:</strong> Obvious, hard to hide</li>
+          <li><strong>Orgasm quality:</strong> Surface-level intensity</li>
+          <li><strong>Skin contact:</strong> Can cause numbness over time</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Reviews -->
 <section class="reviews">
   <div class="container">
-    <h2 class="section-title">Loved by 700,000+ customers.</h2>
-    <div class="review-grid">
+    <h2 class="display center">Loved by 700,000+ customers.</h2>
+    <div class="review-carousel">
       <div class="review-card">
-        <img src="https://hellonancy.com/cdn/shop/files/stars.svg" alt="5 stars" class="stars" />
+        <span class="stars-gold">★★★★★</span>
         <p>"Honestly the most thoughtful first purchase. Quiet, simple, and I love how it looks on my nightstand."</p>
         <p class="reviewer">Leia · 28</p>
       </div>
       <div class="review-card">
-        <img src="https://hellonancy.com/cdn/shop/files/stars.svg" alt="5 stars" class="stars" />
+        <span class="stars-gold">★★★★★</span>
         <p>"It does exactly what it says. Twelve patterns, easy charging, easy to clean. No notes."</p>
         <p class="reviewer">Maya · 34</p>
       </div>
       <div class="review-card">
-        <img src="https://hellonancy.com/cdn/shop/files/stars.svg" alt="5 stars" class="stars" />
+        <span class="stars-gold">★★★★★</span>
         <p>"My partner and I both love it. The design is so unintimidating — and the suction is no joke."</p>
         <p class="reviewer">Priya · 31</p>
+      </div>
+      <div class="review-card">
+        <span class="stars-gold">★★★★★</span>
+        <p>"Travel-friendly is an understatement. Took it on a weekend away — best decision I made all year."</p>
+        <p class="reviewer">Olivia · 26</p>
+      </div>
+      <div class="review-card">
+        <span class="stars-gold">★★★★★</span>
+        <p>"Was nervous about buying my first one. Lem made it feel like buying skincare. Genius."</p>
+        <p class="reviewer">Hana · 33</p>
+      </div>
+      <div class="review-card">
+        <span class="stars-gold">★★★★★</span>
+        <p>"Quiet enough that I forgot to be self-conscious. Which was the whole point, honestly."</p>
+        <p class="reviewer">Amelia · 29</p>
       </div>
     </div>
   </div>
@@ -265,7 +388,7 @@
 <!-- FAQ -->
 <section class="faq">
   <div class="container">
-    <h2 class="section-title">FAQ</h2>
+    <h2 class="display center">FAQ's</h2>
     <details><summary>How fast is shipping?</summary><p>3–7 days in the US, 7–10 days for international orders. Free shipping over $65.</p></details>
     <details><summary>What's the warranty?</summary><p>12-month warranty. If your Lem is defective, we'll replace it.</p></details>
     <details><summary>What's your return policy?</summary><p>Unopened items can be returned within 30 days. Opened items are eligible for exchange or store credit through our Pleasure Guarantee.</p></details>
@@ -278,7 +401,7 @@
 <!-- Newsletter -->
 <section class="signup">
   <div class="container">
-    <h2>Stories &amp; surprises, straight to your inbox 💌</h2>
+    <h2 class="display center">Stories &amp; surprises straight to your inbox 💌</h2>
     <form onsubmit="event.preventDefault();">
       <input type="email" placeholder="your@email.com" required />
       <button type="submit">Subscribe</button>
@@ -316,6 +439,48 @@
     <p class="small">© 2026 Demo PDP recreation · Not affiliated with Nancy. For demonstration purposes.</p>
   </div>
 </footer>
+
+<!-- Sticky add-to-cart bar -->
+<div class="sticky-atc" id="stickyAtc">
+  <div class="container sticky-atc-inner">
+    <img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem" />
+    <div class="sticky-info">
+      <strong>Lem — Clitoral Massager</strong>
+      <span><span class="now-price">£69</span> <span class="was-price">£139</span></span>
+    </div>
+    <button class="btn-buy small" onclick="document.getElementById('atcModal').classList.add('open')">Add to cart</button>
+  </div>
+</div>
+
+<!-- Cart confirmation modal -->
+<div class="atc-modal" id="atcModal">
+  <div class="atc-modal-inner">
+    <button class="atc-modal-close" onclick="document.getElementById('atcModal').classList.remove('open')">×</button>
+    <span class="atc-modal-badge"><span class="dot"></span> HIGH DEMAND</span>
+    <h3>Heads up — your Lem is in high demand</h3>
+    <p>Because of the love we've been getting, Lem orders ship in batches. Here's what to expect:</p>
+    <div class="atc-steps">
+      <div class="atc-step"><span class="icon">📦</span><strong>ORDER</strong><span class="sub">Today</span></div>
+      <div class="atc-line"></div>
+      <div class="atc-step"><span class="icon">🛠</span><strong>PREP</strong><span class="sub">5–10 days</span></div>
+      <div class="atc-line"></div>
+      <div class="atc-step"><span class="icon">🚚</span><strong>DELIVERY</strong><span class="sub">3–5 days</span></div>
+    </div>
+    <button class="btn-buy">I understand — add to cart</button>
+    <button class="atc-modal-back" onclick="document.getElementById('atcModal').classList.remove('open')">Go back</button>
+  </div>
+</div>
+
+<script>
+// Show sticky ATC after scrolling past the buy button
+window.addEventListener('scroll', function() {
+  var btn = document.querySelector('.product-info .btn-buy');
+  if (!btn) return;
+  var rect = btn.getBoundingClientRect();
+  var stuck = rect.bottom < 0;
+  document.getElementById('stickyAtc').classList.toggle('visible', stuck);
+});
+</script>
 
 </body>
 </html>
