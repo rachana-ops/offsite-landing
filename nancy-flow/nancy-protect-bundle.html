@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nancy — Order Protect + Discreet Shipping Bundle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #FF30CC;
+    --pink-dark: #D231CB;
+    --pink-soft: #FFEFF9;
+    --neon: #CCFD28;
+    --neon-dark: #B8E61F;
+    --ink: #1A1A1A;
+    --muted: #666666;
+    --border: #F0F0F0;
+    --line: #E6E6E6;
+    --bg-gray: #FAF7F3;
+    --bg-dark: #1C1C1C;
+    --bg-darker: #141414;
+    --star: #FFB800;
+    --kraft: #D8C5A4;
+    --kraft-dark: #B89B70;
+    --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.5;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
+
+  /* Top header */
+  .top-header {
+    background: #fff;
+    padding: 22px 20px 26px;
+    text-align: center;
+  }
+  .top-header .brand {
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .top-header .brand img { height: 26px; }
+  .top-header h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+  .progress-bar {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .progress-bar .track {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    right: 12px;
+    height: 3px;
+    background: var(--line);
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  .progress-bar .track::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 50%;
+    height: 100%;
+    background: var(--pink);
+  }
+  .progress-step {
+    position: relative;
+    z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 4px;
+  }
+  .progress-step .marker {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--pink);
+  }
+  .progress-step.pending .marker { border-color: var(--line); }
+  .progress-step .marker.icon {
+    width: 22px; height: 22px;
+    background: var(--ink);
+    border: none;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .progress-step .lbl {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .progress-step.done .lbl { color: var(--ink); }
+  .progress-step.current .lbl { color: var(--pink); }
+  .progress-step.pending .lbl { color: var(--muted); }
+
+  /* Hero */
+  .hero {
+    background: var(--pink-soft);
+    padding: 56px 20px 22px;
+    text-align: center;
+    position: relative;
+  }
+  .save-banner {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--neon);
+    color: var(--ink);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .save-banner svg { width: 12px; height: 12px; }
+  .hero h2 {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--pink);
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+  .hero p {
+    font-size: 15px;
+    color: var(--ink);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .hero p strong { font-weight: 700; color: var(--pink); }
+
+  /* Offer */
+  .offer {
+    background: var(--pink-soft);
+    padding: 28px 0 56px;
+  }
+  .offer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+  .offer-img-card {
+    background: linear-gradient(160deg, #F4ECDF 0%, #E6D5B8 100%);
+    border-radius: 18px;
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 28px rgba(184,155,112,0.18);
+  }
+  .offer-img-card .kraft-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(184,155,112,0.10) 0,
+        rgba(184,155,112,0.10) 2px,
+        transparent 2px,
+        transparent 8px
+      ),
+      linear-gradient(160deg, #E8D9BE 0%, #D8C5A4 60%, #C8B388 100%);
+    z-index: 1;
+  }
+  .offer-img-card .tape-strip {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1.5deg);
+    width: 14%;
+    background: rgba(255,255,255,0.45);
+    border-left: 1px dashed rgba(0,0,0,0.10);
+    border-right: 1px dashed rgba(0,0,0,0.10);
+    z-index: 2;
+  }
+  .neon-corner {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background: var(--neon);
+    border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0.55;
+    z-index: 2;
+  }
+  .neon-corner.tl { top: -30px; left: -30px; }
+  .neon-corner.br { bottom: -30px; right: -30px; }
+  .bundle-ribbon {
+    position: relative;
+    z-index: 5;
+    background: var(--ink);
+    color: var(--neon);
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    padding: 8px 16px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+  }
+  .dual-badges {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .circle-badge {
+    width: 175px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 22px 14px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+    position: relative;
+  }
+  .circle-badge.pink {
+    border: 6px solid var(--pink);
+    margin-right: -28px;
+    z-index: 3;
+  }
+  .circle-badge.dark {
+    border: 6px solid var(--ink);
+    margin-left: -28px;
+    z-index: 2;
+  }
+  .circle-badge .inner-ring {
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,48,204,0.4);
+    pointer-events: none;
+  }
+  .circle-badge.dark .inner-ring {
+    border-color: rgba(26,26,26,0.35);
+  }
+  .circle-badge .top-text {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: #fff;
+    padding: 0 5px;
+  }
+  .circle-badge.pink .top-text { color: var(--pink); }
+  .circle-badge.dark .top-text { color: var(--ink); }
+  .circle-badge .icon-svg {
+    width: 30px;
+    height: 30px;
+    margin: 8px 0 4px;
+  }
+  .circle-badge.pink .icon-svg { color: var(--pink); }
+  .circle-badge.dark .icon-svg { color: var(--ink); }
+  .circle-badge .big-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .ampersand {
+    position: relative;
+    z-index: 4;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--pink);
+    font-size: 14px;
+    margin-top: 14px;
+    letter-spacing: 0.04em;
+  }
+  .ampersand strong { color: var(--ink); font-weight: 800; }
+
+  /* Right column */
+  .offer-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .offer-card .icon-box {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    background: var(--pink);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .offer-card .icon-box.dark { background: var(--ink); color: var(--neon); }
+  .offer-card .icon-box svg { width: 26px; height: 26px; }
+  .offer-card .info { flex: 1; min-width: 0; }
+  .offer-card h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .offer-card .small-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.4;
+  }
+  .offer-card .indiv-price {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--muted);
+    text-decoration: line-through;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .plus-divider {
+    text-align: center;
+    margin: 4px 0;
+    font-family: var(--font-display);
+    color: var(--pink);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .bundle-summary {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    margin: 16px 0;
+    border: 2px solid var(--pink);
+    box-shadow: 0 4px 18px rgba(255,48,204,0.12);
+  }
+  .bundle-row {
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 4px 0;
+  }
+  .bundle-row.strike .left { text-decoration: line-through; }
+  .bundle-row .right { font-variant-numeric: tabular-nums; }
+  .bundle-row.total {
+    border-top: 1px dashed var(--line);
+    margin-top: 8px;
+    padding-top: 12px;
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .bundle-row.total .right {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--pink);
+    font-weight: 700;
+  }
+  .savings-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--neon);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-left: 6px;
+  }
+
+  .features {
+    list-style: none; padding: 0; margin: 0 0 14px;
+  }
+  .features li {
+    display: flex; gap: 12px;
+    padding: 8px 6px;
+    align-items: flex-start;
+  }
+  .features .check {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .features .check svg { width: 12px; height: 12px; }
+  .features .ft-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 2px;
+  }
+  .features .ft-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Buttons */
+  .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 16px 18px;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: background 0.15s ease, transform 0.05s ease;
+  }
+  .btn-add {
+    background: var(--pink);
+    box-shadow: 0 4px 0 var(--pink-dark);
+  }
+  .btn-add:hover { background: #e228b3; }
+  .btn-add:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--pink-dark); }
+  .btn-no {
+    background: var(--ink);
+    color: #fff;
+  }
+  .btn-no:hover { background: #333; }
+
+  /* Reviews */
+  .reviews {
+    background: var(--bg-dark);
+    color: #fff;
+    padding: 56px 0 64px;
+  }
+  .reviews-head { text-align: center; margin-bottom: 32px; }
+  .reviews-head .small {
+    font-size: 12px;
+    color: #c4c4c4;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .reviews-head .small strong { color: var(--neon); font-weight: 700; }
+  .reviews-head h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .review-card {
+    background: var(--bg-darker);
+    border-radius: 12px;
+    padding: 20px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #2a2a2a;
+  }
+  .review-card .stars {
+    color: var(--star);
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .review-card .quote {
+    margin: 0 0 16px;
+    font-size: 13px;
+    color: #e8e8e8;
+    line-height: 1.55;
+    flex-grow: 1;
+  }
+  .review-card .name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .review-card .verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--neon);
+    font-weight: 500;
+  }
+  .review-card .verified svg { width: 12px; height: 12px; }
+
+  .reviews-cta { max-width: 600px; margin: 0 auto; }
+
+  /* Footer */
+  .footer {
+    background: #0e0e0e;
+    color: #b5b5b5;
+    text-align: center;
+    padding: 16px 20px;
+    font-size: 12px;
+  }
+  .footer-note {
+    text-align: left;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 12px 20px 16px;
+    background: #fff;
+    max-width: 1020px;
+    margin: 0 auto;
+  }
+
+  .chat-bubble {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    width: 44px; height: 44px;
+    background: var(--pink);
+    border-radius: 50%;
+    box-shadow: 0 4px 14px rgba(255,48,204,0.4);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+  }
+  .chat-bubble svg { width: 22px; height: 22px; color: #fff; }
+
+  @media (max-width: 760px) {
+    .offer-grid { grid-template-columns: 1fr; }
+    .review-grid { grid-template-columns: 1fr; }
+    .hero h2 { font-size: 28px; }
+    .reviews-head h3 { font-size: 26px; }
+    .progress-bar { max-width: 320px; }
+  }
+
+  /* ===== UNIFIED FLOW HEADER ===== */
+  .flow-confirm {
+    background: #FFEFF9;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #1A1A1A;
+    border-bottom: 1px solid #f5d8ec;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .flow-confirm strong { color: #FF30CC; font-weight: 700; }
+  .flow-confirm .flow-check {
+    display: inline-flex; width: 14px; height: 14px;
+    border-radius: 50%; background: #FF30CC; color: #fff;
+    align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; margin-right: 4px;
+    vertical-align: middle;
+  }
+  .flow-confirm .flow-sep { color: #d2a9c8; margin: 0 4px; }
+  .flow-brand { text-align: center; padding: 18px 16px 14px; background: #fff; }
+  .flow-brand img { height: 26px; margin: 0 auto; display: block; }
+  .flow-steps {
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 0 16px 28px; max-width: 700px; margin: 0 auto;
+    background: #fff; border-bottom: 1px solid #f0f0f0;
+  }
+  .flow-step {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    font-family: 'Inter', system-ui, sans-serif; flex: 0 0 auto;
+  }
+  .flow-dot {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 2px solid #e0e0e0; background: #fff; color: #aaa;
+    font-weight: 700; font-size: 13px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .flow-lbl {
+    font-size: 10px; color: #999; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+  }
+  .flow-step.done .flow-dot { background: #FF30CC; border-color: #FF30CC; color: #fff; }
+  .flow-step.done .flow-lbl { color: #1A1A1A; }
+  .flow-step.current .flow-dot {
+    background: #FF30CC; border-color: #FF30CC; color: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 48, 204, 0.18);
+    transform: scale(1.1);
+  }
+  .flow-step.current .flow-lbl { color: #FF30CC; font-weight: 800; }
+  .flow-line {
+    flex: 1 1 auto; height: 2px; background: #e0e0e0;
+    margin: 14px 4px 0; max-width: 60px; min-width: 12px;
+  }
+  .flow-line.done { background: #FF30CC; }
+  @media (max-width: 640px) {
+    .flow-lbl { font-size: 8px; }
+    .flow-line { max-width: 22px; }
+    .flow-dot { width: 24px; height: 24px; font-size: 11px; }
+    .flow-confirm { font-size: 11px; padding: 8px 12px; }
+    .flow-confirm .flow-sep { margin: 0 2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== UNIFIED FLOW HEADER ===== -->
+<div class="flow-confirm">
+  <span class="flow-check">&#10003;</span>
+  <strong>Nancy</strong>
+  <span class="flow-sep">&middot;</span>
+  Confirmation #NCY-9X42KB
+  <span class="flow-sep">&middot;</span>
+  You're all paid up, gorgeous
+</div>
+<div class="flow-brand">
+  <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
+</div>
+<div class="flow-steps">
+  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">2nd Lem</span></div>
+  <div class="flow-line done"></div>
+  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">Lolly</span></div>
+  <div class="flow-line done"></div>
+  <div class="flow-step current"><span class="flow-dot">3</span><span class="flow-lbl">Bundle</span></div>
+  <div class="flow-line"></div>
+  <div class="flow-step"><span class="flow-dot">4</span><span class="flow-lbl">Discreet</span></div>
+  <div class="flow-line"></div>
+  <div class="flow-step"><span class="flow-dot">5</span><span class="flow-lbl">Protect</span></div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <span class="save-banner">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Bundle &amp; Save — Best Value
+    </span>
+    <h2>Protected, Discreet, Delivered.</h2>
+    <p>Add Order Protect <em>and</em> Discreet Shipping together for <strong>just $8</strong> — covering everything that could go sideways between checkout and your door, for less than the cost of a cocktail.</p>
+  </div>
+</section>
+
+<section class="offer">
+  <div class="container">
+    <div class="offer-grid">
+      <div class="offer-img-card">
+        <div class="kraft-bg"></div>
+        <div class="tape-strip"></div>
+        <span class="neon-corner tl"></span>
+        <span class="neon-corner br"></span>
+
+        <div class="bundle-ribbon">&pound;7 Complete Bundle</div>
+
+        <div class="dual-badges">
+          <div class="circle-badge pink">
+            <span class="inner-ring"></span>
+            <div class="top-text">Step 01</div>
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <div class="big-text">Order<br/>Protect</div>
+          </div>
+
+          <div class="circle-badge dark">
+            <span class="inner-ring"></span>
+            <div class="top-text">Step 02</div>
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+            <div class="big-text">Discreet<br/>Shipping</div>
+          </div>
+        </div>
+
+        <div class="ampersand">Protected <strong>&amp;</strong> Discreet</div>
+      </div>
+
+      <div class="offer-right">
+        <div class="offer-card">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </div>
+          <div class="info">
+            <h3>Order Protect</h3>
+            <p class="small-desc">Lost, stolen, or damaged in transit? Replaced free.</p>
+          </div>
+          <span class="indiv-price">$4.99</span>
+        </div>
+
+        <div class="plus-divider">+</div>
+
+        <div class="offer-card">
+          <div class="icon-box dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <div class="info">
+            <h3>Discreet Shipping</h3>
+            <p class="small-desc">Plain box. Neutral sender name. Sealed for your eyes.</p>
+          </div>
+          <span class="indiv-price">$4.99</span>
+        </div>
+
+        <div class="bundle-summary">
+          <div class="bundle-row strike">
+            <span class="left">Both add-ons separately</span>
+            <span class="right">$9.98</span>
+          </div>
+          <div class="bundle-row total">
+            <span class="left">Bundle price <span class="savings-pill">Save $1.98</span></span>
+            <span class="right">$8.00</span>
+          </div>
+        </div>
+
+        <ul class="features">
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div>
+              <p class="ft-title">Full transit cover — start to door.</p>
+              <p class="ft-desc">Free reship for anything lost, stolen, or damaged. No receipts, no police reports.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div>
+              <p class="ft-title">Totally plain outer parcel.</p>
+              <p class="ft-desc">Unbranded box, neutral sender, tamper-evident seal — flatmate-, family- and porter-proof.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div>
+              <p class="ft-title">Priority humans on speed dial.</p>
+              <p class="ft-desc">Bundled orders skip the queue if anything's off. Real replies, real fast.</p>
+            </div>
+          </li>
+        </ul>
+
+        <a href="nancy-discreet-shipping.html" class="btn btn-add">Yes, add the $8 bundle</a>
+        <a href="nancy-discreet-shipping.html" class="btn btn-no">No thanks</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="container">
+    <div class="reviews-head">
+      <p class="small">More than <strong>1,000,000+</strong> happy customers</p>
+      <h3>The $8 our customers never regret</h3>
+    </div>
+
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"Got the bundle and so worth it. Parcel was plain brown, mum thought it was vitamins. And the courier left it in the bin store?? Nancy reshipped same week. Five stars from me x"</p>
+        <div class="name">Aaliyah J.</div>
+        <div class="verified">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Verified Customer
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"Honestly do the bundle. $8 for 'no logos AND no panic if it gets pinched' is genuinely a no-brainer. Cheaper than my morning matcha and twice as comforting."</p>
+        <div class="name">Hannah V.</div>
+        <div class="verified">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Verified Customer
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"Lives in a houseshare = bundle non-negotiable. Plain box, fast reship when royal mail did royal mail things. Nancy customer service queens, I swear."</p>
+        <div class="name">Tasha M.</div>
+        <div class="verified">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Verified Customer
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-cta">
+      <a href="nancy-discreet-shipping.html" class="btn btn-add">Yes, add the $8 bundle</a>
+      <a href="nancy-discreet-shipping.html" class="btn btn-no">No thanks</a>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  &copy; 2026 Nancy. All rights reserved.
+</div>
+<div class="footer-note">*Tax included where applicable. Bundle saving vs. individual add-on prices.</div>
+
+<div class="chat-bubble" aria-label="Chat support">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
+</div>
+
+<script>
+  // ===== FLOW ROUTING =====
+  (function() {
+    var ITEM = 'bundle';
+    var YES_NEXT = 'thank-you.html';
+    var NO_NEXT = 'nancy-discreet-shipping.html';
+    var YES_SEL = 'a.btn-add';
+    var NO_SEL = 'a.btn-no';
+    var params = new URLSearchParams(window.location.search);
+    var items = (params.get('items') || '').split(',').filter(Boolean);
+    function build(next, add) {
+      var arr = items.slice();
+      if (add && ITEM && arr.indexOf(ITEM) === -1) arr.push(ITEM);
+      return next + (arr.length ? '?items=' + arr.join(',') : '');
+    }
+    document.querySelectorAll(YES_SEL).forEach(function(a) { a.setAttribute('href', build(YES_NEXT, true)); });
+    document.querySelectorAll(NO_SEL).forEach(function(a) { a.setAttribute('href', build(NO_NEXT, false)); });
+  })();
+</script>
+</body>
+</html>

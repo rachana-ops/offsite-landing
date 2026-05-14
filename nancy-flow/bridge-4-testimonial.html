@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bridge 4 — Confession Wall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,500;9..144,0,600;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF30CC;
+    --pink-soft: #FFEFF9;
+    --neon: #CCFD28;
+    --ink: #1A1A1A;
+    --muted: #6b6b6b;
+    --bg: #FFF5FB;
+    --font-sans: 'Inter', sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  .head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid rgba(255,48,204,0.25);
+    color: var(--pink);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+  }
+  .pill .dot {
+    width: 8px; height: 8px;
+    background: var(--pink);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255,48,204,0.15);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(38px, 5.6vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  h1 em { font-style: italic; color: var(--pink); }
+  .sub {
+    color: var(--muted);
+    font-size: 18px;
+    max-width: 560px;
+    margin: 0 auto 30px;
+  }
+
+  .stars-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border-radius: 999px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    margin-bottom: 50px;
+  }
+  .stars-row .stars { color: #F4C947; letter-spacing: 2px; font-size: 18px; }
+  .stars-row .count { font-weight: 600; font-size: 14px; }
+  .stars-row .by { color: var(--muted); font-size: 13px; }
+
+  .grid {
+    column-count: 3;
+    column-gap: 18px;
+  }
+  @media (max-width: 880px) { .grid { column-count: 2; } }
+  @media (max-width: 540px) { .grid { column-count: 1; } }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+    break-inside: avoid;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    position: relative;
+  }
+  .card .stars {
+    color: #F4C947;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .card .quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .card .quote::before { content: "“"; color: var(--pink); font-size: 28px; line-height: 0; vertical-align: -10px; margin-right: 2px; }
+  .card .quote::after  { content: "”"; color: var(--pink); font-size: 28px; line-height: 0; vertical-align: -14px; margin-left: 2px; }
+  .card .who {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card .who strong { color: var(--ink); font-weight: 600; }
+  .card.highlight {
+    background: var(--ink);
+    color: #fff;
+  }
+  .card.highlight .quote { color: #fff; }
+  .card.highlight .quote::before,
+  .card.highlight .quote::after { color: var(--neon); }
+  .card.highlight .who { color: rgba(255,255,255,0.65); }
+  .card.highlight .who strong { color: #fff; }
+
+  .cta-block {
+    margin-top: 50px;
+    text-align: center;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--pink);
+    color: #fff;
+    padding: 20px 44px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 17px;
+    box-shadow: 0 18px 40px -12px rgba(255,48,204,0.55);
+    transition: transform .2s ease;
+  }
+  .cta:hover { transform: translateY(-2px); }
+  .micro {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <div class="pill"><span class="dot"></span> Real reviews · Verified buyers</div>
+      <h1>What everyone said<br/>about their <em>first night</em>.</h1>
+      <p class="sub">No influencers. No scripts. Just 1,000+ women telling on themselves — anonymously, of course.</p>
+      <div class="stars-row">
+        <span class="stars">★★★★★</span>
+        <span class="count">4.9 / 5</span>
+        <span class="by">· based on 1,000+ reviews</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">I texted my best friend at 2am. I have never done that about a product before.</div>
+        <div class="who"><strong>Maya R.</strong><span>Brooklyn</span></div>
+      </div>
+      <div class="card highlight">
+        <div class="stars">★★★★★</div>
+        <div class="quote">It's tiny. It's quiet. It is also the most expensive thing in my nightstand in terms of returns on investment.</div>
+        <div class="who"><strong>Priya K.</strong><span>Verified buyer</span></div>
+      </div>
+      <div class="card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">I bought it for "stress relief." That is a real reason, by the way.</div>
+        <div class="who"><strong>Sam D.</strong><span>Austin</span></div>
+      </div>
+      <div class="card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">Husband asked what the soft glow was. I said it's a humidifier.</div>
+        <div class="who"><strong>Anonymous</strong><span>Verified</span></div>
+      </div>
+      <div class="card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">First time I've reordered a "lifestyle product" the same week it shipped.</div>
+        <div class="who"><strong>Jess L.</strong><span>Los Angeles</span></div>
+      </div>
+      <div class="card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">If you're on the fence, this review is your sign. Get off the fence.</div>
+        <div class="who"><strong>Naomi B.</strong><span>Toronto</span></div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <a class="cta" href="lem.html">Read more — and meet Lem →</a>
+      <div class="micro">Free shipping · Discreet packaging · 30-day guarantee</div>
+    </div>
+  </div>
+</body>
+</html>

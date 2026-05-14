@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nancy — Thank You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #FF30CC;
+    --pink-soft: #FFEFF9;
+    --neon: #CCFD28;
+    --ink: #1A1A1A;
+    --muted: #6b6b6b;
+    --bg: #FCF7ED;
+    --border: #F0F0F0;
+    --font-sans: 'Inter', Arial, sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.5;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .brand-band {
+    background: var(--pink-soft);
+    padding: 18px 20px;
+    display: flex; justify-content: center; gap: 24px; align-items: center;
+  }
+  .brand-band img { height: 30px; }
+  .uk-badge {
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 6px; font-weight: 500;
+  }
+  .uk-badge .dot { width: 8px; height: 8px; background: var(--pink); border-radius: 50%; }
+
+  .steps-wrap { padding: 22px 0; background: #fff; border-bottom: 1px solid var(--border); }
+  .steps { display: flex; justify-content: center; }
+  .step {
+    padding: 12px 36px 12px 28px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    color: #fff;
+    text-transform: uppercase;
+    background: #c9c9c9;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+  }
+  .step.current { background: var(--neon); color: var(--ink); margin-left: -10px; }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    text-align: center;
+  }
+  .tick {
+    width: 88px; height: 88px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    background: var(--neon);
+    display: grid; place-items: center;
+    font-size: 44px;
+    color: var(--ink);
+    box-shadow: 0 18px 40px -12px rgba(204,253,40,0.55);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(38px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  h1 em { font-style: italic; color: var(--pink); }
+  .lede {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 480px;
+    margin: 0 auto 36px;
+  }
+
+  .summary {
+    background: #fff;
+    border-radius: 16px;
+    padding: 26px 28px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    text-align: left;
+    margin-bottom: 32px;
+  }
+  .summary h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .summary .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 14px;
+  }
+  .summary .row:last-of-type { border-bottom: none; }
+  .summary .item-info {
+    display: flex; align-items: center; gap: 14px;
+    flex: 1; min-width: 0;
+  }
+  .summary .ic {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: var(--pink-soft);
+    display: grid; place-items: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .summary .name { font-weight: 600; font-size: 15px; line-height: 1.25; }
+  .summary .sub { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .summary .price { font-weight: 600; font-size: 15px; white-space: nowrap; }
+  .summary .price .was {
+    color: var(--muted);
+    text-decoration: line-through;
+    font-size: 12px;
+    font-weight: 400;
+    display: block;
+    text-align: right;
+  }
+  .summary .meta {
+    color: var(--muted);
+    font-size: 13px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary .total {
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .summary .total .label { color: var(--ink); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .summary .total .value { font-family: var(--font-display); font-weight: 600; font-size: 26px; color: var(--pink); }
+  .summary .savings {
+    margin-top: 8px;
+    text-align: right;
+    font-size: 13px;
+    color: var(--pink);
+    font-weight: 600;
+  }
+
+  .timeline {
+    background: #fff;
+    border-radius: 16px;
+    padding: 26px 28px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    margin-bottom: 32px;
+    text-align: left;
+  }
+  .timeline h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .tl-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .tl-step {
+    background: var(--pink-soft);
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .tl-step .icon { font-size: 24px; display: block; margin-bottom: 6px; }
+  .tl-step strong { display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
+  .tl-step .sub { font-size: 12px; color: var(--muted); }
+  @media (max-width: 520px) {
+    .tl-steps { grid-template-columns: 1fr; }
+  }
+
+  .back {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .back:hover { background: var(--pink); }
+
+  .micro {
+    margin-top: 22px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+
+<div class="brand-band">
+  <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
+  <span class="uk-badge"><span class="dot"></span> Designed in London</span>
+</div>
+
+<div class="steps-wrap">
+  <div class="steps">
+    <div class="step">Step 1: Order Placed</div>
+    <div class="step">Step 2: Customize Order</div>
+    <div class="step current">✓ Order Complete</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="tick">✓</div>
+  <h1>You're all <em>set.</em></h1>
+  <p class="lede">Your order is on the way. We just sent the confirmation to your inbox — keep an eye out (and maybe your housemates too).</p>
+
+  <div class="summary">
+    <h3>Your order</h3>
+    <div id="lineItems"></div>
+    <div class="meta">
+      <span>Order #</span>
+      <span id="orderNum">LEMXNZ9P2</span>
+    </div>
+    <div class="meta">
+      <span>Shipping</span>
+      <span>Free · Discreet</span>
+    </div>
+    <div class="total">
+      <span class="label">Total paid</span>
+      <span class="value" id="totalPaid">$0.00</span>
+    </div>
+    <div class="savings" id="savings"></div>
+  </div>
+
+  <div class="timeline">
+    <h3>What happens next</h3>
+    <div class="tl-steps">
+      <div class="tl-step"><span class="icon">📦</span><strong>Order</strong><span class="sub">Today</span></div>
+      <div class="tl-step"><span class="icon">🛠</span><strong>Prep</strong><span class="sub">1–2 business days</span></div>
+      <div class="tl-step"><span class="icon">🚚</span><strong>Delivery</strong><span class="sub">3–5 business days</span></div>
+    </div>
+  </div>
+
+  <a class="back" href="bridges.html">← Back to bridge pages</a>
+  <div class="micro">Need help? hello@hellonancy.com</div>
+</div>
+
+<script>
+(function() {
+  var CATALOG = {
+    lem:      { name: 'Lem — Clitoral Massager', sub: 'Pocket-sized air-pulse',          icon: '🍋', price: 89,    was: 159 },
+    pouch:    { name: 'Pleasure Pouch',          sub: 'Discreet velvet storage pouch',   icon: '👜', price: 9.99,  was: 19.99 },
+    lem2:     { name: 'Lem — 2nd unit',           sub: 'VIP one-time price',              icon: '🍋', price: 39,    was: 89 },
+    lolly:    { name: 'Lolly — Pocket Vibrator',  sub: 'VIP one-time price',              icon: '🍭', price: 29,    was: 89 },
+    bundle:   { name: 'Order Protect + Discreet Shipping', sub: 'The protected delivery bundle', icon: '🛡', price: 8.00, was: 9.98 },
+    discreet: { name: 'Discreet Shipping',        sub: 'Plain box · neutral sender',      icon: '📦', price: 4.99,  was: 0 },
+    protect:  { name: 'Order Protect',            sub: 'Lost · stolen · damaged covered', icon: '🛡', price: 4.99,  was: 0 }
+  };
+  var ORDER = ['lem','pouch','lem2','lolly','bundle','discreet','protect'];
+
+  var params = new URLSearchParams(window.location.search);
+  var items = (params.get('items') || '').split(',').filter(Boolean);
+  // If no items in URL (e.g. user landed directly), default to base Lem
+  if (items.length === 0) items = ['lem'];
+
+  var present = {};
+  items.forEach(function(k) { present[k] = true; });
+
+  var lineHtml = '';
+  var total = 0, was = 0;
+  ORDER.forEach(function(k) {
+    if (!present[k]) return;
+    var it = CATALOG[k];
+    if (!it) return;
+    total += it.price;
+    was   += (it.was || it.price);
+    lineHtml += '' +
+      '<div class="row">' +
+        '<div class="item-info">' +
+          '<div class="ic">' + it.icon + '</div>' +
+          '<div>' +
+            '<div class="name">' + it.name + '</div>' +
+            '<div class="sub">' + it.sub + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="price">' +
+          '$' + it.price.toFixed(2) +
+          (it.was && it.was > it.price ? '<span class="was">$' + it.was.toFixed(2) + '</span>' : '') +
+        '</div>' +
+      '</div>';
+  });
+
+  document.getElementById('lineItems').innerHTML = lineHtml;
+  document.getElementById('totalPaid').textContent = '$' + total.toFixed(2);
+
+  var saved = was - total;
+  if (saved > 0.01) {
+    document.getElementById('savings').textContent = 'You saved $' + saved.toFixed(2) + ' today';
+  }
+})();
+</script>
+
+</body>
+</html>
