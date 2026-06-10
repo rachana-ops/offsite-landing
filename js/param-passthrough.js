@@ -88,6 +88,16 @@
 
     // --- Click-capture fallback for buttons with inline window.location ---
     // Handles the quiz page where <button onclick="window.location='...'"> is used.
+    //
+    // Why stopImmediatePropagation + setAttribute('onclick', ''):
+    //   stopPropagation() in the capture phase does NOT prevent the button's own
+    //   inline onclick attribute from executing — that fires in the target/bubble
+    //   phase and is not a propagation-path listener that stopPropagation blocks.
+    //   The inline onclick's bare window.location assignment would then overwrite
+    //   our augmented URL (last assignment wins).
+    //   Fix: null out the onclick attribute before navigating so it never runs,
+    //   and call stopImmediatePropagation() to prevent any other capture listeners
+    //   from also firing.
     document.addEventListener('click', function (e) {
       var el = e.target;
       // Walk up to a button in case the click landed on a child element
@@ -101,7 +111,12 @@
               var url = augmentUrl(m[1], params);
               if (url !== m[1]) {
                 e.preventDefault();
-                e.stopPropagation();
+                // Null out the inline onclick so it cannot overwrite our
+                // augmented URL after this handler returns.
+                el.setAttribute('onclick', '');
+                // Stop other capture-phase listeners; does not block onclick
+                // (already cleared above), but is correct defensive practice.
+                e.stopImmediatePropagation();
                 window.location = url;
                 return;
               }
