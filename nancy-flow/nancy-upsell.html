@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="nancy-upsell">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Nancy — Customize Your Order</title>
+<title data-i18n="meta.title">Nancy — Customize Your Order</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -489,9 +490,9 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
 <div class="top-bar">
   <span class="brand-mini">Nancy</span>
-  <span><span class="check">✓</span> Confirmation #NCY-9X42KB</span>
-  <span>You're all paid up, gorgeous.</span>
-  <a href="#">View order confirmation ›</a>
+  <span data-i18n="topbar.confirmation"><span class="check">✓</span> Confirmation #NCY-9X42KB</span>
+  <span data-i18n="topbar.paid">You're all paid up, gorgeous.</span>
+  <a href="#" data-i18n="topbar.viewOrder">View order confirmation ›</a>
 </div>
 
 <div class="header">
@@ -499,20 +500,20 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 </div>
 
 <div class="steps">
-  <div class="step completed">Step 1 · Order Received</div>
-  <div class="step current">Step 2 · Customize Order</div>
+  <div class="step completed" data-i18n="steps.step1">Step 1 · Order Received</div>
+  <div class="step current" data-i18n="steps.step2">Step 2 · Customize Order</div>
 </div>
 
-<div class="warning">Wait! Don't close this page yet 💗</div>
-<div class="sub-warning">Hitting "Back" or "Exit" could double-charge your card — let's keep things smooth.</div>
+<div class="warning" data-i18n="warning.title">Wait! Don't close this page yet 💗</div>
+<div class="sub-warning" data-i18n="warning.sub">Hitting "Back" or "Exit" could double-charge your card — let's keep things smooth.</div>
 
 <div class="container">
-  <div class="intro">
+  <div class="intro" data-i18n="intro.body">
     Because you just picked up <strong>Lem</strong>, you've unlocked one-time VIP access to its perfect partner-in-crime: <strong>Lolly</strong> — our pocket-sized mini wand vibrator designed to be sweet, small, and slip-into-your-bag discreet. Where Lem brings deep, rumbly air-pulse waves, Lolly delivers rumbly all-over vibrations anywhere you want them. Together they're our most-requested pairing — and today only, you can add Lolly to your order for a price you'll <em>never</em> see again.
   </div>
 
-  <div class="price-teaser">Just $29 — once.</div>
-  <div class="vip-line">Today only, for Nancy VIPs (yes, that's you)</div>
+  <div class="price-teaser" data-i18n="priceTeaser">Just $29 — once.</div>
+  <div class="vip-line" data-i18n="vipLine">Today only, for Nancy VIPs (yes, that's you)</div>
 
   <div class="product-block">
     <div class="lollies">
@@ -525,30 +526,30 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
       <div class="lolly right">
         <img src="https://hellonancy.com/cdn/shop/files/LOL_2.png?v=1762422962&width=800" alt="Lolly" />
         <div class="save-badge">
-          <div>Save</div>
+          <div data-i18n="product.save">Save</div>
           <div class="amt">$60</div>
         </div>
       </div>
     </div>
-    <div class="free-ship">★ Free Shipping Included</div>
+    <div class="free-ship" data-i18n="product.freeShip">★ Free Shipping Included</div>
   </div>
 
-  <div class="product-title">Add Lolly — Pocket Vibrator</div>
+  <div class="product-title" data-i18n="product.title">Add Lolly — Pocket Vibrator</div>
 
   <div class="price-row">
     <div class="col">
-      <span class="label">Usually</span>
+      <span class="label" data-i18n="product.usually">Usually</span>
       <span class="strike">$89</span>
     </div>
     <div class="col">
-      <span class="label">Your VIP price</span>
+      <span class="label" data-i18n="product.vipPriceLabel">Your VIP price</span>
       <span class="vip-price">$29</span>
     </div>
   </div>
 
-  <a href="nancy-order-protect.html" class="cta">Yes! Add Lolly to my order for $29 →</a>
+  <a href="nancy-order-protect.html" class="cta" data-i18n="cta.yes">Yes! Add Lolly to my order for $29 →</a>
 
-  <a href="nancy-order-protect.html" class="decline-link">No thanks, I'll pass on this offer</a>
+  <a href="nancy-order-protect.html" class="decline-link" data-i18n="cta.decline">No thanks, I'll pass on this offer</a>
 
   <div class="payments">
     <div class="pay visa">VISA</div>
@@ -562,18 +563,18 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="guarantee">
     <div class="guarantee-badge">
       <div class="big">30</div>
-      <div>Day Promise</div>
+      <div data-i18n="guarantee.dayPromise">Day Promise</div>
     </div>
   </div>
 
-  <div class="decline-copy">
+  <div class="decline-copy" data-i18n="declineCopy.1">
     No thanks — I understand this is my one and only chance to add Lolly at the VIP price, and I'm okay missing it. If I change my mind later, I'll pay full price at $89 or more.
   </div>
 
   <div class="body-copy">
-    <p>Picture this: Lem giving you those deep, all-over waves you came here for…</p>
-    <p class="pink">…and Lolly tagging in for the finish.</p>
-    <p>One brings the build-up. The other goes anywhere with you. The combo is the reason this pair sells out every time we restock.</p>
+    <p data-i18n="body1.p1">Picture this: Lem giving you those deep, all-over waves you came here for…</p>
+    <p class="pink" data-i18n="body1.p2">…and Lolly tagging in for the finish.</p>
+    <p data-i18n="body1.p3">One brings the build-up. The other goes anywhere with you. The combo is the reason this pair sells out every time we restock.</p>
   </div>
 
   <div class="story-img">
@@ -582,21 +583,21 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
   <div class="testimonial">
     <div class="stars">★★★★★</div>
-    <div class="quote">"I bought Lem on a whim and added Lolly at checkout for the laugh. Best $29 I've ever spent. Lem warms me up, Lolly seals the deal. They live in my nightstand together like a little duo. 10/10, would recommend to my group chat — and I have."</div>
-    <span class="author">— Eleanor, London · Verified Buyer</span>
+    <div class="quote" data-i18n="testimonial.quote">"I bought Lem on a whim and added Lolly at checkout for the laugh. Best $29 I've ever spent. Lem warms me up, Lolly seals the deal. They live in my nightstand together like a little duo. 10/10, would recommend to my group chat — and I have."</div>
+    <span class="author" data-i18n="testimonial.author">— Eleanor, London · Verified Buyer</span>
   </div>
 
   <div class="body-copy">
-    <p>Here's the honest truth before you decide…</p>
-    <p>Most people who buy Lem come back within a month asking what they should pair it with. We made Lolly <em>specifically</em> as that answer — pocket-sized, travel-ready, and built for the moments when Lem is at home and you're not.</p>
-    <p>Multiple intensities. Whisper-quiet. USB-rechargeable. Body-safe silicone. Small enough to live in your handbag — discreet enough that no one would ever guess.</p>
-    <p>Because we only get a handful of restocks each quarter, this VIP price is exclusive to the post-checkout window. After today, Lolly goes back to $89 — and during the next sell-out window, you could be waiting 6–8 weeks for the next batch.</p>
-    <p class="pink">Lock in your Lolly now while it's still here, and at a price you'll never see again.</p>
-    <p>And yes — <strong>shipping is on us, discreetly packaged</strong>, same parcel as your Lem.</p>
-    <p>Covered by our <strong>30-Day Pleasure Promise</strong>. If it doesn't change things for you, we'll refund you — no awkward questions.</p>
+    <p data-i18n="body2.p1">Here's the honest truth before you decide…</p>
+    <p data-i18n="body2.p2">Most people who buy Lem come back within a month asking what they should pair it with. We made Lolly <em>specifically</em> as that answer — pocket-sized, travel-ready, and built for the moments when Lem is at home and you're not.</p>
+    <p data-i18n="body2.p3">Multiple intensities. Whisper-quiet. USB-rechargeable. Body-safe silicone. Small enough to live in your handbag — discreet enough that no one would ever guess.</p>
+    <p data-i18n="body2.p4">Because we only get a handful of restocks each quarter, this VIP price is exclusive to the post-checkout window. After today, Lolly goes back to $89 — and during the next sell-out window, you could be waiting 6–8 weeks for the next batch.</p>
+    <p class="pink" data-i18n="body2.p5">Lock in your Lolly now while it's still here, and at a price you'll never see again.</p>
+    <p data-i18n="body2.p6">And yes — <strong>shipping is on us, discreetly packaged</strong>, same parcel as your Lem.</p>
+    <p data-i18n="body2.p7">Covered by our <strong>30-Day Pleasure Promise</strong>. If it doesn't change things for you, we'll refund you — no awkward questions.</p>
   </div>
 
-  <div class="try-line">
+  <div class="try-line" data-i18n="tryLine">
     Add <strong>Lolly</strong> to your order for <span class="pink">just $29</span>.<br>
     Sound good?
   </div>
@@ -612,30 +613,30 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
       <div class="lolly right">
         <img src="https://hellonancy.com/cdn/shop/files/LOL_2.png?v=1762422962&width=800" alt="Lolly" />
         <div class="save-badge">
-          <div>Save</div>
+          <div data-i18n="product.save">Save</div>
           <div class="amt">$60</div>
         </div>
       </div>
     </div>
-    <div class="free-ship">★ Free Shipping Included</div>
+    <div class="free-ship" data-i18n="product.freeShip">★ Free Shipping Included</div>
   </div>
 
-  <div class="product-title">Add Lolly — Pocket Vibrator</div>
+  <div class="product-title" data-i18n="product.title">Add Lolly — Pocket Vibrator</div>
 
   <div class="price-row">
     <div class="col">
-      <span class="label">Usually</span>
+      <span class="label" data-i18n="product.usually">Usually</span>
       <span class="strike">$89</span>
     </div>
     <div class="col">
-      <span class="label">Your VIP price</span>
+      <span class="label" data-i18n="product.vipPriceLabel">Your VIP price</span>
       <span class="vip-price">$29</span>
     </div>
   </div>
 
-  <a href="nancy-order-protect.html" class="cta">Yes! Add Lolly to my order for $29 →</a>
+  <a href="nancy-order-protect.html" class="cta" data-i18n="cta.yes">Yes! Add Lolly to my order for $29 →</a>
 
-  <a href="nancy-order-protect.html" class="decline-link">No thanks, I'll pass on this offer</a>
+  <a href="nancy-order-protect.html" class="decline-link" data-i18n="cta.decline">No thanks, I'll pass on this offer</a>
 
   <div class="payments">
     <div class="pay visa">VISA</div>
@@ -649,34 +650,34 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="guarantee">
     <div class="guarantee-badge">
       <div class="big">30</div>
-      <div>Day Promise</div>
+      <div data-i18n="guarantee.dayPromise">Day Promise</div>
     </div>
   </div>
 
-  <div class="decline-copy">
+  <div class="decline-copy" data-i18n="declineCopy.2">
     No, I don't want to add Lolly to my order for $29. I'm aware I'll never see this price again.
   </div>
 
-  <div class="reminder">
+  <div class="reminder" data-i18n="reminder.block">
     <div class="reminder-title">One-time offer — only on this page</div>
     Once you leave this page, Lolly goes back to its full $89 price tag. This VIP offer is reserved exclusively for new Lem customers, in this window only. <a href="#">Click the pink button above</a> to lock in your Lolly.
   </div>
 </div>
 
 <div class="footer">
-  <div class="available">Reserved for Nancy VIPs · One-Time Offer</div>
+  <div class="available" data-i18n="footer.available">Reserved for Nancy VIPs · One-Time Offer</div>
   <div class="badges">
     <div class="badge-item">
       <div class="badge-icon">🚚</div>
-      <div>Ships in 48 Hours</div>
+      <div data-i18n="footer.badge.ships">Ships in 48 Hours</div>
     </div>
     <div class="badge-item">
       <div class="badge-icon">📦</div>
-      <div>Discreet Packaging</div>
+      <div data-i18n="footer.badge.discreet">Discreet Packaging</div>
     </div>
     <div class="badge-item">
       <div class="badge-icon">💬</div>
-      <div>Real-Human Support</div>
+      <div data-i18n="footer.badge.support">Real-Human Support</div>
     </div>
   </div>
 </div>

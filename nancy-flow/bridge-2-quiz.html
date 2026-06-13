@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="bridge-2-quiz">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Bridge 2 — Quiz</title>
+<title data-i18n="meta.title">Bridge 2 — Quiz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -149,35 +150,35 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 </head>
 <body>
   <div class="wrap">
-    <div class="eyebrow">Pleasure Profile</div>
-    <h1>What's your <em>vibe</em> tonight?</h1>
-    <p class="sub">Tap the one that feels closest. We'll match you with the right buzz.</p>
+    <div class="eyebrow" data-i18n="hero.eyebrow">Pleasure Profile</div>
+    <h1 data-i18n="hero.title">What's your <em>vibe</em> tonight?</h1>
+    <p class="sub" data-i18n="hero.sub">Tap the one that feels closest. We'll match you with the right buzz.</p>
 
     <div class="options">
       <button class="opt" onclick="window.location='lem.html'">
         <span class="emoji">🌙</span>
-        <div class="title">Slow burn</div>
-        <div class="desc">Soft, lingering, take-your-time energy.</div>
+        <div class="title" data-i18n="opt.slowburn.title">Slow burn</div>
+        <div class="desc" data-i18n="opt.slowburn.desc">Soft, lingering, take-your-time energy.</div>
       </button>
       <button class="opt" onclick="window.location='lem.html'">
         <span class="emoji">⚡</span>
-        <div class="title">Quick spark</div>
-        <div class="desc">15-min reset, get there fast.</div>
+        <div class="title" data-i18n="opt.quickspark.title">Quick spark</div>
+        <div class="desc" data-i18n="opt.quickspark.desc">15-min reset, get there fast.</div>
       </button>
       <button class="opt" onclick="window.location='lem.html'">
         <span class="emoji">🍋</span>
-        <div class="title">Zesty &amp; playful</div>
-        <div class="desc">Curious, a little experimental.</div>
+        <div class="title" data-i18n="opt.zesty.title">Zesty &amp; playful</div>
+        <div class="desc" data-i18n="opt.zesty.desc">Curious, a little experimental.</div>
       </button>
       <button class="opt" onclick="window.location='lem.html'">
         <span class="emoji">🔥</span>
-        <div class="title">All in</div>
-        <div class="desc">Full body, no holding back.</div>
+        <div class="title" data-i18n="opt.allin.title">All in</div>
+        <div class="desc" data-i18n="opt.allin.desc">Full body, no holding back.</div>
       </button>
     </div>
 
-    <a class="cta" href="lem.html">See my match →</a>
-    <div class="footer-note">Free shipping · Discreet packaging · 30-day guarantee</div>
+    <a class="cta" href="lem.html" data-i18n="cta.match">See my match →</a>
+    <div class="footer-note" data-i18n="footer.note">Free shipping · Discreet packaging · 30-day guarantee</div>
   </div>
 </body>
 </html>

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="thank-you">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Nancy — Thank You</title>
+<title data-i18n="meta.title">Nancy — Thank You</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -240,63 +241,63 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
 <div class="brand-band">
   <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
-  <span class="uk-badge"><span class="dot"></span> Designed in London</span>
+  <span class="uk-badge" data-i18n="brand.badge"><span class="dot"></span> Designed in London</span>
 </div>
 
 <div class="steps-wrap">
   <div class="steps">
-    <div class="step">Step 1: Order Placed</div>
-    <div class="step">Step 2: Customize Order</div>
-    <div class="step current">✓ Order Complete</div>
+    <div class="step" data-i18n="steps.s1">Step 1: Order Placed</div>
+    <div class="step" data-i18n="steps.s2">Step 2: Customize Order</div>
+    <div class="step current" data-i18n="steps.s3">✓ Order Complete</div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="tick">✓</div>
-  <h1>You're all <em>set.</em></h1>
-  <p class="lede">Your order is on the way. We just sent the confirmation to your inbox — keep an eye out (and maybe your housemates too).</p>
+  <h1 data-i18n="hero.title">You're all <em>set.</em></h1>
+  <p class="lede" data-i18n="hero.lede">Your order is on the way. We just sent the confirmation to your inbox — keep an eye out (and maybe your housemates too).</p>
 
   <div class="summary">
-    <h3>Your order</h3>
+    <h3 data-i18n="summary.heading">Your order</h3>
     <div id="lineItems"></div>
     <div class="meta">
-      <span>Order #</span>
+      <span data-i18n="summary.orderNum">Order #</span>
       <span id="orderNum">LEMXNZ9P2</span>
     </div>
     <div class="meta">
-      <span>Shipping</span>
-      <span>Free · Discreet</span>
+      <span data-i18n="summary.shipping">Shipping</span>
+      <span data-i18n="summary.shippingValue">Free · Discreet</span>
     </div>
     <div class="total">
-      <span class="label">Total paid</span>
+      <span class="label" data-i18n="summary.totalLabel">Total paid</span>
       <span class="value" id="totalPaid">$0.00</span>
     </div>
     <div class="savings" id="savings"></div>
   </div>
 
   <div class="timeline">
-    <h3>What happens next</h3>
+    <h3 data-i18n="timeline.heading">What happens next</h3>
     <div class="tl-steps">
-      <div class="tl-step"><span class="icon">📦</span><strong>Order</strong><span class="sub">Today</span></div>
-      <div class="tl-step"><span class="icon">🛠</span><strong>Prep</strong><span class="sub">1–2 business days</span></div>
-      <div class="tl-step"><span class="icon">🚚</span><strong>Delivery</strong><span class="sub">3–5 business days</span></div>
+      <div class="tl-step"><span class="icon">📦</span><strong data-i18n="timeline.s1.label">Order</strong><span class="sub" data-i18n="timeline.s1.sub">Today</span></div>
+      <div class="tl-step"><span class="icon">🛠</span><strong data-i18n="timeline.s2.label">Prep</strong><span class="sub" data-i18n="timeline.s2.sub">1–2 business days</span></div>
+      <div class="tl-step"><span class="icon">🚚</span><strong data-i18n="timeline.s3.label">Delivery</strong><span class="sub" data-i18n="timeline.s3.sub">3–5 business days</span></div>
     </div>
   </div>
 
-  <a class="back" href="bridges.html">← Back to bridge pages</a>
-  <div class="micro">Need help? hello@hellonancy.com</div>
+  <a class="back" href="bridges.html" data-i18n="cta.back">← Back to bridge pages</a>
+  <div class="micro" data-i18n="footer.support">Need help? hello@hellonancy.com</div>
 </div>
 
 <script>
-(function() {
+window.i18n.ready.then(function() {
   var CATALOG = {
-    lem:      { name: 'Lem — Clitoral Massager', sub: 'Pocket-sized air-pulse',          icon: '🍋', price: 89,    was: 159 },
-    pouch:    { name: 'Pleasure Pouch',          sub: 'Discreet velvet storage pouch',   icon: '👜', price: 9.99,  was: 19.99 },
-    lem2:     { name: 'Lem — 2nd unit',           sub: 'VIP one-time price',              icon: '🍋', price: 39,    was: 89 },
-    lolly:    { name: 'Lolly — Pocket Vibrator',  sub: 'VIP one-time price',              icon: '🍭', price: 29,    was: 89 },
-    bundle:   { name: 'Order Protect + Discreet Shipping', sub: 'The protected delivery bundle', icon: '🛡', price: 8.00, was: 9.98 },
-    discreet: { name: 'Discreet Shipping',        sub: 'Plain box · neutral sender',      icon: '📦', price: 4.99,  was: 0 },
-    protect:  { name: 'Order Protect',            sub: 'Lost · stolen · damaged covered', icon: '🛡', price: 4.99,  was: 0 }
+    lem:      { name: window.i18n.t('catalog.lem.name', 'Lem — Clitoral Massager'), sub: window.i18n.t('catalog.lem.sub', 'Pocket-sized air-pulse'),          icon: '🍋', price: 89,    was: 159 },
+    pouch:    { name: window.i18n.t('catalog.pouch.name', 'Pleasure Pouch'),          sub: window.i18n.t('catalog.pouch.sub', 'Discreet velvet storage pouch'),   icon: '👜', price: 9.99,  was: 19.99 },
+    lem2:     { name: window.i18n.t('catalog.lem2.name', 'Lem — 2nd unit'),           sub: window.i18n.t('catalog.lem2.sub', 'VIP one-time price'),              icon: '🍋', price: 39,    was: 89 },
+    lolly:    { name: window.i18n.t('catalog.lolly.name', 'Lolly — Pocket Vibrator'),  sub: window.i18n.t('catalog.lolly.sub', 'VIP one-time price'),              icon: '🍭', price: 29,    was: 89 },
+    bundle:   { name: window.i18n.t('catalog.bundle.name', 'Order Protect + Discreet Shipping'), sub: window.i18n.t('catalog.bundle.sub', 'The protected delivery bundle'), icon: '🛡', price: 8.00, was: 9.98 },
+    discreet: { name: window.i18n.t('catalog.discreet.name', 'Discreet Shipping'),        sub: window.i18n.t('catalog.discreet.sub', 'Plain box · neutral sender'),      icon: '📦', price: 4.99,  was: 0 },
+    protect:  { name: window.i18n.t('catalog.protect.name', 'Order Protect'),            sub: window.i18n.t('catalog.protect.sub', 'Lost · stolen · damaged covered'), icon: '🛡', price: 4.99,  was: 0 }
   };
   var ORDER = ['lem','pouch','lem2','lolly','bundle','discreet','protect'];
 
@@ -337,9 +338,9 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
   var saved = was - total;
   if (saved > 0.01) {
-    document.getElementById('savings').textContent = 'You saved $' + saved.toFixed(2) + ' today';
+    document.getElementById('savings').textContent = window.i18n.t('order.saved', 'You saved {amount} today', { amount: '$' + saved.toFixed(2) });
   }
-})();
+});
 </script>
 
 </body>

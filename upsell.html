@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="upsell">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Rosabella — Customize Your Order</title>
+<title data-i18n="meta.title">Rosabella — Customize Your Order</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -464,9 +465,9 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
       <strong>Rosabella</strong>
     </div>
     <div style="padding-left: 24px;">
-      <div style="font-size: 12px; color: #444;">Confirmation #GDUXDNLZA</div>
-      <div style="font-weight: 600; font-size: 13px;">You've paid for your order.</div>
-      <a href="#" class="small-link" style="margin-left:0;">View order confirmation &rsaquo;</a>
+      <div style="font-size: 12px; color: #444;" data-i18n="confirm.number">Confirmation #GDUXDNLZA</div>
+      <div style="font-weight: 600; font-size: 13px;" data-i18n="confirm.paid">You've paid for your order.</div>
+      <a href="#" class="small-link" style="margin-left:0;" data-i18n="confirm.viewOrder">View order confirmation &rsaquo;</a>
     </div>
   </div>
 </div>
@@ -484,7 +485,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
         <path d="M0 1.5h24M0 4h24M0 6.5h24M0 9h24M0 11.5h24" stroke="#c62b2b" stroke-width="1"/>
         <rect width="10" height="7" fill="#1f3a8a"/>
       </svg>
-      Made In The USA
+      <span data-i18n="brand.madeInUsa">Made In The USA</span>
     </div>
   </div>
 </div>
@@ -492,42 +493,42 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Steps -->
 <div class="steps-wrap">
   <div class="steps">
-    <div class="step done">STEP 1: ORDER RECEIVED</div>
-    <div class="step current">STEP 2: CUSTOMIZE ORDER</div>
+    <div class="step done" data-i18n="steps.step1">STEP 1: ORDER RECEIVED</div>
+    <div class="step current" data-i18n="steps.step2">STEP 2: CUSTOMIZE ORDER</div>
   </div>
 </div>
 
 <!-- Congrats banner -->
 <div class="container">
-  <div class="congrats">CONGRATULATIONS! YOU HAVE QUALIFIED FOR A SPECIAL OFFER! GET 3 MORE UNITS OF OUR ROSABELLA MORINGA FOR $27 EACH</div>
+  <div class="congrats" data-i18n="congrats.banner">CONGRATULATIONS! YOU HAVE QUALIFIED FOR A SPECIAL OFFER! GET 3 MORE UNITS OF OUR ROSABELLA MORINGA FOR $27 EACH</div>
 </div>
 
 <!-- Alert -->
-<div class="alert-red">Wait... Your Order is Not Complete!</div>
+<div class="alert-red" data-i18n="alert.incomplete">Wait... Your Order is Not Complete!</div>
 
 <!-- Hero Offer -->
 <section class="offer">
   <div class="container">
     <div class="offer-grid">
       <div class="offer-img">
-        <img src="https://tryrosabella.com/cdn/shop/files/3bottle.png?v=1721818000" alt="3 bottle Rosabella Moringa" onerror="this.src='https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600'"/>
+        <img src="https://tryrosabella.com/cdn/shop/files/3bottle.png?v=1721818000" alt="3 bottle Rosabella Moringa" data-i18n-alt="offer.imgAlt" onerror="this.src='https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600'"/>
         <div class="save-badge">
-          <span>SAVE</span>
+          <span data-i18n="offer.saveLabel">SAVE</span>
           <span>$162</span>
         </div>
-        <div class="ship-badge">FREE<br/>SHIPPING</div>
+        <div class="ship-badge" data-i18n="offer.shipBadge">FREE<br/>SHIPPING</div>
       </div>
       <div class="offer-copy">
-        <h2>Rosabella Moringa Powder Capsule &ndash; 3x Bottle One Time Offer</h2>
-        <p>Complete your order with this One-Time-Only Special Offer and more of our Rosabella Moringa for a 50% discount</p>
+        <h2 data-i18n="offer.title">Rosabella Moringa Powder Capsule &ndash; 3x Bottle One Time Offer</h2>
+        <p data-i18n="offer.desc">Complete your order with this One-Time-Only Special Offer and more of our Rosabella Moringa for a 50% discount</p>
         <div class="price-row">
-          <span class="label">YOUR PRICE:</span>
+          <span class="label" data-i18n="offer.yourPriceLabel">YOUR PRICE:</span>
           <span class="strike">$253.00</span>
           <span class="now">$27 /ea</span>
         </div>
-        <a href="#add" class="btn-cta">Yes, Add To Order</a>
-        <a href="#decline" class="decline">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
-        <div class="ship-note">&#128666; FREE SHIPPING INCLUDED IN THE SAME PACKAGE</div>
+        <a href="#add" class="btn-cta" data-i18n="cta.yes">Yes, Add To Order</a>
+        <a href="#decline" class="decline" data-i18n="cta.decline">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
+        <div class="ship-note" data-i18n="offer.shipNote">&#128666; FREE SHIPPING INCLUDED IN THE SAME PACKAGE</div>
 
         <div class="thumbs">
           <span class="dot"></span>
@@ -543,8 +544,8 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Risk-free band -->
 <div class="risk-band">
   <div class="inner">
-    <div class="top">THIS IS YOUR ONLY CHANCE TO GET ROSABELLA MORINGA RISK-FREE AT AN ALL-TIME LOW PRICE!</div>
-    <div class="bot">ADDITIONAL 50% OFF PLUS FREE SHIPPING!</div>
+    <div class="top" data-i18n="risk.top">THIS IS YOUR ONLY CHANCE TO GET ROSABELLA MORINGA RISK-FREE AT AN ALL-TIME LOW PRICE!</div>
+    <div class="bot" data-i18n="risk.bot">ADDITIONAL 50% OFF PLUS FREE SHIPPING!</div>
   </div>
 </div>
 
@@ -553,14 +554,14 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container">
     <div class="two-col-grid">
       <div class="col-img">
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600" alt="Benefits"/>
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600" alt="Benefits" data-i18n-alt="whymore.imgAlt"/>
       </div>
       <div class="col-copy">
-        <h3>Why Buy More?</h3>
-        <p>Due to the amazing effectiveness of <strong>Rosabella Moringa</strong> in boosting energy, reducing inflammation, and supporting overall wellness, raving customers are <strong>stocking up in large quantities</strong>, and supplies will soon sell out (again!).</p>
-        <p>After you try <strong>Rosabella Moringa</strong> and experience its incredible benefits, it's very likely that demand will drive the price up, and you'll have to pay full price to continue enjoying the results of <strong>#1 Moringa supplement</strong>.</p>
-        <p>So why not take advantage of this one-time <strong>50% OFF discount</strong> and get 3 more bottles of <strong>Rosabella Moringa</strong> at only <strong>$27 per bottle</strong>.</p>
-        <a href="#add" class="btn-cta">Yes, Add To Order</a>
+        <h3 data-i18n="whymore.title">Why Buy More?</h3>
+        <p data-i18n="whymore.p1">Due to the amazing effectiveness of <strong>Rosabella Moringa</strong> in boosting energy, reducing inflammation, and supporting overall wellness, raving customers are <strong>stocking up in large quantities</strong>, and supplies will soon sell out (again!).</p>
+        <p data-i18n="whymore.p2">After you try <strong>Rosabella Moringa</strong> and experience its incredible benefits, it's very likely that demand will drive the price up, and you'll have to pay full price to continue enjoying the results of <strong>#1 Moringa supplement</strong>.</p>
+        <p data-i18n="whymore.p3">So why not take advantage of this one-time <strong>50% OFF discount</strong> and get 3 more bottles of <strong>Rosabella Moringa</strong> at only <strong>$27 per bottle</strong>.</p>
+        <a href="#add" class="btn-cta" data-i18n="cta.yes2">Yes, Add To Order</a>
         <div class="pay-row">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" style="height:14px;"/>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="MasterCard"/>
@@ -568,7 +569,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/120px-American_Express_logo_%282018%29.svg.png" alt="Amex"/>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/200px-PayPal.svg.png" alt="PayPal"/>
         </div>
-        <a href="#decline" class="decline-center">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
+        <a href="#decline" class="decline-center" data-i18n="cta.decline2">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
       </div>
     </div>
   </div>
@@ -579,15 +580,15 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container">
     <div class="two-col-grid">
       <div class="col-copy">
-        <h3>What Makes Rosabella Moringa So Special?</h3>
+        <h3 data-i18n="special.title">What Makes Rosabella Moringa So Special?</h3>
         <ul class="check-list">
-          <li>Boosts Energy &amp; Reduces Fatigue by up to 80%</li>
-          <li>Simple To Use (Just take 2 capsules daily for powerful results)</li>
-          <li>Gentle on your body, free from harmful additives</li>
-          <li>Easy on the stomach</li>
-          <li>100% Satisfaction Guarantee</li>
+          <li data-i18n="special.item1">Boosts Energy &amp; Reduces Fatigue by up to 80%</li>
+          <li data-i18n="special.item2">Simple To Use (Just take 2 capsules daily for powerful results)</li>
+          <li data-i18n="special.item3">Gentle on your body, free from harmful additives</li>
+          <li data-i18n="special.item4">Easy on the stomach</li>
+          <li data-i18n="special.item5">100% Satisfaction Guarantee</li>
         </ul>
-        <a href="#add" class="btn-cta">Yes, Add To Order</a>
+        <a href="#add" class="btn-cta" data-i18n="cta.yes3">Yes, Add To Order</a>
         <div class="pay-row">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" style="height:14px;"/>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="MasterCard"/>
@@ -595,10 +596,10 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/120px-American_Express_logo_%282018%29.svg.png" alt="Amex"/>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/200px-PayPal.svg.png" alt="PayPal"/>
         </div>
-        <a href="#decline" class="decline-center">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
+        <a href="#decline" class="decline-center" data-i18n="cta.decline3">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
       </div>
       <div class="col-img">
-        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600" alt="Benefits"/>
+        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600" alt="Benefits" data-i18n-alt="special.imgAlt"/>
       </div>
     </div>
   </div>
@@ -607,9 +608,9 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Reviews -->
 <section class="reviews">
   <div class="container">
-    <h3>MORE THAN 200,000+ HAPPY CUSTOMERS</h3>
+    <h3 data-i18n="reviews.heading">MORE THAN 200,000+ HAPPY CUSTOMERS</h3>
     <div class="rating-card">
-      <div class="label">Average Rating</div>
+      <div class="label" data-i18n="reviews.avgLabel">Average Rating</div>
       <div class="num">4.9</div>
     </div>
     <div class="bars">
@@ -634,7 +635,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
         <div class="stars">&#9733;</div>
       </div>
     </div>
-    <a href="#add" class="btn-cta" style="max-width:340px; margin: 0 auto;">Yes, Add To Order</a>
+    <a href="#add" class="btn-cta" style="max-width:340px; margin: 0 auto;" data-i18n="cta.yes4">Yes, Add To Order</a>
     <div class="pay-row" style="margin-top: 14px;">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" style="height:18px;"/>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="MasterCard" style="height:24px;"/>
@@ -642,7 +643,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/120px-American_Express_logo_%282018%29.svg.png" alt="Amex" style="height:24px;"/>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/200px-PayPal.svg.png" alt="PayPal" style="height:24px;"/>
     </div>
-    <a href="#decline" class="decline-center">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
+    <a href="#decline" class="decline-center" data-i18n="cta.decline4">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
   </div>
 </section>
 
@@ -651,7 +652,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container">
     <div class="family-grid">
       <div class="family-img">
-        <div class="header-bar">JOIN THE ROSABELLA FAMILY<br/>- 25,000+ AND COUNTING!</div>
+        <div class="header-bar" data-i18n="family.header">JOIN THE ROSABELLA FAMILY<br/>- 25,000+ AND COUNTING!</div>
         <div class="collage">
           <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160" alt=""/>
           <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160" alt=""/>
@@ -674,43 +675,43 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
         </div>
       </div>
       <div class="family-copy">
-        <p class="lead">Complete your order with this One-Time-Only Special Offer and more of our Rosabella Moringa for a 50% discount</p>
-        <div class="reg">Regular price: <span class="strike">$54</span></div>
-        <div class="your-price">Your price $27 each</div>
-        <a href="#add" class="btn-cta">Yes, Add To Order</a>
-        <a href="#decline" class="decline-center">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
-        <div class="ship-note" style="margin-top:8px;">&#128666; FREE SHIPPING INCLUDED IN THE SAME PACKAGE</div>
+        <p class="lead" data-i18n="family.lead">Complete your order with this One-Time-Only Special Offer and more of our Rosabella Moringa for a 50% discount</p>
+        <div class="reg" data-i18n="family.regPrice">Regular price: <span class="strike">$54</span></div>
+        <div class="your-price" data-i18n="family.yourPrice">Your price $27 each</div>
+        <a href="#add" class="btn-cta" data-i18n="cta.yes5">Yes, Add To Order</a>
+        <a href="#decline" class="decline-center" data-i18n="cta.decline5">No, I don't like 50% discount &amp; Free Shipping. I'll pay full price later.</a>
+        <div class="ship-note" style="margin-top:8px;" data-i18n="family.shipNote">&#128666; FREE SHIPPING INCLUDED IN THE SAME PACKAGE</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Limited -->
-<div class="limited">ONLY AVAILABLE FOR A LIMITED TIME!</div>
+<div class="limited" data-i18n="limited.text">ONLY AVAILABLE FOR A LIMITED TIME!</div>
 
 <!-- Trust badges -->
 <section class="trust">
   <div class="trust-item">
     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM18.75 18.75a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM3 3h2.25l2.4 11.4a1.5 1.5 0 001.5 1.2H17.5a1.5 1.5 0 001.4-1l2.1-7H6"/></svg>
-    Ship In 48 Hours
+    <span data-i18n="trust.ship">Ship In 48 Hours</span>
   </div>
   <div class="trust-item">
     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.7 0-3 1-3 2.5s1.3 2.5 3 2.5 3 1 3 2.5-1.3 2.5-3 2.5m0-12v2m0 12v2"/><circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    100% Secure Payment
+    <span data-i18n="trust.secure">100% Secure Payment</span>
   </div>
   <div class="trust-item">
     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2.3a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.2L7.5 10.5a11 11 0 006 6l1.12-1.75a1 1 0 011.2-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.6 21 3 14.4 3 6V5z"/></svg>
-    24/7 Support
+    <span data-i18n="trust.support">24/7 Support</span>
   </div>
 </section>
 
 <!-- Legal -->
 <div class="legal">
-  <a href="#">Refund policy</a>
-  <a href="#">Privacy policy</a>
-  <a href="#">Terms of service</a>
-  <a href="#">Cancellations</a>
-  <a href="#">Contact</a>
+  <a href="#" data-i18n="legal.refund">Refund policy</a>
+  <a href="#" data-i18n="legal.privacy">Privacy policy</a>
+  <a href="#" data-i18n="legal.terms">Terms of service</a>
+  <a href="#" data-i18n="legal.cancellations">Cancellations</a>
+  <a href="#" data-i18n="legal.contact">Contact</a>
 </div>
 
 </body>

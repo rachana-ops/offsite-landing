@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="testimonial">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Nancy — Real Reviews</title>
+<title data-i18n="meta.title">Nancy — Real Reviews</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,500;9..144,0,600;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -188,52 +189,52 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <body>
   <div class="wrap">
     <div class="head">
-      <div class="pill"><span class="dot"></span> Real reviews · Verified buyers</div>
-      <h1>What everyone said<br/>about their <em>first night</em>.</h1>
-      <p class="sub">No influencers. No scripts. Just 15,000 women telling on themselves — anonymously, of course.</p>
+      <div class="pill"><span class="dot"></span> <span data-i18n="head.pill">Real reviews · Verified buyers</span></div>
+      <h1 data-i18n="head.title">What everyone said<br/>about their <em>first night</em>.</h1>
+      <p class="sub" data-i18n="head.sub">No influencers. No scripts. Just 15,000 women telling on themselves — anonymously, of course.</p>
       <div class="stars-row">
         <span class="stars">★★★★★</span>
         <span class="count">4.9 / 5</span>
-        <span class="by">· based on 15,000 reviews</span>
+        <span class="by" data-i18n="head.reviewCount">· based on 15,000 reviews</span>
       </div>
     </div>
 
     <div class="grid">
       <div class="card">
         <div class="stars">★★★★★</div>
-        <div class="quote">I texted my best friend at 2am. I have never done that about a product before.</div>
+        <div class="quote" data-i18n="reviews.r1.quote">I texted my best friend at 2am. I have never done that about a product before.</div>
         <div class="who"><strong>Maya R.</strong><span>Brooklyn</span></div>
       </div>
       <div class="card highlight">
         <div class="stars">★★★★★</div>
-        <div class="quote">It's tiny. It's quiet. It is also the most expensive thing in my nightstand in terms of returns on investment.</div>
-        <div class="who"><strong>Priya K.</strong><span>Verified buyer</span></div>
+        <div class="quote" data-i18n="reviews.r2.quote">It's tiny. It's quiet. It is also the most expensive thing in my nightstand in terms of returns on investment.</div>
+        <div class="who"><strong>Priya K.</strong><span data-i18n="reviews.r2.tag">Verified buyer</span></div>
       </div>
       <div class="card">
         <div class="stars">★★★★★</div>
-        <div class="quote">I bought it for "stress relief." That is a real reason, by the way.</div>
+        <div class="quote" data-i18n="reviews.r3.quote">I bought it for "stress relief." That is a real reason, by the way.</div>
         <div class="who"><strong>Sam D.</strong><span>Austin</span></div>
       </div>
       <div class="card">
         <div class="stars">★★★★★</div>
-        <div class="quote">Husband asked what the soft glow was. I said it's a humidifier.</div>
-        <div class="who"><strong>Anonymous</strong><span>Verified</span></div>
+        <div class="quote" data-i18n="reviews.r4.quote">Husband asked what the soft glow was. I said it's a humidifier.</div>
+        <div class="who"><strong data-i18n="reviews.r4.name">Anonymous</strong><span data-i18n="reviews.r4.tag">Verified</span></div>
       </div>
       <div class="card">
         <div class="stars">★★★★★</div>
-        <div class="quote">First time I've reordered a "lifestyle product" the same week it shipped.</div>
+        <div class="quote" data-i18n="reviews.r5.quote">First time I've reordered a "lifestyle product" the same week it shipped.</div>
         <div class="who"><strong>Jess L.</strong><span>Los Angeles</span></div>
       </div>
       <div class="card">
         <div class="stars">★★★★★</div>
-        <div class="quote">If you're on the fence, this review is your sign. Get off the fence.</div>
+        <div class="quote" data-i18n="reviews.r6.quote">If you're on the fence, this review is your sign. Get off the fence.</div>
         <div class="who"><strong>Naomi B.</strong><span>Toronto</span></div>
       </div>
     </div>
 
     <div class="cta-block">
-      <a class="cta" href="https://get.nancyflow.com/products/lem">Read more — and meet Lem →</a>
-      <div class="micro">Free shipping · Discreet packaging · 30-day guarantee</div>
+      <a class="cta" href="https://get.nancyflow.com/products/lem" data-i18n="cta.button">Read more — and meet Lem →</a>
+      <div class="micro" data-i18n="cta.micro">Free shipping · Discreet packaging · 30-day guarantee</div>
     </div>
   </div>
 <script src="../js/param-passthrough.js"></script>

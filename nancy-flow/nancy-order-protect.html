@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="nancy-order-protect">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Nancy — Add Order Protection</title>
+<title data-i18n="meta.title">Nancy — Add Order Protection</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -589,21 +590,21 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
 </div>
 <div class="flow-steps">
-  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">2nd Lem</span></div>
+  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl" data-i18n="flow.step.lem2">2nd Lem</span></div>
   <div class="flow-line done"></div>
   <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">Lolly</span></div>
   <div class="flow-line done"></div>
-  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">Bundle</span></div>
+  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl" data-i18n="flow.step.bundle">Bundle</span></div>
   <div class="flow-line done"></div>
-  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl">Discreet</span></div>
+  <div class="flow-step done"><span class="flow-dot">&#10003;</span><span class="flow-lbl" data-i18n="flow.step.discreet">Discreet</span></div>
   <div class="flow-line done"></div>
-  <div class="flow-step current"><span class="flow-dot">5</span><span class="flow-lbl">Protect</span></div>
+  <div class="flow-step current"><span class="flow-dot">5</span><span class="flow-lbl" data-i18n="flow.step.protect">Protect</span></div>
 </div>
 
 <section class="hero">
   <div class="container">
-    <h2>Protect Your Parcel All The Way To Your Door</h2>
-    <p>Add Order Protect for <strong>just $4.99</strong> — total peace of mind if your parcel is lost, stolen, or damaged in transit.</p>
+    <h2 data-i18n="hero.title">Protect Your Parcel All The Way To Your Door</h2>
+    <p data-i18n="hero.subtitle">Add Order Protect for <strong>just $4.99</strong> — total peace of mind if your parcel is lost, stolen, or damaged in transit.</p>
   </div>
 </section>
 
@@ -617,13 +618,13 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
         <span class="neon-corner br"></span>
         <div class="protect-badge">
           <span class="inner-ring"></span>
-          <div class="top-text">Nancy &middot; Promise</div>
+          <div class="top-text" data-i18n="badge.top">Nancy &middot; Promise</div>
           <svg class="lock-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          <div class="big-text">Order<br/>Protect</div>
-          <div class="bot-text">Lost &middot; Stolen &middot; Damaged</div>
+          <div class="big-text" data-i18n="badge.big">Order<br/>Protect</div>
+          <div class="bot-text" data-i18n="badge.bot">Lost &middot; Stolen &middot; Damaged</div>
         </div>
       </div>
 
@@ -636,13 +637,13 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
             </svg>
           </div>
           <div class="info">
-            <h3>Order Protect</h3>
+            <h3 data-i18n="offer.title">Order Protect</h3>
             <div class="price-row">
               <span class="price">$4.99</span>
-              <span class="off-pill">Recommended</span>
+              <span class="off-pill" data-i18n="offer.pill">Recommended</span>
             </div>
-            <p class="per">One-time add-on for this order</p>
-            <p class="tagline">A tiny insurance that keeps your delivery worry-free, end to end.</p>
+            <p class="per" data-i18n="offer.per">One-time add-on for this order</p>
+            <p class="tagline" data-i18n="offer.tagline">A tiny insurance that keeps your delivery worry-free, end to end.</p>
           </div>
         </div>
 
@@ -650,30 +651,30 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
           <li>
             <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
             <div>
-              <p class="ft-title">Lost or stolen? Free reship.</p>
-              <p class="ft-desc">If your parcel vanishes or never arrives, we'll send a new one — no police reports, no hoops.</p>
+              <p class="ft-title" data-i18n="feature.lost.title">Lost or stolen? Free reship.</p>
+              <p class="ft-desc" data-i18n="feature.lost.desc">If your parcel vanishes or never arrives, we'll send a new one — no police reports, no hoops.</p>
             </div>
           </li>
           <li>
             <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
             <div>
-              <p class="ft-title">Damaged in transit? Replaced.</p>
-              <p class="ft-desc">If anything arrives less than perfect, snap a photo and we'll handle the rest in 24 hours.</p>
+              <p class="ft-title" data-i18n="feature.damaged.title">Damaged in transit? Replaced.</p>
+              <p class="ft-desc" data-i18n="feature.damaged.desc">If anything arrives less than perfect, snap a photo and we'll handle the rest in 24 hours.</p>
             </div>
           </li>
           <li>
             <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
             <div>
-              <p class="ft-title">Priority support, always.</p>
-              <p class="ft-desc">Protected orders skip the queue — real humans, real fast, no scripted replies.</p>
+              <p class="ft-title" data-i18n="feature.support.title">Priority support, always.</p>
+              <p class="ft-desc" data-i18n="feature.support.desc">Protected orders skip the queue — real humans, real fast, no scripted replies.</p>
             </div>
           </li>
         </ul>
 
-        <div class="tax-row">Tax included — <strong>$4.99</strong></div>
+        <div class="tax-row" data-i18n="tax.row">Tax included — <strong>$4.99</strong></div>
 
-        <a href="thank-you.html" class="btn btn-add" data-add="protect">Yes, add Order Protect</a>
-        <a href="thank-you.html" class="btn btn-no">No thanks</a>
+        <a href="thank-you.html" class="btn btn-add" data-add="protect" data-i18n="cta.yes">Yes, add Order Protect</a>
+        <a href="thank-you.html" class="btn btn-no" data-i18n="cta.no">No thanks</a>
       </div>
     </div>
   </div>
@@ -682,14 +683,14 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <section class="reviews">
   <div class="container">
     <div class="reviews-head">
-      <p class="small">More than <strong>1,000,000+</strong> happy customers</p>
-      <h3>Why customers say yes</h3>
+      <p class="small" data-i18n="reviews.eyebrow">More than <strong>1,000,000+</strong> happy customers</p>
+      <h3 data-i18n="reviews.title">Why customers say yes</h3>
     </div>
 
     <div class="review-grid">
       <div class="review-card">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="quote">"Honestly nearly skipped this and SO glad I didn't. My parcel got 'delivered' to god-knows-where and Nancy reshipped within a day. Worth every penny x"</p>
+        <p class="quote" data-i18n="reviews.r1.quote">"Honestly nearly skipped this and SO glad I didn't. My parcel got 'delivered' to god-knows-where and Nancy reshipped within a day. Worth every penny x"</p>
         <div class="name">Sophie L.</div>
         <div class="verified">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
@@ -699,7 +700,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
       <div class="review-card">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="quote">"My building has a vibe and parcels go walkies all the time. Order Protect is basically peace of mind in checkout form. Will always add it."</p>
+        <p class="quote" data-i18n="reviews.r2.quote">"My building has a vibe and parcels go walkies all the time. Order Protect is basically peace of mind in checkout form. Will always add it."</p>
         <div class="name">Imani A.</div>
         <div class="verified">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
@@ -709,7 +710,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
       <div class="review-card">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="quote">"Box arrived a bit squished — Nancy popped a fresh one in the post same day after I sent a photo. $4.99 well spent, didn't even have to argue with anyone."</p>
+        <p class="quote" data-i18n="reviews.r3.quote">"Box arrived a bit squished — Nancy popped a fresh one in the post same day after I sent a photo. $4.99 well spent, didn't even have to argue with anyone."</p>
         <div class="name">Charlotte W.</div>
         <div class="verified">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
@@ -719,18 +720,18 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
     </div>
 
     <div class="reviews-cta">
-      <a href="thank-you.html" class="btn btn-add" data-add="protect">Yes, add Order Protect</a>
-      <a href="thank-you.html" class="btn btn-no">No thanks</a>
+      <a href="thank-you.html" class="btn btn-add" data-add="protect" data-i18n="cta.yes">Yes, add Order Protect</a>
+      <a href="thank-you.html" class="btn btn-no" data-i18n="cta.no">No thanks</a>
     </div>
   </div>
 </section>
 
-<div class="footer">
+<div class="footer" data-i18n="footer.copyright">
   &copy; 2026 Nancy. All rights reserved.
 </div>
-<div class="footer-note">*Tax included where applicable.</div>
+<div class="footer-note" data-i18n="footer.note">*Tax included where applicable.</div>
 
-<div class="chat-bubble" aria-label="Chat support">
+<div class="chat-bubble" aria-label="Chat support" data-i18n-aria-label="chat.ariaLabel">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
   </svg>

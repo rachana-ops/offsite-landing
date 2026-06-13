@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="manifesto">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Nancy — A Manifesto</title>
+<title data-i18n="meta.title">Nancy — A Manifesto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,500;9..144,0,700;9..144,0,900;9..144,1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -217,30 +218,30 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <body>
   <div class="ticker">
     <div class="ticker-track">
-      <span>Permission Granted</span><span>Free Shipping</span><span>Discreet Packaging</span><span>30-Day Pleasure Guarantee</span><span>Made For Her</span><span>15,000 Five Star Reviews</span>
-      <span>Permission Granted</span><span>Free Shipping</span><span>Discreet Packaging</span><span>30-Day Pleasure Guarantee</span><span>Made For Her</span><span>15,000 Five Star Reviews</span>
+      <span data-i18n="ticker.item1">Permission Granted</span><span data-i18n="ticker.item2">Free Shipping</span><span data-i18n="ticker.item3">Discreet Packaging</span><span data-i18n="ticker.item4">30-Day Pleasure Guarantee</span><span data-i18n="ticker.item5">Made For Her</span><span data-i18n="ticker.item6">15,000 Five Star Reviews</span>
+      <span data-i18n="ticker.item1b">Permission Granted</span><span data-i18n="ticker.item2b">Free Shipping</span><span data-i18n="ticker.item3b">Discreet Packaging</span><span data-i18n="ticker.item4b">30-Day Pleasure Guarantee</span><span data-i18n="ticker.item5b">Made For Her</span><span data-i18n="ticker.item6b">15,000 Five Star Reviews</span>
     </div>
   </div>
 
   <section class="stage">
     <div class="topline">
       <span class="logo"><img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy" /></span>
-      <span>A Manifesto · 02</span>
+      <span data-i18n="topline.label">A Manifesto · 02</span>
     </div>
 
     <h1>
-      <span class="line"><span class="strike">Quiet.</span></span>
-      <span class="line">Loud about <span class="pink">pleasure.</span></span>
-      <span class="line">Loud about <span class="neon underline">you.</span></span>
+      <span class="line" data-i18n="hero.line1"><span class="strike">Quiet.</span></span>
+      <span class="line" data-i18n="hero.line2">Loud about <span class="pink">pleasure.</span></span>
+      <span class="line" data-i18n="hero.line3">Loud about <span class="neon underline">you.</span></span>
     </h1>
 
     <div class="stack">
-      <p class="manifesto">
+      <p class="manifesto" data-i18n="manifesto.body">
         We made a thing for the part of the day no one schedules. It's small. It's quiet (until you don't want it to be). It is unapologetic — and so, finally, are you. Meet <strong>Lem</strong>.
       </p>
       <div class="cta-col">
-        <a class="cta" href="https://get.nancyflow.com/products/lem">Unlock Lem <span class="arrow">→</span></a>
-        <div class="micro">★★★★★ &nbsp;<span>4.9</span> / 5 · 15,000 reviews</div>
+        <a class="cta" href="https://get.nancyflow.com/products/lem" data-i18n="cta.unlock">Unlock Lem <span class="arrow">→</span></a>
+        <div class="micro" data-i18n="cta.micro">★★★★★ &nbsp;<span>4.9</span> / 5 · 15,000 reviews</div>
       </div>
     </div>
   </section>

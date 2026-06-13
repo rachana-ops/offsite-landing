@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="lem-upsell">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Nancy — Customize Your Order</title>
+<title data-i18n="meta.title">Nancy — Customize Your Order</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -662,9 +663,9 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
       <strong>Nancy</strong>
     </div>
     <div style="padding-left: 24px; margin-top: 2px;">
-      <div style="font-size: 12px; color: #666;">Confirmation #LEMXNZ9P2</div>
-      <div style="font-weight: 600; font-size: 13px;">You've paid for your order. 💛</div>
-      <a href="#" class="small-link">View order confirmation &rsaquo;</a>
+      <div style="font-size: 12px; color: #666;" data-i18n="confirm.number">Confirmation #LEMXNZ9P2</div>
+      <div style="font-weight: 600; font-size: 13px;" data-i18n="confirm.paid">You've paid for your order. 💛</div>
+      <a href="#" class="small-link" data-i18n="confirm.viewOrder">View order confirmation &rsaquo;</a>
     </div>
   </div>
 </div>
@@ -672,24 +673,24 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Brand band -->
 <div class="brand-band">
   <img class="logo" src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
-  <span class="uk-badge"><span class="dot"></span> Designed in London</span>
+  <span class="uk-badge" data-i18n="brand.designed"><span class="dot"></span> Designed in London</span>
 </div>
 
 <!-- Steps -->
 <div class="steps-wrap">
   <div class="steps">
-    <div class="step done">Step 1: Order Placed</div>
-    <div class="step current">Step 2: Customize Order</div>
+    <div class="step done" data-i18n="steps.step1">Step 1: Order Placed</div>
+    <div class="step current" data-i18n="steps.step2">Step 2: Customize Order</div>
   </div>
 </div>
 
 <!-- Congrats -->
 <div class="container">
-  <div class="congrats">🍋 You've Unlocked a One-Time Offer — Get a 2nd Lem at 58% OFF</div>
+  <div class="congrats" data-i18n="congrats.banner">🍋 You've Unlocked a One-Time Offer — Get a 2nd Lem at 58% OFF</div>
 </div>
 
 <!-- Alert -->
-<div class="alert-red">Wait... your order is not complete!</div>
+<div class="alert-red" data-i18n="alert.incomplete">Wait... your order is not complete!</div>
 
 <!-- Hero Offer -->
 <section class="offer">
@@ -697,28 +698,28 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
     <div class="offer-grid">
       <div class="offer-img">
         <div class="stage">
-          <img id="heroImg" src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem clitoral massager"/>
+          <img id="heroImg" src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem clitoral massager" data-i18n-alt="hero.imgAlt"/>
         </div>
         <div class="save-badge">
-          <span>SAVE</span>
+          <span data-i18n="hero.saveLabel">SAVE</span>
           <span>$50</span>
         </div>
-        <div class="ship-badge">Free<br/>Shipping</div>
+        <div class="ship-badge" data-i18n="hero.shipBadge">Free<br/>Shipping</div>
       </div>
       <div class="offer-copy">
-        <h2>Add a 2nd Lem to your order &mdash; for $39</h2>
-        <p>One for the nightstand, one for the weekender. Or treat a best friend. Either way, you'll never want to be caught without it again. This one-time offer is only available right now.</p>
+        <h2 data-i18n="offer.title">Add a 2nd Lem to your order &mdash; for $39</h2>
+        <p data-i18n="offer.body">One for the nightstand, one for the weekender. Or treat a best friend. Either way, you'll never want to be caught without it again. This one-time offer is only available right now.</p>
         <div class="price-row">
-          <span class="label">Your price:</span>
+          <span class="label" data-i18n="offer.priceLabel">Your price:</span>
           <span class="strike">$89</span>
-          <span class="now">$39 each</span>
+          <span class="now" data-i18n="offer.priceNow">$39 each</span>
         </div>
-        <a href="nancy-upsell.html" class="btn-cta">Yes, add a 2nd Lem</a>
-        <a href="nancy-upsell.html" class="decline">No thanks &mdash; I don't want a second Lem at 58% off.</a>
-        <div class="ship-wrap"><div class="ship-note">🚚 Ships free in the same package</div></div>
+        <a href="nancy-upsell.html" class="btn-cta" data-i18n="cta.yes">Yes, add a 2nd Lem</a>
+        <a href="nancy-upsell.html" class="decline" data-i18n="cta.no58">No thanks &mdash; I don't want a second Lem at 58% off.</a>
+        <div class="ship-wrap"><div class="ship-note" data-i18n="offer.shipNote">🚚 Ships free in the same package</div></div>
 
         <div class="thumbs" id="thumbs">
-          <button type="button" class="active" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp')"><img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem product"/></button>
+          <button type="button" class="active" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp')"><img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem product" data-i18n-alt="hero.thumbAlt"/></button>
           <button type="button" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/IMG_3323.jpg')"><img src="https://hellonancy.com/cdn/shop/files/IMG_3323.jpg" alt=""/></button>
           <button type="button" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/IMG_3322.jpg')"><img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt=""/></button>
           <button type="button" onclick="swapHero(this,'https://hellonancy.com/cdn/shop/files/IMG_3325.jpg')"><img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt=""/></button>
@@ -742,8 +743,8 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Risk band -->
 <div class="risk-band">
   <div class="inner">
-    <div class="top">This is your only chance to get a second Lem at the lowest price we've ever offered.</div>
-    <div class="bot">An extra 58% off &mdash; plus free shipping.</div>
+    <div class="top" data-i18n="risk.top">This is your only chance to get a second Lem at the lowest price we've ever offered.</div>
+    <div class="bot" data-i18n="risk.bot">An extra 58% off &mdash; plus free shipping.</div>
   </div>
 </div>
 
@@ -752,14 +753,14 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container">
     <div class="two-col-grid">
       <div class="col-img-wrap">
-        <img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt="Lem on bedside" style="border-radius:10px;"/>
+        <img src="https://hellonancy.com/cdn/shop/files/IMG_3322.jpg" alt="Lem on bedside" style="border-radius:10px;" data-i18n-alt="whyTwo.imgAlt"/>
       </div>
       <div class="col-copy">
-        <h3>Why two Lems?</h3>
-        <p>Because once you try one, you'll wish you had backup. Customers tell us the same thing: "I wish I'd bought two." So this is your moment.</p>
-        <p><strong>One for home, one for the handbag.</strong> Travel without the awkward TSA reshuffle. Keep one charged and ready, always.</p>
-        <p><strong>A gift that lands every time.</strong> Birthdays, hen dos, "just because" &mdash; nothing makes a friend gasp like the world's most-loved suction massager turning up in a discreet package.</p>
-        <a href="nancy-upsell.html" class="btn-cta">Yes, add a 2nd Lem</a>
+        <h3 data-i18n="whyTwo.title">Why two Lems?</h3>
+        <p data-i18n="whyTwo.p1">Because once you try one, you'll wish you had backup. Customers tell us the same thing: "I wish I'd bought two." So this is your moment.</p>
+        <p data-i18n="whyTwo.p2"><strong>One for home, one for the handbag.</strong> Travel without the awkward TSA reshuffle. Keep one charged and ready, always.</p>
+        <p data-i18n="whyTwo.p3"><strong>A gift that lands every time.</strong> Birthdays, hen dos, "just because" &mdash; nothing makes a friend gasp like the world's most-loved suction massager turning up in a discreet package.</p>
+        <a href="nancy-upsell.html" class="btn-cta" data-i18n="cta.yes2">Yes, add a 2nd Lem</a>
         <div class="pay-chips">
           <span class="pay-chip visa">VISA</span>
           <span class="pay-chip mc">MC</span>
@@ -771,7 +772,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
           </span>
           <span class="pay-chip gpay">G&nbsp;Pay</span>
         </div>
-        <a href="nancy-upsell.html" class="decline-center">No thanks &mdash; I don't want a second Lem at 58% off.</a>
+        <a href="nancy-upsell.html" class="decline-center" data-i18n="cta.no58b">No thanks &mdash; I don't want a second Lem at 58% off.</a>
       </div>
     </div>
   </div>
@@ -782,16 +783,16 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container">
     <div class="two-col-grid">
       <div class="col-copy">
-        <h3>What makes Lem so special?</h3>
+        <h3 data-i18n="special.title">What makes Lem so special?</h3>
         <ul class="check-list">
-          <li>12 unique intensities &amp; pulse patterns to find your perfect rhythm</li>
-          <li>Air-pulse technology &mdash; never touches the skin directly</li>
-          <li>Whisper-quiet motor (under 50 dB &mdash; quieter than a kettle)</li>
-          <li>Body-safe medical-grade silicone, free from harmful additives</li>
-          <li>Fully waterproof (IPX7) &mdash; bath, shower, beyond</li>
-          <li>30-Day Pleasure Guarantee, no questions asked</li>
+          <li data-i18n="special.f1">12 unique intensities &amp; pulse patterns to find your perfect rhythm</li>
+          <li data-i18n="special.f2">Air-pulse technology &mdash; never touches the skin directly</li>
+          <li data-i18n="special.f3">Whisper-quiet motor (under 50 dB &mdash; quieter than a kettle)</li>
+          <li data-i18n="special.f4">Body-safe medical-grade silicone, free from harmful additives</li>
+          <li data-i18n="special.f5">Fully waterproof (IPX7) &mdash; bath, shower, beyond</li>
+          <li data-i18n="special.f6">30-Day Pleasure Guarantee, no questions asked</li>
         </ul>
-        <a href="nancy-upsell.html" class="btn-cta neon">Yes, add a 2nd Lem</a>
+        <a href="nancy-upsell.html" class="btn-cta neon" data-i18n="cta.yes3">Yes, add a 2nd Lem</a>
         <div class="pay-chips">
           <span class="pay-chip visa">VISA</span>
           <span class="pay-chip mc">MC</span>
@@ -803,10 +804,10 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
           </span>
           <span class="pay-chip gpay">G&nbsp;Pay</span>
         </div>
-        <a href="nancy-upsell.html" class="decline-center">No thanks &mdash; I don't want a second Lem at 58% off.</a>
+        <a href="nancy-upsell.html" class="decline-center" data-i18n="cta.no58c">No thanks &mdash; I don't want a second Lem at 58% off.</a>
       </div>
       <div class="col-img-wrap">
-        <img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt="Lem detail" style="border-radius:10px;"/>
+        <img src="https://hellonancy.com/cdn/shop/files/IMG_3325.jpg" alt="Lem detail" style="border-radius:10px;" data-i18n-alt="special.imgAlt"/>
       </div>
     </div>
   </div>
@@ -815,13 +816,13 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Reviews -->
 <section class="reviews">
   <div class="container">
-    <div class="eyebrow">Loved by 1,000,000+ happy customers</div>
+    <div class="eyebrow" data-i18n="reviews.eyebrow">Loved by 1,000,000+ happy customers</div>
 
     <div class="reviews-head">
       <div class="rating-summary">
         <div class="num">4.9<small>/5</small></div>
         <div class="stars-line">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="meta">Based on 12,847 verified reviews</div>
+        <div class="meta" data-i18n="reviews.basedOn">Based on 12,847 verified reviews</div>
       </div>
       <div class="bars">
         <div class="bar-row">
@@ -865,14 +866,14 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
     <div class="testimonials">
       <div class="testimonial">
         <div class="stars-row">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <blockquote>"Bought a second one for my flat. Best decision I've made all year."</blockquote>
-        <p class="body">Wish I'd done this from the start. Keeping one charged and ready in two places means I'm never without &mdash; and the discreet design genuinely looks like a piece of decor.</p>
+        <blockquote data-i18n="reviews.r1.quote">"Bought a second one for my flat. Best decision I've made all year."</blockquote>
+        <p class="body" data-i18n="reviews.r1.body">Wish I'd done this from the start. Keeping one charged and ready in two places means I'm never without &mdash; and the discreet design genuinely looks like a piece of decor.</p>
         <div class="reviewer">
           <span class="avatar">AO</span>
           <div class="reviewer-meta">
             <div class="reviewer-name">
               Aisha O.
-              <span class="verified">
+              <span class="verified" data-i18n="reviews.r1.verified">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.77l-6.18 3.25L7 13.14 2 8.27l6.91-1.01L12 1z"/></svg>
                 Verified
               </span>
@@ -884,14 +885,14 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
       <div class="testimonial">
         <div class="stars-row">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <blockquote>"Gifted one to my best friend. She literally screamed."</blockquote>
-        <p class="body">Got my second Lem during the upsell &mdash; ended up giving it to my best mate for her birthday. Now we both rave about it. Worth every penny at this price.</p>
+        <blockquote data-i18n="reviews.r2.quote">"Gifted one to my best friend. She literally screamed."</blockquote>
+        <p class="body" data-i18n="reviews.r2.body">Got my second Lem during the upsell &mdash; ended up giving it to my best mate for her birthday. Now we both rave about it. Worth every penny at this price.</p>
         <div class="reviewer">
           <span class="avatar">PR</span>
           <div class="reviewer-meta">
             <div class="reviewer-name">
               Priya R.
-              <span class="verified">
+              <span class="verified" data-i18n="reviews.r2.verified">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.77l-6.18 3.25L7 13.14 2 8.27l6.91-1.01L12 1z"/></svg>
                 Verified
               </span>
@@ -903,14 +904,14 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
       <div class="testimonial">
         <div class="stars-row">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <blockquote>"Honestly, the best $39 I've ever spent."</blockquote>
-        <p class="body">I was on the fence about adding a second one. So glad I did. Travel-ready, gift-ready, always-ready. Quiet, powerful, and the lemon design just makes me smile.</p>
+        <blockquote data-i18n="reviews.r3.quote">"Honestly, the best $39 I've ever spent."</blockquote>
+        <p class="body" data-i18n="reviews.r3.body">I was on the fence about adding a second one. So glad I did. Travel-ready, gift-ready, always-ready. Quiet, powerful, and the lemon design just makes me smile.</p>
         <div class="reviewer">
           <span class="avatar">CN</span>
           <div class="reviewer-meta">
             <div class="reviewer-name">
               Camille N.
-              <span class="verified">
+              <span class="verified" data-i18n="reviews.r3.verified">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.77l-6.18 3.25L7 13.14 2 8.27l6.91-1.01L12 1z"/></svg>
                 Verified
               </span>
@@ -922,7 +923,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
     </div>
 
     <div class="reviews-cta">
-      <a href="nancy-upsell.html" class="btn-cta">Yes, add a 2nd Lem</a>
+      <a href="nancy-upsell.html" class="btn-cta" data-i18n="cta.yes4">Yes, add a 2nd Lem</a>
       <div class="pay-chips">
         <span class="pay-chip visa">VISA</span>
         <span class="pay-chip mc">MC</span>
@@ -934,7 +935,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
         </span>
         <span class="pay-chip gpay">G&nbsp;Pay</span>
       </div>
-      <a href="nancy-upsell.html" class="decline-center">No thanks &mdash; I'll pay full price later.</a>
+      <a href="nancy-upsell.html" class="decline-center" data-i18n="cta.noLater">No thanks &mdash; I'll pay full price later.</a>
     </div>
   </div>
 </section>
@@ -944,56 +945,56 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container">
     <div class="family-grid">
       <div class="family-img">
-        <div class="header-bar">Join the Nancy Family &mdash; 1,000,000+ &amp; counting</div>
+        <div class="header-bar" data-i18n="family.header">Join the Nancy Family &mdash; 1,000,000+ &amp; counting</div>
         <div class="collage">
-          <img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?w=240&h=240&fit=crop&auto=format" alt="Friends cheering"/>
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=240&h=240&fit=crop&auto=format" alt="Woman laughing"/>
-          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=240&h=240&fit=crop&auto=format" alt="Joyful woman"/>
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop&auto=format" alt="Smiling woman"/>
-          <img src="https://images.unsplash.com/photo-1491582990992-68ec88e070a3?w=240&h=240&fit=crop&auto=format" alt="Happy couple"/>
-          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=240&h=240&fit=crop&auto=format" alt="Woman smiling"/>
-          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=240&h=240&fit=crop&auto=format" alt="Woman portrait"/>
-          <img src="https://images.unsplash.com/photo-1525206809752-65312b959c88?w=240&h=240&fit=crop&auto=format" alt="Happy couple"/>
-          <img src="https://images.unsplash.com/photo-1525186402429-b4ff38bedec6?w=240&h=240&fit=crop&auto=format" alt="Couple"/>
-          <img src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=240&h=240&fit=crop&auto=format" alt="Joyful woman"/>
-          <img src="https://images.unsplash.com/photo-1506014299253-3725319c0f69?w=240&h=240&fit=crop&auto=format" alt="Happy couple"/>
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=240&h=240&fit=crop&auto=format" alt="Woman portrait"/>
+          <img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?w=240&h=240&fit=crop&auto=format" alt="Friends cheering" data-i18n-alt="family.img1Alt"/>
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=240&h=240&fit=crop&auto=format" alt="Woman laughing" data-i18n-alt="family.img2Alt"/>
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=240&h=240&fit=crop&auto=format" alt="Joyful woman" data-i18n-alt="family.img3Alt"/>
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop&auto=format" alt="Smiling woman" data-i18n-alt="family.img4Alt"/>
+          <img src="https://images.unsplash.com/photo-1491582990992-68ec88e070a3?w=240&h=240&fit=crop&auto=format" alt="Happy couple" data-i18n-alt="family.img5Alt"/>
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=240&h=240&fit=crop&auto=format" alt="Woman smiling" data-i18n-alt="family.img6Alt"/>
+          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=240&h=240&fit=crop&auto=format" alt="Woman portrait" data-i18n-alt="family.img7Alt"/>
+          <img src="https://images.unsplash.com/photo-1525206809752-65312b959c88?w=240&h=240&fit=crop&auto=format" alt="Happy couple" data-i18n-alt="family.img8Alt"/>
+          <img src="https://images.unsplash.com/photo-1525186402429-b4ff38bedec6?w=240&h=240&fit=crop&auto=format" alt="Couple" data-i18n-alt="family.img9Alt"/>
+          <img src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=240&h=240&fit=crop&auto=format" alt="Joyful woman" data-i18n-alt="family.img10Alt"/>
+          <img src="https://images.unsplash.com/photo-1506014299253-3725319c0f69?w=240&h=240&fit=crop&auto=format" alt="Happy couple" data-i18n-alt="family.img11Alt"/>
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=240&h=240&fit=crop&auto=format" alt="Woman portrait" data-i18n-alt="family.img12Alt"/>
         </div>
         <div class="footer-logo">
           <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy"/>
         </div>
       </div>
       <div class="family-copy">
-        <h3>One Lem is great. Two is a love language.</h3>
-        <p class="lead">Add a second Lem to today's order at 58% off. One-time offer only &mdash; it disappears when you leave this page.</p>
-        <div class="reg">Regular price: <span class="strike">$89</span></div>
-        <div class="your-price">Your price $39 each</div>
-        <a href="nancy-upsell.html" class="btn-cta">Yes, add a 2nd Lem</a>
-        <a href="nancy-upsell.html" class="decline-center">No thanks &mdash; I'll pay full price later.</a>
-        <div class="ship-wrap" style="margin-top: 10px;"><div class="ship-note">🚚 Ships free in the same package</div></div>
+        <h3 data-i18n="family.title">One Lem is great. Two is a love language.</h3>
+        <p class="lead" data-i18n="family.lead">Add a second Lem to today's order at 58% off. One-time offer only &mdash; it disappears when you leave this page.</p>
+        <div class="reg" data-i18n="family.reg">Regular price: <span class="strike">$89</span></div>
+        <div class="your-price" data-i18n="family.yourPrice">Your price $39 each</div>
+        <a href="nancy-upsell.html" class="btn-cta" data-i18n="cta.yes5">Yes, add a 2nd Lem</a>
+        <a href="nancy-upsell.html" class="decline-center" data-i18n="cta.noLater2">No thanks &mdash; I'll pay full price later.</a>
+        <div class="ship-wrap" style="margin-top: 10px;"><div class="ship-note" data-i18n="family.shipNote">🚚 Ships free in the same package</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Limited -->
-<div class="limited">Only available right now &mdash; offer disappears when you leave</div>
+<div class="limited" data-i18n="limited.text">Only available right now &mdash; offer disappears when you leave</div>
 
 <!-- Trust -->
 <section class="trust">
-  <div class="trust-item">
+  <div class="trust-item" data-i18n="trust.shipping">
     <span class="icon">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7.5 18.5a2 2 0 100-4 2 2 0 000 4zM17.5 18.5a2 2 0 100-4 2 2 0 000 4z"/></svg>
     </span>
     Free Shipping
   </div>
-  <div class="trust-item">
+  <div class="trust-item" data-i18n="trust.discreet">
     <span class="icon">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg>
     </span>
     Discreet Packaging
   </div>
-  <div class="trust-item">
+  <div class="trust-item" data-i18n="trust.guarantee">
     <span class="icon">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l4 4L19 7"/></svg>
     </span>
@@ -1003,11 +1004,11 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
 <!-- Legal -->
 <div class="legal">
-  <a href="#">Refund policy</a>
-  <a href="#">Privacy policy</a>
-  <a href="#">Terms of service</a>
-  <a href="#">Cancellations</a>
-  <a href="#">Contact</a>
+  <a href="#" data-i18n="footer.refund">Refund policy</a>
+  <a href="#" data-i18n="footer.privacy">Privacy policy</a>
+  <a href="#" data-i18n="footer.terms">Terms of service</a>
+  <a href="#" data-i18n="footer.cancellations">Cancellations</a>
+  <a href="#" data-i18n="footer.contact">Contact</a>
 </div>
 
 <script>

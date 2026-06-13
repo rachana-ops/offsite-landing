@@ -1,0 +1,22 @@
+{
+  "meta.title": "Bridge 5 — Manifest",
+  "ticker.permission": "Tillåtelse beviljad",
+  "ticker.shipping": "Fri frakt",
+  "ticker.packaging": "Diskret förpackning",
+  "ticker.guarantee": "30 dagars njutningsgaranti",
+  "ticker.madeforher": "Gjord för henne",
+  "ticker.reviews": "15 000 femstjärniga recensioner",
+  "ticker.permission2": "Tillåtelse beviljad",
+  "ticker.shipping2": "Fri frakt",
+  "ticker.packaging2": "Diskret förpackning",
+  "ticker.guarantee2": "30 dagars njutningsgaranti",
+  "ticker.madeforher2": "Gjord för henne",
+  "ticker.reviews2": "15 000 femstjärniga recensioner",
+  "topline.label": "Ett manifest · 02",
+  "hero.line1": "<span class=\"strike\">Tyst.</span>",
+  "hero.line2": "Högljudd om <span class=\"pink\">njutning.</span>",
+  "hero.line3": "Högljudd om <span class=\"neon underline\">dig.</span>",
+  "manifesto.body": "Vi skapade något för den delen av dagen som ingen planerar in. Den är liten. Den är tyst (tills du inte vill det). Den ber inte om ursäkt — och det gör äntligen inte du heller. Möt <strong>Lem</strong>.",
+  "cta.unlock": "Lås upp Lem <span class=\"arrow\">→</span>",
+  "micro.rating": "★★★★★ &nbsp;<span>4,9</span> / 5 · 15 000 recensioner"
+}

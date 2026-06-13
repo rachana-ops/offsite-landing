@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-page="lem">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../js/i18n.js"></script>
 <!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -26,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<title>Lem — PDP Recreation</title>
+<title data-i18n="meta.title">Lem — PDP Recreation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,9 +38,9 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Promo Bar -->
 <div class="promo-bar">
   <div class="promo-track">
-    <span>Free Shipping</span>
-    <span>Free Gift</span>
-    <span>30-Day Pleasure Guarantee</span>
+    <span data-i18n="promo.shipping">Free Shipping</span>
+    <span data-i18n="promo.gift">Free Gift</span>
+    <span data-i18n="promo.guarantee">30-Day Pleasure Guarantee</span>
   </div>
 </div>
 
@@ -47,17 +48,17 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <header class="site-header">
   <div class="container nav-container">
     <nav class="nav-left">
-      <a href="#">Shop</a>
-      <a href="#">Guides</a>
-      <a href="#">Reviews</a>
+      <a href="#" data-i18n="nav.shop">Shop</a>
+      <a href="#" data-i18n="nav.guides">Guides</a>
+      <a href="#" data-i18n="nav.reviews">Reviews</a>
     </nav>
     <a class="brand" href="#">
       <img src="https://hellonancy.com/cdn/shop/files/Nancy_Logo_Pink.png" alt="Nancy" />
     </a>
     <div class="nav-right">
-      <a href="#">Search</a>
-      <a href="#">Account</a>
-      <a href="#">Cart (0)</a>
+      <a href="#" data-i18n="nav.search">Search</a>
+      <a href="#" data-i18n="nav.account">Account</a>
+      <a href="#" data-i18n="nav.cart">Cart (0)</a>
     </div>
   </div>
 </header>
@@ -65,9 +66,9 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Trust strip -->
 <div class="trust-strip">
   <div class="container trust-grid">
-    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/truck.png" alt="" /><span>Free Shipping</span></div>
-    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/anonymous.png" alt="" /><span>Discreet Packaging</span></div>
-    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/shield.png" alt="" /><span>30-Day Guarantee</span></div>
+    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/truck.png" alt="" /><span data-i18n="trust.shipping">Free Shipping</span></div>
+    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/anonymous.png" alt="" /><span data-i18n="trust.discreet">Discreet Packaging</span></div>
+    <div class="trust-item"><img src="https://hellonancy.com/cdn/shop/files/shield.png" alt="" /><span data-i18n="trust.guarantee">30-Day Guarantee</span></div>
   </div>
 </div>
 
@@ -92,41 +93,41 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 
     <!-- Product info -->
     <div class="product-info">
-      <span class="pill">BEST SELLER</span>
-      <h1>Lem — Clitoral Massager</h1>
+      <span class="pill" data-i18n="pdp.pill">BEST SELLER</span>
+      <h1 data-i18n="pdp.title">Lem — Clitoral Massager</h1>
 
       <div class="rating">
         <span class="stars-gold">★★★★★</span>
-        <span>5/5 · 1,000+ five-star reviews</span>
+        <span data-i18n="pdp.rating">5/5 · 1,000+ five-star reviews</span>
       </div>
 
       <div class="price-row">
         <span class="now-price">$89.00</span>
         <span class="was-price">$159.00</span>
-        <span class="save-badge">Save $70</span>
+        <span class="save-badge" data-i18n="pdp.save">Save $70</span>
       </div>
 
-      <p class="promo-code">Use code <strong>LEM25</strong> for an extra 25% off.</p>
+      <p class="promo-code" data-i18n="pdp.promo">Use code <strong>LEM25</strong> for an extra 25% off.</p>
 
-      <p class="lead">A zesty, lemon-shaped suction massager designed for first-timers. Air-pulse technology for longer, deeper, more satisfying moments — wrapped in a design discreet enough for your nightstand.</p>
+      <p class="lead" data-i18n="pdp.lead">A zesty, lemon-shaped suction massager designed for first-timers. Air-pulse technology for longer, deeper, more satisfying moments — wrapped in a design discreet enough for your nightstand.</p>
 
       <ul class="feature-bullets">
-        <li>🌀 12 unique intensities &amp; patterns</li>
-        <li>🤫 Whisper-quiet motor (under 50 dB)</li>
-        <li>💛 Body-safe medical-grade silicone</li>
-        <li>💦 Fully waterproof (IPX7)</li>
+        <li data-i18n="pdp.bullet1">🌀 12 unique intensities &amp; patterns</li>
+        <li data-i18n="pdp.bullet2">🤫 Whisper-quiet motor (under 50 dB)</li>
+        <li data-i18n="pdp.bullet3">💛 Body-safe medical-grade silicone</li>
+        <li data-i18n="pdp.bullet4">💦 Fully waterproof (IPX7)</li>
       </ul>
 
       <div class="addons">
-        <label><input type="checkbox" class="addon-cb" data-item="protect" /> Order Protect <span>+$4.99</span></label>
-        <label><input type="checkbox" class="addon-cb" data-item="discreet" /> Extra Discreet Packaging <span>+$4.99</span></label>
-        <label><input type="checkbox" class="addon-cb" data-item="pouch" /> Add the Pleasure Pouch <span><s>$19.99</s> $9.99</span></label>
+        <label><input type="checkbox" class="addon-cb" data-item="protect" /> <span data-i18n="addon.protect">Order Protect</span> <span>+$4.99</span></label>
+        <label><input type="checkbox" class="addon-cb" data-item="discreet" /> <span data-i18n="addon.discreet">Extra Discreet Packaging</span> <span>+$4.99</span></label>
+        <label><input type="checkbox" class="addon-cb" data-item="pouch" /> <span data-i18n="addon.pouch">Add the Pleasure Pouch</span> <span><s>$19.99</s> $9.99</span></label>
       </div>
 
-      <button class="btn-buy" onclick="goToCart()">Add to cart — $89</button>
+      <button class="btn-buy" onclick="goToCart()" data-i18n="pdp.buy">Add to cart — $89</button>
 
       <div class="press-logos">
-        <p class="press-label">As seen in</p>
+        <p class="press-label" data-i18n="pdp.pressLabel">As seen in</p>
         <div class="press-row">
           <img src="https://hellonancy.com/cdn/shop/files/The_Guardian_2018_svg.png" alt="The Guardian" />
           <img src="https://hellonancy.com/cdn/shop/files/vice-logo_6cc50991-ceed-4fc6-8e84-7bf8b7252af9.svg" alt="Vice" />
@@ -144,23 +145,23 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container feature-strip-grid">
     <div class="feat">
       <img src="https://hellonancy.com/cdn/shop/files/nancy_graphic_intensity_7ef01583-8685-48a9-b6de-fb7509a4e1e2.svg" alt="" />
-      <h4>12 patterns</h4>
-      <p>Unique intensities so you can find your rhythm.</p>
+      <h4 data-i18n="feat.patterns.title">12 patterns</h4>
+      <p data-i18n="feat.patterns.desc">Unique intensities so you can find your rhythm.</p>
     </div>
     <div class="feat">
       <img src="https://hellonancy.com/cdn/shop/files/no-sound.svg" alt="" />
-      <h4>Quiet motor</h4>
-      <p>Quieter than a normal conversation.</p>
+      <h4 data-i18n="feat.quiet.title">Quiet motor</h4>
+      <p data-i18n="feat.quiet.desc">Quieter than a normal conversation.</p>
     </div>
     <div class="feat">
       <img src="https://hellonancy.com/cdn/shop/files/noun-drop-1797148_3fb47920-9fbb-4cd1-aae6-60de946188a8.svg" alt="" />
-      <h4>Fully waterproof</h4>
-      <p>IPX7 — pool, bath, anywhere.</p>
+      <h4 data-i18n="feat.waterproof.title">Fully waterproof</h4>
+      <p data-i18n="feat.waterproof.desc">IPX7 — pool, bath, anywhere.</p>
     </div>
     <div class="feat">
       <img src="https://hellonancy.com/cdn/shop/files/Asset_1_4x_c2356914-4e35-4567-91d8-8046d5faac52.png" alt="" />
-      <h4>Easy to use</h4>
-      <p>One button. No learning curve.</p>
+      <h4 data-i18n="feat.easy.title">Easy to use</h4>
+      <p data-i18n="feat.easy.desc">One button. No learning curve.</p>
     </div>
   </div>
 </section>
@@ -170,8 +171,8 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container doctor-grid">
     <img src="https://hellonancy.com/cdn/shop/files/Image_Dr._Angela_Wright.png" alt="Dr. Angela Wright" />
     <div>
-      <p class="quote">"A high-quality, beginner-friendly suction toy I'm happy to recommend to my patients exploring this category for the first time."</p>
-      <p class="attribution"><strong>Dr. Angela Wright</strong> · GP &amp; Clinical Sexologist</p>
+      <p class="quote" data-i18n="doctor.quote">"A high-quality, beginner-friendly suction toy I'm happy to recommend to my patients exploring this category for the first time."</p>
+      <p class="attribution" data-i18n="doctor.attribution"><strong>Dr. Angela Wright</strong> · GP &amp; Clinical Sexologist</p>
     </div>
   </div>
 </section>
@@ -179,23 +180,23 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Perfect for Beginners -->
 <section class="beginners">
   <div class="container">
-    <h2 class="display">Perfect for Beginners ✨</h2>
-    <p class="lede">No experience needed. Lem is designed to be approachable, intuitive, and forgiving — whether it's your first suction toy or your tenth.</p>
+    <h2 class="display" data-i18n="beginners.title">Perfect for Beginners ✨</h2>
+    <p class="lede" data-i18n="beginners.lede">No experience needed. Lem is designed to be approachable, intuitive, and forgiving — whether it's your first suction toy or your tenth.</p>
     <div class="beginners-grid">
       <div class="beginner-card">
         <span class="emoji">🍋</span>
-        <h4>Approachable design</h4>
-        <p>Looks like a piece of fruit. Feels like a deep breath.</p>
+        <h4 data-i18n="beginners.card1.title">Approachable design</h4>
+        <p data-i18n="beginners.card1.desc">Looks like a piece of fruit. Feels like a deep breath.</p>
       </div>
       <div class="beginner-card">
         <span class="emoji">🤫</span>
-        <h4>Whisper-quiet</h4>
-        <p>Roommate-proof. Travel-friendly. Genuinely discreet.</p>
+        <h4 data-i18n="beginners.card2.title">Whisper-quiet</h4>
+        <p data-i18n="beginners.card2.desc">Roommate-proof. Travel-friendly. Genuinely discreet.</p>
       </div>
       <div class="beginner-card">
         <span class="emoji">👌</span>
-        <h4>One-button simple</h4>
-        <p>No app, no manual. Press, cycle, enjoy.</p>
+        <h4 data-i18n="beginners.card3.title">One-button simple</h4>
+        <p data-i18n="beginners.card3.desc">No app, no manual. Press, cycle, enjoy.</p>
       </div>
     </div>
   </div>
@@ -204,28 +205,28 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- How to use -->
 <section class="how-to">
   <div class="container">
-    <h2 class="display center">Simple 5-Step Process</h2>
+    <h2 class="display center" data-i18n="howto.title">Simple 5-Step Process</h2>
     <ol class="steps">
-      <li><span>1</span><h4>Charge it up</h4><p>90 minutes of charging gives you 120 minutes of play.</p></li>
-      <li><span>2</span><h4>Add water-based lube</h4><p>Optional, but it helps create a perfect seal.</p></li>
-      <li><span>3</span><h4>Power on</h4><p>Hold the button for 2 seconds.</p></li>
-      <li><span>4</span><h4>Cycle through patterns</h4><p>Tap to move through the 12 intensities.</p></li>
-      <li><span>5</span><h4>Clean &amp; store</h4><p>Rinse with warm water and a gentle body-safe cleaner.</p></li>
+      <li><span>1</span><h4 data-i18n="howto.step1.title">Charge it up</h4><p data-i18n="howto.step1.desc">90 minutes of charging gives you 120 minutes of play.</p></li>
+      <li><span>2</span><h4 data-i18n="howto.step2.title">Add water-based lube</h4><p data-i18n="howto.step2.desc">Optional, but it helps create a perfect seal.</p></li>
+      <li><span>3</span><h4 data-i18n="howto.step3.title">Power on</h4><p data-i18n="howto.step3.desc">Hold the button for 2 seconds.</p></li>
+      <li><span>4</span><h4 data-i18n="howto.step4.title">Cycle through patterns</h4><p data-i18n="howto.step4.desc">Tap to move through the 12 intensities.</p></li>
+      <li><span>5</span><h4 data-i18n="howto.step5.title">Clean &amp; store</h4><p data-i18n="howto.step5.desc">Rinse with warm water and a gentle body-safe cleaner.</p></li>
     </ol>
 
     <div class="tips-row">
       <div class="tips-card">
-        <h3>First-Timer Tips 💛</h3>
+        <h3 data-i18n="tips.title">First-Timer Tips 💛</h3>
         <ul class="tips-list">
-          <li><strong>Start with Level 1.</strong> The gentlest setting will surprise you.</li>
-          <li><strong>Go slow.</strong> Climb gradually — your body sets the pace.</li>
-          <li><strong>Experiment with placement.</strong> Small movements, big difference.</li>
-          <li><strong>Normalise it.</strong> Pleasure is wellness. Welcome in.</li>
+          <li data-i18n="tips.tip1"><strong>Start with Level 1.</strong> The gentlest setting will surprise you.</li>
+          <li data-i18n="tips.tip2"><strong>Go slow.</strong> Climb gradually — your body sets the pace.</li>
+          <li data-i18n="tips.tip3"><strong>Experiment with placement.</strong> Small movements, big difference.</li>
+          <li data-i18n="tips.tip4"><strong>Normalise it.</strong> Pleasure is wellness. Welcome in.</li>
         </ul>
       </div>
       <div class="quote-card">
-        <h4>Real Customer Quote:</h4>
-        <p>"I have literally never been more relaxed in my life. 10/10, would gift to my best friend."</p>
+        <h4 data-i18n="tips.quoteLabel">Real Customer Quote:</h4>
+        <p data-i18n="tips.quote">"I have literally never been more relaxed in my life. 10/10, would gift to my best friend."</p>
         <p class="reviewer">— Leia, 28</p>
       </div>
     </div>
@@ -235,14 +236,14 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Specs -->
 <section class="specs">
   <div class="container">
-    <h2 class="display center">Specifications</h2>
+    <h2 class="display center" data-i18n="specs.title">Specifications</h2>
     <div class="spec-grid">
-      <div><strong>Dimensions</strong><span>7.8 cm × 5.1 cm</span></div>
-      <div><strong>Material</strong><span>Medical-grade silicone</span></div>
-      <div><strong>Play time</strong><span>Up to 120 minutes</span></div>
-      <div><strong>Charge time</strong><span>90 minutes</span></div>
-      <div><strong>Waterproof rating</strong><span>IPX7</span></div>
-      <div><strong>Noise level</strong><span>Under 50 dB</span></div>
+      <div><strong data-i18n="specs.dimensions.label">Dimensions</strong><span>7.8 cm × 5.1 cm</span></div>
+      <div><strong data-i18n="specs.material.label">Material</strong><span data-i18n="specs.material.value">Medical-grade silicone</span></div>
+      <div><strong data-i18n="specs.playtime.label">Play time</strong><span data-i18n="specs.playtime.value">Up to 120 minutes</span></div>
+      <div><strong data-i18n="specs.chargetime.label">Charge time</strong><span data-i18n="specs.chargetime.value">90 minutes</span></div>
+      <div><strong data-i18n="specs.waterproof.label">Waterproof rating</strong><span>IPX7</span></div>
+      <div><strong data-i18n="specs.noise.label">Noise level</strong><span data-i18n="specs.noise.value">Under 50 dB</span></div>
     </div>
   </div>
 </section>
@@ -251,29 +252,29 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <section class="intensity">
   <div class="container intensity-grid">
     <div>
-      <h2 class="display">12 intensities, your tempo.</h2>
+      <h2 class="display" data-i18n="intensity.title">12 intensities, your tempo.</h2>
       <ul class="intensity-list">
-        <li><strong>Levels 1–2</strong> Gentle, made for warming up.</li>
-        <li><strong>Levels 3–4</strong> Medium — finding your groove.</li>
-        <li><strong>Levels 5–6</strong> Strong, focused suction.</li>
-        <li><strong>Levels 7–8</strong> Intense, climbing fast.</li>
-        <li><strong>Patterns 9–12</strong> Rhythmic waves and pulses.</li>
+        <li data-i18n="intensity.level1"><strong>Levels 1–2</strong> Gentle, made for warming up.</li>
+        <li data-i18n="intensity.level2"><strong>Levels 3–4</strong> Medium — finding your groove.</li>
+        <li data-i18n="intensity.level3"><strong>Levels 5–6</strong> Strong, focused suction.</li>
+        <li data-i18n="intensity.level4"><strong>Levels 7–8</strong> Intense, climbing fast.</li>
+        <li data-i18n="intensity.level5"><strong>Patterns 9–12</strong> Rhythmic waves and pulses.</li>
       </ul>
-      <p class="tip"><em>Pro tip:</em> start slow, climb gradually, finish however you like.</p>
+      <p class="tip" data-i18n="intensity.tip"><em>Pro tip:</em> start slow, climb gradually, finish however you like.</p>
     </div>
-    <img src="https://hellonancy.com/cdn/shop/files/rythm-diagram-1.svg" alt="Pattern diagram" />
+    <img src="https://hellonancy.com/cdn/shop/files/rythm-diagram-1.svg" alt="Pattern diagram" data-i18n-alt="intensity.diagramAlt" />
   </div>
 </section>
 
 <!-- Discreetness -->
 <section class="discreet">
   <div class="container">
-    <h2 class="display center">Discreet, by design.</h2>
+    <h2 class="display center" data-i18n="discreet.title">Discreet, by design.</h2>
     <div class="discreet-grid">
-      <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/no-sound.svg" alt="" /><h4>Whisper-quiet</h4><p>Under 50 dB — quieter than a normal conversation.</p></div>
-      <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/box.svg" alt="" /><h4>Plain packaging</h4><p>No suggestive text. Nothing on the outside.</p></div>
-      <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/money.svg" alt="" /><h4>Private billing</h4><p>Shows up as a neutral name on your statement.</p></div>
-      <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/airplane.svg" alt="" /><h4>Travel-friendly</h4><p>TSA-friendly, compact, and quiet on the road.</p></div>
+      <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/no-sound.svg" alt="" /><h4 data-i18n="discreet.item1.title">Whisper-quiet</h4><p data-i18n="discreet.item1.desc">Under 50 dB — quieter than a normal conversation.</p></div>
+      <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/box.svg" alt="" /><h4 data-i18n="discreet.item2.title">Plain packaging</h4><p data-i18n="discreet.item2.desc">No suggestive text. Nothing on the outside.</p></div>
+      <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/money.svg" alt="" /><h4 data-i18n="discreet.item3.title">Private billing</h4><p data-i18n="discreet.item3.desc">Shows up as a neutral name on your statement.</p></div>
+      <div class="discreet-item"><img src="https://hellonancy.com/cdn/shop/files/airplane.svg" alt="" /><h4 data-i18n="discreet.item4.title">Travel-friendly</h4><p data-i18n="discreet.item4.desc">TSA-friendly, compact, and quiet on the road.</p></div>
     </div>
   </div>
 </section>
@@ -281,31 +282,31 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Couples Play -->
 <section class="couples">
   <div class="container">
-    <h2 class="display center">Better Together 💕</h2>
-    <p class="lede center">Lem isn't just a solo act. Couples report deeper connection, longer sessions, and a whole lot more communication. Here's how to bring it in.</p>
+    <h2 class="display center" data-i18n="couples.title">Better Together 💕</h2>
+    <p class="lede center" data-i18n="couples.lede">Lem isn't just a solo act. Couples report deeper connection, longer sessions, and a whole lot more communication. Here's how to bring it in.</p>
     <div class="couples-grid">
       <div class="couples-card">
-        <h3>Best Positions for Couples</h3>
+        <h3 data-i18n="couples.positions.title">Best Positions for Couples</h3>
         <ul>
-          <li><strong>Missionary + Lem.</strong> Position Lem between you for shared sensation.</li>
-          <li><strong>Doggy enhancement.</strong> Hold Lem in place for hands-free intensity.</li>
-          <li><strong>Reverse cowgirl.</strong> You control the angle, you control the rhythm.</li>
-          <li><strong>Oral + Lem combo.</strong> Best of both worlds, simultaneously.</li>
+          <li data-i18n="couples.positions.item1"><strong>Missionary + Lem.</strong> Position Lem between you for shared sensation.</li>
+          <li data-i18n="couples.positions.item2"><strong>Doggy enhancement.</strong> Hold Lem in place for hands-free intensity.</li>
+          <li data-i18n="couples.positions.item3"><strong>Reverse cowgirl.</strong> You control the angle, you control the rhythm.</li>
+          <li data-i18n="couples.positions.item4"><strong>Oral + Lem combo.</strong> Best of both worlds, simultaneously.</li>
         </ul>
       </div>
       <div class="couples-card">
-        <h3>Communication Tips</h3>
+        <h3 data-i18n="couples.comm.title">Communication Tips</h3>
         <ul>
-          <li><strong>Talk first, then play.</strong> Even one sentence reduces awkwardness.</li>
-          <li><strong>Take turns exploring.</strong> Both partners get to try, both get to ask.</li>
-          <li><strong>Experiment with angles.</strong> A few millimetres changes everything.</li>
-          <li><strong>Check in mid-session.</strong> "More? Less? Slower?" — sexy, not clinical.</li>
+          <li data-i18n="couples.comm.item1"><strong>Talk first, then play.</strong> Even one sentence reduces awkwardness.</li>
+          <li data-i18n="couples.comm.item2"><strong>Take turns exploring.</strong> Both partners get to try, both get to ask.</li>
+          <li data-i18n="couples.comm.item3"><strong>Experiment with angles.</strong> A few millimetres changes everything.</li>
+          <li data-i18n="couples.comm.item4"><strong>Check in mid-session.</strong> "More? Less? Slower?" — sexy, not clinical.</li>
         </ul>
       </div>
     </div>
     <div class="quote-card center-card">
-      <h4>Real Customer Quote:</h4>
-      <p>"My partner and I had more honest conversations in one night with Lem than the past year combined. Game-changer."</p>
+      <h4 data-i18n="couples.quoteLabel">Real Customer Quote:</h4>
+      <p data-i18n="couples.quote">"My partner and I had more honest conversations in one night with Lem than the past year combined. Game-changer."</p>
       <p class="reviewer">— Priya, 31</p>
     </div>
   </div>
@@ -314,7 +315,7 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Comparison -->
 <section class="comparison">
   <div class="container">
-    <h2 class="display center">How Lem stacks up.</h2>
+    <h2 class="display center" data-i18n="comparison.title">How Lem stacks up.</h2>
     <div class="table-wrap">
       <table class="compare-table">
         <thead>
@@ -327,12 +328,12 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
           </tr>
         </thead>
         <tbody>
-          <tr><td>Trustpilot score</td><td>4.7</td><td>3.7</td><td>2.4</td><td>1.9</td></tr>
-          <tr><td>Discreet design</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
-          <tr><td>Beginner-friendly</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
-          <tr><td>Whisper-quiet</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
-          <tr><td>Plain packaging</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
-          <tr><td>Free shipping + gift</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
+          <tr><td data-i18n="comparison.row1">Trustpilot score</td><td>4.7</td><td>3.7</td><td>2.4</td><td>1.9</td></tr>
+          <tr><td data-i18n="comparison.row2">Discreet design</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
+          <tr><td data-i18n="comparison.row3">Beginner-friendly</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
+          <tr><td data-i18n="comparison.row4">Whisper-quiet</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
+          <tr><td data-i18n="comparison.row5">Plain packaging</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
+          <tr><td data-i18n="comparison.row6">Free shipping + gift</td><td><img src="https://hellonancy.com/cdn/shop/files/Checkmark_Icon_7044c2d7-d539-41bf-9803-2be30480eac5.svg" alt="yes" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td><td><img src="https://hellonancy.com/cdn/shop/files/Cross_Icon_b61c3e14-f468-42c0-851f-3473151b2389.svg" alt="no" /></td></tr>
         </tbody>
       </table>
     </div>
@@ -342,27 +343,27 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Air Pulse vs Traditional Vibrators -->
 <section class="air-vs-trad">
   <div class="container">
-    <h2 class="display center">Air Pulse vs Traditional Vibrators</h2>
-    <p class="lede center">Two completely different technologies. Here's why most first-timers fall in love with air pulse.</p>
+    <h2 class="display center" data-i18n="vs.title">Air Pulse vs Traditional Vibrators</h2>
+    <p class="lede center" data-i18n="vs.lede">Two completely different technologies. Here's why most first-timers fall in love with air pulse.</p>
     <div class="vs-grid">
       <div class="vs-card us">
-        <h3>Air Pulse (Lem)</h3>
+        <h3 data-i18n="vs.us.title">Air Pulse (Lem)</h3>
         <ul>
-          <li><strong>Stimulation type:</strong> Gentle suction + air waves</li>
-          <li><strong>Noise:</strong> Whisper-quiet (under 50 dB)</li>
-          <li><strong>Design:</strong> Discreet, lemon-shaped</li>
-          <li><strong>Orgasm quality:</strong> Deeper, longer, more sensitive</li>
-          <li><strong>Skin contact:</strong> Minimal — no numbness</li>
+          <li data-i18n="vs.us.item1"><strong>Stimulation type:</strong> Gentle suction + air waves</li>
+          <li data-i18n="vs.us.item2"><strong>Noise:</strong> Whisper-quiet (under 50 dB)</li>
+          <li data-i18n="vs.us.item3"><strong>Design:</strong> Discreet, lemon-shaped</li>
+          <li data-i18n="vs.us.item4"><strong>Orgasm quality:</strong> Deeper, longer, more sensitive</li>
+          <li data-i18n="vs.us.item5"><strong>Skin contact:</strong> Minimal — no numbness</li>
         </ul>
       </div>
       <div class="vs-card them">
-        <h3>Traditional Vibrators</h3>
+        <h3 data-i18n="vs.them.title">Traditional Vibrators</h3>
         <ul>
-          <li><strong>Stimulation type:</strong> Surface vibration</li>
-          <li><strong>Noise:</strong> Often audible across the room</li>
-          <li><strong>Design:</strong> Obvious, hard to hide</li>
-          <li><strong>Orgasm quality:</strong> Surface-level intensity</li>
-          <li><strong>Skin contact:</strong> Can cause numbness over time</li>
+          <li data-i18n="vs.them.item1"><strong>Stimulation type:</strong> Surface vibration</li>
+          <li data-i18n="vs.them.item2"><strong>Noise:</strong> Often audible across the room</li>
+          <li data-i18n="vs.them.item3"><strong>Design:</strong> Obvious, hard to hide</li>
+          <li data-i18n="vs.them.item4"><strong>Orgasm quality:</strong> Surface-level intensity</li>
+          <li data-i18n="vs.them.item5"><strong>Skin contact:</strong> Can cause numbness over time</li>
         </ul>
       </div>
     </div>
@@ -372,36 +373,36 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- Reviews -->
 <section class="reviews">
   <div class="container">
-    <h2 class="display center">Loved by 700,000+ customers.</h2>
+    <h2 class="display center" data-i18n="reviews.title">Loved by 700,000+ customers.</h2>
     <div class="review-carousel">
       <div class="review-card">
         <span class="stars-gold">★★★★★</span>
-        <p>"Honestly the most thoughtful first purchase. Quiet, simple, and I love how it looks on my nightstand."</p>
+        <p data-i18n="reviews.r1.quote">"Honestly the most thoughtful first purchase. Quiet, simple, and I love how it looks on my nightstand."</p>
         <p class="reviewer">Leia · 28</p>
       </div>
       <div class="review-card">
         <span class="stars-gold">★★★★★</span>
-        <p>"It does exactly what it says. Twelve patterns, easy charging, easy to clean. No notes."</p>
+        <p data-i18n="reviews.r2.quote">"It does exactly what it says. Twelve patterns, easy charging, easy to clean. No notes."</p>
         <p class="reviewer">Maya · 34</p>
       </div>
       <div class="review-card">
         <span class="stars-gold">★★★★★</span>
-        <p>"My partner and I both love it. The design is so unintimidating — and the suction is no joke."</p>
+        <p data-i18n="reviews.r3.quote">"My partner and I both love it. The design is so unintimidating — and the suction is no joke."</p>
         <p class="reviewer">Priya · 31</p>
       </div>
       <div class="review-card">
         <span class="stars-gold">★★★★★</span>
-        <p>"Travel-friendly is an understatement. Took it on a weekend away — best decision I made all year."</p>
+        <p data-i18n="reviews.r4.quote">"Travel-friendly is an understatement. Took it on a weekend away — best decision I made all year."</p>
         <p class="reviewer">Olivia · 26</p>
       </div>
       <div class="review-card">
         <span class="stars-gold">★★★★★</span>
-        <p>"Was nervous about buying my first one. Lem made it feel like buying skincare. Genius."</p>
+        <p data-i18n="reviews.r5.quote">"Was nervous about buying my first one. Lem made it feel like buying skincare. Genius."</p>
         <p class="reviewer">Hana · 33</p>
       </div>
       <div class="review-card">
         <span class="stars-gold">★★★★★</span>
-        <p>"Quiet enough that I forgot to be self-conscious. Which was the whole point, honestly."</p>
+        <p data-i18n="reviews.r6.quote">"Quiet enough that I forgot to be self-conscious. Which was the whole point, honestly."</p>
         <p class="reviewer">Amelia · 29</p>
       </div>
     </div>
@@ -411,23 +412,23 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- FAQ -->
 <section class="faq">
   <div class="container">
-    <h2 class="display center">FAQ's</h2>
-    <details><summary>How fast is shipping?</summary><p>3–7 days in the US, 7–10 days for international orders. Free shipping over $65.</p></details>
-    <details><summary>What's the warranty?</summary><p>12-month warranty. If your Lem is defective, we'll replace it.</p></details>
-    <details><summary>What's your return policy?</summary><p>Unopened items can be returned within 30 days. Opened items are eligible for exchange or store credit through our Pleasure Guarantee.</p></details>
-    <details><summary>Is the packaging really discreet?</summary><p>Yes. Plain box, no suggestive text. Optional extra-discreet upgrade at checkout.</p></details>
-    <details><summary>How will this show up on my statement?</summary><p>Under a neutral billing name — never a product description.</p></details>
-    <details><summary>Is it safe to use in water?</summary><p>Yes — Lem is IPX7 rated and fully waterproof.</p></details>
+    <h2 class="display center" data-i18n="faq.title">FAQ's</h2>
+    <details><summary data-i18n="faq.q1">How fast is shipping?</summary><p data-i18n="faq.a1">3–7 days in the US, 7–10 days for international orders. Free shipping over $65.</p></details>
+    <details><summary data-i18n="faq.q2">What's the warranty?</summary><p data-i18n="faq.a2">12-month warranty. If your Lem is defective, we'll replace it.</p></details>
+    <details><summary data-i18n="faq.q3">What's your return policy?</summary><p data-i18n="faq.a3">Unopened items can be returned within 30 days. Opened items are eligible for exchange or store credit through our Pleasure Guarantee.</p></details>
+    <details><summary data-i18n="faq.q4">Is the packaging really discreet?</summary><p data-i18n="faq.a4">Yes. Plain box, no suggestive text. Optional extra-discreet upgrade at checkout.</p></details>
+    <details><summary data-i18n="faq.q5">How will this show up on my statement?</summary><p data-i18n="faq.a5">Under a neutral billing name — never a product description.</p></details>
+    <details><summary data-i18n="faq.q6">Is it safe to use in water?</summary><p data-i18n="faq.a6">Yes — Lem is IPX7 rated and fully waterproof.</p></details>
   </div>
 </section>
 
 <!-- Newsletter -->
 <section class="signup">
   <div class="container">
-    <h2 class="display center">Stories &amp; surprises straight to your inbox 💌</h2>
+    <h2 class="display center" data-i18n="signup.title">Stories &amp; surprises straight to your inbox 💌</h2>
     <form onsubmit="event.preventDefault();">
       <input type="email" placeholder="your@email.com" required />
-      <button type="submit">Subscribe</button>
+      <button type="submit" data-i18n="signup.button">Subscribe</button>
     </form>
   </div>
 </section>
@@ -437,29 +438,29 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container footer-grid">
     <div>
       <img src="https://hellonancy.com/cdn/shop/files/Logo.png" alt="Nancy" class="footer-logo" />
-      <p class="small">Breaking the taboo. Creating a safe, welcoming space for everyone to explore.</p>
+      <p class="small" data-i18n="footer.tagline">Breaking the taboo. Creating a safe, welcoming space for everyone to explore.</p>
     </div>
     <div>
-      <h5>Shop</h5>
-      <a href="#">All products</a>
-      <a href="#">Bundles</a>
-      <a href="#">Accessories</a>
+      <h5 data-i18n="footer.shop.title">Shop</h5>
+      <a href="#" data-i18n="footer.shop.link1">All products</a>
+      <a href="#" data-i18n="footer.shop.link2">Bundles</a>
+      <a href="#" data-i18n="footer.shop.link3">Accessories</a>
     </div>
     <div>
-      <h5>Help</h5>
-      <a href="#">Contact</a>
-      <a href="#">FAQ</a>
-      <a href="#">Shipping</a>
+      <h5 data-i18n="footer.help.title">Help</h5>
+      <a href="#" data-i18n="footer.help.link1">Contact</a>
+      <a href="#" data-i18n="footer.help.link2">FAQ</a>
+      <a href="#" data-i18n="footer.help.link3">Shipping</a>
     </div>
     <div>
-      <h5>Company</h5>
-      <a href="#">Privacy policy</a>
-      <a href="#">Terms of service</a>
-      <a href="#">Affiliates</a>
+      <h5 data-i18n="footer.company.title">Company</h5>
+      <a href="#" data-i18n="footer.company.link1">Privacy policy</a>
+      <a href="#" data-i18n="footer.company.link2">Terms of service</a>
+      <a href="#" data-i18n="footer.company.link3">Affiliates</a>
     </div>
   </div>
   <div class="container disclaimer">
-    <p class="small">© 2026 Demo PDP recreation · Not affiliated with Nancy. For demonstration purposes.</p>
+    <p class="small" data-i18n="footer.disclaimer">© 2026 Demo PDP recreation · Not affiliated with Nancy. For demonstration purposes.</p>
   </div>
 </footer>
 
@@ -468,10 +469,10 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
   <div class="container sticky-atc-inner">
     <img src="https://hellonancy.com/cdn/shop/files/WhatsAppImage2023-11-18at14.19.19_2acc31e8.webp" alt="Lem" />
     <div class="sticky-info">
-      <strong>Lem — Clitoral Massager</strong>
+      <strong data-i18n="pdp.title">Lem — Clitoral Massager</strong>
       <span><span class="now-price">$89</span> <span class="was-price">$159</span></span>
     </div>
-    <button class="btn-buy small" onclick="goToCart()">Add to cart</button>
+    <button class="btn-buy small" onclick="goToCart()" data-i18n="sticky.buy">Add to cart</button>
   </div>
 </div>
 

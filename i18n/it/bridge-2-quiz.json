@@ -1,0 +1,16 @@
+{
+  "meta.title": "Bridge 2 — Quiz",
+  "hero.eyebrow": "Profilo del Piacere",
+  "hero.title": "Qual è il tuo <em>mood</em> stasera?",
+  "hero.sub": "Tocca quello che ti somiglia di più. Ti abbiniamo al ritmo giusto.",
+  "opt.slowburn.title": "A fuoco lento",
+  "opt.slowburn.desc": "Morbido, prolungato, energia con tutta calma.",
+  "opt.quickspark.title": "Scintilla veloce",
+  "opt.quickspark.desc": "Reset in 15 minuti, dritta al punto.",
+  "opt.zesty.title": "Frizzante &amp; giocosa",
+  "opt.zesty.desc": "Curiosa, un po' sperimentale.",
+  "opt.allin.title": "Tutto e subito",
+  "opt.allin.desc": "Tutto il corpo, senza freni.",
+  "cta.match": "Trova il mio abbinamento →",
+  "footer.note": "Spedizione gratuita · Imballaggio discreto · Garanzia 30 giorni"
+}

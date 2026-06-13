@@ -1,0 +1,16 @@
+{
+  "meta.title": "Bridge 2 — Quiz",
+  "hero.eyebrow": "Perfil de placer",
+  "hero.title": "¿Cuál es tu <em>vibe</em> esta noche?",
+  "hero.sub": "Toca la que más te encaje. Te emparejamos con la vibración ideal.",
+  "opt.slowburn.title": "A fuego lento",
+  "opt.slowburn.desc": "Energía suave, prolongada, sin prisas.",
+  "opt.quickspark.title": "Chispa rápida",
+  "opt.quickspark.desc": "Reset de 15 min, directa al grano.",
+  "opt.zesty.title": "Atrevida &amp; juguetona",
+  "opt.zesty.desc": "Curiosa, un poco experimental.",
+  "opt.allin.title": "Sin reservas",
+  "opt.allin.desc": "Todo el cuerpo, sin frenos.",
+  "cta.match": "Ver mi match →",
+  "footer.note": "Envío gratis · Embalaje discreto · Garantía de 30 días"
+}
