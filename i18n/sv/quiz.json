@@ -1,16 +1,16 @@
 {
   "meta.title": "Nancy — Njutningsprofil",
   "hero.eyebrow": "Njutningsprofil",
-  "hero.title": "Vad är din <em>vibe</em> ikväll?",
-  "hero.sub": "Tryck på den som känns närmast. Vi matchar dig med rätt buzz.",
+  "hero.title": "Vilken <em>vibe</em> är du på ikväll?",
+  "hero.sub": "Tryck på den som känns mest som du. Vi matchar dig med rätt känsla.",
   "opt1.title": "Långsam glöd",
-  "opt1.desc": "Mjuk, dröjande, ta-din-tid-energi.",
+  "opt1.desc": "Mjukt, dröjande, ta-det-lugnt-energi.",
   "opt2.title": "Snabb gnista",
-  "opt2.desc": "15-min reset, kom dit snabbt.",
+  "opt2.desc": "15-minutersfix, snabbt i mål.",
   "opt3.title": "Pirrig &amp; lekfull",
-  "opt3.desc": "Nyfiken, lite experimentell.",
+  "opt3.desc": "Nyfiken och lite på experimenthumör.",
   "opt4.title": "Allt in",
-  "opt4.desc": "Hela kroppen, håll inget tillbaka.",
-  "cta.match": "Se min match →",
-  "footer.note": "Fri frakt · Diskret förpackning · 30-dagarsgaranti"
+  "opt4.desc": "Hela kroppen, inga gränser.",
+  "cta.match": "Visa min match →",
+  "footer.note": "Fri frakt · Diskret förpackning · 30 dagars nöjd-kund-garanti"
 }

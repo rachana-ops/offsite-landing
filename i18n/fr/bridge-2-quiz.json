@@ -2,15 +2,15 @@
   "meta.title": "Bridge 2 — Quiz",
   "hero.eyebrow": "Profil plaisir",
   "hero.title": "C'est quoi ton <em>vibe</em> ce soir ?",
-  "hero.sub": "Choisis celui qui te ressemble le plus. On te trouve le bon buzz.",
+  "hero.sub": "Choisis celui qui te parle le plus. On te trouve le bon buzz.",
   "opt.slowburn.title": "Tout en douceur",
   "opt.slowburn.desc": "Doux, qui dure, à ton rythme.",
   "opt.quickspark.title": "Petite étincelle",
-  "opt.quickspark.desc": "Pause de 15 min, vite fait bien fait.",
+  "opt.quickspark.desc": "15 min chrono, et c'est parti.",
   "opt.zesty.title": "Pétillant &amp; joueur",
   "opt.zesty.desc": "Curieuse, un brin aventureuse.",
   "opt.allin.title": "À fond",
-  "opt.allin.desc": "Corps entier, sans retenue.",
+  "opt.allin.desc": "Tout le corps, sans retenue.",
   "cta.match": "Voir mon match →",
   "footer.note": "Livraison gratuite · Emballage discret · Garantie 30 jours"
 }
