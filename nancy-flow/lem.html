@@ -27,6 +27,12 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<!-- Reddit Pixel -->
+<script>
+!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js?pixel_id=a2_j3xe4m7w7k79",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_j3xe4m7w7k79');rdt('track', 'PageVisit');
+</script>
+<!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
+<!-- End Reddit Pixel -->
 <title data-i18n="meta.title">Lem — PDP Recreation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -477,6 +483,11 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 </div>
 
 <script>
+// Reddit Pixel — catalog prices in USD (mirrors thank-you.html CATALOG).
+var RDT_PRICES = { lem: 89, pouch: 9.99, lem2: 39, lolly: 29, bundle: 8.00, discreet: 4.99, protect: 4.99 };
+// ViewContent for the Lem product page (fires once on load).
+if (window.rdt) rdt('track', 'ViewContent', { products: [{ id: 'lem', name: 'Lem — Clitoral Massager', category: 'Massager' }], value: RDT_PRICES.lem, currency: 'USD' });
+
 // Show sticky ATC after scrolling past the buy button
 window.addEventListener('scroll', function() {
   var btn = document.querySelector('.product-info .btn-buy');
@@ -493,6 +504,15 @@ function goToCart() {
     var key = cb.getAttribute('data-item');
     if (key && items.indexOf(key) === -1) items.push(key);
   });
+  // Reddit Pixel — AddToCart with the selected line items + summed value.
+  if (window.rdt) {
+    var rdtValue = 0;
+    var rdtProducts = items.map(function(id) {
+      rdtValue += (RDT_PRICES[id] || 0);
+      return { id: id };
+    });
+    rdt('track', 'AddToCart', { products: rdtProducts, value: rdtValue, currency: 'USD', itemCount: items.length });
+  }
   window.location.href = 'lem-upsell.html?items=' + items.join(',');
 }
 </script>

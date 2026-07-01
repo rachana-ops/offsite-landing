@@ -27,6 +27,12 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<!-- Reddit Pixel -->
+<script>
+!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js?pixel_id=a2_j3xe4m7w7k79",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_j3xe4m7w7k79');rdt('track', 'PageVisit');
+</script>
+<!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
+<!-- End Reddit Pixel -->
 <title data-i18n="meta.title">Nancy — Thank You</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -335,6 +341,33 @@ window.i18n.ready.then(function() {
 
   document.getElementById('lineItems').innerHTML = lineHtml;
   document.getElementById('totalPaid').textContent = '$' + total.toFixed(2);
+
+  // Reddit Pixel — Purchase for the completed order (value + items computed
+  // above). Two separate ids on purpose:
+  //   • rdtKey (item-set based) is ONLY the local sessionStorage guard, so a
+  //     refresh in the same session doesn't re-count.
+  //   • conversionId must be UNIQUE per purchase — it is Reddit's server-side
+  //     dedup key, so reusing an item-set value would collapse every buyer of
+  //     the same combo into one counted conversion. There is no per-order id
+  //     on this static funnel, so we mint a fresh uuid per fire.
+  if (window.rdt) {
+    var rdtKey = 'rdt_purchase_' + items.join('_');
+    var rdtFired = false;
+    try { rdtFired = !!sessionStorage.getItem(rdtKey); } catch (e) {}
+    if (!rdtFired) {
+      var rdtConvId = (window.crypto && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : ('rdt_' + Date.now() + '_' + Math.floor(Math.random() * 1e9));
+      rdt('track', 'Purchase', {
+        currency: 'USD',
+        value: total,
+        itemCount: items.length,
+        conversionId: rdtConvId,
+        products: items.map(function(k) { return { id: k, name: (CATALOG[k] && CATALOG[k].name) || k }; })
+      });
+      try { sessionStorage.setItem(rdtKey, '1'); } catch (e) {}
+    }
+  }
 
   var saved = was - total;
   if (saved > 0.01) {

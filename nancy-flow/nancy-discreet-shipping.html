@@ -27,6 +27,12 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<!-- Reddit Pixel -->
+<script>
+!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js?pixel_id=a2_j3xe4m7w7k79",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_j3xe4m7w7k79');rdt('track', 'PageVisit');
+</script>
+<!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
+<!-- End Reddit Pixel -->
 <title data-i18n="meta.title">Nancy — Add Discreet Shipping</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -794,6 +800,8 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
       return next + (arr.length ? '?items=' + arr.join(',') : '');
     }
     document.querySelectorAll(YES_SEL).forEach(function(a) { a.setAttribute('href', build(YES_NEXT, true)); });
+    // Reddit Pixel — AddToCart when this offer is accepted.
+    document.querySelectorAll(YES_SEL).forEach(function(a) { a.addEventListener('click', function() { if (window.rdt) rdt('track', 'AddToCart', { products: [{ id: ITEM }], value: 4.99, currency: 'USD', itemCount: 1 }); }); });
     document.querySelectorAll(NO_SEL).forEach(function(a) { a.setAttribute('href', build(NO_NEXT, false)); });
   })();
 </script>
