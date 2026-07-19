@@ -6,6 +6,18 @@
       "slug": "zenify",
       "pages": [
         {
+          "locale": "en",
+          "sourceUrl": "https://www.zenify.today/article/7-best-suction-toys-for-women-2025-reviews",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "note": "EN source page hosted under our control; no proofreader corrections apply (source of truth)."
+        },
+        {
           "locale": "de",
           "sourceUrl": "https://www.zenify.today/article/7-best-suction-toys-for-women-2025-reviews-de",
           "driveFileId": null,
@@ -378,6 +390,18 @@
       "slug": "herdailyinsight",
       "pages": [
         {
+          "locale": "en",
+          "sourceUrl": "https://herdailyinsight.com/pages/nancypowerful",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "note": "EN source page hosted under our control; no proofreader corrections apply (source of truth)."
+        },
+        {
           "locale": "de",
           "sourceUrl": "https://herdailyinsight.com/de/pages/nancypowerful",
           "driveFileId": null,
@@ -469,6 +493,18 @@
     "fiftieslifestyle": {
       "slug": "fiftieslifestyle",
       "pages": [
+        {
+          "locale": "en",
+          "sourceUrl": "https://fiftieslifestyle.com/pages/ifakedforyears",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "note": "EN source page hosted under our control; no proofreader corrections apply (source of truth)."
+        },
         {
           "locale": "de",
           "sourceUrl": "https://fiftieslifestyle.com/de/pages/ifakedforyears",
@@ -567,6 +603,18 @@
       "slug": "modernwellnessinsider",
       "pages": [
         {
+          "locale": "en",
+          "sourceUrl": "https://modernwellnessinsider.com/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "note": "EN source page hosted under our control; no proofreader corrections apply (source of truth)."
+        },
+        {
           "locale": "de",
           "sourceUrl": "https://modernwellnessinsider.com/de",
           "driveFileId": null,
@@ -644,6 +692,18 @@
       "slug": "thedailyedit",
       "pages": [
         {
+          "locale": "en",
+          "sourceUrl": "https://thedailyedit.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "note": "EN source page hosted under our control; no proofreader corrections apply (source of truth)."
+        },
+        {
           "locale": "de",
           "sourceUrl": "https://thedailyedit.manus.space/",
           "driveFileId": null,
@@ -697,6 +757,18 @@
     "whatifthis": {
       "slug": "whatifthis",
       "pages": [
+        {
+          "locale": "en",
+          "sourceUrl": "https://whatifthis.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "note": "EN source page hosted under our control; no proofreader corrections apply (source of truth)."
+        },
         {
           "locale": "de",
           "sourceUrl": "https://whatifthis.manus.space/",
@@ -761,6 +833,18 @@
     "menopause": {
       "slug": "menopause",
       "pages": [
+        {
+          "locale": "en",
+          "sourceUrl": "https://menopause.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "note": "EN source page hosted under our control; no proofreader corrections apply (source of truth)."
+        },
         {
           "locale": "de",
           "sourceUrl": "https://menopause.manus.space/",
@@ -847,6 +931,18 @@
       "slug": "menopause-fifty",
       "pages": [
         {
+          "locale": "en",
+          "sourceUrl": "https://menopause-fifty.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "note": "EN source page hosted under our control; no proofreader corrections apply (source of truth)."
+        },
+        {
           "locale": "de",
           "sourceUrl": "https://menopause-fifty.manus.space/",
           "driveFileId": null,
@@ -897,5 +993,6 @@
         }
       ]
     }
-  }
+  },
+  "generatedEnPages": "2026-07-19"
 }
