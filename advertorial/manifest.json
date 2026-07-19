@@ -1,0 +1,901 @@
+{
+  "generated": "2026-07-19",
+  "driveSnapshot": "2026-07-19T18:05:00Z",
+  "slugs": {
+    "zenify": {
+      "slug": "zenify",
+      "pages": [
+        {
+          "locale": "de",
+          "sourceUrl": "https://www.zenify.today/article/7-best-suction-toys-for-women-2025-reviews-de",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "corrections_detail": [],
+          "notes": [
+            "visible CTA anchor text 'hellonancy.com' swapped to 'Nancys offiziellen Shop' so copy matches the nancyflow PDP target (judgment call, not a jsonl correction)"
+          ],
+          "qa": {
+            "pass": true,
+            "issues": [],
+            "spot_diff_scores": [
+              1,
+              1,
+              0.995,
+              1,
+              1,
+              0.996,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "locale": "nl",
+          "sourceUrl": "https://www.zenify.today/article/7-best-suction-toys-for-women-2025-reviews-nl",
+          "driveFileId": null,
+          "corrections_applied": 14,
+          "corrections_skipped": [
+            {
+              "content": "Zo goed. Je zal gillen.",
+              "reason": "targets the English caption 'So good. You'll scream.' baked into the Lem product image (Top-7-Lem png); not editable HTML text — would need a localized image asset"
+            }
+          ],
+          "corrections_detail": [
+            {
+              "content": "Beste van alles",
+              "status": "applied-edit"
+            },
+            {
+              "content": "Zo goed. Je zal gillen.",
+              "status": "skipped"
+            },
+            {
+              "content": "Double",
+              "status": "applied-edit"
+            },
+            {
+              "content": "We schetsen even een beeld:",
+              "status": "applied-edit"
+            },
+            {
+              "content": "Zoom meeting",
+              "status": "applied-edit"
+            },
+            {
+              "content": "gaf me een compliment",
+              "status": "applied-edit"
+            },
+            {
+              "content": "Je moet snel zijn.",
+              "status": "applied-edit"
+            },
+            {
+              "content": "/\\",
+              "status": "applied-edit"
+            },
+            {
+              "content": "staat hij",
+              "status": "applied-edit"
+            },
+            {
+              "content": "Niet meer",
+              "status": "applied-edit"
+            },
+            {
+              "content": "neemt ruimte in je koffer in",
+              "status": "applied-edit"
+            },
+            {
+              "content": "handig",
+              "status": "applied-edit"
+            },
+            {
+              "content": "voor beginners",
+              "status": "applied-edit"
+            },
+            {
+              "content": "Voor de andere: zet muziek op",
+              "status": "applied-edit"
+            },
+            {
+              "content": "oordeel",
+              "status": "applied-edit"
+            }
+          ],
+          "notes": [
+            "live page shows updated price €86,95 (PDF €77,95); prices left as live page per spec rule 9"
+          ],
+          "qa": {
+            "pass": true,
+            "issues": [],
+            "spot_diff_scores": [
+              0.983,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "locale": "fr",
+          "sourceUrl": "https://www.zenify.today/article/7-suction-toys-so-good-youll-want-to-cheat-2025-edition-fr",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "corrections_detail": [],
+          "notes": [],
+          "qa": {
+            "pass": true,
+            "issues": [],
+            "spot_diff_scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "locale": "it",
+          "sourceUrl": "https://www.zenify.today/article/7-best-suction-toys-for-women-2025-reviews-it",
+          "driveFileId": null,
+          "corrections_applied": 20,
+          "corrections_skipped": [
+            {
+              "content": "per cambio modalità",
+              "reason": "ambiguous annotation on LELO con 'Varietà di pattern limitata'; base page already italianizes it to 'Varietà di modalità limitata' consistent with the annotator's pattern->modalita sweep, and no coherent placement for 'per cambio modalità' could be determined"
+            }
+          ],
+          "corrections_detail": [
+            {
+              "content": "quasi un'esperienza mistica",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "appagante",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "d'arredo",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "La modalità",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "per cambio modalità",
+              "status": "skipped"
+            },
+            {
+              "content": "l'antistress",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "difficoltà",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "percezione",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "senza l'uso delle mani",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "guardata male",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "avere necessità di un rumore",
+              "status": "applied-edit"
+            },
+            {
+              "content": "senza uso delle mani",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "limone non teme",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "this sentence means nothing it is better to delete",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "dovere",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "la modalità",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "poco,",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "a forma di agrumi",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "in my opinion it is better to delete, sentence without meaning",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "per te. Ogni modalità è studiata",
+              "status": "applied-edit"
+            },
+            {
+              "content": "vengono",
+              "status": "applied-in-base"
+            }
+          ],
+          "notes": [
+            "spot-diff <0.85 on two paragraphs vs PDF: live page shows updated price €86,95 (PDF €77,95) and live pre-applied deletion of a parenthetical (correction #14); live-localized base is authoritative"
+          ],
+          "qa": {
+            "pass": true,
+            "issues": [],
+            "spot_diff_scores": [
+              0.931,
+              0.948,
+              1,
+              1,
+              1,
+              0.808,
+              0.797,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "locale": "sv",
+          "sourceUrl": "https://www.zenify.today/article/7-best-suction-toys-for-women-2025-reviews-sv",
+          "driveFileId": null,
+          "corrections_applied": 13,
+          "corrections_skipped": [],
+          "corrections_detail": [
+            {
+              "content": "7 sexleksaker som överträffar allt du testat",
+              "status": "applied-edit"
+            },
+            {
+              "content": "Lätt att ta med",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "priset",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "användning",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "Om du någon gång känt att du vill ha något helt annat än det vanliga, kan det här vara ett betydligt bättre och mycket roligare alternativ.",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "Förvara i svalt och torrt",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "Näst bäst:",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "får konkurrenterna att blekna",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "Om någon hade sagt att en liten sugleksak också kan fungera som stämningslampa på nattduksbordet, hade jag skrattat och kastat ut dem ur gruppchatten direkt.",
+              "status": "applied-edit"
+            },
+            {
+              "content": "delete english, keep \"12 månaders garanti\"",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "Exklusiv design",
+              "status": "applied-in-base"
+            },
+            {
+              "content": "Tänk dig lufttrycksinställningar",
+              "status": "applied-edit"
+            },
+            {
+              "content": "90 minuters batteriprestanda",
+              "status": "applied-in-base"
+            }
+          ],
+          "notes": [
+            "headline correction sv-1 replaces H1+<title>; spot-diff against PDF headline expectedly diverges"
+          ],
+          "qa": {
+            "pass": true,
+            "issues": [],
+            "spot_diff_scores": [
+              1,
+              1,
+              1,
+              0.99,
+              1,
+              0.901,
+              0.891,
+              0.961,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "locale": "da",
+          "sourceUrl": "https://www.zenify.today/article/7-suction-toys-so-good-youll-want-to-cheat-2025-edition-dk",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "corrections_detail": [],
+          "notes": [],
+          "qa": {
+            "pass": true,
+            "issues": [],
+            "spot_diff_scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    "herdailyinsight": {
+      "slug": "herdailyinsight",
+      "pages": [
+        {
+          "locale": "de",
+          "sourceUrl": "https://herdailyinsight.com/de/pages/nancypowerful",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "nl",
+          "sourceUrl": "https://herdailyinsight.com/nl/pages/nancypowerful",
+          "driveFileId": null,
+          "corrections_applied": 4,
+          "corrections_skipped": [
+            {
+              "content": "This looks weird, to black?",
+              "reason": "reviewer design/visual comment on heading colour, no text change specified"
+            },
+            {
+              "content": "Dat sti muleert de hele structuur, diep vanbi nnen.",
+              "reason": "highlight annotation whose content is identical to the live sentence; superseded 19s later by the sticky-note rewrite applied next"
+            },
+            {
+              "content": "Needs a translation",
+              "reason": "points at gallery product images pdp4/pdp9 whose English copy is baked into the JPEG; no localized image variant exists in the scrape — needs new creative"
+            }
+          ],
+          "notes": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "fr",
+          "sourceUrl": "https://herdailyinsight.com/fr/pages/nancypowerful",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "it",
+          "sourceUrl": "https://herdailyinsight.com/it/pages/nancypowerful",
+          "driveFileId": null,
+          "corrections_applied": 3,
+          "corrections_skipped": [],
+          "notes": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "sv",
+          "sourceUrl": "https://herdailyinsight.com/sv/pages/nancypowerful",
+          "driveFileId": null,
+          "corrections_applied": 6,
+          "corrections_skipped": [],
+          "notes": [
+            "spot-diff line altered by applied correction: 'SPELAR TEATER (OCH VARFÖR'"
+          ],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "da",
+          "sourceUrl": "https://herdailyinsight.com/da/pages/nancypowerful",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        }
+      ]
+    },
+    "fiftieslifestyle": {
+      "slug": "fiftieslifestyle",
+      "pages": [
+        {
+          "locale": "de",
+          "sourceUrl": "https://fiftieslifestyle.com/de/pages/ifakedforyears",
+          "driveFileId": null,
+          "corrections_applied": 4,
+          "corrections_skipped": [],
+          "notes": [
+            "4 corrections from de-annotations.jsonl (Timo); de-doc-a.txt verified byte-equivalent to the live DE text (extraction-order diffs only).",
+            "de-3 applied Timo's first suggested variant: 'diesem tauben Kribbeln'."
+          ],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "nl",
+          "sourceUrl": "https://fiftieslifestyle.com/nl/pages/ifakedforyears",
+          "driveFileId": null,
+          "corrections_applied": 28,
+          "corrections_skipped": [
+            {
+              "content": "Do you need a translation?",
+              "reason": "Comment about the oral_vs_lem diagram image which contains English text; no localized image variant exists in the scrape — left as-is."
+            },
+            {
+              "content": "The picture with the text Winnaar, above, is not full visable.",
+              "reason": "PDF-rendering artifact; the WINNAAR badge renders fully on the live web layout."
+            },
+            {
+              "content": "This text, need to be lower. Because its on the sentence above.",
+              "reason": "PDF layout-overlap artifact; the live heading has correct spacing."
+            }
+          ],
+          "notes": [
+            "'Is Uno the name of the toy?' answered by fixing the copy error: de Uno -> de Lem (mirrors Timo's DE correction).",
+            "nl-27: author wrote 'clitorus' (typo); applied standard Dutch spelling 'clitoris'.",
+            "nl-5/6/7 are one combined sentence rewrite counted as 3 corrections."
+          ],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "fr",
+          "sourceUrl": "https://fiftieslifestyle.com/fr/pages/ifakedforyears",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": [
+            "No corrections for fr (per spec)."
+          ],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "it",
+          "sourceUrl": "https://fiftieslifestyle.com/it/pages/ifakedforyears",
+          "driveFileId": null,
+          "corrections_applied": 19,
+          "corrections_skipped": [
+            {
+              "content": "momento",
+              "reason": "Unanchored single-word note; the word 'momento' already appears at the annotated location ('Ma sul momento la testa andava a mille') — no discernible change."
+            }
+          ],
+          "notes": [
+            "it-2/5/20 mapped to Cynthia review lines via annotation rects (y=3561/3632/3679, left column).",
+            "it-15: applied with typographic apostrophe (all’infinito) to match page typography."
+          ],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "da",
+          "sourceUrl": "https://fiftieslifestyle.com/da/pages/ifakedforyears",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": [
+            "No corrections for da (per spec)."
+          ],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        }
+      ]
+    },
+    "modernwellnessinsider": {
+      "slug": "modernwellnessinsider",
+      "pages": [
+        {
+          "locale": "de",
+          "sourceUrl": "https://modernwellnessinsider.com/de",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": "No corrections file for de. Bundle-vs-PDF drift aligned to PDF: price 86,95->77,95 EUR, Spare 52->61 EUR, 37->44 % Rabatt, 'gleichmaessiger und unermuedlicher'->'gleichmaessig und unermuedlich', dynamic last-updated date frozen to PDF (29. Juni 2026), reader count normalized to 1,847.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "nl",
+          "sourceUrl": "https://modernwellnessinsider.com/nl",
+          "driveFileId": null,
+          "corrections_applied": 10,
+          "corrections_skipped": [],
+          "notes": "All 10 Melissa van Alphen corrections applied as text edits. Prices aligned to PDF (86,95->77,95, 52->61, 37%->44%); date frozen to 29 jun 2026.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "fr",
+          "sourceUrl": "https://modernwellnessinsider.com/fr",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": "No corrections file for fr. Prices aligned to PDF (86,95->77,95, 52->61 EUR d'economie, -37->-44 %); date frozen to 29 juin 2026.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "it",
+          "sourceUrl": "https://modernwellnessinsider.com/it",
+          "driveFileId": null,
+          "corrections_applied": 11,
+          "corrections_skipped": [],
+          "notes": "11 isabella pentenero corrections accounted for: 8 were already present in the live bundle text (newer than the PDF: dobbiamo ammetterlo, Un nascondiglio, inadeguato, sottovuoto deleted, confusione mentale, Basta vibrazione si alla pressione [bundle uses accented 'si'], donne+comma, a un ginocchio); 3 applied as edits (I batteri, Puoi evitare, toy ingombrante). Prices aligned to PDF; date frozen to 29 giu 2026.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "sv",
+          "sourceUrl": "https://modernwellnessinsider.com/se",
+          "driveFileId": null,
+          "corrections_applied": 7,
+          "corrections_skipped": [],
+          "notes": "All 7 Joanna Haegg corrections already present in the live bundle text (koep nu, Ja det aer det, Tre minuters miraklet, Hur hoegljudd aer den, oroa sig, Diskret tyst, Livstidssupport); verified present, no edits needed. Prices already matched PDF; date frozen to 29 juni 2026.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "da",
+          "sourceUrl": "https://modernwellnessinsider.com/da",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": "No corrections file for da. Prices already matched PDF; date frozen to 29. jun. 2026. Source has no DA-localized anatomy/bloodflow diagrams; the EN diagram images (manuscdn hotlinks in source) were localized to ../assets copies, captions/labels around them are Danish as in the source.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        }
+      ]
+    },
+    "thedailyedit": {
+      "slug": "thedailyedit",
+      "pages": [
+        {
+          "locale": "de",
+          "sourceUrl": "https://thedailyedit.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 12,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "nl",
+          "sourceUrl": "https://thedailyedit.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 20,
+          "corrections_skipped": [
+            {
+              "content": "I think that the V is too big :) it looks weird",
+              "reason": "Subjective design feedback on the drop-cap (shared template element identical across locales), not a text correction; deferred to the central visual pass."
+            }
+          ],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "fr",
+          "sourceUrl": "https://thedailyedit.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "sv",
+          "sourceUrl": "https://thedailyedit.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 14,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        }
+      ]
+    },
+    "whatifthis": {
+      "slug": "whatifthis",
+      "pages": [
+        {
+          "locale": "de",
+          "sourceUrl": "https://whatifthis.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "nl",
+          "sourceUrl": "https://whatifthis.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 7,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "notes": "All 7 Melissa van Alphen corrections applied: hero sub 'helpt om hun', intro quote 'niets voor mij zou zijn', 'langer genieten', 'helpt om een hoogtepunt', 'Niet Alle Speeltjes Zijn Hetzelfde' (capitalized to match title-case heading), 'gemeenschap van vrouwen waarbij plezier voorop staat', 'Klaar om je plezier voorop te stellen?'"
+        },
+        {
+          "locale": "fr",
+          "sourceUrl": "https://whatifthis.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "sv",
+          "sourceUrl": "https://whatifthis.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 4,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          },
+          "notes": "All 4 Joanna Hägg corrections applied: FAQ 'Vad händer om jag inte är nöjd?', hero CTA 'Starta din njutningsresa', science item 3 'Garanterad njutning', feature 01 heading 'Diskret tyst' — the annotation content read 'Diskret tyskt' ('German'), applied as 'Diskret tyst' treating the trailing k as an obvious typo. Correction anchored to the '01 Viskande tyst' heading only; the comparison-table cell keeps 'Viskande tyst'."
+        }
+      ],
+      "shared": {
+        "assets": [
+          "PDP-1.jpg",
+          "PDP-2.jpg",
+          "PDP-6.jpg",
+          "PDP-7.jpg",
+          "PDP-12.jpg",
+          "PDP-17.jpg",
+          "index-Cz81u5Tz.css",
+          "SXcE6jrtvkujBbgoyXMUQg.jpg"
+        ],
+        "assetNotes": "PDP-7.jpg recompressed 297KB->93KB (sips jpeg q80); og screenshot SXcE6jrtvkujBbgoyXMUQg.png converted to jpg 366KB->123KB, used as og:image only. Manus JS bundle dropped (DOM pre-rendered); Radix accordion (empty answers in source) flattened to static FAQ boxes; i.pravatar.cc avatars replaced with inline initial circles (not downloadable per spec asset rule); minimal inline countdown script replaces React timer; Google Fonts (DM Sans + Syne) hotlinked per spec exception."
+      }
+    },
+    "menopause": {
+      "slug": "menopause",
+      "pages": [
+        {
+          "locale": "de",
+          "sourceUrl": "https://menopause.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 1,
+          "corrections_applied_detail": [
+            "de-annotations (TimoH): '€55,00,00' -> '€55,00' in the price paragraph (Get Lem Today section)"
+          ],
+          "corrections_skipped": [],
+          "notes": "PDF text dropped two EN bullets ('using Lem 3-4 times a week' in Week 2-3, 'Beginners exploring air suction' in Perfect for) — removed to match the DE localized text. Fixed mobile sticky-bar strings (not present in PDF) translated consistently with page CTAs.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "nl",
+          "sourceUrl": "https://menopause.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 33,
+          "corrections_skipped": [],
+          "notes": "All 33 corrections by Melissa van Alphen applied. Judgment calls on 4 fragment-style annotations: 'lang duurt' -> 'Het duurt lang om er te komen' (replaced 'een eeuwigheid'); 'Je bent al snel bang dat iemand ze ziet of vindt' joined as '...\"seksspeeltje\" en je bent al snel bang...'; 'plezier mee te hebben.' rendered as '...in bad of waar je ook zin hebt om er plezier mee te hebben.'; 'Ontvang' applied only to the mid-page CTA she anchored (hero CTA left as 'Krijg'). 'Bestel Lem Nu €73,95' applied verbatim (her text drops 'voor'). Week 2-3 keeps 4 bullets incl. the NL-specific relaxation bullet per the NL PDF.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "fr",
+          "sourceUrl": "https://menopause.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "notes": "No FR corrections exist for advertorials. Same two bullets removed as DE/SV to match the FR localized text.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "sv",
+          "sourceUrl": "https://menopause.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 8,
+          "corrections_skipped": [],
+          "notes": "All 8 corrections by Joanna Hägg applied. Judgment calls: 'till' read as replacing 'annan' -> 'Lem är inte bara en till sexleksak'; 'njutningsgaranti' rendered as 'Vår 30-dagars njutningsgaranti' (replaces the '\"Fantastisk Orgasm\"-Garanti' tail, sentence case per her other corrections). Same two bullets removed as DE/FR to match the SV localized text. SV PDF quirks kept as-is per price rule: Sarah M. review says 796,00 kr (page price is 775,00 kr) and 'Upplever längre...' in Option 3.",
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        }
+      ],
+      "shared_assets": [
+        "assets/lem-hero.jpg",
+        "assets/lem-product.jpg",
+        "assets/lem-lifestyle.jpg",
+        "assets/index-D1ugQdp6.css",
+        "assets/favicon.png"
+      ],
+      "build": {
+        "base": "en-dom (loc/scrape/menopause/en.html, React DOM rendered from menopause.manus.space)",
+        "stripped": [
+          "Clarity",
+          "Meta pixel 832767357702650",
+          "GTM/gtag AW-11033179838",
+          "manus-runtime inline React bundle",
+          "index-CEDlUtlu.js module",
+          "umami (manus-analytics)",
+          "plausible",
+          "sonner toast container",
+          "chrome-extension leftover"
+        ],
+        "added": [
+          "PostHog+Meta(4287828478137575)+Reddit(a2_j3xe4m7w7k79) head block verbatim from editorial/index.html",
+          "preconnect + speculationrules prefetch of localized PDP",
+          "canonical + hreflang de/nl/fr/sv (no x-default)",
+          "minimal inline countdown replacement (no tracking)",
+          "../../../js/param-passthrough.js"
+        ],
+        "cta": "https://get.nancyflow.com/{locale}/{cc}/products/lem (de->de nl->nl fr->fr sv->se), 7 CTAs per page"
+      }
+    },
+    "menopause-fifty": {
+      "slug": "menopause-fifty",
+      "pages": [
+        {
+          "locale": "de",
+          "sourceUrl": "https://menopause-fifty.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [
+            {
+              "content": "No language errors found on this page - text reads naturally throughout!",
+              "reason": "informational note from Timo (de-annotations.jsonl) - explicitly states no changes needed; no text edit to apply"
+            }
+          ],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "nl",
+          "sourceUrl": "https://menopause-fifty.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 52,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "fr",
+          "sourceUrl": "https://menopause-fifty.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 0,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        },
+        {
+          "locale": "sv",
+          "sourceUrl": "https://menopause-fifty.manus.space/",
+          "driveFileId": null,
+          "corrections_applied": 4,
+          "corrections_skipped": [],
+          "qa": {
+            "pass": true,
+            "issues": []
+          }
+        }
+      ]
+    }
+  }
+}
