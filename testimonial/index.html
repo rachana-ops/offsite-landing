@@ -34,6 +34,15 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 <!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
 <!-- End Reddit Pixel -->
 <title data-i18n="meta.title">Nancy — Real Reviews</title>
+<!-- Warm the storefront handoff: the CTA points at get.nancyflow.com, and a
+     cold tap paid full DNS+TCP+TLS before the ad-lander -> PDP hop even began.
+     preconnect opens the connection early; the speculation rules prefetch the
+     Lem PDP itself so the tap-to-render hop starts warm on Chromium. -->
+<link rel="preconnect" href="https://get.nancyflow.com" crossorigin>
+<link rel="dns-prefetch" href="https://get.nancyflow.com">
+<script type="speculationrules">
+{"prefetch": [{"urls": ["https://get.nancyflow.com/products/lem"], "eagerness": "moderate"}]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,500;9..144,0,600;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
