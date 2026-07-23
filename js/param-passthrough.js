@@ -1,7 +1,14 @@
 /**
  * param-passthrough.js
- * Appends fbclid + utm_* params from the current page URL to every outbound
- * link pointing at get.nancyflow.com, preserving existing query params and hash.
+ * Appends fbclid + utm_* params from the current page URL — plus a forced
+ * `nf_geo=stay` — to every outbound link pointing at get.nancyflow.com,
+ * preserving existing query params and hash.
+ *
+ * `nf_geo=stay` is the storefront's geo opt-out: it keeps bridge/ad traffic ON
+ * get.nancyflow.com and stops the cross-domain hop to a country-code store
+ * (.co.uk / .ca / .co.nz). The .com store still applies its own local-currency
+ * path prefixes (/gb, /se, /dk …), so buyers keep their currency/language
+ * without leaving the .com domain. See ../GEO-DOMAIN-ROUTING.md.
  *
  * Also patches inline window.location assignments on buttons (quiz page) via
  * a click-capture listener so late-added or dynamically-set hrefs are covered.
@@ -49,16 +56,26 @@
       href = href.slice(0, hashIdx);
     }
 
-    // Parse existing query string
+    // Parse existing query string. We track ALL existing keys (not just the
+    // tracking ones) so a param we're adding — e.g. nf_geo — is never appended
+    // twice if the target URL already carries it.
     var qIdx = href.indexOf('?');
     var base = qIdx === -1 ? href : href.slice(0, qIdx);
     var existingSearch = qIdx === -1 ? '' : href.slice(qIdx + 1);
-    var existing = collectParams('?' + existingSearch);
+    var existingKeys = {};
+    if (existingSearch) {
+      var epairs = existingSearch.split('&');
+      for (var e = 0; e < epairs.length; e++) {
+        if (!epairs[e]) continue;
+        var eidx = epairs[e].indexOf('=');
+        existingKeys[eidx === -1 ? epairs[e] : epairs[e].slice(0, eidx)] = true;
+      }
+    }
 
     var qs = existingSearch;
     for (var k = 0; k < keys.length; k++) {
       var key = keys[k];
-      if (!(key in existing)) {
+      if (!(key in existingKeys)) {
         qs += (qs ? '&' : '') + key + '=' + params[key];
       }
     }
@@ -69,8 +86,11 @@
   function run() {
     var params = collectParams(window.location.search);
 
-    // Nothing to forward — skip all DOM work
-    if (!Object.keys(params).length) return;
+    // Force nf_geo=stay onto every store link so bridge/ad traffic is never
+    // bounced off get.nancyflow.com onto a country-code domain (.co.uk/.ca/
+    // .co.nz). This is added even when there are NO fbclid/utm params to
+    // forward, so we can't early-return on an empty tracking set anymore.
+    params.nf_geo = 'stay';
 
     // --- Patch <a> elements ---
     function patchAnchors(root) {
