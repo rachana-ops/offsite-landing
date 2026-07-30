@@ -51,6 +51,40 @@
     ca: "es", gl: "es" // Catalan/Galician -> Spanish
   };
 
+  /**
+   * Language BRIDGE domains — one dedicated domain per top language, mirroring
+   * the storefront's language markets (GEO_MARKETS in the storefront's
+   * src/i18n/routing.ts — keep in sync). When LIVE:
+   *   - visiting nancyflow.com with a language that has a domain redirects
+   *     there (path + query preserved, ?lang stripped);
+   *   - a language domain PINS its language (no browser detection);
+   *   - window.i18n.setLocale('de') navigates to the domain instead of
+   *     reloading in place.
+   * Flip LANG_DOMAINS_LIVE to true only when every domain below serves this
+   * site over HTTPS — otherwise visitors would be bounced onto dead domains.
+   *
+   * `it` and `da` deliberately have NO domain: nancyflow.it was never
+   * registered and nancyflow.dk is undelegated, so both stay on nancyflow.com
+   * and hand off to get.nancyflow.com with the /<locale>/<country>/ path
+   * prefix, exactly as before.
+   */
+  var LANG_DOMAINS_LIVE = false;
+  var LANG_DOMAINS = {
+    de: "nancyflow.de",
+    nl: "nancyflow.nl",
+    fr: "nancyflow.fr",
+    sv: "nancyflow.se"
+  };
+
+  /** Locale pinned by the current hostname, or null off the language domains. */
+  function localeFromHost() {
+    var host = window.location.hostname.toLowerCase().replace(/^www\./, "");
+    for (var loc in LANG_DOMAINS) {
+      if (LANG_DOMAINS[loc] === host) return loc;
+    }
+    return null;
+  }
+
   var STORAGE_KEY = "nancy_locale";
   var HIDE_STYLE_ID = "i18n-hide-style";
   var REVEAL_TIMEOUT_MS = 1500;
@@ -93,6 +127,10 @@
       try { localStorage.setItem(STORAGE_KEY, q); } catch (e) {}
       return q;
     }
+    // A language domain IS the language choice — pin it, ignoring any stale
+    // localStorage/browser signal. (?lang above stays as an explicit escape.)
+    var pinned = localeFromHost();
+    if (pinned) return pinned;
     try {
       var saved = localStorage.getItem(STORAGE_KEY);
       if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
@@ -138,11 +176,52 @@
     setLocale: function (loc) {
       if (SUPPORTED.indexOf(loc) === -1) return;
       try { localStorage.setItem(STORAGE_KEY, loc); } catch (e) {}
+      // Choosing a language that has a live dedicated domain navigates THERE
+      // (path + query preserved); other languages reload in place as before.
+      // Choosing a domain-less language while ON a language domain returns to
+      // nancyflow.com (which serves every language client-side).
+      var target = LANG_DOMAINS_LIVE && LANG_DOMAINS[loc] ? LANG_DOMAINS[loc] : null;
+      var here = localeFromHost();
+      if (target && window.location.hostname.toLowerCase().replace(/^www\./, "") !== target) {
+        window.location.assign("https://" + target + window.location.pathname + stripLangParam(window.location.search) + window.location.hash);
+        return;
+      }
+      if (!target && here) {
+        window.location.assign("https://nancyflow.com" + window.location.pathname + withLangParam(stripLangParam(window.location.search), loc) + window.location.hash);
+        return;
+      }
       window.location.reload();
     },
     supported: SUPPORTED.slice()
   };
   window.i18n = api;
+
+  /** Drop any lang=… pair from a search string (keeps every other param). */
+  function stripLangParam(search) {
+    if (!search) return "";
+    var kept = search.replace(/^\?/, "").split("&").filter(function (pair) {
+      return pair && pair.split("=")[0] !== "lang";
+    });
+    return kept.length ? "?" + kept.join("&") : "";
+  }
+
+  /** Append lang=<loc> to a search string. */
+  function withLangParam(search, loc) {
+    return (search ? search + "&" : "?") + "lang=" + loc;
+  }
+
+  // --- Language-domain routing (inert while LANG_DOMAINS_LIVE is false) ---
+  // On nancyflow.com, a resolved language that has its own live domain sends
+  // the visitor there — so "choosing a language" (via ?lang=, a stored choice,
+  // or browser detection) lands on the localized domain. The redirect keeps
+  // path + query (?lang stripped — the domain now carries the language) and
+  // never fires ON a language domain itself, so it cannot loop.
+  if (LANG_DOMAINS_LIVE && !localeFromHost() && LANG_DOMAINS[LOCALE]) {
+    window.location.replace(
+      "https://" + LANG_DOMAINS[LOCALE] + window.location.pathname +
+      stripLangParam(window.location.search) + window.location.hash
+    );
+  }
 
   // --- No-FOUC: hide the body for non-English visitors until we swap text. ---
   var needsTranslation = LOCALE !== "en" && SUPPORTED.indexOf(LOCALE) !== -1;
