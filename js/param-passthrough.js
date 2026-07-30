@@ -1,20 +1,77 @@
 /**
  * param-passthrough.js
  * Appends fbclid + utm_* params from the current page URL — plus a forced
- * `nf_geo=stay` — to every outbound link pointing at get.nancyflow.com,
- * preserving existing query params and hash.
+ * `nf_geo=stay` — to every outbound link pointing at ANY get.nancyflow.*
+ * store host (.com and the market ccTLDs incl. the language domains
+ * .de/.nl/.fr/.it/.se/.dk), preserving existing query params and hash.
  *
- * `nf_geo=stay` is the storefront's geo opt-out: it keeps bridge/ad traffic ON
- * get.nancyflow.com and stops the cross-domain hop to a country-code store
- * (.co.uk / .ca / .co.nz). The .com store still applies its own local-currency
- * path prefixes (/gb, /se, /dk …), so buyers keep their currency/language
- * without leaving the .com domain. See ../GEO-DOMAIN-ROUTING.md.
+ * `nf_geo=stay` is the storefront's geo opt-out: it pins the visitor to the
+ * store domain the link targets and stops the cross-domain geo hop. Links to
+ * .com keep the .com path-prefix behavior; links to a language store domain
+ * (e.g. a German advertorial CTA → get.nancyflow.de) keep the visitor on the
+ * pinned German/EUR store even when their geo says otherwise (an Austrian
+ * clicking a German ad stays on the German store). See ../GEO-DOMAIN-ROUTING.md.
  *
  * Also patches inline window.location assignments on buttons (quiz page) via
  * a click-capture listener so late-added or dynamically-set hrefs are covered.
  */
 (function () {
-  var STORE_HOST = 'get.nancyflow.com';
+  // Every nancyflow STORE host: .com + market ccTLDs (English-currency AND
+  // language domains). Keep in sync with GEO_MARKETS in the storefront's
+  // src/i18n/routing.ts (single source of truth).
+  var STORE_HOST_RE = /^https?:\/\/get\.nancyflow\.(com|co\.uk|ca|co\.nz|de|nl|fr|it|se|dk)(\/|\?|#|$)/;
+
+  /**
+   * Bridge domain → the store host a visitor on it must land on.
+   *
+   * The market bridges share their pages with .com, and the shared ones
+   * (index, quiz, editorial, manifesto, testimonial) hardcode
+   * get.nancyflow.com — so without this a visitor who arrived on
+   * nancyflow.se would be handed to the .com/USD store the moment they
+   * clicked anything outside a Swedish advertorial. The DOMAIN is the
+   * market signal: land on .se, buy on get.nancyflow.se.
+   *
+   * nancyflow.com is absent on purpose — it is the default and keeps its
+   * existing geo + path-prefix behavior.
+   */
+  var BRIDGE_TO_STORE = {
+    'nancyflow.de': 'get.nancyflow.de',
+    'nancyflow.nl': 'get.nancyflow.nl',
+    'nancyflow.fr': 'get.nancyflow.fr',
+    'nancyflow.se': 'get.nancyflow.se',
+    // Listed ahead of these bridges going live; harmless until then.
+    'nancyflow.co.uk': 'get.nancyflow.co.uk',
+    'nancyflow.ca': 'get.nancyflow.ca',
+    'nancyflow.co.nz': 'get.nancyflow.co.nz'
+  };
+
+  /**
+   * A `/<locale>/<country>/` prefix on a .com link (e.g. /it/it/products/lem
+   * on the Italian advertorial, /da/dk/... on the Danish one) is an EXPLICIT
+   * market choice — those markets have no domain of their own and must stay
+   * on .com. Never re-point them at the current bridge's store.
+   */
+  var MARKET_PATH_RE = /^\/[a-z]{2}(?:-[a-z]+)?\/[a-z]{2}(?:[\/?#]|$)/i;
+
+  /** The store host pinned by the CURRENT bridge domain, or '' on .com/previews. */
+  function pinnedStoreHost() {
+    var host = String(window.location.hostname || '').toLowerCase().replace(/^www\./, '');
+    return BRIDGE_TO_STORE[host] || '';
+  }
+
+  /**
+   * Re-point a DEFAULT-store (.com) link at the pinned store host. Links that
+   * already name a market ccTLD, and .com links carrying a market path prefix,
+   * are left untouched — both already express a market.
+   */
+  function pinStoreHost(href, pin) {
+    if (!pin) return href;
+    var m = href.match(/^(https?:\/\/)get\.nancyflow\.com(?=[\/?#]|$)/);
+    if (!m) return href;
+    var rest = href.slice(m[0].length);
+    if (MARKET_PATH_RE.test(rest)) return href;
+    return m[1] + pin + rest;
+  }
 
   /** Extract fbclid + utm_* params from the given search string. */
   function collectParams(search) {
@@ -38,13 +95,15 @@
    * Leaves the host/path/hash untouched; preserves any pre-existing query
    * params on the target URL; never duplicates keys.
    */
-  function augmentUrl(href, params) {
+  function augmentUrl(href, params, pin) {
     if (!href) return href;
-    // Only touch absolute URLs aimed at the store
-    if (href.indexOf('https://' + STORE_HOST) !== 0 &&
-        href.indexOf('http://' + STORE_HOST) !== 0) {
+    // Only touch absolute URLs aimed at a nancyflow store host
+    if (!STORE_HOST_RE.test(href)) {
       return href;
     }
+    // Market pinning first, so nf_geo=stay is appended to the FINAL host and
+    // the visitor is held on the store their bridge domain implies.
+    href = pinStoreHost(href, pin);
     var keys = Object.keys(params);
     if (!keys.length) return href;
 
@@ -85,6 +144,8 @@
 
   function run() {
     var params = collectParams(window.location.search);
+    // Which store this bridge domain hands off to (see BRIDGE_TO_STORE).
+    var pin = pinnedStoreHost();
 
     // Force nf_geo=stay onto every store link so bridge/ad traffic is never
     // bounced off get.nancyflow.com onto a country-code domain (.co.uk/.ca/
@@ -97,7 +158,7 @@
       var anchors = (root || document).querySelectorAll('a[href]');
       for (var i = 0; i < anchors.length; i++) {
         var a = anchors[i];
-        var patched = augmentUrl(a.getAttribute('href'), params);
+        var patched = augmentUrl(a.getAttribute('href'), params, pin);
         if (patched !== a.getAttribute('href')) {
           a.setAttribute('href', patched);
         }
@@ -128,7 +189,7 @@
             // Match patterns: window.location='URL' or window.location="URL"
             var m = oc.match(/window\.location\s*=\s*['"]([^'"]+)['"]/);
             if (m) {
-              var url = augmentUrl(m[1], params);
+              var url = augmentUrl(m[1], params, pin);
               if (url !== m[1]) {
                 e.preventDefault();
                 // Null out the inline onclick so it cannot overwrite our
