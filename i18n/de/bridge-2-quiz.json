@@ -1,16 +1,16 @@
 {
-  "meta.title": "Bridge 2 — Quiz",
-  "hero.eyebrow": "Lust-Profil",
+  "meta.title": "Nancy — Lustprofil",
+  "hero.eyebrow": "Lustprofil",
   "hero.title": "Worauf hast du heute Abend <em>Lust</em>?",
-  "hero.sub": "Tipp auf das, was sich am ehesten richtig anfühlt. Den passenden Buzz finden wir für dich.",
-  "opt.slowburn.title": "Langsames Glühen",
-  "opt.slowburn.desc": "Sanft, genüsslich, lass dir alle Zeit der Welt.",
+  "hero.sub": "Tipp auf das, was gerade am besten passt. Wir finden das Richtige für dich.",
+  "opt.slowburn.title": "Langsam &amp; intensiv",
+  "opt.slowburn.desc": "Sanft, genüsslich, ganz ohne Eile.",
   "opt.quickspark.title": "Schneller Funke",
-  "opt.quickspark.desc": "15-Minuten-Reset, schnell am Ziel.",
+  "opt.quickspark.desc": "15-Minuten-Auszeit, schnell am Ziel.",
   "opt.zesty.title": "Frech &amp; verspielt",
-  "opt.zesty.desc": "Neugierig, mit Lust am Ausprobieren.",
-  "opt.allin.title": "Volles Programm",
-  "opt.allin.desc": "Ganzer Körper, nichts zurückhalten.",
+  "opt.zesty.desc": "Neugierig, mit Lust auf Neues.",
+  "opt.allin.title": "Volle Power",
+  "opt.allin.desc": "Ganzer Körper, kein Halten mehr.",
   "cta.match": "Zeig mir mein Match →",
-  "footer.note": "Kostenloser Versand · Diskrete Verpackung · 30-Tage-Garantie"
+  "footer.note": "Kostenloser Versand · Diskrete Verpackung · 30-Tage-Genuss-Garantie"
 }
