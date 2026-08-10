@@ -55,8 +55,6 @@
    * Language BRIDGE domains — one dedicated domain per top language, mirroring
    * the storefront's language markets (GEO_MARKETS in the storefront's
    * src/i18n/routing.ts — keep in sync). When LIVE:
-   *   - visiting nancyflow.com with a language that has a domain redirects
-   *     there (path + query preserved, ?lang stripped);
    *   - a language domain PINS its language (no browser detection);
    *   - window.i18n.setLocale('de') navigates to the domain instead of
    *     reloading in place.
@@ -70,6 +68,7 @@
    */
   var LANG_DOMAINS_LIVE = false;
   var LANG_DOMAINS = {
+    da: "nancyflow.dk",
     de: "nancyflow.de",
     nl: "nancyflow.nl",
     fr: "nancyflow.fr",
@@ -210,18 +209,9 @@
     return (search ? search + "&" : "?") + "lang=" + loc;
   }
 
-  // --- Language-domain routing (inert while LANG_DOMAINS_LIVE is false) ---
-  // On nancyflow.com, a resolved language that has its own live domain sends
-  // the visitor there — so "choosing a language" (via ?lang=, a stored choice,
-  // or browser detection) lands on the localized domain. The redirect keeps
-  // path + query (?lang stripped — the domain now carries the language) and
-  // never fires ON a language domain itself, so it cannot loop.
-  if (LANG_DOMAINS_LIVE && !localeFromHost() && LANG_DOMAINS[LOCALE]) {
-    window.location.replace(
-      "https://" + LANG_DOMAINS[LOCALE] + window.location.pathname +
-      stripLangParam(window.location.search) + window.location.hash
-    );
-  }
+  // Never geo/language-redirect a visitor who landed on nancyflow.com. Their
+  // locale is rendered in place; a domain hop only happens after they actively
+  // choose a language through setLocale above.
 
   // --- No-FOUC: hide the body for non-English visitors until we swap text. ---
   var needsTranslation = LOCALE !== "en" && SUPPORTED.indexOf(LOCALE) !== -1;

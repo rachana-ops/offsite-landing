@@ -1,16 +1,13 @@
 /**
  * param-passthrough.js
- * Appends fbclid + utm_* params from the current page URL — plus a forced
- * `nf_geo=stay` — to every outbound link pointing at ANY get.nancyflow.*
+ * Appends fbclid + utm_* params from the current page URL to every outbound
+ * link pointing at ANY get.nancyflow.*
  * store host (.com and the market ccTLDs incl. the language domains
  * .de/.nl/.fr/.it/.se/.dk), preserving existing query params and hash.
  *
- * `nf_geo=stay` is the storefront's geo opt-out: it pins the visitor to the
- * store domain the link targets and stops the cross-domain geo hop. Links to
- * .com keep the .com path-prefix behavior; links to a language store domain
- * (e.g. a German advertorial CTA → get.nancyflow.de) keep the visitor on the
- * pinned German/EUR store even when their geo says otherwise (an Austrian
- * clicking a German ad stays on the German store). See ../GEO-DOMAIN-ROUTING.md.
+ * Links to .com keep the .com path-prefix behavior; links to a language store
+ * domain keep that explicit market choice. The storefront never performs an
+ * automatic cross-domain geo redirect.
  *
  * Also patches inline window.location assignments on buttons (quiz page) via
  * a click-capture listener so late-added or dynamically-set hrefs are covered.
@@ -39,19 +36,12 @@
     'nancyflow.nl': 'get.nancyflow.nl',
     'nancyflow.fr': 'get.nancyflow.fr',
     'nancyflow.se': 'get.nancyflow.se',
+    'nancyflow.dk': 'get.nancyflow.dk',
     // Listed ahead of these bridges going live; harmless until then.
     'nancyflow.co.uk': 'get.nancyflow.co.uk',
     'nancyflow.ca': 'get.nancyflow.ca',
     'nancyflow.co.nz': 'get.nancyflow.co.nz'
   };
-
-  /**
-   * A `/<locale>/<country>/` prefix on a .com link (e.g. /it/it/products/lem
-   * on the Italian advertorial, /da/dk/... on the Danish one) is an EXPLICIT
-   * market choice — those markets have no domain of their own and must stay
-   * on .com. Never re-point them at the current bridge's store.
-   */
-  var MARKET_PATH_RE = /^\/[a-z]{2}(?:-[a-z]+)?\/[a-z]{2}(?:[\/?#]|$)/i;
 
   /** The store host pinned by the CURRENT bridge domain, or '' on .com/previews. */
   function pinnedStoreHost() {
@@ -69,7 +59,6 @@
     var m = href.match(/^(https?:\/\/)get\.nancyflow\.com(?=[\/?#]|$)/);
     if (!m) return href;
     var rest = href.slice(m[0].length);
-    if (MARKET_PATH_RE.test(rest)) return href;
     return m[1] + pin + rest;
   }
 
@@ -101,8 +90,7 @@
     if (!STORE_HOST_RE.test(href)) {
       return href;
     }
-    // Market pinning first, so nf_geo=stay is appended to the FINAL host and
-    // the visitor is held on the store their bridge domain implies.
+    // Market pinning first so tracking params are appended to the final host.
     href = pinStoreHost(href, pin);
     var keys = Object.keys(params);
     if (!keys.length) return href;
@@ -116,8 +104,8 @@
     }
 
     // Parse existing query string. We track ALL existing keys (not just the
-    // tracking ones) so a param we're adding — e.g. nf_geo — is never appended
-    // twice if the target URL already carries it.
+    // tracking ones) so a param we're adding is never appended twice if the
+    // target URL already carries it.
     var qIdx = href.indexOf('?');
     var base = qIdx === -1 ? href : href.slice(0, qIdx);
     var existingSearch = qIdx === -1 ? '' : href.slice(qIdx + 1);
@@ -146,12 +134,6 @@
     var params = collectParams(window.location.search);
     // Which store this bridge domain hands off to (see BRIDGE_TO_STORE).
     var pin = pinnedStoreHost();
-
-    // Force nf_geo=stay onto every store link so bridge/ad traffic is never
-    // bounced off get.nancyflow.com onto a country-code domain (.co.uk/.ca/
-    // .co.nz). This is added even when there are NO fbclid/utm params to
-    // forward, so we can't early-return on an empty tracking set anymore.
-    params.nf_geo = 'stay';
 
     // --- Patch <a> elements ---
     function patchAnchors(root) {
