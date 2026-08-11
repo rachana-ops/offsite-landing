@@ -1,0 +1,8 @@
+{
+  "name": "nancy-bridge",
+  "private": true,
+  "scripts": {
+    "check:no-legacy-navigation": "node scripts/check-no-legacy-navigation.mjs",
+    "vercel-build": "npm run check:no-legacy-navigation"
+  }
+}

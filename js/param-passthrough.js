@@ -1,7 +1,8 @@
 /**
  * param-passthrough.js
- * Appends fbclid + utm_* params from the current page URL to every outbound
- * link pointing at ANY get.nancyflow.*
+ * Migrates any legacy *.hellonancy.com navigation to Nancyflow, then appends
+ * fbclid + utm_* params from the current page URL to every outbound link
+ * pointing at ANY get.nancyflow.*
  * store host (.com and the market ccTLDs incl. the language domains
  * .de/.nl/.fr/.it/.se/.dk), preserving existing query params and hash.
  *
@@ -17,6 +18,7 @@
   // language domains). Keep in sync with GEO_MARKETS in the storefront's
   // src/i18n/routing.ts (single source of truth).
   var STORE_HOST_RE = /^https?:\/\/get\.nancyflow\.(com|co\.uk|ca|co\.nz|de|nl|fr|it|se|dk)(\/|\?|#|$)/;
+  var LEGACY_STORE_RE = /^https?:\/\/(?:[a-z0-9-]+\.)*hellonancy\.com(?=\/|\?|#|$)/i;
 
   /**
    * Bridge domain → the store host a visitor on it must land on.
@@ -86,6 +88,10 @@
    */
   function augmentUrl(href, params, pin) {
     if (!href) return href;
+    // A shared last line of defence for all bridge/editorial pages: even if a
+    // future static template accidentally carries an old-store URL, visitors
+    // are moved to Nancyflow before market pinning and attribution run.
+    href = href.replace(LEGACY_STORE_RE, 'https://get.nancyflow.com');
     // Only touch absolute URLs aimed at a nancyflow store host
     if (!STORE_HOST_RE.test(href)) {
       return href;
