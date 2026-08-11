@@ -1,7 +1,7 @@
 /**
  * param-passthrough.js
  * Migrates any legacy *.hellonancy.com navigation to Nancyflow, then appends
- * fbclid + utm_* params from the current page URL to every outbound link
+ * attribution params from the current page URL to every outbound link
  * pointing at ANY get.nancyflow.*
  * store host (.com and the market ccTLDs incl. the language domains
  * .de/.nl/.fr/.it/.se/.dk), preserving existing query params and hash.
@@ -19,6 +19,33 @@
   // src/i18n/routing.ts (single source of truth).
   var STORE_HOST_RE = /^https?:\/\/get\.nancyflow\.(com|co\.uk|ca|co\.nz|de|nl|fr|it|se|dk)(\/|\?|#|$)/;
   var LEGACY_STORE_RE = /^https?:\/\/(?:[a-z0-9-]+\.)*hellonancy\.com(?=\/|\?|#|$)/i;
+  var FBC_COOKIE = '_fbc';
+  var FBP_COOKIE = '_fbp';
+  var FBC_MAX_AGE = 60 * 60 * 24 * 90;
+  var FBP_MAX_AGE = 60 * 60 * 24 * 365 * 2;
+  var FBCLID_RE = /^[A-Za-z0-9._-]+$/;
+  var FBC_RE = /^fb\.\d+\.\d+\.[A-Za-z0-9._-]+$/;
+  var FBP_RE = /^fb\.\d+\.\d+\.[A-Za-z0-9._-]+$/;
+
+  // Explicit allowlist: carry attribution, never arbitrary visitor-provided
+  // query parameters. utm_* is handled separately below.
+  var TRACKING_PARAMS = {
+    fbclid: true,
+    fbc: true,
+    fbp: true,
+    _fbc: true,
+    _fbp: true,
+    gclid: true,
+    dclid: true,
+    gbraid: true,
+    wbraid: true,
+    ttclid: true,
+    msclkid: true,
+    twclid: true,
+    li_fat_id: true,
+    sccid: true,
+    rdt_cid: true
+  };
 
   /**
    * Bridge domain → the store host a visitor on it must land on.
@@ -64,20 +91,100 @@
     return m[1] + pin + rest;
   }
 
-  /** Extract fbclid + utm_* params from the given search string. */
-  function collectParams(search) {
+  function readCookie(name) {
+    var prefix = name + '=';
+    var cookies = String(document.cookie || '').split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var item = cookies[i].replace(/^\s+/, '');
+      if (item.slice(0, prefix.length) === prefix) {
+        return item.slice(prefix.length);
+      }
+    }
+    return '';
+  }
+
+  /** Return the known Nancyflow apex domain shared by bridge + storefront. */
+  function cookieDomain() {
+    var host = String(window.location.hostname || '').toLowerCase().replace(/^www\./, '');
+    if (host === 'nancyflow.com' || BRIDGE_TO_STORE[host]) return host;
+    return '';
+  }
+
+  function writeCookie(name, value, maxAge) {
+    var cookie = name + '=' + value + '; Path=/; Max-Age=' + maxAge + '; SameSite=Lax';
+    var domain = cookieDomain();
+    if (domain) cookie += '; Domain=.' + domain;
+    if (window.location.protocol === 'https:') cookie += '; Secure';
+    document.cookie = cookie;
+  }
+
+  function fbcTail(value) {
+    if (!FBC_RE.test(value || '')) return '';
+    return value.split('.').slice(3).join('.');
+  }
+
+  function randomFbpSuffix() {
+    try {
+      var values = new Uint32Array(1);
+      window.crypto.getRandomValues(values);
+      return String(1000000000 + (values[0] % 9000000000));
+    } catch (e) {
+      return String(1000000000 + Math.floor(Math.random() * 9000000000));
+    }
+  }
+
+  /**
+   * Ensure first-party Meta cookies exist on the bridge apex. Domain=.nancyflow.*
+   * makes them available to get.nancyflow.*; the URL carriers below are a
+   * second line of defence for ccTLD hops and browsers/pixels that behave
+   * differently. Existing valid identifiers are preserved.
+   */
+  function ensureMetaCookies(search) {
+    var query = new URLSearchParams(search || '');
+    var now = Date.now();
+
+    var existingFbc = readCookie(FBC_COOKIE);
+    var fbclid = query.get('fbclid');
+    var carriedFbc = query.get(FBC_COOKIE) || query.get('fbc');
+    var fbc = FBC_RE.test(existingFbc) ? existingFbc : '';
+    if (fbclid && FBCLID_RE.test(fbclid)) {
+      if (fbcTail(fbc) !== fbclid) fbc = 'fb.1.' + now + '.' + fbclid;
+    } else if (!fbc && FBC_RE.test(carriedFbc || '')) {
+      fbc = carriedFbc;
+    }
+    if (fbc) writeCookie(FBC_COOKIE, fbc, FBC_MAX_AGE);
+
+    var existingFbp = readCookie(FBP_COOKIE);
+    var carriedFbp = query.get(FBP_COOKIE) || query.get('fbp');
+    var fbp = FBP_RE.test(existingFbp)
+      ? existingFbp
+      : (FBP_RE.test(carriedFbp || '')
+        ? carriedFbp
+        : 'fb.1.' + now + '.' + randomFbpSuffix());
+    writeCookie(FBP_COOKIE, fbp, FBP_MAX_AGE);
+
+    return { _fbc: fbc, _fbp: fbp };
+  }
+
+  /** Extract supported attribution params and Meta cookie carriers. */
+  function collectParams(search, metaCookies) {
     var out = {};
-    if (!search) return out;
-    var pairs = search.replace(/^\?/, '').split('&');
+    var pairs = String(search || '').replace(/^\?/, '').split('&');
     for (var i = 0; i < pairs.length; i++) {
       if (!pairs[i]) continue;
       var idx = pairs[i].indexOf('=');
       var key = idx === -1 ? pairs[i] : pairs[i].slice(0, idx);
       var val = idx === -1 ? '' : pairs[i].slice(idx + 1);
-      if (key === 'fbclid' || key.slice(0, 4) === 'utm_') {
+      var normalizedKey = key.toLowerCase();
+      if (TRACKING_PARAMS[normalizedKey] || normalizedKey.slice(0, 4) === 'utm_') {
         out[key] = val;
       }
     }
+
+    // The storefront accepts these canonical carrier names, persists them as
+    // first-party cookies, then removes them from the visible address bar.
+    if (metaCookies && metaCookies._fbc && !out._fbc) out._fbc = metaCookies._fbc;
+    if (metaCookies && metaCookies._fbp && !out._fbp) out._fbp = metaCookies._fbp;
     return out;
   }
 
@@ -137,7 +244,8 @@
   }
 
   function run() {
-    var params = collectParams(window.location.search);
+    var metaCookies = ensureMetaCookies(window.location.search);
+    var params = collectParams(window.location.search, metaCookies);
     // Which store this bridge domain hands off to (see BRIDGE_TO_STORE).
     var pin = pinnedStoreHost();
 
@@ -155,8 +263,9 @@
 
     patchAnchors(document);
 
-    // --- Click-capture fallback for buttons with inline window.location ---
-    // Handles the quiz page where <button onclick="window.location='...'"> is used.
+    // --- Click-capture fallback for dynamic anchors + inline buttons ---
+    // Re-read cookies at click time because Meta's pixel loads asynchronously.
+    // This also covers anchors injected after DOMContentLoaded.
     //
     // Why stopImmediatePropagation + setAttribute('onclick', ''):
     //   stopPropagation() in the capture phase does NOT prevent the button's own
@@ -169,15 +278,25 @@
     //   from also firing.
     document.addEventListener('click', function (e) {
       var el = e.target;
-      // Walk up to a button in case the click landed on a child element
+      var currentParams = collectParams(window.location.search, {
+        _fbc: readCookie(FBC_COOKIE),
+        _fbp: readCookie(FBP_COOKIE)
+      });
+      // Walk up in case the click landed on a child element.
       while (el && el !== document.body) {
+        if (el.tagName === 'A' && el.getAttribute('href')) {
+          var currentHref = el.getAttribute('href');
+          var currentPatched = augmentUrl(currentHref, currentParams, pin);
+          if (currentPatched !== currentHref) el.setAttribute('href', currentPatched);
+          return;
+        }
         if (el.tagName === 'BUTTON') {
           var oc = el.getAttribute('onclick');
           if (oc) {
             // Match patterns: window.location='URL' or window.location="URL"
             var m = oc.match(/window\.location\s*=\s*['"]([^'"]+)['"]/);
             if (m) {
-              var url = augmentUrl(m[1], params, pin);
+              var url = augmentUrl(m[1], currentParams, pin);
               if (url !== m[1]) {
                 e.preventDefault();
                 // Null out the inline onclick so it cannot overwrite our

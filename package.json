@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "check:no-legacy-navigation": "node scripts/check-no-legacy-navigation.mjs",
-    "vercel-build": "npm run check:no-legacy-navigation"
+    "test": "node --test tests/*.test.mjs",
+    "vercel-build": "npm test && npm run check:no-legacy-navigation"
   }
 }
