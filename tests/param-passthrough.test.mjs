@@ -4,8 +4,17 @@ import test from "node:test"
 import vm from "node:vm"
 
 const source = readFileSync(new URL("../js/param-passthrough.js", import.meta.url), "utf8")
+const supportedLocales = [
+  "en", "it", "de", "zh-hans", "zh-hant", "nl", "ko", "pt", "es",
+  "sv", "ja", "fr", "da", "fi", "ro", "pl", "cs", "hu", "el", "hr",
+]
 
-function runBridge({ search, href = "https://get.nancyflow.com/products/lem#details" }) {
+function runBridge({
+  search = "",
+  href = "https://get.nancyflow.com/products/lem#details",
+  hostname = "nancyflow.com",
+  locale = "en",
+} = {}) {
   const cookies = new Map()
   const cookieWrites = []
   const listeners = new Map()
@@ -24,6 +33,7 @@ function runBridge({ search, href = "https://get.nancyflow.com/products/lem#deta
   anchor.parentElement = body
   const document = {
     body,
+    documentElement: { lang: locale },
     readyState: "complete",
     querySelectorAll(selector) {
       return selector === "a[href]" ? [anchor] : []
@@ -47,7 +57,7 @@ function runBridge({ search, href = "https://get.nancyflow.com/products/lem#deta
   const window = {
     crypto: { getRandomValues(values) { values[0] = 1234567890; return values } },
     location: {
-      hostname: "nancyflow.com",
+      hostname,
       protocol: "https:",
       search,
     },
@@ -60,7 +70,7 @@ function runBridge({ search, href = "https://get.nancyflow.com/products/lem#deta
     document,
     window,
   })
-  return { anchor, cookies, cookieWrites, listeners, body }
+  return { anchor, cookies, cookieWrites, listeners, body, window }
 }
 
 test("forwards Meta and major ad attribution parameters without arbitrary query data", () => {
@@ -109,4 +119,135 @@ test("patches anchors added after initial page load using fresh cookie carriers"
   assert.equal(url.searchParams.get("fbclid"), "late-click")
   assert.equal(url.searchParams.get("_fbc"), result.cookies.get("_fbc"))
   assert.equal(url.searchParams.get("_fbp"), result.cookies.get("_fbp"))
+})
+
+test("quiz buttons navigate to the guarded localized Lem handoff", () => {
+  const result = runBridge({
+    hostname: "nancyflow.ca",
+    locale: "fr",
+    search: "?utm_source=quiz",
+  })
+  const button = {
+    tagName: "BUTTON",
+    parentElement: result.body,
+    attributes: {
+      onclick: "window.location='https://get.nancyflow.com/products/lem'",
+    },
+    getAttribute(name) { return this.attributes[name] ?? null },
+    setAttribute(name, value) { this.attributes[name] = value },
+  }
+  let prevented = false
+  let stopped = false
+
+  result.listeners.get("click")({
+    target: button,
+    preventDefault() { prevented = true },
+    stopImmediatePropagation() { stopped = true },
+  })
+
+  const url = new URL(result.window.location)
+  assert.equal(url.origin + url.pathname, "https://get.nancyflow.ca/fr/products/lem")
+  assert.equal(url.searchParams.get("utm_source"), "quiz")
+  assert.equal(button.attributes.onclick, "")
+  assert.equal(prevented, true)
+  assert.equal(stopped, true)
+})
+
+test("every live bridge market reaches the matching live Lem storefront", () => {
+  const cases = [
+    ["nancyflow.com", "get.nancyflow.com"],
+    ["nancyflow.co.uk", "get.nancyflow.co.uk"],
+    ["nancyflow.ca", "get.nancyflow.ca"],
+    ["nancyflow.co.nz", "get.nancyflow.co.nz"],
+    ["nancyflow.de", "get.nancyflow.de"],
+    ["nancyflow.nl", "get.nancyflow.nl"],
+    ["nancyflow.fr", "get.nancyflow.fr"],
+    ["nancyflow.se", "get.nancyflow.se"],
+  ]
+
+  for (const [hostname, storeHost] of cases) {
+    for (const locale of supportedLocales) {
+      const result = runBridge({ hostname, locale })
+      const url = new URL(result.anchor.attributes.href)
+      assert.equal(url.host, storeHost, `${hostname} / ${locale}`)
+      assert.equal(url.pathname, `/${locale}/products/lem`, `${hostname} / ${locale}`)
+    }
+  }
+})
+
+test("the bridge language is explicit on the Lem handoff for every catalog", () => {
+  for (const locale of supportedLocales) {
+    const result = runBridge({ locale })
+    const url = new URL(result.anchor.attributes.href)
+    assert.equal(url.pathname, `/${locale}/products/lem`, locale)
+  }
+})
+
+test("unavailable storefront hosts fail over to the geo-aware .com Lem route", () => {
+  for (const [href, locale, expectedPath] of [
+    ["https://get.nancyflow.dk/products/lem", "en", "/en/products/lem"],
+    ["https://get.nancyflow.it/products/lem", "it", "/it/products/lem"],
+  ]) {
+    const result = runBridge({ href, locale })
+    const url = new URL(result.anchor.attributes.href)
+    assert.equal(url.host, "get.nancyflow.com")
+    assert.equal(url.pathname, expectedPath)
+  }
+
+  const danishBridge = runBridge({
+    hostname: "nancyflow.dk",
+    locale: "da",
+  })
+  const danishUrl = new URL(danishBridge.anchor.attributes.href)
+  assert.equal(danishUrl.host, "get.nancyflow.com")
+  assert.equal(danishUrl.pathname, "/da/dk/products/lem")
+})
+
+test("the serving bridge market and rendered language override stale authored paths", () => {
+  const result = runBridge({
+    hostname: "nancyflow.de",
+    locale: "de",
+    href: "https://get.nancyflow.com/da/dk/products/lem?offer=bridge#buy",
+  })
+  const url = new URL(result.anchor.attributes.href)
+
+  assert.equal(url.host, "get.nancyflow.de")
+  assert.equal(url.pathname, "/de/products/lem")
+  assert.equal(url.searchParams.get("offer"), "bridge")
+  assert.equal(url.hash, "#buy")
+})
+
+test("content language never masquerades as shopper geography", () => {
+  const cases = [
+    {
+      hostname: "nancyflow.com",
+      locale: "fr",
+      href: "https://get.nancyflow.fr/products/lem",
+      expected: "https://get.nancyflow.com/fr/products/lem",
+    },
+    {
+      hostname: "nancyflow.ca",
+      locale: "fr",
+      href: "https://get.nancyflow.fr/products/lem",
+      expected: "https://get.nancyflow.ca/fr/products/lem",
+    },
+    {
+      hostname: "nancyflow.de",
+      locale: "da",
+      href: "https://get.nancyflow.com/da/dk/products/lem",
+      expected: "https://get.nancyflow.de/da/products/lem",
+    },
+    {
+      hostname: "offsite-landing-git-preview.vercel.app",
+      locale: "nl",
+      href: "https://get.nancyflow.nl/products/lem",
+      expected: "https://get.nancyflow.com/nl/products/lem",
+    },
+  ]
+
+  for (const { hostname, locale, href, expected } of cases) {
+    const result = runBridge({ hostname, locale, href })
+    const url = new URL(result.anchor.attributes.href)
+    assert.equal(url.origin + url.pathname, expected)
+  }
 })

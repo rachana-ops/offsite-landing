@@ -92,10 +92,16 @@
   function langFromQuery() {
     var m = /[?&]lang=([^&#]+)/.exec(window.location.search);
     if (!m) return null;
-    var raw = decodeURIComponent(m[1]).toLowerCase();
-    if (SUPPORTED.indexOf(raw) !== -1) return raw;
-    var base = raw.split("-")[0];
-    return LANG_TO_LOCALE[base] || null;
+    try {
+      var raw = decodeURIComponent(m[1]).toLowerCase();
+      if (SUPPORTED.indexOf(raw) !== -1) return raw;
+      var base = raw.split("-")[0];
+      return LANG_TO_LOCALE[base] || null;
+    } catch (e) {
+      // A malformed campaign URL must never abort the bridge runtime (which
+      // would also prevent the guarded storefront handoff from initializing).
+      return null;
+    }
   }
 
   /** Walk navigator.languages in priority order; first mapped locale wins. */
