@@ -111,7 +111,7 @@ test("the pricing endpoint returns live Medusa amounts and calculated savings", 
     savingsPercent: 54,
     source: "medusa",
   })
-  assert.match(response.headers["cache-control"], /s-maxage=300/)
+  assert.equal(response.headers["cache-control"], "no-store")
   assert.equal(response.headers.vary, "X-Vercel-IP-Country")
 })
 

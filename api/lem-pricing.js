@@ -116,10 +116,8 @@ async function handler(request, response) {
 
   try {
     const pricing = await loadLemPricing(requestCountry(request), publishableKey)
-    response.setHeader(
-      "Cache-Control",
-      "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
-    )
+    // Price changes made in Medusa must be reflected on the bridge immediately.
+    response.setHeader("Cache-Control", "no-store")
     response.setHeader("Vary", "X-Vercel-IP-Country")
     response.setHeader("X-Content-Type-Options", "nosniff")
     return response.status(200).json(pricing)
