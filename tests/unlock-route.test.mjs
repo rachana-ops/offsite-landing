@@ -53,7 +53,14 @@ test("the /unlock entry is a self-contained production build of the English land
   assert.match(bundle, /flex-col items-center justify-center gap-1 sm:flex-row/)
   assert.match(bundle, /h-auto min-h-14 w-full whitespace-normal/)
   assert.match(bundle, /h-auto min-h-14 w-full max-w-full whitespace-normal/)
+  assert.match(bundle, /h-auto min-h-12 w-full max-w-full whitespace-normal/)
   assert.match(bundle, /sm:w-auto sm:px-12 sm:py-4 sm:text-xl/)
+  assert.match(bundle, /inline-grid shrink-0 items-center gap-x-1 gap-y-0\.5/)
+  assert.match(bundle, /label:"DAYS".*label:"HRS".*label:"MIN".*label:"SEC"/)
+  assert.match(bundle, /Summer Sale ends in/)
+  assert.match(bundle, /"data-unlock-deadline-hour":"2"/)
+  assert.match(bundle, /"data-unlock-countdown-mode":"daily-reset"/)
+  assert.doesNotMatch(bundle, /Ends in |Offer expires in:/)
   assert.match(bundle, /Shop Now —/)
   assert.doesNotMatch(bundle, /rotate-12 translate-x-8 -translate-y-2/)
   for (const layoutHook of [
@@ -61,11 +68,14 @@ test("the /unlock entry is a self-contained production build of the English land
     "sticky-pricing",
     "sticky-compare",
     "sticky-savings",
+    "sticky-sale-timer",
     "offer-savings-badge",
     "offer-timer",
     "offer-price",
     "offer-cta",
+    "qualifier-cta",
     "final-cta",
+    "summer-sale-countdown",
   ]) {
     assert.equal(
       bundle.split(layoutHook).length - 1,
