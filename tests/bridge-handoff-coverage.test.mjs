@@ -67,6 +67,6 @@ test("every Lem bridge handoff uses the guarded live storefront route", () => {
     }
   }
 
-  assert.equal(guardedPages.length, 57, "expected every bridge-to-Lem page")
+  assert.equal(guardedPages.length, 58, "expected every bridge-to-Lem page")
   assert.equal(advertorialPages.length, 47, "expected every advertorial locale")
 })
