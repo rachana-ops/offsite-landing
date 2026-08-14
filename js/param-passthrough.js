@@ -404,8 +404,16 @@
                 return;
               }
             }
+
+            // An authored inline button handler owns navigation when it does
+            // not match the Lem handoff above, so do not continue into a
+            // surrounding link.
+            break;
           }
-          break;
+
+          // React bridge CTAs commonly render a presentational <button>
+          // inside an <a>. With no inline navigation of its own, keep walking
+          // so the parent anchor still receives market + attribution guards.
         }
         el = el.parentElement;
       }
