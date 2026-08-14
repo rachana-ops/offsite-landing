@@ -42,6 +42,22 @@ test("the /unlock entry is a self-contained production build of the English land
   assert.doesNotMatch(bundle, /Page Not Found/)
   assert.doesNotMatch(bundle, /\bdata-loc\b/)
 
+  assert.match(bundle, /\/api\/lem-pricing/)
+  assert.match(bundle, /data-unlock-price/)
+  assert.match(
+    bundle,
+    /USD:\{currencyCode:"USD",current:69,compareAt:159\}/,
+    "the USD fallback must match the current Lem offer",
+  )
+  assert.match(
+    bundle,
+    /EUR:\{currencyCode:"EUR",current:59,compareAt:128\.95\}/,
+    "the EUR fallback must match the current Lem offer",
+  )
+  assert.doesNotMatch(bundle, /\$89|SAVE \$70|\$0\.24\/day|Save \$70 \(44% off\)/)
+  assert.match(bundle, /\$50-150/)
+  assert.match(bundle, /\$30-50\/month/)
+
   const ctaUrl = "https://get.nancyflow.com/en/products/lem"
   assert.equal(bundle.split(ctaUrl).length - 1, 4, "expected all four Lem CTAs")
   assert.doesNotMatch(bundle, /https:\/\/hellonancy\.com\/products\/lem/i)
