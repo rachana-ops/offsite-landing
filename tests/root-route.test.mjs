@@ -35,10 +35,12 @@ test("PostHog initializes once on the live landing page with cross-domain handof
     1,
   )
   assert.match(rootHtml, /api_host:\s*["']https:\/\/us\.i\.posthog\.com["']/)
+  assert.match(rootHtml, /person_profiles:\s*["']identified_only["']/)
   assert.match(rootHtml, /cross_subdomain_cookie:\s*true/)
   assert.match(rootHtml, /get_distinct_id\(\)/)
   assert.match(rootHtml, /get_session_id\(\)/)
   assert.match(rootHtml, /h\.set\(["']distinct_id["'], did\)/)
   assert.match(rootHtml, /h\.set\(["']session_id["'], sid\)/)
   assert.match(rootHtml, /IN_SCOPE\s*=\s*\[[^\]]*["']nancyflow\.com["']/s)
+  assert.match(rootHtml, /targetRoot === scopeRoot\(location\.hostname\)/)
 })

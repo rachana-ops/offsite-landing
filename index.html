@@ -64,7 +64,7 @@
         var config = {
             api_host: 'https://us.i.posthog.com',
             defaults: '2026-05-30',
-            person_profiles: 'always',
+            person_profiles: 'identified_only',
             // manus.space is NOT on the Public Suffix List, so a .manus.space cookie is
             // permitted; this lets same-root subdomains share one cookie when possible.
             cross_subdomain_cookie: true
@@ -92,15 +92,18 @@
         }
 
         // --- Outbound: carry identity to other in-scope domains on click ---
-        function inScope(host) {
-            return IN_SCOPE.some(function (d) { return host === d || host.endsWith('.' + d); });
+        function scopeRoot(host) {
+            return IN_SCOPE.find(function (d) { return host === d || host.endsWith('.' + d); }) || '';
         }
         function decorate(href) {
             try {
                 var url = new URL(href, location.href);
                 if (!/^https?:$/.test(url.protocol)) return null;
-                if (!inScope(url.hostname)) return null;
-                if (url.hostname === location.hostname) return null; // same host: cookie already covers it
+                var targetRoot = scopeRoot(url.hostname);
+                if (!targetRoot) return null;
+                // Subdomains under the same root already share PostHog's first-party cookie.
+                // Avoid exposing redundant identity/session values in the destination URL.
+                if (targetRoot === scopeRoot(location.hostname)) return null;
                 if (!window.posthog || !posthog.get_distinct_id) return null;
                 var did = posthog.get_distinct_id();
                 if (!did) return null;
