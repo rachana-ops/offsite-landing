@@ -37,6 +37,8 @@ test("the /unlock entry is a self-contained production build of the English land
 
   const bundle = readFileSync(localUnlockFile(scriptUrl), "utf8")
   assert.match(bundle, /1M\+ Orgasms Later/)
+  assert.match(bundle, /fixed top-\[65px\] md:top-\[73px\]/)
+  assert.doesNotMatch(bundle, /fixed top-14/)
   assert.doesNotMatch(bundle, /Page Not Found/)
   assert.doesNotMatch(bundle, /\bdata-loc\b/)
 
