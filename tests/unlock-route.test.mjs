@@ -44,14 +44,20 @@ test("the /unlock entry is a self-contained production build of the English land
 
   assert.match(bundle, /\/api\/lem-pricing/)
   assert.match(bundle, /data-unlock-price/)
+  assert.match(bundle, /max-w-\[100vw\] overflow-x-clip/)
+  assert.match(bundle, /box-border flex w-full max-w-full/)
   assert.match(bundle, /grid-cols-\[minmax\(0,1fr\)_auto\]/)
-  assert.match(bundle, /text-\[11px\] leading-none text-white\/75 line-through sm:text-sm/)
+  assert.match(bundle, /whitespace-nowrap text-\[11px\] leading-none text-white\/75 line-through sm:text-sm/)
+  assert.match(bundle, /flex-wrap items-center gap-x-1\.5 gap-y-0\.5/)
   assert.match(bundle, /space-y-5 p-4 sm:space-y-6 sm:p-8/)
   assert.match(bundle, /flex-col items-center justify-center gap-1 sm:flex-row/)
   assert.match(bundle, /h-auto min-h-14 w-full whitespace-normal/)
+  assert.match(bundle, /h-auto min-h-14 w-full max-w-full whitespace-normal/)
+  assert.match(bundle, /sm:w-auto sm:px-12 sm:py-4 sm:text-xl/)
   assert.match(bundle, /Shop Now —/)
   assert.doesNotMatch(bundle, /rotate-12 translate-x-8 -translate-y-2/)
   for (const layoutHook of [
+    "sticky-bar",
     "sticky-pricing",
     "sticky-compare",
     "sticky-savings",
@@ -59,6 +65,7 @@ test("the /unlock entry is a self-contained production build of the English land
     "offer-timer",
     "offer-price",
     "offer-cta",
+    "final-cta",
   ]) {
     assert.equal(
       bundle.split(layoutHook).length - 1,
