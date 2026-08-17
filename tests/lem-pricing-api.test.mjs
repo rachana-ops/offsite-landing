@@ -86,7 +86,7 @@ test("the pricing endpoint returns live Medusa amounts and calculated savings", 
       products: [{
         variants: [{
           calculated_price: {
-            calculated_amount: 59,
+            calculated_amount: 69,
             original_amount: 128.95,
             currency_code: "eur",
           },
@@ -105,10 +105,10 @@ test("the pricing endpoint returns live Medusa amounts and calculated savings", 
   assert.deepEqual(response.body, {
     country: "de",
     currency: "eur",
-    price: 59,
+    price: 69,
     compareAt: 128.95,
-    savings: 69.95,
-    savingsPercent: 54,
+    savings: 59.95,
+    savingsPercent: 46,
     source: "medusa",
   })
   assert.equal(response.headers["cache-control"], "no-store")
