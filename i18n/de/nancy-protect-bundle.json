@@ -1,7 +1,8 @@
 {
   "meta.title": "Nancy — Bestellschutz + diskreter Versand im Bundle",
+  "flow.confirm": "\n  <span class=\"flow-check\">✓</span>\n  <strong>Nancy</strong>\n  <span class=\"flow-sep\">·</span>\n  Bestellnummer #NCY-9X42KB\n  <span class=\"flow-sep\">·</span>\n  Alles bezahlt, meine Liebe\n",
   "flow.step.lem2": "2. Lem",
-  "flow.step.bundle": "Bundle",
+  "flow.step.bundle": "Paket",
   "flow.step.discreet": "Diskret",
   "flow.step.protect": "Schutz",
   "hero.savebanner": "\n      <svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z\"/></svg>\n      Im Bundle sparen — bestes Angebot\n    ",

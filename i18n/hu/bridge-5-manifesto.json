@@ -1,0 +1,22 @@
+{
+  "meta.title": "Nancy — Egy kiáltvány",
+  "ticker.permission": "Megengedheted magadnak",
+  "ticker.shipping": "Ingyenes szállítás",
+  "ticker.packaging": "Diszkrét csomagolás",
+  "ticker.guarantee": "30 napos élvezetgarancia",
+  "ticker.madeforher": "Nőknek készült",
+  "ticker.reviews": "15,000 ötcsillagos értékelés",
+  "ticker.permission2": "Megengedheted magadnak",
+  "ticker.shipping2": "Ingyenes szállítás",
+  "ticker.packaging2": "Diszkrét csomagolás",
+  "ticker.guarantee2": "30 napos élvezetgarancia",
+  "ticker.madeforher2": "Nőknek készült",
+  "ticker.reviews2": "15,000 ötcsillagos értékelés",
+  "topline.label": "Egy kiáltvány · 02",
+  "hero.line1": "<span class=\"strike\">Csendes.</span>",
+  "hero.line2": "Hangos, ha a <span class=\"pink\">gyönyörről</span> van szó.",
+  "hero.line3": "Hangos, ha <span class=\"neon underline\">rólad</span> van szó.",
+  "manifesto.body": "Valamit arra a pillanatra alkottunk, amelyet senki sem tervez be a napjába. Kicsi. Csendes (amíg hangosnak nem akarod). Nem kér bocsánatot semmiért — és végre neked sem kell. Ismerd meg <strong>Lem-et</strong>.",
+  "cta.unlock": "Fedezd fel Lem-et <span class=\"arrow\">→</span>",
+  "micro.rating": "★★★★★ &nbsp;<span>4.9</span> / 5 · 15,000 értékelés"
+}

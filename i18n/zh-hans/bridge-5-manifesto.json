@@ -1,0 +1,22 @@
+{
+  "meta.title": "桥梁5 — 宣言",
+  "ticker.permission": "许可已授予",
+  "ticker.shipping": "免运费",
+  "ticker.packaging": "隐秘包装",
+  "ticker.guarantee": "30天愉悦保证",
+  "ticker.madeforher": "为她而造",
+  "ticker.reviews": "15,000条五星好评",
+  "ticker.permission2": "许可已授予",
+  "ticker.shipping2": "免运费",
+  "ticker.packaging2": "隐秘包装",
+  "ticker.guarantee2": "30天愉悦保证",
+  "ticker.madeforher2": "为她而造",
+  "ticker.reviews2": "15,000条五星评价",
+  "topline.label": "宣言 · 02",
+  "hero.line1": "<span class=\"strike\">安静。</span>",
+  "hero.line2": "关于 <span class=\"pink\">快乐的喧嚣。</span>",
+  "hero.line3": "关于 <span class=\"neon underline\">你的喧嚣。</span>",
+  "manifesto.body": "\n        我们为没人安排的那部分时间做了一件事。它小巧。它安静（直到你不希望它安静为止）。它毫不道歉——最终，你也是如此。认识一下 <strong>Lem</strong>.\n      ",
+  "cta.unlock": "解锁 Lem <span class=\"arrow\">→</span>",
+  "micro.rating": "★★★★★ &nbsp;<span>4.9</span> / 5 · 15,000 条评论"
+}

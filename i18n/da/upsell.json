@@ -54,5 +54,9 @@
   "legal.privacy": "Privatlivspolitik",
   "legal.terms": "Servicevilkår",
   "legal.cancellations": "Annulleringer",
-  "legal.contact": "Kontakt"
+  "legal.contact": "Kontakt",
+  "offer.unitPrice": "$27 pr. stk.",
+  "offer.thumb1Alt": "Produktminiature 1",
+  "offer.thumb2Alt": "Produktminiature 2",
+  "offer.thumb3Alt": "Produktminiature 3"
 }

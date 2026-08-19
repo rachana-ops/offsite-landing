@@ -54,5 +54,9 @@
   "legal.privacy": "Integritetspolicy",
   "legal.terms": "Användarvillkor",
   "legal.cancellations": "Avbeställningar",
-  "legal.contact": "Kontakt"
+  "legal.contact": "Kontakt",
+  "offer.unitPrice": "$27 styck",
+  "offer.thumb1Alt": "Produktminiatyr 1",
+  "offer.thumb2Alt": "Produktminiatyr 2",
+  "offer.thumb3Alt": "Produktminiatyr 3"
 }

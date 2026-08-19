@@ -1,0 +1,22 @@
+{
+  "meta.title": "Bridge 5 — Manifest",
+  "ticker.permission": "Permisiune Acordată",
+  "ticker.shipping": "Transport Gratuit",
+  "ticker.packaging": "Ambalaj Discret",
+  "ticker.guarantee": "Garanție de Plăcere 30 de Zile",
+  "ticker.madeforher": "Creat pentru ea",
+  "ticker.reviews": "15.000 de recenzii cu cinci stele",
+  "ticker.permission2": "Permisiune acordată",
+  "ticker.shipping2": "Transport gratuit",
+  "ticker.packaging2": "Ambalaj discret",
+  "ticker.guarantee2": "Garanție de plăcere de 30 de zile",
+  "ticker.madeforher2": "Creat pentru Ea",
+  "ticker.reviews2": "15.000 de Recenzii cu Cinci Stele",
+  "topline.label": "Un Manifest · 02",
+  "hero.line1": "<span class=\"strike\">Liniște.</span>",
+  "hero.line2": "Răsunător despre <span class=\"pink\">plăcere.</span>",
+  "hero.line3": "Răsunător despre <span class=\"neon underline\">tine.</span>",
+  "manifesto.body": "\n        Am creat un lucru pentru partea zilei pe care nimeni nu o programează. Este mic. Este liniștit (până când nu vrei să mai fie). Este neiertător — și așa ești, în sfârșit, și tu. Întâlnește: <strong>Lem</strong>.\n      ",
+  "cta.unlock": "Deblochează Lem <span class=\"arrow\">→</span>",
+  "micro.rating": "★★★★★ &nbsp;<span>4,9</span> / 5 · 15.000 de recenzii"
+}

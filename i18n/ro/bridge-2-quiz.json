@@ -1,0 +1,16 @@
+{
+  "meta.title": "Bridge 2 — Chestionar",
+  "hero.eyebrow": "Profil de plăcere",
+  "hero.title": "Care este <em>vibrația</em> ta în seara asta?",
+  "hero.sub": "Atinge opțiunea care se potrivește cel mai bine. Te vom potrivi cu starea potrivită.",
+  "opt.slowburn.title": "Aprindere lentă",
+  "opt.slowburn.desc": "Energie moale, persistentă, savurează-ți timpul.",
+  "opt.quickspark.title": "Scânteie rapidă",
+  "opt.quickspark.desc": "Resetare de 15 minute, ajungi rapid acolo.",
+  "opt.zesty.title": "Viu și jucăuș",
+  "opt.zesty.desc": "Curios, puțin experimental.",
+  "opt.allin.title": "Totul la pachet",
+  "opt.allin.desc": "Plin de corp, fără rețineri.",
+  "cta.match": "Vezi perechea mea →",
+  "footer.note": "Transport gratuit · Ambalare discretă · Garanție de 30 de zile"
+}

@@ -106,6 +106,9 @@
   "couples.quoteLabel": "Från en riktig kund:",
   "couples.quote": "\"Min partner och jag pratade ärligare på en kväll med Lem än vi gjort under hela det senaste året. Helt omvälvande.\"",
   "comparison.title": "Så står sig Lem.",
+  "comparison.brand": "Märke",
+  "comparison.yes": "Ja",
+  "comparison.no": "Nej",
   "comparison.row1": "Trustpilot-betyg",
   "comparison.row2": "Diskret design",
   "comparison.row3": "Nybörjarvänlig",
@@ -147,6 +150,7 @@
   "faq.q6": "Är den säker att använda i vatten?",
   "faq.a6": "Ja — Lem är IPX7-klassad och helt vattentät.",
   "signup.title": "Berättelser &amp; överraskningar direkt i inkorgen 💌",
+  "signup.placeholder": "din@email.se",
   "signup.button": "Prenumerera",
   "footer.tagline": "Vi bryter tabut och skapar en trygg, välkomnande plats där alla får utforska.",
   "footer.shop.title": "Butik",
@@ -160,7 +164,7 @@
   "footer.company.title": "Företag",
   "footer.company.link1": "Integritetspolicy",
   "footer.company.link2": "Användarvillkor",
-  "footer.company.link3": "Affiliates",
+  "footer.company.link3": "Partnerprogram",
   "footer.disclaimer": "© 2026 Demo PDP-återskapning · Ej affilierad med Nancy. För demonstrationssyfte.",
   "sticky.buy": "Lägg i varukorg"
 }

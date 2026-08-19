@@ -1,5 +1,6 @@
 {
   "meta.title": "Nancy — Pack Order Protect + Livraison discrète",
+  "flow.confirm": "\n  <span class=\"flow-check\">✓</span>\n  <strong>Nancy</strong>\n  <span class=\"flow-sep\">·</span>\n  Confirmation #NCY-9X42KB\n  <span class=\"flow-sep\">·</span>\n  Tout est réglé, ma belle\n",
   "flow.step.lem2": "2e Lem",
   "flow.step.bundle": "Pack",
   "flow.step.discreet": "Discret",

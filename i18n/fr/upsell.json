@@ -54,5 +54,9 @@
   "legal.privacy": "Politique de confidentialité",
   "legal.terms": "Conditions d'utilisation",
   "legal.cancellations": "Annulations",
-  "legal.contact": "Contact"
+  "legal.contact": "Contact",
+  "offer.unitPrice": "27 $ l’unité",
+  "offer.thumb1Alt": "Miniature du produit 1",
+  "offer.thumb2Alt": "Miniature du produit 2",
+  "offer.thumb3Alt": "Miniature du produit 3"
 }

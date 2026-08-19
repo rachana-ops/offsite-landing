@@ -11,7 +11,7 @@ const bridgeHtml = readFileSync(join(root, "bridge-page", "index.html"), "utf8")
 
 test("the previous pink bridge is restored at the live root", () => {
   assert.equal(rootHtml, bridgeHtml, "the root must remain the preserved bridge page")
-  assert.match(rootHtml, /<title>Unlock the Lem<\/title>/)
+  assert.match(rootHtml, /<title\b[^>]*>Unlock the Lem<\/title>/)
   assert.match(rootHtml, /Rediscover Your .*Sensual.* Side/s)
   assert.match(
     rootHtml,

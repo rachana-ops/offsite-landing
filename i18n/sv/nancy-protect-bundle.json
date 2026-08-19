@@ -1,5 +1,6 @@
 {
   "meta.title": "Nancy — Paket med Orderskydd + Diskret frakt",
+  "flow.confirm": "\n  <span class=\"flow-check\">✓</span>\n  <strong>Nancy</strong>\n  <span class=\"flow-sep\">·</span>\n  Bekräftelse #NCY-9X42KB\n  <span class=\"flow-sep\">·</span>\n  Allt är betalt, snygging\n",
   "flow.step.lem2": "Andra Lem",
   "flow.step.bundle": "Paket",
   "flow.step.discreet": "Diskret",
