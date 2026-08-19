@@ -1,9 +1,10 @@
 {
   "meta.title": "Nancy — Order Protect + Discrete Verzending Bundel",
+  "flow.confirm": "\n  <span class=\"flow-check\">✓</span>\n  <strong>Nancy</strong>\n  <span class=\"flow-sep\">·</span>\n  Bevestiging #NCY-9X42KB\n  <span class=\"flow-sep\">·</span>\n  Alles afgerekend, schoonheid\n",
   "flow.step.lem2": "2e Lem",
   "flow.step.bundle": "Bundel",
   "flow.step.discreet": "Discreet",
-  "flow.step.protect": "Protect",
+  "flow.step.protect": "Bescherming",
   "hero.savebanner": "\n      <svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z\"/></svg>\n      Bundel &amp; Bespaar — Beste Deal\n    ",
   "hero.title": "Beschermd, Discreet, Bezorgd.",
   "hero.subtitle": "Voeg Order Protect <em>én</em> Discrete Verzending in één keer toe voor <strong>slechts $8</strong> — dekt alles wat mis kan gaan tussen het afrekenen en je voordeur, voor minder dan de prijs van een cocktail.",

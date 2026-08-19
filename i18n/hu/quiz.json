@@ -1,0 +1,16 @@
+{
+  "meta.title": "Nancy — Élvezetprofil",
+  "hero.eyebrow": "Élvezetprofil",
+  "hero.title": "Mihez lenne ma este <em>kedved</em>?",
+  "hero.sub": "Koppints arra, amelyik most a legközelebb áll hozzád. Megtaláljuk neked a tökéletes rezgést.",
+  "opt1.title": "Lassan kibontakozó",
+  "opt1.desc": "Lágy, elnyújtott, ráérős élmény.",
+  "opt2.title": "Gyors szikra",
+  "opt2.desc": "15 perces feltöltődés, gyorsan a célhoz.",
+  "opt3.title": "Pikáns &amp; játékos",
+  "opt3.desc": "Kíváncsi, egy csipetnyi kísérletező kedvvel.",
+  "opt4.title": "Mindent bele",
+  "opt4.desc": "Teljes testtel, minden gátlás nélkül.",
+  "cta.match": "Mutasd a hozzám illőt →",
+  "footer.note": "Ingyenes szállítás · Diszkrét csomagolás · 30 napos élvezetgarancia"
+}

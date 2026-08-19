@@ -1,0 +1,16 @@
+{
+  "meta.title": "Ponte 2 — Quiz",
+  "hero.eyebrow": "Perfil de Prazer",
+  "hero.title": "Qual é o seu <em>ambiente</em> esta noite?",
+  "hero.sub": "Toque naquele que se sentir mais próximo. Nós combinaremos você com o efeito certo.",
+  "opt.slowburn.title": "Queima lenta",
+  "opt.slowburn.desc": "Energia suave, prolongada, para levar o tempo que quiser.",
+  "opt.quickspark.title": "Faísca rápida",
+  "opt.quickspark.desc": "Reinício de 15 minutos, vá rápido ao objetivo.",
+  "opt.zesty.title": "Vivo e brincalhão",
+  "opt.zesty.desc": "Curioso, um pouco experimental.",
+  "opt.allin.title": "Tudo em",
+  "opt.allin.desc": "Corpo cheio, sem hesitações.",
+  "cta.match": "Veja a minha correspondência →",
+  "footer.note": "Envio gratuito · Embalagem discreta · Garantia de 30 dias"
+}

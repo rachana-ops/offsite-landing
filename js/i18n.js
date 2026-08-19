@@ -33,8 +33,11 @@
   "use strict";
 
   // Locales we ship translations for. English is the baked-in fallback.
-  // Matches the chosen top-traffic set (see PostHog top-country analysis).
-  var SUPPORTED = ["en", "nl", "de", "it", "fr", "sv", "da", "es"];
+  // Every locale available across the storefront catalogs.
+  var SUPPORTED = [
+    "en", "nl", "de", "it", "fr", "sv", "da", "es", "cs", "el",
+    "fi", "hr", "hu", "ja", "ko", "pl", "pt", "ro", "zh-hans", "zh-hant"
+  ];
 
   // BCP-47 base language -> our locale. Mirrors the storefront's intent
   // (e.g. Norwegian visitors are served Danish, as no->da in the storefront).
@@ -48,8 +51,43 @@
     da: "da", // Danish
     no: "da", nb: "da", nn: "da", // Norwegian -> Danish (storefront parity)
     es: "es", // Spanish (all variants)
-    ca: "es", gl: "es" // Catalan/Galician -> Spanish
+    ca: "es", gl: "es", // Catalan/Galician -> Spanish
+    cs: "cs",
+    el: "el",
+    fi: "fi",
+    hr: "hr",
+    hu: "hu",
+    ja: "ja",
+    ko: "ko",
+    pl: "pl",
+    pt: "pt",
+    ro: "ro",
+    zh: "zh-hans" // Bare Chinese defaults to Simplified Chinese.
   };
+
+  /** Map a BCP-47 language tag to one of our locale catalogues. */
+  function localeFromLanguageTag(value) {
+    var raw = String(value || "").toLowerCase().replace(/_/g, "-");
+    if (!raw) return null;
+    if (SUPPORTED.indexOf(raw) !== -1) return raw;
+
+    // Chinese requires script/region-aware routing: Taiwan, Hong Kong and
+    // Macau use Traditional; mainland China, Singapore and Malaysia use
+    // Simplified. An explicit script subtag always wins over the region.
+    if (raw === "zh" || raw.indexOf("zh-") === 0) {
+      var parts = raw.split("-");
+      if (parts.indexOf("hant") !== -1) return "zh-hant";
+      if (parts.indexOf("hans") !== -1) return "zh-hans";
+      for (var i = 1; i < parts.length; i++) {
+        if (parts[i] === "tw" || parts[i] === "hk" || parts[i] === "mo") {
+          return "zh-hant";
+        }
+      }
+      return "zh-hans";
+    }
+
+    return LANG_TO_LOCALE[raw.split("-")[0]] || null;
+  }
 
   /**
    * Language BRIDGE domains — one dedicated domain per top language, mirroring
@@ -85,18 +123,58 @@
   }
 
   var STORAGE_KEY = "nancy_locale";
+  var STOREFRONT_COOKIE = "NEXT_LOCALE";
+  var EXPLICIT_LOCALE_COOKIE = "NANCY_LOCALE_MANUAL";
+  var COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
   var HIDE_STYLE_ID = "i18n-hide-style";
   var REVEAL_TIMEOUT_MS = 1500;
+
+  /** Share an explicit bridge-language choice with get.nancyflow.*. */
+  function writeStorefrontLocaleCookie(loc) {
+    var host = window.location.hostname.toLowerCase().replace(/^www\./, "");
+    var knownApex = host === "nancyflow.com";
+    for (var key in LANG_DOMAINS) {
+      if (LANG_DOMAINS[key] === host) knownApex = true;
+    }
+    // Preview/localhost hosts get a host-only cookie. Production bridge hosts
+    // use their apex so the get.nancyflow.* subdomain receives the same choice.
+    var suffix =
+      "; Path=/; Max-Age=" + COOKIE_MAX_AGE + "; SameSite=Lax";
+    if (knownApex) suffix += "; Domain=." + host;
+    if (window.location.protocol === "https:") suffix += "; Secure";
+    try {
+      document.cookie = STOREFRONT_COOKIE + "=" + encodeURIComponent(loc) + suffix;
+      // Store the locale in the intent marker too. Unlike NEXT_LOCALE this
+      // cookie did not exist in legacy deployments, so an old host-only
+      // NEXT_LOCALE=en cannot beat the newer parent-domain choice by ordering.
+      document.cookie = EXPLICIT_LOCALE_COOKIE + "=" + encodeURIComponent(loc) + suffix;
+    } catch (e) {}
+  }
+
+  function rememberLocale(loc) {
+    try { localStorage.setItem(STORAGE_KEY, loc); } catch (e) {}
+    writeStorefrontLocaleCookie(loc);
+  }
+
+  function readCookie(name) {
+    var prefix = name + "=";
+    var cookies = String(document.cookie || "").split(";");
+    for (var i = 0; i < cookies.length; i++) {
+      var item = cookies[i].replace(/^\s+/, "");
+      if (item.slice(0, prefix.length) === prefix) {
+        try { return decodeURIComponent(item.slice(prefix.length)); }
+        catch (e) { return item.slice(prefix.length); }
+      }
+    }
+    return "";
+  }
 
   /** Read ?lang= override from the current URL, normalised to a supported locale. */
   function langFromQuery() {
     var m = /[?&]lang=([^&#]+)/.exec(window.location.search);
     if (!m) return null;
     try {
-      var raw = decodeURIComponent(m[1]).toLowerCase();
-      if (SUPPORTED.indexOf(raw) !== -1) return raw;
-      var base = raw.split("-")[0];
-      return LANG_TO_LOCALE[base] || null;
+      return localeFromLanguageTag(decodeURIComponent(m[1]));
     } catch (e) {
       // A malformed campaign URL must never abort the bridge runtime (which
       // would also prevent the guarded storefront handoff from initializing).
@@ -111,34 +189,53 @@
       : [navigator.language || navigator.userLanguage || "en"];
     for (var i = 0; i < langs.length; i++) {
       if (!langs[i]) continue;
-      var raw = String(langs[i]).toLowerCase();
-      if (SUPPORTED.indexOf(raw) !== -1) return raw;
-      var base = raw.split("-")[0];
-      if (LANG_TO_LOCALE[base]) return LANG_TO_LOCALE[base];
+      var locale = localeFromLanguageTag(langs[i]);
+      if (locale) return locale;
     }
     return "en";
   }
 
   /**
    * Resolve the active locale. Priority:
-   *   1. ?lang= URL override (and it is remembered for the session)
-   *   2. previously remembered choice (localStorage)
-   *   3. browser languages
+   *   1. ?lang= URL override
+   *   2. a language-specific bridge hostname
+   *   3. a deliberate storefront choice shared by cookie
+   *   4. a previously remembered bridge choice (localStorage)
+   *   5. browser languages
    * Defaults to "en".
    */
   function resolveLocale() {
     var q = langFromQuery();
     if (q) {
-      try { localStorage.setItem(STORAGE_KEY, q); } catch (e) {}
+      rememberLocale(q);
       return q;
     }
     // A language domain IS the language choice — pin it, ignoring any stale
     // localStorage/browser signal. (?lang above stays as an explicit escape.)
     var pinned = localeFromHost();
-    if (pinned) return pinned;
+    if (pinned) {
+      writeStorefrontLocaleCookie(pinned);
+      return pinned;
+    }
+    // A choice made on get.nancyflow.com is shared back to this sibling host.
+    // Only trust it with the explicit marker: older storefront deployments
+    // auto-seeded NEXT_LOCALE=en for every visitor.
+    var explicit = readCookie(EXPLICIT_LOCALE_COOKIE);
+    var shared = SUPPORTED.indexOf(explicit) !== -1
+      ? explicit
+      : (explicit === "1" ? readCookie(STOREFRONT_COOKIE) : "");
+    if (shared && SUPPORTED.indexOf(shared) !== -1) {
+      try { localStorage.setItem(STORAGE_KEY, shared); } catch (e) {}
+      return shared;
+    }
     try {
       var saved = localStorage.getItem(STORAGE_KEY);
-      if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
+      if (saved && SUPPORTED.indexOf(saved) !== -1) {
+        // Backfill the shared cookie for choices saved before the storefront
+        // handoff existed.
+        writeStorefrontLocaleCookie(saved);
+        return saved;
+      }
     } catch (e) {}
     return langFromBrowser();
   }
@@ -180,7 +277,7 @@
     /** Programmatically switch locale (persists + reloads). */
     setLocale: function (loc) {
       if (SUPPORTED.indexOf(loc) === -1) return;
-      try { localStorage.setItem(STORAGE_KEY, loc); } catch (e) {}
+      rememberLocale(loc);
       // Choosing a language that has a live dedicated domain navigates THERE
       // (path + query preserved); other languages reload in place as before.
       // Choosing a domain-less language while ON a language domain returns to

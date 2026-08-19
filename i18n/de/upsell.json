@@ -54,5 +54,9 @@
   "legal.privacy": "Datenschutz",
   "legal.terms": "AGB",
   "legal.cancellations": "Stornierungen",
-  "legal.contact": "Kontakt"
+  "legal.contact": "Kontakt",
+  "offer.unitPrice": "$27 pro Stück",
+  "offer.thumb1Alt": "Produktvorschaubild 1",
+  "offer.thumb2Alt": "Produktvorschaubild 2",
+  "offer.thumb3Alt": "Produktvorschaubild 3"
 }

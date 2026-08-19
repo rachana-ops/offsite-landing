@@ -54,5 +54,9 @@
   "legal.privacy": "Privacybeleid",
   "legal.terms": "Servicevoorwaarden",
   "legal.cancellations": "Annuleringen",
-  "legal.contact": "Contact"
+  "legal.contact": "Contact",
+  "offer.unitPrice": "$27 per stuk",
+  "offer.thumb1Alt": "Productminiatuur 1",
+  "offer.thumb2Alt": "Productminiatuur 2",
+  "offer.thumb3Alt": "Productminiatuur 3"
 }

@@ -3,7 +3,7 @@
   "confirm.number": "Conferma #GDUXDNLZA",
   "confirm.paid": "Il tuo ordine è stato pagato.",
   "confirm.viewOrder": "Vedi la conferma dell'ordine &rsaquo;",
-  "brand.madeInUsa": "Made In The USA",
+  "brand.madeInUsa": "Prodotto negli Stati Uniti",
   "steps.step1": "FASE 1: ORDINE RICEVUTO",
   "steps.step2": "FASE 2: PERSONALIZZA L'ORDINE",
   "congrats.banner": "CONGRATULAZIONI! TI SEI AGGIUDICATA UN'OFFERTA SPECIALE! PORTA A CASA ALTRI 3 FLACONI DELLA NOSTRA ROSABELLA MORINGA A SOLI $27 L'UNO",
@@ -54,5 +54,9 @@
   "legal.privacy": "Informativa sulla privacy",
   "legal.terms": "Termini di servizio",
   "legal.cancellations": "Cancellazioni",
-  "legal.contact": "Contatti"
+  "legal.contact": "Contatti",
+  "offer.unitPrice": "$27 l’uno",
+  "offer.thumb1Alt": "Miniatura prodotto 1",
+  "offer.thumb2Alt": "Miniatura prodotto 2",
+  "offer.thumb3Alt": "Miniatura prodotto 3"
 }
