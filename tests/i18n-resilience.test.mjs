@@ -55,6 +55,6 @@ function runI18n(search) {
 
 test("a malformed lang query cannot abort bridge localization", () => {
   const result = runI18n("?lang=%E0%A4%A&utm_source=test")
-  assert.equal(result.window.i18n.locale, "de")
-  assert.equal(result.documentElement.lang, "de")
+  assert.equal(result.window.i18n.locale, "en")
+  assert.equal(result.documentElement.lang, "en")
 })
