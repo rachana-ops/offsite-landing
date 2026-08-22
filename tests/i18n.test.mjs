@@ -13,11 +13,14 @@ const locales = [
 function runI18n({
   languages = ["en-US"],
   search = "",
-  savedLocale = null,
+  legacySavedLocale = null,
+  selectedLocale = null,
   cookies = "",
   hostname = "nancyflow.com",
 }) {
-  const stored = new Map(savedLocale ? [["nancy_locale", savedLocale]] : [])
+  const stored = new Map()
+  if (legacySavedLocale) stored.set("nancy_locale", legacySavedLocale)
+  if (selectedLocale) stored.set("nancy_locale_selected_v2", selectedLocale)
   const cookieWrites = []
   let assignedUrl = null
   let reloads = 0
@@ -94,30 +97,29 @@ test("browser language never switches a first-time bridge visitor", () => {
   assert.doesNotMatch(source, /navigator\.(?:languages|language|userLanguage)/)
 })
 
-test("explicit query choices retain locale and Chinese-script normalization", () => {
-  for (const [tag, expected] of [
-    ["de-AT", "de"],
-    ["nb-NO", "da"],
-    ["zh", "zh-hans"],
-    ["zh-Hans-HK", "zh-hans"],
-    ["zh-TW", "zh-hant"],
-    ["zh-Hant-CN", "zh-hant"],
-  ]) {
+test("bare language queries never switch or persist a bridge locale", () => {
+  for (const tag of ["fr", "de-AT", "nb-NO", "zh-TW"]) {
     const result = runI18n({
       languages: ["fr-FR"],
       search: `?lang=${encodeURIComponent(tag)}`,
     })
-    assert.equal(result.window.i18n.locale, expected, tag)
-    assert.equal(result.stored.get("nancy_locale"), expected, tag)
+    assert.equal(result.window.i18n.locale, "en", tag)
+    assert.equal(result.documentElement.lang, "en", tag)
+    assert.equal(result.stored.size, 0, tag)
+    assert.deepEqual(result.cookieWrites, [], tag)
   }
 })
 
-test("an unmarked legacy cookie cannot override the English default", () => {
+test("legacy locale state cannot override the English default", () => {
   const result = runI18n({
     languages: ["de-DE", "en"],
-    cookies: "NEXT_LOCALE=en",
+    search: "?lang=fr&utm_source=meta",
+    legacySavedLocale: "fr",
+    cookies: "NEXT_LOCALE=fr; NANCY_LOCALE_MANUAL=fr",
   })
   assert.equal(result.window.i18n.locale, "en")
+  assert.equal(result.documentElement.lang, "en")
+  assert.deepEqual(result.cookieWrites, [])
 })
 
 test("a malformed lang query cannot abort bridge localization", () => {
@@ -129,10 +131,10 @@ test("a malformed lang query cannot abort bridge localization", () => {
   assert.equal(result.documentElement.lang, "en")
 })
 
-test("an explicit bridge locale is shared with the storefront subdomain", () => {
-  const result = runI18n({ languages: ["en"], search: "?lang=fr" })
-  assert.equal(result.window.i18n.locale, "fr")
-  assert.equal(result.stored.get("nancy_locale"), "fr")
+test("the selector shares its V2 locale with the storefront subdomain", () => {
+  const result = runI18n({ languages: ["en"] })
+  result.window.i18n.setLocale("fr")
+  assert.equal(result.stored.get("nancy_locale_selected_v2"), "fr")
   assert.ok(
     result.cookieWrites.some((cookie) =>
       cookie.includes("NEXT_LOCALE=fr") && cookie.includes("Domain=.nancyflow.com")
@@ -140,12 +142,12 @@ test("an explicit bridge locale is shared with the storefront subdomain", () => 
   )
   assert.ok(
     result.cookieWrites.some((cookie) =>
-      cookie.includes("NANCY_LOCALE_MANUAL=fr") && cookie.includes("Domain=.nancyflow.com")
+      cookie.includes("NANCY_LOCALE_SELECTED_V2=fr") && cookie.includes("Domain=.nancyflow.com")
     )
   )
 })
 
-test("every live Nancyflow apex shares explicit locale cookies with its storefront", () => {
+test("every live Nancyflow apex shares selector-owned locale cookies with its storefront", () => {
   for (const hostname of [
     "nancyflow.com",
     "nancyflow.co.uk",
@@ -156,8 +158,9 @@ test("every live Nancyflow apex shares explicit locale cookies with its storefro
     "nancyflow.fr",
     "nancyflow.se",
   ]) {
-    const result = runI18n({ languages: ["en"], search: "?lang=fr", hostname })
-    for (const name of ["NEXT_LOCALE", "NANCY_LOCALE_MANUAL"]) {
+    const result = runI18n({ languages: ["en"], hostname })
+    result.window.i18n.setLocale("fr")
+    for (const name of ["NEXT_LOCALE", "NANCY_LOCALE_SELECTED_V2"]) {
       assert.ok(
         result.cookieWrites.some((cookie) =>
           cookie.startsWith(`${name}=fr;`) && cookie.includes(`Domain=.${hostname}`)
@@ -169,53 +172,59 @@ test("every live Nancyflow apex shares explicit locale cookies with its storefro
 
   const preview = runI18n({
     languages: ["en"],
-    search: "?lang=fr",
     hostname: "nancy-bridge-preview.vercel.app",
   })
+  preview.window.i18n.setLocale("fr")
   assert.ok(preview.cookieWrites.every((cookie) => !cookie.includes("Domain=")))
 })
 
-test("a deliberate storefront choice is reused on the bridge", () => {
+test("a selector-owned storefront choice is reused on the bridge", () => {
   const result = runI18n({
     languages: ["en-US"],
-    cookies: "NEXT_LOCALE=sv; NANCY_LOCALE_MANUAL=sv",
+    cookies: "NEXT_LOCALE=sv; NANCY_LOCALE_SELECTED_V2=sv",
   })
   assert.equal(result.window.i18n.locale, "sv")
-  assert.equal(result.stored.get("nancy_locale"), "sv")
+  assert.equal(result.documentElement.lang, "sv")
 })
 
-test("the explicit locale marker wins over a conflicting legacy cookie", () => {
+test("the V2 selector marker wins over conflicting legacy state and query", () => {
   const result = runI18n({
     languages: ["en-US"],
-    cookies: "NEXT_LOCALE=en; NANCY_LOCALE_MANUAL=fr",
+    search: "?lang=de",
+    legacySavedLocale: "de",
+    cookies: "NEXT_LOCALE=en; NANCY_LOCALE_MANUAL=de; NANCY_LOCALE_SELECTED_V2=fr",
   })
   assert.equal(result.window.i18n.locale, "fr")
 })
 
-test("a remembered manual choice beats browser language", () => {
+test("selector-owned V2 storage beats browser language", () => {
   const result = runI18n({
     languages: ["de-DE"],
-    savedLocale: "fr",
+    selectedLocale: "fr",
   })
 
   assert.equal(result.window.i18n.locale, "fr")
   assert.equal(result.documentElement.lang, "fr")
-  assert.ok(result.cookieWrites.some((cookie) => cookie.includes("NEXT_LOCALE=fr")))
+  assert.deepEqual(result.cookieWrites, [])
 })
 
-test("language-specific hosts remain pinned without browser detection", () => {
-  for (const [hostname, expected] of [
-    ["nancyflow.de", "de"],
-    ["nancyflow.nl", "nl"],
-    ["nancyflow.fr", "fr"],
-    ["nancyflow.se", "sv"],
+test("every market hostname defaults to English without a selector choice", () => {
+  for (const hostname of [
+    "nancyflow.com",
+    "nancyflow.co.uk",
+    "nancyflow.ca",
+    "nancyflow.co.nz",
+    "nancyflow.de",
+    "nancyflow.nl",
+    "nancyflow.fr",
+    "nancyflow.se",
+    "nancyflow.dk",
+    "nancyflow.it",
   ]) {
     const result = runI18n({ hostname, languages: ["it-IT"] })
-    assert.equal(result.window.i18n.locale, expected, hostname)
-    assert.ok(
-      result.cookieWrites.some((cookie) => cookie.includes(`NEXT_LOCALE=${expected}`)),
-      hostname,
-    )
+    assert.equal(result.window.i18n.locale, "en", hostname)
+    assert.equal(result.documentElement.lang, "en", hostname)
+    assert.deepEqual(result.cookieWrites, [], hostname)
   }
 })
 
@@ -227,14 +236,14 @@ test("the manual setLocale API persists and applies a visitor choice", () => {
   sameHost.window.location.pathname = "/bridge-page/"
   sameHost.window.location.hash = "#offer"
   sameHost.window.i18n.setLocale("de")
-  assert.equal(sameHost.stored.get("nancy_locale"), "de")
+  assert.equal(sameHost.stored.get("nancy_locale_selected_v2"), "de")
   assert.equal(sameHost.reloads, 0)
   assert.equal(
     sameHost.assignedUrl,
     "/bridge-page/?utm_source=test&lang=de#offer",
   )
   assert.ok(sameHost.cookieWrites.some((cookie) => cookie.includes("NEXT_LOCALE=de")))
-  assert.ok(sameHost.cookieWrites.some((cookie) => cookie.includes("NANCY_LOCALE_MANUAL=de")))
+  assert.ok(sameHost.cookieWrites.some((cookie) => cookie.includes("NANCY_LOCALE_SELECTED_V2=de")))
 
   const languageHost = runI18n({
     hostname: "nancyflow.de",
@@ -245,9 +254,14 @@ test("the manual setLocale API persists and applies a visitor choice", () => {
   languageHost.window.i18n.setLocale("it")
   assert.equal(
     languageHost.assignedUrl,
-    "https://nancyflow.com/?utm_source=test&lang=it#offer",
+    "/?utm_source=test&lang=it#offer",
   )
-  assert.equal(languageHost.stored.get("nancy_locale"), "it")
+  assert.equal(languageHost.stored.get("nancy_locale_selected_v2"), "it")
+  assert.ok(
+    languageHost.cookieWrites.some((cookie) =>
+      cookie.includes("NANCY_LOCALE_SELECTED_V2=it") && cookie.includes("Domain=.nancyflow.de")
+    )
+  )
 })
 
 function htmlFiles(directory) {

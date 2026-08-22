@@ -82,16 +82,16 @@ test("browser language never switches an English advertorial", () => {
   assert.doesNotMatch(source, /nancy_auto_locale_redirect|sessionStorage/)
 })
 
-test("a direct localized advertorial path remains stable and persists manually", () => {
+test("a direct localized advertorial path renders without creating preference state", () => {
   const result = runRouter({
     pathname: "/advertorial/fiftieslifestyle/fr/",
     languages: ["de-DE", "en-US"],
   })
 
   assert.equal(result.redirect, null)
-  assert.equal(result.cookieJar.get("NEXT_LOCALE"), "fr")
-  assert.equal(result.cookieJar.get("NANCY_LOCALE_MANUAL"), "fr")
-  assert.equal(result.storage.get("nancy_locale"), "fr")
+  assert.equal(result.cookieJar.size, 0)
+  assert.equal(result.storage.size, 0)
+  assert.doesNotMatch(source, /localStorage\.setItem|document\.cookie\s*=/)
 })
 
 test("explicit advertorial locale paths remain stable", () => {
@@ -101,36 +101,49 @@ test("explicit advertorial locale paths remain stable", () => {
   )
 })
 
-test("a supported lang query is explicit and preserves unrelated URL state", () => {
-  assert.equal(
-    runRouter({ search: "?lang=fr&utm_campaign=spring", hash: "#offer", languages: ["de-DE"] }).redirect,
-    "/advertorial/fiftieslifestyle/fr/?utm_campaign=spring#offer",
-  )
-  assert.equal(
-    runRouter({ search: "?lang=ja&utm_campaign=spring", languages: ["de-DE"] }).redirect,
-    null,
-    "an unavailable explicit locale must not silently select a different language",
-  )
+test("a bare or stale lang query never switches an English advertorial", () => {
+  for (const lang of ["fr", "de-AT", "ja"]) {
+    const result = runRouter({
+      search: `?lang=${lang}&utm_campaign=spring`,
+      hash: "#offer",
+      languages: ["de-DE"],
+    })
+    assert.equal(result.redirect, null, lang)
+    assert.equal(result.cookieJar.size, 0, lang)
+    assert.equal(result.storage.size, 0, lang)
+  }
 })
 
-test("an explicit English choice persists and keeps the default route English", () => {
+test("legacy cookies and storage cannot route an English advertorial", () => {
+  const storage = new Map([["nancy_locale", "fr"]])
+  const cookieJar = new Map([
+    ["NEXT_LOCALE", "fr"],
+    ["NANCY_LOCALE_MANUAL", "fr"],
+  ])
+  const result = runRouter({
+    languages: ["de-DE"],
+    storage,
+    cookieJar,
+    search: "?lang=fr&utm_source=test",
+  })
+
+  assert.equal(result.redirect, null)
+})
+
+test("a localized path does not contaminate a later English ad entry", () => {
   const storage = new Map()
   const cookieJar = new Map()
-  const selected = runRouter({
-    search: "?lang=en&utm_campaign=spring",
+  const localized = runRouter({
+    pathname: "/advertorial/fiftieslifestyle/fr/",
     languages: ["de-DE"],
     storage,
     cookieJar,
   })
 
-  assert.equal(selected.redirect, null)
-  assert.equal(storage.get("nancy_locale"), "en")
-  assert.equal(cookieJar.get("NEXT_LOCALE"), "en")
-  assert.equal(cookieJar.get("NANCY_LOCALE_MANUAL"), "en")
+  assert.equal(localized.redirect, null)
+  assert.equal(storage.size, 0)
+  assert.equal(cookieJar.size, 0)
 
-  // Prove the shared cookie works independently of localStorage on a later
-  // advertorial family.
-  storage.clear()
   const nextPage = runRouter({
     pathname: "/advertorial/menopause/en/",
     languages: ["de-DE"],
@@ -141,48 +154,38 @@ test("an explicit English choice persists and keeps the default route English", 
   assert.equal(nextPage.redirect, null)
 })
 
-test("a remembered manual cookie routes an English advertorial", () => {
-  const cookieJar = new Map([
-    ["NEXT_LOCALE", "fr"],
-    ["NANCY_LOCALE_MANUAL", "fr"],
-  ])
+test("a V2 selector cookie routes an English advertorial and strips lang transport", () => {
+  const cookieJar = new Map([["NANCY_LOCALE_SELECTED_V2", "fr"]])
   const result = runRouter({
     languages: ["de-DE"],
     cookieJar,
-    search: "?utm_source=test",
+    search: "?lang=fr&utm_source=test",
+    hash: "#offer",
+  })
+
+  assert.equal(result.redirect, "/advertorial/fiftieslifestyle/fr/?utm_source=test#offer")
+  assert.equal(cookieJar.size, 1)
+})
+
+test("a stale lang query cannot replace the V2 selector choice", () => {
+  const cookieJar = new Map([["NANCY_LOCALE_SELECTED_V2", "fr"]])
+  const result = runRouter({
+    cookieJar,
+    search: "?lang=de&utm_source=test",
   })
 
   assert.equal(result.redirect, "/advertorial/fiftieslifestyle/fr/?utm_source=test")
 })
 
-test("a locale path persists across advertorial families through localStorage", () => {
-  const storage = new Map()
-  const cookieJar = new Map()
-  const selected = runRouter({
-    pathname: "/advertorial/fiftieslifestyle/fr/",
-    languages: ["de-DE"],
-    storage,
-    cookieJar,
-  })
+test("V2 selector storage routes an English advertorial", () => {
+  const storage = new Map([["nancy_locale_selected_v2", "fr"]])
+  const result = runRouter({ storage, search: "?utm_source=test" })
 
-  assert.equal(selected.redirect, null)
-  assert.equal(storage.get("nancy_locale"), "fr")
-
-  // Prove localStorage works independently of the shared cookie and routes a
-  // later English/default advertorial family.
-  cookieJar.clear()
-  const nextPage = runRouter({
-    pathname: "/advertorial/menopause/en/",
-    languages: ["de-DE"],
-    alternates: ["en", "de", "nl", "fr", "sv", "x-default"],
-    storage,
-    cookieJar,
-  })
-  assert.equal(nextPage.redirect, "/advertorial/menopause/fr/")
+  assert.equal(result.redirect, "/advertorial/fiftieslifestyle/fr/?utm_source=test")
 })
 
-test("an unavailable remembered locale keeps the English fallback", () => {
-  const storage = new Map([["nancy_locale", "ja"]])
+test("an unavailable V2 selector locale keeps the English fallback", () => {
+  const storage = new Map([["nancy_locale_selected_v2", "ja"]])
   const result = runRouter({
     languages: ["de-DE"],
     alternates: ["en", "de", "fr", "x-default"],

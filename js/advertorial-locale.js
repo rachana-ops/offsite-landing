@@ -1,11 +1,10 @@
 /**
  * Route an advertorial's English/default URL to an existing translated page.
  *
- * Locale-specific paths and `?lang=` are deliberate choices. They are shared
- * with later advertorial/bridge pages through the same cookie and localStorage
- * keys as the bridge i18n runtime. A remembered manual choice can route the
- * English x-default URL; otherwise it remains English. Browser language never
- * switches an advertorial.
+ * A locale-specific path renders directly but never creates preference state.
+ * Only the selector-owned V2 preference shared with the bridge/storefront can
+ * route a later English x-default URL. Browser language, market hostname,
+ * legacy state, and bare `?lang=` parameters never switch an advertorial.
  */
 (function () {
   "use strict";
@@ -14,14 +13,8 @@
     "en", "nl", "de", "it", "fr", "sv", "da", "es", "cs", "el",
     "fi", "hr", "hu", "ja", "ko", "pl", "pt", "ro", "zh-hans", "zh-hant"
   ];
-  var STORAGE_KEY = "nancy_locale";
-  var STOREFRONT_COOKIE = "NEXT_LOCALE";
-  var EXPLICIT_LOCALE_COOKIE = "NANCY_LOCALE_MANUAL";
-  var COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
-  var COOKIE_APEXES = [
-    "nancyflow.com", "nancyflow.co.uk", "nancyflow.ca", "nancyflow.co.nz",
-    "nancyflow.de", "nancyflow.nl", "nancyflow.fr", "nancyflow.se"
-  ];
+  var STORAGE_KEY = "nancy_locale_selected_v2";
+  var SELECTED_LOCALE_COOKIE = "NANCY_LOCALE_SELECTED_V2";
 
   var match = window.location.pathname.match(/^(.*\/advertorial\/[^/]+\/)([a-z-]+)(\/.*)?$/i);
   if (!match) return;
@@ -72,31 +65,8 @@
     return "";
   }
 
-  function cookieApex() {
-    var host = String(window.location.hostname || "").toLowerCase().replace(/^www\./, "");
-    for (var i = 0; i < COOKIE_APEXES.length; i++) {
-      var apex = COOKIE_APEXES[i];
-      if (host === apex || host.slice(-(apex.length + 1)) === "." + apex) return apex;
-    }
-    return null;
-  }
-
-  function rememberLocale(locale) {
-    try { localStorage.setItem(STORAGE_KEY, locale); } catch (e) {}
-    var suffix = "; Path=/; Max-Age=" + COOKIE_MAX_AGE + "; SameSite=Lax";
-    var apex = cookieApex();
-    if (apex) suffix += "; Domain=." + apex;
-    if (window.location.protocol === "https:") suffix += "; Secure";
-    try {
-      document.cookie = STOREFRONT_COOKIE + "=" + encodeURIComponent(locale) + suffix;
-      document.cookie = EXPLICIT_LOCALE_COOKIE + "=" + encodeURIComponent(locale) + suffix;
-    } catch (e) {}
-  }
-
-  function rememberedLocale() {
-    var explicit = readCookie(EXPLICIT_LOCALE_COOKIE);
-    var cookieLocale = explicit === "1" ? readCookie(STOREFRONT_COOKIE) : explicit;
-    var normalized = normalizeKnownLocale(cookieLocale);
+  function selectedLocale() {
+    var normalized = normalizeKnownLocale(readCookie(SELECTED_LOCALE_COOKIE));
     if (normalized) return normalized;
     try {
       normalized = normalizeKnownLocale(localStorage.getItem(STORAGE_KEY));
@@ -117,30 +87,21 @@
     return null;
   }
 
-  var query = new URLSearchParams(window.location.search).get("lang");
-  if (query !== null) {
-    var explicitLocale = normalizeKnownLocale(query);
-    if (explicitLocale) rememberLocale(explicitLocale);
-    var requested = map(explicitLocale);
-    if (requested && requested !== current) redirect(requested);
-    return;
-  }
-
-  // A locale segment other than `en` is an explicit/manual URL and stays put.
+  // A localized path renders as authored but is not evidence of a selector
+  // click and therefore must not affect a later English ad visit.
   if (current !== "en") {
-    var currentLocale = normalizeKnownLocale(current);
-    if (currentLocale && available.indexOf(currentLocale) !== -1) {
-      rememberLocale(currentLocale);
-    }
     return;
   }
 
-  // A deliberate choice made on another advertorial or bridge page may route
-  // this English URL. If it is unavailable here, keep the English fallback.
-  var remembered = rememberedLocale();
-  if (remembered) {
-    var rememberedTarget = map(remembered);
-    if (rememberedTarget && rememberedTarget !== current) redirect(rememberedTarget);
+  // A selector choice made on another bridge/storefront page may route this
+  // English URL. `?lang=` is only transport and cannot create or replace that
+  // choice; when it is stale, the selector-owned marker remains authoritative.
+  var selected = selectedLocale();
+  if (selected) {
+    var query = normalizeKnownLocale(new URLSearchParams(window.location.search).get("lang"));
+    var requested = query === selected ? query : selected;
+    var target = map(requested);
+    if (target && target !== current) redirect(target);
     return;
   }
 
