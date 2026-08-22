@@ -85,20 +85,20 @@ test("the /unlock entry is a self-contained production build of the English land
   }
   assert.match(
     bundle,
-    /USD:\{currencyCode:"USD",current:79,compareAt:159\}/,
+    /USD:\{currencyCode:"USD",current:69\.99,compareAt:159\}/,
     "the USD fallback must match the current Lem offer",
   )
   assert.match(
     bundle,
-    /EUR:\{currencyCode:"EUR",current:69,compareAt:128\.95\}/,
+    /EUR:\{currencyCode:"EUR",current:59\.99,compareAt:128\.95\}/,
     "the EUR fallback must match the current Lem offer",
   )
   for (const fallback of [
-    /CAD:\{currencyCode:"CAD",current:109,compareAt:207\}/,
-    /GBP:\{currencyCode:"GBP",current:59,compareAt:132\}/,
-    /NZD:\{currencyCode:"NZD",current:129,compareAt:256\}/,
-    /SEK:\{currencyCode:"SEK",current:799,compareAt:1800\}/,
-    /DKK:\{currencyCode:"DKK",current:529,compareAt:1225\}/,
+    /CAD:\{currencyCode:"CAD",current:99\.99,compareAt:207\}/,
+    /GBP:\{currencyCode:"GBP",current:49\.99,compareAt:132\}/,
+    /NZD:\{currencyCode:"NZD",current:109\.99,compareAt:256\}/,
+    /SEK:\{currencyCode:"SEK",current:699\.99,compareAt:1800\}/,
+    /DKK:\{currencyCode:"DKK",current:459\.99,compareAt:1225\}/,
   ]) {
     assert.match(bundle, fallback, "every pinned-market fallback matches the live Lem ladder")
   }
