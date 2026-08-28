@@ -1,6 +1,6 @@
 import assert from "node:assert/strict"
 import { readFileSync, readdirSync, statSync } from "node:fs"
-import { join } from "node:path"
+import { join, relative } from "node:path"
 import test from "node:test"
 import vm from "node:vm"
 
@@ -175,7 +175,9 @@ test("the explicit locale marker wins over a conflicting legacy cookie", () => {
 
 function htmlFiles(directory) {
   return readdirSync(directory).flatMap((name) => {
-    if (name === "advertorial" || name.startsWith(".")) return []
+    // advertorial/ ships one directory per language; lem-lander/ is a
+    // standalone English-only lander. Neither uses the shared dictionaries.
+    if (name === "advertorial" || name === "lem-lander" || name.startsWith(".")) return []
     const path = join(directory, name)
     return statSync(path).isDirectory()
       ? htmlFiles(path)
@@ -190,6 +192,10 @@ test("every shared bridge page has complete dictionaries for every locale", () =
   const rootPath = root.pathname
 
   for (const file of htmlFiles(rootPath)) {
+    // The homepage is now the English-only Lem lander (same page as
+    // lem-lander/), so it carries no shared dictionary either.
+    if (relative(rootPath, file) === "index.html") continue
+
     const html = readFileSync(file, "utf8")
     const pageMatch = html.match(/data-i18n-page="([^"]+)"/)
     assert.ok(pageMatch, `${file} is missing data-i18n-page`)
