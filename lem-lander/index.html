@@ -4,13 +4,16 @@
   lang="en"
   data-wf-page="686d7c01e6389e268a4ccbb4"
   data-wf-site="686d7c01e6389e268a4ccbb5"
+  data-bridge-page="lem_lander"
+  data-bridge-variant="lem_lander_v1"
 >
   <head>
     <meta charset="utf-8" />
 <!-- PostHog -->
+<script src="/js/bridge-cro.js"></script>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-posthog.init('phc_tidb5pyk3fbAfNR4jRPdBFQKYgPSH4opmbmPtzsz9Bdd', { api_host: 'https://us.i.posthog.com', person_profiles: 'identified_only' })
+posthog.init('phc_tidb5pyk3fbAfNR4jRPdBFQKYgPSH4opmbmPtzsz9Bdd', { api_host: 'https://us.i.posthog.com', person_profiles: 'identified_only', autocapture: false, before_send: window.NancyBridgeCroBeforeSend })
 </script>
 <!-- End PostHog -->
 <!-- Meta Pixel Code -->
@@ -2045,7 +2048,7 @@ a,
           </style>
         </div>
       </div>
-      <div class="hero-sec">
+      <div class="hero-sec" data-bridge-section-id="hero">
         <div class="padding-global">
           <div class="inner-content">
             <div class="content-wrap cc-center">
@@ -2073,8 +2076,8 @@ a,
                   alt=""
                   class="image-235"
                 />
-                <a href="https://get.nancyflow.com/en/products/lem" class="cta cc-relat w-inline-block">
-                  <p class="cta-p">Order Now &amp; Save 56%</p>
+                <a href="https://get.nancyflow.com/en/products/lem" class="cta cc-relat w-inline-block" data-bridge-cta-id="hero_primary" data-bridge-cta-location="hero">
+                  <p class="cta-p">Choose Your Lem</p>
                   <img
                     loading="lazy"
                     src="/lem-lander/images/cta-arrow.svg"
@@ -2114,7 +2117,7 @@ a,
           />
         </div>
       </div>
-      <div class="seen-sec">
+      <div class="seen-sec" data-bridge-section-id="press_logos">
         <div class="marquee-horizontal seenon">
           <div class="marquee-horizontal-alt-css w-embed">
             <style>
@@ -3075,7 +3078,7 @@ a,
           </div>
         </div>
       </div>
-      <div class="benefit-sec">
+      <div class="benefit-sec" data-bridge-section-id="benefits" data-bridge-important="true">
         <div class="padding-global">
           <div class="inner-content">
             <div class="content-wrap">
@@ -3149,7 +3152,7 @@ a,
           </div>
         </div>
       </div>
-      <div class="review-sec">
+      <div class="review-sec" data-bridge-section-id="customer_reviews" data-bridge-important="true">
         <div class="padding-global">
           <div class="inner-content">
             <div class="content-wrap">
@@ -3801,7 +3804,7 @@ a,
           class="image-hand"
         />
       </div>
-      <div class="special-sec">
+      <div class="special-sec" data-bridge-section-id="product_story">
         <div class="padding-global">
           <div class="inner-content">
             <div class="content-wrap">
@@ -3886,7 +3889,7 @@ a,
           </div>
         </div>
       </div>
-      <div class="cta-sec">
+      <div class="cta-sec" data-bridge-section-id="proof_cta">
         <div class="padding-global">
           <div class="inner-content cc-0 mobo-2">
             <div class="content-wrap">
@@ -3923,8 +3926,8 @@ a,
                     </div>
                   </div>
                   <div class="cta-hodlsss">
-                    <a href="https://get.nancyflow.com/en/products/lem" class="cta cc-relat w-inline-block">
-                      <p class="cta-p cc-bism">Order Now &amp; Save 56%</p>
+                    <a href="https://get.nancyflow.com/en/products/lem" class="cta cc-relat w-inline-block" data-bridge-cta-id="proof_primary" data-bridge-cta-location="proof">
+                      <p class="cta-p cc-bism">Choose Your Lem</p>
                       <img
                         loading="lazy"
                         src="/lem-lander/images/cta-arrow.svg"
@@ -3949,7 +3952,7 @@ a,
           </div>
         </div>
       </div>
-      <div class="comparison-sec">
+      <div class="comparison-sec" data-bridge-section-id="comparison" data-bridge-important="true">
         <div class="padding-global">
           <div class="inner-content cc-b0">
             <div class="content-wrap">
@@ -4107,7 +4110,7 @@ a,
           </div>
         </div>
       </div>
-      <div class="test-sec">
+      <div class="test-sec" data-bridge-section-id="testimonials" data-bridge-important="true">
         <div class="padding-global">
           <div class="inner-content">
             <div class="content-wrap">
@@ -5157,7 +5160,7 @@ a,
           </div>
         </div>
       </div>
-      <div class="cta2-sec">
+      <div class="cta2-sec" data-bridge-section-id="product_offer" data-bridge-important="true">
         <div class="padding-global">
           <div class="inner-content cc-mobo2">
             <div class="content-wrap">
@@ -5414,8 +5417,8 @@ a,
                     </div>
                   </div>
                   <div class="cta-hodlsss">
-                    <a href="https://get.nancyflow.com/en/products/lem" class="cta cc-relat w-inline-block">
-                      <p class="cta-p cc-bism">Order Now &amp; Save 56%</p>
+                    <a href="https://get.nancyflow.com/en/products/lem" class="cta cc-relat w-inline-block" data-bridge-cta-id="product_primary" data-bridge-cta-location="product_offer">
+                      <p class="cta-p cc-bism">Choose Your Lem</p>
                       <img
                         loading="lazy"
                         src="/lem-lander/images/cta-arrow.svg"
@@ -5441,8 +5444,8 @@ a,
         </div>
       </div>
       <div data-btn="sticky-atc" class="sticky-atc">
-        <a href="https://get.nancyflow.com/en/products/lem" class="cta w-inline-block">
-          <p class="cta-p">Add to Cart</p>
+        <a href="https://get.nancyflow.com/en/products/lem" class="cta w-inline-block" data-bridge-cta-id="sticky_primary" data-bridge-cta-location="sticky">
+          <p class="cta-p">Choose Your Lem</p>
           <img
             src="/lem-lander/images/cta-arrow.svg"
             loading="lazy"
@@ -5514,7 +5517,6 @@ document.addEventListener('click', function (e) {
   if (!/get\.nancyflow\.[a-z.]+\/.*\/products\/lem/i.test(a.getAttribute('href') || '')) return;
   if (window.fbq) fbq('track', 'InitiateCheckout', { content_ids: ['lem'], content_type: 'product', value: RDT_PRICES.lem, currency: 'USD' });
   if (window.rdt) rdt('track', 'AddToCart', { products: [{ id: 'lem' }], value: RDT_PRICES.lem, currency: 'USD', itemCount: 1 });
-  if (window.posthog) posthog.capture('bridge_cta_click', { page: 'lem-lander', destination: a.getAttribute('href') });
 }, false);
 </script>
 </body>
