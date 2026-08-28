@@ -337,7 +337,12 @@
     return base + (qs ? '?' + qs : '') + hash;
   }
 
-  function run() {
+  /**
+   * Rewrite every <a> on the page. Runs at DOMContentLoaded, which on a
+   * script-heavy page lands well after the first CTA is already clickable;
+   * armClickFallback() covers that window.
+   */
+  function patchDocument() {
     var metaCookies = ensureMetaCookies(window.location.search);
     var params = collectParams(window.location.search, metaCookies);
     // Which store this bridge domain hands off to (see BRIDGE_TO_STORE).
@@ -357,6 +362,17 @@
     }
 
     patchAnchors(document);
+  }
+
+  /**
+   * Arm the capture-phase click interceptor. Attached the moment this script
+   * executes rather than at DOMContentLoaded: a visitor can click a CTA while
+   * the rest of the page is still parsing, and until patchDocument() runs the
+   * authored hrefs still carry no attribution at all.
+   */
+  function armClickFallback() {
+    // Which store this bridge domain hands off to (see BRIDGE_TO_STORE).
+    var target = pinnedStoreTarget();
 
     // --- Click-capture fallback for dynamic anchors + inline buttons ---
     // Re-read cookies at click time because Meta's pixel loads asynchronously.
@@ -412,9 +428,14 @@
     }, true /* capture phase — fires before onclick */);
   }
 
+  // Mint the Meta cookies and arm the click interceptor straight away, so a
+  // click that lands before DOMContentLoaded still leaves with attribution.
+  ensureMetaCookies(window.location.search);
+  armClickFallback();
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run);
+    document.addEventListener('DOMContentLoaded', patchDocument);
   } else {
-    run();
+    patchDocument();
   }
 })();

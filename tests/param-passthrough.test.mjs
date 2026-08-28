@@ -14,6 +14,7 @@ function runBridge({
   href = "https://get.nancyflow.com/products/lem#details",
   hostname = "nancyflow.com",
   locale = "en",
+  readyState = "complete",
 } = {}) {
   const cookies = new Map()
   const cookieWrites = []
@@ -34,7 +35,7 @@ function runBridge({
   const document = {
     body,
     documentElement: { lang: locale },
-    readyState: "complete",
+    readyState,
     querySelectorAll(selector) {
       return selector === "a[href]" ? [anchor] : []
     },
@@ -119,6 +120,38 @@ test("patches anchors added after initial page load using fresh cookie carriers"
   assert.equal(url.searchParams.get("fbclid"), "late-click")
   assert.equal(url.searchParams.get("_fbc"), result.cookies.get("_fbc"))
   assert.equal(url.searchParams.get("_fbp"), result.cookies.get("_fbp"))
+})
+
+test("a CTA clicked before DOMContentLoaded still leaves with attribution", () => {
+  // Regression: on a script-heavy lander the authored hrefs are still bare
+  // while the page is parsing. Both the anchor rewrite AND the click fallback
+  // used to be deferred to DOMContentLoaded, so an early click navigated to
+  // the storefront with no utm_*, no click id and no Meta cookies at all.
+  const result = runBridge({
+    search: "?utm_source=facebook&fbclid=early-click",
+    readyState: "loading",
+  })
+
+  // Bulk patching has NOT run yet - this is the state an early clicker sees.
+  assert.equal(result.anchor.attributes.href, "https://get.nancyflow.com/products/lem#details")
+
+  // ...but the interceptor is already armed, and repairs the click in flight.
+  result.listeners.get("click")({ target: result.anchor })
+  const url = new URL(result.anchor.attributes.href)
+  assert.equal(url.searchParams.get("utm_source"), "facebook")
+  assert.equal(url.searchParams.get("fbclid"), "early-click")
+  assert.match(url.searchParams.get("_fbc"), /^fb\.1\.\d+\.early-click$/)
+  assert.ok(url.searchParams.has("_fbp"))
+
+  // And DOMContentLoaded still patches the rest of the page as before.
+  result.listeners.get("DOMContentLoaded")()
+  assert.ok(new URL(result.anchor.attributes.href).searchParams.has("utm_source"))
+})
+
+test("Meta cookies are minted before DOMContentLoaded", () => {
+  const result = runBridge({ search: "?fbclid=early-mint", readyState: "loading" })
+  assert.match(result.cookies.get("_fbc"), /^fb\.1\.\d+\.early-mint$/)
+  assert.match(result.cookies.get("_fbp"), /^fb\.1\.\d+\.\d+$/)
 })
 
 test("quiz buttons navigate to the guarded localized Lem handoff", () => {

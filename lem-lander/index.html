@@ -36,6 +36,16 @@ src="https://www.facebook.com/tr?id=4287828478137575&ev=PageView&noscript=1"
 </script>
 <!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
 <!-- End Reddit Pixel -->
+<!-- Storefront handoff: pins the live market/locale on every get.nancyflow.*
+     link, bootstraps the first-party _fbc/_fbp cookies the storefront's Meta
+     Conversions API reads server-side, and carries utm_*/fbclid/gclid/ttclid/
+     rdt_cid attribution across the hop.
+     Loaded HERE, in <head>, and never at the end of <body>: this page ships
+     408KB of webflow.js, so DOMContentLoaded lands ~650ms in on fast wifi and
+     seconds out on mobile. The script arms its capture-phase click interceptor
+     the moment it executes, so a CTA clicked while the page is still parsing
+     is repaired in flight instead of navigating bare. -->
+<script src="/js/param-passthrough.js"></script>
     <title>Turn yourself on. Turn the world off. | Hello Nancy</title>
     <meta
       content="Achieve Longer, More Powerful and Deeply Satisfying Orgasms."
@@ -5490,11 +5500,6 @@ a,
     ></script>
     <script src="/lem-lander/js/webflow.js" type="text/javascript"></script>
     <script src="/lem-lander/js/inline-scripts.js"></script>
-  <!-- Storefront handoff: pins the live market/locale on every get.nancyflow.*
-     link, bootstraps the first-party _fbc/_fbp cookies the storefront's Meta
-     Conversions API reads server-side, and carries utm_*/fbclid/gclid/ttclid/
-     rdt_cid attribution across the hop. Must stay last. -->
-<script src="/js/param-passthrough.js"></script>
 <script>
 // Reddit Pixel — catalog price in USD (mirrors lem.html / thank-you.html CATALOG).
 var RDT_PRICES = { lem: 89 };
