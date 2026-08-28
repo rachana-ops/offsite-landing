@@ -13,6 +13,10 @@ function runRouter({
   hash = "",
   languages = ["en-US"],
   alternates = ["en", "de", "nl", "fr", "it", "da", "x-default"],
+  hostname = "nancyflow.com",
+  storage = new Map(),
+  session = new Map(),
+  cookieJar = new Map(),
 } = {}) {
   let redirect = null
   const window = {
@@ -20,6 +24,8 @@ function runRouter({
       pathname,
       search,
       hash,
+      hostname,
+      protocol: "https:",
       replace(url) { redirect = url },
     },
   }
@@ -30,52 +36,174 @@ function runRouter({
       }))
     },
   }
+  Object.defineProperty(document, "cookie", {
+    get() {
+      return [...cookieJar].map(([name, value]) => `${name}=${value}`).join("; ")
+    },
+    set(value) {
+      const pair = value.split(";", 1)[0]
+      const separator = pair.indexOf("=")
+      cookieJar.set(pair.slice(0, separator), pair.slice(separator + 1))
+    },
+  })
+  const localStorage = {
+    getItem(key) { return storage.get(key) ?? null },
+    setItem(key, value) { storage.set(key, value) },
+  }
+  const sessionStorage = {
+    getItem(key) { return session.get(key) ?? null },
+    setItem(key, value) { session.set(key, value) },
+    removeItem(key) { session.delete(key) },
+  }
 
   vm.runInNewContext(source, {
     URLSearchParams,
     document,
+    localStorage,
+    sessionStorage,
     navigator: { languages, language: languages[0] },
     window,
   })
-  return redirect
+  return { cookieJar, redirect, session, storage }
 }
 
-test("English advertorial routes select the first available browser language", () => {
-  assert.equal(
-    runRouter({ languages: ["de-AT", "en-US"], search: "?utm_source=test", hash: "#story" }),
-    "/advertorial/fiftieslifestyle/de/?utm_source=test#story",
-  )
-  assert.equal(runRouter({ languages: ["nb-NO", "en-US"] }), "/advertorial/fiftieslifestyle/da/")
+test("browser language never switches an English advertorial", () => {
+  for (const languages of [["de-AT", "en-US"], ["nb-NO", "en-US"], ["fr-FR"]]) {
+    const result = runRouter({
+      languages,
+      search: "?utm_source=test",
+      hash: "#story",
+    })
+    assert.equal(result.redirect, null, languages[0])
+    assert.equal(result.cookieJar.size, 0, languages[0])
+    assert.equal(result.storage.size, 0, languages[0])
+  }
+  assert.doesNotMatch(source, /navigator\.(?:languages|language|userLanguage)/)
+  assert.doesNotMatch(source, /nancy_auto_locale_redirect|sessionStorage/)
 })
 
-test("advertorial routing never invents an unavailable translation", () => {
-  assert.equal(
-    runRouter({ languages: ["it-IT", "sv-SE"], alternates: ["en", "de", "nl", "fr", "sv", "x-default"] }),
-    "/advertorial/fiftieslifestyle/sv/",
-  )
-  assert.equal(
-    runRouter({ languages: ["ja-JP", "en-US"], alternates: ["en", "de", "fr", "x-default"] }),
-    null,
-  )
+test("a direct localized advertorial path renders without creating preference state", () => {
+  const result = runRouter({
+    pathname: "/advertorial/fiftieslifestyle/fr/",
+    languages: ["de-DE", "en-US"],
+  })
+
+  assert.equal(result.redirect, null)
+  assert.equal(result.cookieJar.size, 0)
+  assert.equal(result.storage.size, 0)
+  assert.doesNotMatch(source, /localStorage\.setItem|document\.cookie\s*=/)
 })
 
 test("explicit advertorial locale paths remain stable", () => {
   assert.equal(
-    runRouter({ pathname: "/advertorial/fiftieslifestyle/fr/", languages: ["de-DE"] }),
+    runRouter({ pathname: "/advertorial/fiftieslifestyle/fr/", languages: ["de-DE"] }).redirect,
     null,
   )
 })
 
-test("a supported lang query is explicit and preserves unrelated URL state", () => {
-  assert.equal(
-    runRouter({ search: "?lang=fr&utm_campaign=spring", hash: "#offer", languages: ["de-DE"] }),
-    "/advertorial/fiftieslifestyle/fr/?utm_campaign=spring#offer",
+test("a bare or stale lang query never switches an English advertorial", () => {
+  for (const lang of ["fr", "de-AT", "ja"]) {
+    const result = runRouter({
+      search: `?lang=${lang}&utm_campaign=spring`,
+      hash: "#offer",
+      languages: ["de-DE"],
+    })
+    assert.equal(result.redirect, null, lang)
+    assert.equal(result.cookieJar.size, 0, lang)
+    assert.equal(result.storage.size, 0, lang)
+  }
+})
+
+test("legacy cookies and storage cannot route an English advertorial", () => {
+  const storage = new Map([["nancy_locale", "fr"]])
+  const cookieJar = new Map([
+    ["NEXT_LOCALE", "fr"],
+    ["NANCY_LOCALE_MANUAL", "fr"],
+  ])
+  const result = runRouter({
+    languages: ["de-DE"],
+    storage,
+    cookieJar,
+    search: "?lang=fr&utm_source=test",
+  })
+
+  assert.equal(result.redirect, null)
+})
+
+test("a localized path does not contaminate a later English ad entry", () => {
+  const storage = new Map()
+  const cookieJar = new Map()
+  const localized = runRouter({
+    pathname: "/advertorial/fiftieslifestyle/fr/",
+    languages: ["de-DE"],
+    storage,
+    cookieJar,
+  })
+
+  assert.equal(localized.redirect, null)
+  assert.equal(storage.size, 0)
+  assert.equal(cookieJar.size, 0)
+
+  const nextPage = runRouter({
+    pathname: "/advertorial/menopause/en/",
+    languages: ["de-DE"],
+    alternates: ["en", "de", "nl", "fr", "sv", "x-default"],
+    storage,
+    cookieJar,
+  })
+  assert.equal(nextPage.redirect, null)
+})
+
+test("a V2 selector cookie routes an English advertorial and strips lang transport", () => {
+  const cookieJar = new Map([["NANCY_LOCALE_SELECTED_V2", "fr"]])
+  const result = runRouter({
+    languages: ["de-DE"],
+    cookieJar,
+    search: "?lang=fr&utm_source=test",
+    hash: "#offer",
+  })
+
+  assert.equal(result.redirect, "/advertorial/fiftieslifestyle/fr/?utm_source=test#offer")
+  assert.equal(cookieJar.size, 1)
+})
+
+test("a stale lang query cannot replace the V2 selector choice", () => {
+  const cookieJar = new Map([["NANCY_LOCALE_SELECTED_V2", "fr"]])
+  const result = runRouter({
+    cookieJar,
+    search: "?lang=de&utm_source=test",
+  })
+
+  assert.equal(result.redirect, "/advertorial/fiftieslifestyle/fr/?utm_source=test")
+})
+
+test("V2 selector storage routes an English advertorial", () => {
+  const storage = new Map([["nancy_locale_selected_v2", "fr"]])
+  const result = runRouter({ storage, search: "?utm_source=test" })
+
+  assert.equal(result.redirect, "/advertorial/fiftieslifestyle/fr/?utm_source=test")
+})
+
+test("an unavailable V2 selector locale keeps the English fallback", () => {
+  const storage = new Map([["nancy_locale_selected_v2", "ja"]])
+  const result = runRouter({
+    languages: ["de-DE"],
+    alternates: ["en", "de", "fr", "x-default"],
+    storage,
+  })
+
+  assert.equal(result.redirect, null)
+})
+
+test("the authored manual language control remains visible", () => {
+  const html = readFileSync(
+    new URL("../advertorial/menopause-fifty/en/index.html", import.meta.url),
+    "utf8",
   )
-  assert.equal(
-    runRouter({ search: "?lang=ja&utm_campaign=spring", languages: ["de-DE"] }),
-    null,
-    "an unavailable explicit locale must not silently select a different language",
-  )
+
+  assert.match(html, /data-slot="dropdown-menu-trigger"/)
+  assert.match(html, /lucide lucide-globe/)
+  assert.match(html, />Switch language</)
 })
 
 function indexFiles(directory) {

@@ -154,6 +154,34 @@ test("Meta cookies are minted before DOMContentLoaded", () => {
   assert.match(result.cookies.get("_fbp"), /^fb\.1\.\d+\.\d+$/)
 })
 
+test("patches a dynamic anchor when the click lands on its nested button", () => {
+  const result = runBridge({
+    hostname: "nancyflow.ca",
+    search: "?utm_source=unlock",
+  })
+  const dynamicAnchor = {
+    tagName: "A",
+    parentElement: result.body,
+    attributes: { href: "https://get.nancyflow.com/en/products/lem" },
+    getAttribute(name) { return this.attributes[name] ?? null },
+    setAttribute(name, value) { this.attributes[name] = value },
+  }
+  const nestedButton = {
+    tagName: "BUTTON",
+    parentElement: dynamicAnchor,
+    attributes: {},
+    getAttribute(name) { return this.attributes[name] ?? null },
+    setAttribute(name, value) { this.attributes[name] = value },
+  }
+
+  result.listeners.get("click")({ target: nestedButton })
+
+  const url = new URL(dynamicAnchor.attributes.href)
+  assert.equal(url.origin + url.pathname, "https://get.nancyflow.ca/en/products/lem")
+  assert.equal(url.searchParams.get("utm_source"), "unlock")
+  assert.equal(url.searchParams.get("_fbp"), result.cookies.get("_fbp"))
+})
+
 test("quiz buttons navigate to the guarded localized Lem handoff", () => {
   const result = runBridge({
     hostname: "nancyflow.ca",

@@ -1,12 +1,11 @@
 /**
  * i18n.js — client-side translation runtime for the Nancy bridge pages.
  *
- * These pages are static HTML hosted on GitHub Pages (no server / no edge), so
- * unlike the Next storefront — which detects the visitor's country at the edge
- * (x-vercel-ip-country / cf-ipcountry) and server-renders the matching locale —
- * we detect language CLIENT-SIDE from navigator.languages. That mirrors the
- * storefront's accept-language signal (see pickLocaleFromAcceptLanguage in the
- * storefront middleware) using the same supported-locale set.
+ * These pages are static HTML hosted without a server-side locale runtime.
+ * Language is selected only by the selector-owned V2 preference shared with
+ * the storefront. A first-time visitor on every market host sees English;
+ * browser language, market hostname, legacy state, and bare URL parameters
+ * never switch the page.
  *
  * English is the source of truth: every translatable element keeps its English
  * text baked into the markup as the always-present fallback. For a non-English
@@ -89,65 +88,44 @@
     return LANG_TO_LOCALE[raw.split("-")[0]] || null;
   }
 
-  /**
-   * Language BRIDGE domains — one dedicated domain per top language, mirroring
-   * the storefront's language markets (GEO_MARKETS in the storefront's
-   * src/i18n/routing.ts — keep in sync). When LIVE:
-   *   - a language domain PINS its language (no browser detection);
-   *   - window.i18n.setLocale('de') navigates to the domain instead of
-   *     reloading in place.
-   * Flip LANG_DOMAINS_LIVE to true only when every domain below serves this
-   * site over HTTPS — otherwise visitors would be bounced onto dead domains.
-   *
-   * `it` and `da` deliberately have NO domain: nancyflow.it was never
-   * registered and nancyflow.dk is undelegated, so both stay on nancyflow.com
-   * and hand off to get.nancyflow.com with the /<locale>/<country>/ path
-   * prefix, exactly as before.
-   */
-  var LANG_DOMAINS_LIVE = false;
-  var LANG_DOMAINS = {
-    da: "nancyflow.dk",
-    de: "nancyflow.de",
-    nl: "nancyflow.nl",
-    fr: "nancyflow.fr",
-    sv: "nancyflow.se"
-  };
+  // These V2 keys are written only by setLocale (the authored selector). The
+  // legacy nancy_locale / NANCY_LOCALE_MANUAL keys are intentionally never
+  // read: older host, path, and query routing could create them without a click.
+  var STORAGE_KEY = "nancy_locale_selected_v2";
+  var STOREFRONT_COOKIE = "NEXT_LOCALE";
+  var SELECTED_LOCALE_COOKIE = "NANCY_LOCALE_SELECTED_V2";
+  var COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+  var COOKIE_APEXES = [
+    "nancyflow.com", "nancyflow.co.uk", "nancyflow.ca", "nancyflow.co.nz",
+    "nancyflow.de", "nancyflow.nl", "nancyflow.fr", "nancyflow.se"
+  ];
+  var HIDE_STYLE_ID = "i18n-hide-style";
+  var REVEAL_TIMEOUT_MS = 1500;
 
-  /** Locale pinned by the current hostname, or null off the language domains. */
-  function localeFromHost() {
+  /** Resolve the production apex shared by a bridge and its get.* storefront. */
+  function cookieApex() {
     var host = window.location.hostname.toLowerCase().replace(/^www\./, "");
-    for (var loc in LANG_DOMAINS) {
-      if (LANG_DOMAINS[loc] === host) return loc;
+    for (var i = 0; i < COOKIE_APEXES.length; i++) {
+      var apex = COOKIE_APEXES[i];
+      if (host === apex || host.slice(-(apex.length + 1)) === "." + apex) {
+        return apex;
+      }
     }
     return null;
   }
 
-  var STORAGE_KEY = "nancy_locale";
-  var STOREFRONT_COOKIE = "NEXT_LOCALE";
-  var EXPLICIT_LOCALE_COOKIE = "NANCY_LOCALE_MANUAL";
-  var COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
-  var HIDE_STYLE_ID = "i18n-hide-style";
-  var REVEAL_TIMEOUT_MS = 1500;
-
   /** Share an explicit bridge-language choice with get.nancyflow.*. */
   function writeStorefrontLocaleCookie(loc) {
-    var host = window.location.hostname.toLowerCase().replace(/^www\./, "");
-    var knownApex = host === "nancyflow.com";
-    for (var key in LANG_DOMAINS) {
-      if (LANG_DOMAINS[key] === host) knownApex = true;
-    }
     // Preview/localhost hosts get a host-only cookie. Production bridge hosts
     // use their apex so the get.nancyflow.* subdomain receives the same choice.
     var suffix =
       "; Path=/; Max-Age=" + COOKIE_MAX_AGE + "; SameSite=Lax";
-    if (knownApex) suffix += "; Domain=." + host;
+    var apex = cookieApex();
+    if (apex) suffix += "; Domain=." + apex;
     if (window.location.protocol === "https:") suffix += "; Secure";
     try {
       document.cookie = STOREFRONT_COOKIE + "=" + encodeURIComponent(loc) + suffix;
-      // Store the locale in the intent marker too. Unlike NEXT_LOCALE this
-      // cookie did not exist in legacy deployments, so an old host-only
-      // NEXT_LOCALE=en cannot beat the newer parent-domain choice by ordering.
-      document.cookie = EXPLICIT_LOCALE_COOKIE + "=" + encodeURIComponent(loc) + suffix;
+      document.cookie = SELECTED_LOCALE_COOKIE + "=" + encodeURIComponent(loc) + suffix;
     } catch (e) {}
   }
 
@@ -169,75 +147,39 @@
     return "";
   }
 
-  /** Read ?lang= override from the current URL, normalised to a supported locale. */
+  /** Return only a preference previously written by the language selector. */
+  function selectedLocale() {
+    var selected = localeFromLanguageTag(readCookie(SELECTED_LOCALE_COOKIE));
+    if (selected && SUPPORTED.indexOf(selected) !== -1) return selected;
+    try {
+      selected = localeFromLanguageTag(localStorage.getItem(STORAGE_KEY));
+      if (selected && SUPPORTED.indexOf(selected) !== -1) return selected;
+    } catch (e) {}
+    return null;
+  }
+
+  /** Read a selector transport value, normalised to a supported locale. */
   function langFromQuery() {
     var m = /[?&]lang=([^&#]+)/.exec(window.location.search);
     if (!m) return null;
     try {
       return localeFromLanguageTag(decodeURIComponent(m[1]));
     } catch (e) {
-      // A malformed campaign URL must never abort the bridge runtime (which
-      // would also prevent the guarded storefront handoff from initializing).
+      // A malformed campaign URL must never abort the bridge runtime.
       return null;
     }
   }
 
-  /** Walk navigator.languages in priority order; first mapped locale wins. */
-  function langFromBrowser() {
-    var langs = (navigator.languages && navigator.languages.length)
-      ? navigator.languages
-      : [navigator.language || navigator.userLanguage || "en"];
-    for (var i = 0; i < langs.length; i++) {
-      if (!langs[i]) continue;
-      var locale = localeFromLanguageTag(langs[i]);
-      if (locale) return locale;
-    }
-    return "en";
-  }
-
   /**
-   * Resolve the active locale. Priority:
-   *   1. ?lang= URL override
-   *   2. a language-specific bridge hostname
-   *   3. a deliberate storefront choice shared by cookie
-   *   4. a previously remembered bridge choice (localStorage)
-   *   5. browser languages
-   * Defaults to "en".
+   * Resolve the active locale from selector-owned V2 state only. `?lang=` is
+   * transport for setLocale and is accepted only when it agrees with that
+   * state; a stale/bare campaign parameter is never a language choice.
    */
   function resolveLocale() {
+    var selected = selectedLocale();
+    if (!selected) return "en";
     var q = langFromQuery();
-    if (q) {
-      rememberLocale(q);
-      return q;
-    }
-    // A language domain IS the language choice — pin it, ignoring any stale
-    // localStorage/browser signal. (?lang above stays as an explicit escape.)
-    var pinned = localeFromHost();
-    if (pinned) {
-      writeStorefrontLocaleCookie(pinned);
-      return pinned;
-    }
-    // A choice made on get.nancyflow.com is shared back to this sibling host.
-    // Only trust it with the explicit marker: older storefront deployments
-    // auto-seeded NEXT_LOCALE=en for every visitor.
-    var explicit = readCookie(EXPLICIT_LOCALE_COOKIE);
-    var shared = SUPPORTED.indexOf(explicit) !== -1
-      ? explicit
-      : (explicit === "1" ? readCookie(STOREFRONT_COOKIE) : "");
-    if (shared && SUPPORTED.indexOf(shared) !== -1) {
-      try { localStorage.setItem(STORAGE_KEY, shared); } catch (e) {}
-      return shared;
-    }
-    try {
-      var saved = localStorage.getItem(STORAGE_KEY);
-      if (saved && SUPPORTED.indexOf(saved) !== -1) {
-        // Backfill the shared cookie for choices saved before the storefront
-        // handoff existed.
-        writeStorefrontLocaleCookie(saved);
-        return saved;
-      }
-    } catch (e) {}
-    return langFromBrowser();
+    return q === selected ? q : selected;
   }
 
   /** Absolute site root derived from this script's own URL (.../js/i18n.js). */
@@ -278,21 +220,13 @@
     setLocale: function (loc) {
       if (SUPPORTED.indexOf(loc) === -1) return;
       rememberLocale(loc);
-      // Choosing a language that has a live dedicated domain navigates THERE
-      // (path + query preserved); other languages reload in place as before.
-      // Choosing a domain-less language while ON a language domain returns to
-      // nancyflow.com (which serves every language client-side).
-      var target = LANG_DOMAINS_LIVE && LANG_DOMAINS[loc] ? LANG_DOMAINS[loc] : null;
-      var here = localeFromHost();
-      if (target && window.location.hostname.toLowerCase().replace(/^www\./, "") !== target) {
-        window.location.assign("https://" + target + window.location.pathname + stripLangParam(window.location.search) + window.location.hash);
-        return;
-      }
-      if (!target && here) {
-        window.location.assign("https://nancyflow.com" + window.location.pathname + withLangParam(stripLangParam(window.location.search), loc) + window.location.hash);
-        return;
-      }
-      window.location.reload();
+      // A language choice changes content only. Relative navigation deliberately
+      // preserves the current market hostname and therefore its currency.
+      window.location.assign(
+        window.location.pathname +
+        withLangParam(stripLangParam(window.location.search), loc) +
+        window.location.hash
+      );
     },
     supported: SUPPORTED.slice()
   };
@@ -312,9 +246,7 @@
     return (search ? search + "&" : "?") + "lang=" + loc;
   }
 
-  // Never geo/language-redirect a visitor who landed on nancyflow.com. Their
-  // locale is rendered in place; a domain hop only happens after they actively
-  // choose a language through setLocale above.
+  // Language never changes the current market hostname.
 
   // --- No-FOUC: hide the body for non-English visitors until we swap text. ---
   var needsTranslation = LOCALE !== "en" && SUPPORTED.indexOf(LOCALE) !== -1;
@@ -342,8 +274,8 @@
     window.setTimeout(reveal, REVEAL_TIMEOUT_MS);
   }
 
-  // Always reflect the active locale on <html lang> (helps a11y + the store's
-  // own detection stays consistent because both read the same browser signal).
+  // Always reflect the explicitly resolved locale on <html lang> for a11y and
+  // for the localized storefront handoff.
   try { document.documentElement.lang = LOCALE; } catch (e) {}
 
   /** Apply the loaded dictionary to all instrumented nodes in `root`. */
