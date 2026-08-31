@@ -63,10 +63,20 @@ for (const relativePath of ["../index.html", "../lem-lander/index.html"]) {
     assert.match(html, /data-bridge-variant="lem_lander_v1"/)
     assert.equal((html.match(/>Choose Your Lem</g) ?? []).length, 4)
     assert.doesNotMatch(html, /<p class="cta-p[^"]*">(?:Add to Cart|Order Now[^<]*)<\/p>/i)
+    assert.equal((html.match(/src="\/js\/bridge-sticky-cta\.js"/g) ?? []).length, 1)
     assert.equal((html.match(/src="\/js\/bridge-cro\.js"/g) ?? []).length, 1)
+    assert.ok(
+      html.indexOf('src="/js/bridge-sticky-cta.js"') < html.indexOf('src="/js/bridge-cro.js"'),
+      "sticky visibility must initialize before CRO observers",
+    )
     assert.ok(
       html.indexOf('src="/js/bridge-cro.js"') < html.indexOf("posthog.init("),
       "privacy hook must exist before PostHog initializes",
+    )
+    assert.match(
+      html,
+      /<div\b[^>]*data-btn="sticky-atc"[^>]*data-sticky-state="hidden"[^>]*aria-hidden="true"[^>]*\binert(?:\s|>)/i,
+      "the off-screen sticky CTA must be inert before JavaScript initializes",
     )
     assert.match(html, /autocapture:\s*false/)
     assert.match(html, /before_send:\s*window\.NancyBridgeCroBeforeSend/)
@@ -304,6 +314,29 @@ test("CTA impression/view and click events are finite, deduplicated, and privacy
     const serialized = JSON.stringify(capture.properties)
     assert.doesNotMatch(serialized, /SECRET_CLICK|fbclid|_fbp|\?utm_|#buy/)
     assert.equal(Object.hasOwn(capture.properties, "destination"), false)
+  }
+})
+
+test("the sticky CTA retains finite bridge_cro_v1 click and handoff tracking", () => {
+  const result = runTracker()
+  const clickRegistration = result.documentListeners.listeners("click")[0]
+
+  clickRegistration.listener({
+    target: result.ctas[3],
+    isTrusted: true,
+  })
+
+  const click = events(result, "bridge_cta_click")[0]
+  const handoff = events(result, "bridge_handoff_started")[0]
+  for (const capture of [click, handoff]) {
+    assert.equal(capture.properties.schema_version, "bridge_cro_v1")
+    assert.equal(capture.properties.cta_id, "sticky_primary")
+    assert.equal(capture.properties.cta_location, "sticky")
+    assert.equal(capture.properties.is_sticky, true)
+    assert.equal(capture.properties.destination_host, "get.nancyflow.com")
+    assert.equal(capture.properties.destination_path, "/en/products/lem")
+    assert.equal(capture.options.transport, "sendBeacon")
+    assert.equal(capture.options.send_instantly, true)
   }
 })
 
