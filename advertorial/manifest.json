@@ -918,7 +918,7 @@
           "chrome-extension leftover"
         ],
         "added": [
-          "PostHog+Meta(4287828478137575)+Reddit(a2_j3xe4m7w7k79) head block verbatim from editorial/index.html",
+          "PostHog+Reddit(a2_j3xe4m7w7k79) head block from editorial/index.html; Meta delivery is CAPI-only",
           "preconnect + speculationrules prefetch of localized PDP",
           "canonical + hreflang de/nl/fr/sv (no x-default)",
           "minimal inline countdown replacement (no tracking)",
