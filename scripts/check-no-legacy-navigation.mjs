@@ -6,6 +6,23 @@ const IGNORED_DIRECTORIES = new Set([".git", ".vercel", "node_modules"])
 const TEXT_EXTENSIONS = new Set([".css", ".html", ".js", ".json"])
 const LEGACY_URL =
   /(?:https?:)?\/\/(?:[a-z0-9-]+\.)*hellonancy\.com(?::\d+)?(?:[/?#][^\s"'`<>{}\]\\)]*)?/gi
+// Every page loads the Hello Nancy attribution relay as a script, never as
+// navigation:
+//   <script data-cfasync="false" defer src="https://sub.hellonancy.com/bridge/v1.js"></script>
+// Only that exact URL, quoted as the src attribute of a <script> element in an
+// HTML file, is exempt. Every other hellonancy.com URL stays forbidden.
+const BRIDGE_SCRIPT_URL = "https://sub.hellonancy.com/bridge/v1.js"
+
+function isBridgeScriptSrc(relativePath, source, match) {
+  if (!relativePath.toLowerCase().endsWith(".html")) return false
+  if (match[0] !== BRIDGE_SCRIPT_URL) return false
+  const quote = source[match.index - 1]
+  if (quote !== '"' && quote !== "'") return false
+  if (source[match.index + match[0].length] !== quote) return false
+  const tagStart = source.lastIndexOf("<", match.index)
+  if (tagStart === -1) return false
+  return /^<script\b[^<>]*\ssrc=$/i.test(source.slice(tagStart, match.index - 1))
+}
 
 async function collectFiles(directory = ".") {
   const entries = await readdir(path.join(ROOT, directory), {
@@ -45,6 +62,7 @@ for (const relativePath of files) {
     // These static pages still load a few Shopify-hosted media resources.
     // They are not navigation and remain allowed until fully mirrored locally.
     if (url.pathname.startsWith("/cdn/")) continue
+    if (isBridgeScriptSrc(relativePath, source, match)) continue
 
     failures.push({
       file: relativePath.replace(/^\.\//, ""),
