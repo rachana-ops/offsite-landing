@@ -8,8 +8,10 @@ import test from "node:test"
 
 const root = fileURLToPath(new URL("..", import.meta.url))
 const checker = join(root, "scripts", "check-no-legacy-navigation.mjs")
+// async, not defer: a deferred relay would hold DOMContentLoaded (and every
+// handler waiting for it) until sub.hellonancy.com answers.
 const BRIDGE_TAG =
-  '<script data-cfasync="false" defer src="https://sub.hellonancy.com/bridge/v1.js"></script>'
+  '<script data-cfasync="false" async src="https://sub.hellonancy.com/bridge/v1.js"></script>'
 const NANCY_POSTHOG_TOKEN = "phc_tidb5pyk3fbAfNR4jRPdBFQKYgPSH4opmbmPtzsz9Bdd"
 
 function htmlFiles(directory) {
@@ -37,6 +39,10 @@ test("every page loads the Hello Nancy bridge relay exactly once, verbatim, in <
     const path = relative(root, file)
 
     assert.equal(count(html, BRIDGE_TAG), 1, `${path} must contain the verbatim bridge tag once`)
+    assert.ok(
+      !/<script\b[^>]*\bdefer\b[^>]*bridge\/v1\.js/i.test(html),
+      `${path} must not defer the relay`,
+    )
     assert.equal(count(html, "sub.hellonancy.com"), 1, `${path} references the relay more than once`)
     assert.equal(
       (html.match(/<script\b[^>]*\bsrc=["'][^"']*bridge\/v1\.js/gi) ?? []).length,

@@ -8,7 +8,7 @@ const LEGACY_URL =
   /(?:https?:)?\/\/(?:[a-z0-9-]+\.)*hellonancy\.com(?::\d+)?(?:[/?#][^\s"'`<>{}\]\\)]*)?/gi
 // Every page loads the Hello Nancy attribution relay as a script, never as
 // navigation:
-//   <script data-cfasync="false" defer src="https://sub.hellonancy.com/bridge/v1.js"></script>
+//   <script data-cfasync="false" async src="https://sub.hellonancy.com/bridge/v1.js"></script>
 // Only that exact URL, quoted as the src attribute of a <script> element in an
 // HTML file, is exempt. Every other hellonancy.com URL stays forbidden.
 const BRIDGE_SCRIPT_URL = "https://sub.hellonancy.com/bridge/v1.js"
