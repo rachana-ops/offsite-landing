@@ -157,8 +157,8 @@
       'tb_tfa_script');
     </script>
     <!-- End of Taboola Pixel Code -->
-    <script type="module" crossorigin src="/unlock/assets/index-1253cf73e423.js"></script>
-    <link rel="stylesheet" crossorigin href="/unlock/assets/index-9f8d1a38c2d7.css">
+    <!-- WELLNESS_SCRIPT -->
+    <!-- WELLNESS_STYLE -->
   <script data-cfasync="false" async src="https://sub.hellonancy.com/bridge/v1.js"></script>
   </head>
 

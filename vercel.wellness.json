@@ -1,0 +1,21 @@
+{
+  "buildCommand": "npm run wellness-build",
+  "outputDirectory": ".wellness-public",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/unlock/index.html"
+    }
+  ]
+}

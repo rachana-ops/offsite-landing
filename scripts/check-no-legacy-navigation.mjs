@@ -2,7 +2,7 @@ import { readdir, readFile } from "node:fs/promises"
 import path from "node:path"
 
 const ROOT = process.cwd()
-const IGNORED_DIRECTORIES = new Set([".git", ".vercel", "node_modules"])
+const IGNORED_DIRECTORIES = new Set([".git", ".vercel", "node_modules", ".wellness-public"])
 const TEXT_EXTENSIONS = new Set([".css", ".html", ".js", ".json"])
 const LEGACY_URL =
   /(?:https?:)?\/\/(?:[a-z0-9-]+\.)*hellonancy\.com(?::\d+)?(?:[/?#][^\s"'`<>{}\]\\)]*)?/gi
@@ -10,7 +10,8 @@ const LEGACY_URL =
 // navigation:
 //   <script data-cfasync="false" async src="https://sub.hellonancy.com/bridge/v1.js"></script>
 // Only that exact URL, quoted as the src attribute of a <script> element in an
-// HTML file, is exempt. Every other hellonancy.com URL stays forbidden.
+// HTML file, is exempt. The Wellness guide is also allowed to link directly
+// to the exact Lem product page, as requested for that separate funnel.
 const BRIDGE_SCRIPT_URL = "https://sub.hellonancy.com/bridge/v1.js"
 
 function isBridgeScriptSrc(relativePath, source, match) {
@@ -63,6 +64,8 @@ for (const relativePath of files) {
     // They are not navigation and remain allowed until fully mirrored locally.
     if (url.pathname.startsWith("/cdn/")) continue
     if (isBridgeScriptSrc(relativePath, source, match)) continue
+    const isWellnessFile = relativePath === "unlock/index.html" || /^unlock\/assets\/index-.*\.js$/.test(relativePath)
+    if (isWellnessFile && url.origin === "https://hellonancy.com" && url.pathname === "/products/lem") continue
 
     failures.push({
       file: relativePath.replace(/^\.\//, ""),

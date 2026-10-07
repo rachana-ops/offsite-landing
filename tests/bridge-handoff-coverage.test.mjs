@@ -7,7 +7,7 @@ const root = new URL("..", import.meta.url).pathname
 
 function htmlFiles(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    if ([".git", ".vercel", "node_modules"].includes(entry.name)) return []
+    if ([".git", ".vercel", "node_modules", ".wellness-public"].includes(entry.name)) return []
     const path = join(directory, entry.name)
     return entry.isDirectory()
       ? htmlFiles(path)
@@ -30,6 +30,13 @@ test("every Lem bridge handoff uses the guarded live storefront route", () => {
       /(?:href\s*=\s*|window\.location\s*=\s*)["'](?:\.\/)?lem\.html(?:[?#][^"']*)?["']/i,
       `${relativePath} still navigates to the local mock Lem page`,
     )
+
+    if (relativePath === "unlock/index.html") {
+      assert.match(html, /https:\/\/hellonancy\.com\/products\/lem/)
+      assert.match(html, /src=["']\/js\/wellness-attribution\.js["']/)
+      guardedPages.push(relativePath)
+      continue
+    }
 
     const hasLemHandoff = /https:\/\/get\.nancyflow\.[^\s"'<>]+\/products\/lem(?:[?#\s"'<>]|$)/i.test(html)
     if (!hasLemHandoff) continue

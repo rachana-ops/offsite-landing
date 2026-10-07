@@ -16,7 +16,7 @@ const NANCY_POSTHOG_TOKEN = "phc_tidb5pyk3fbAfNR4jRPdBFQKYgPSH4opmbmPtzsz9Bdd"
 
 function htmlFiles(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    if ([".git", ".vercel", "node_modules"].includes(entry.name)) return []
+    if ([".git", ".vercel", "node_modules", ".wellness-public"].includes(entry.name)) return []
     const path = join(directory, entry.name)
     return entry.isDirectory()
       ? htmlFiles(path)
