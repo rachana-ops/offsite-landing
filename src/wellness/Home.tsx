@@ -21,10 +21,7 @@ export default function Home() {
     { src: "/unlock/PDP-1.jpg", alt: "Lem with lifestyle setting" },
     { src: "/unlock/PDP-2.jpg", alt: "Close-up of Lem design" },
     { src: "/unlock/PDP-3.jpg", alt: "Lem product details" },
-    { src: "/unlock/PDP-4.jpg", alt: "Lem in use demonstration" },
     { src: "/unlock/PDP-5.jpg", alt: "Lem packaging and accessories" },
-    { src: "/unlock/PDP-6.jpg", alt: "Lem lifestyle image" },
-    { src: "/unlock/PDP-7.jpg", alt: "Lem product features" },
   ];
 
   return (
@@ -140,10 +137,10 @@ export default function Home() {
       <section className="container py-8">
         <img 
           src="/unlock/PDP.jpg" 
-          alt="Nancy's Lem wellness device on nightstand" 
+          alt="Nancy's Lem wellness device held in a hand" 
           className="w-full rounded-lg shadow-lg"
         />
-        <p className="text-sm text-gray-500 mt-2 italic">The Nancy's Lem sits discreetly on a nightstand—most people think it's a decorative lemon. Photo: Hello Nancy</p>
+        <p className="text-sm text-gray-500 mt-2 italic">Nancy's Lem has a compact, lemon-shaped design. Photo: Hello Nancy</p>
       </section>
 
       {/* Trust Indicators */}
@@ -299,8 +296,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <img 
-                src="/unlock/PDP-5.jpg" 
-                alt="Lem unboxing experience" 
+                src="/unlock/PDP-2.jpg" 
+                alt="Lem device beside fresh lemons" 
                 className="w-full rounded-lg shadow-lg"
               />
             </div>
