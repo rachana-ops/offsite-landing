@@ -137,7 +137,7 @@ export default function Home() {
       <section className="container py-8">
         <img 
           src="/unlock/PDP.jpg" 
-          alt="Nancy's Lem wellness device held in a hand" 
+          alt="Nancy's Lem wellness device held in a hand"
           className="w-full rounded-lg shadow-lg"
         />
         <p className="text-sm text-gray-500 mt-2 italic">Nancy's Lem has a compact, lemon-shaped design. Photo: Hello Nancy</p>
@@ -296,8 +296,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <img 
-                src="/unlock/PDP-2.jpg" 
-                alt="Lem device beside fresh lemons" 
+                src="/unlock/PDP-2.jpg"
+                alt="Lem device beside fresh lemons"
                 className="w-full rounded-lg shadow-lg"
               />
             </div>
