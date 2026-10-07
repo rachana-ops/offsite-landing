@@ -1,0 +1,7 @@
+This English guide is served on wellnessinsiderguide.com and www.wellnessinsiderguide.com. Its editable article, UI, stylesheet, and HTML template live in this directory. `npm run build:wellness` regenerates the content-hashed files under `unlock/`.
+
+Run `npm run wellness-build` to compile the guide, run all repository checks, and stage only public landing-page assets. Product CTAs go to `https://hellonancy.com/products/lem`; the dedicated parameter helper preserves UTM values, Taboola's `tblci`, other click IDs, custom fields, repeat values, and empty values. The existing Meta CAPI bridge carries raw cookie identifiers through its `hn_at` token.
+
+Taboola account 2079308 sends one `page_view` per document load and `lem_product_click` on primary or middle product-link clicks. This does not send purchase events. Conversion reporting for the custom click event depends on the account's conversion rules. Reference: https://developers.taboola.com/pixel/docs/add-the-base-pixel-to-an-spa
+
+To deploy, link the checkout to Vercel project `wellness-insider-lander`, commit changes, then run `npm run deploy:wellness -- --prod --skip-domain`. The script copies tracked source into an isolated deployment directory and uses `vercel.wellness.json` as the uploaded `vercel.json`. This matters because the remote builder reads the uploaded root configuration even when CLI `--local-config` selected a different file. Inspect the staged deployment and promote its URL after verification. The shared Nancy bridge's default configuration is preserved.
