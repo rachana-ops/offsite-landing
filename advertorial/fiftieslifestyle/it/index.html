@@ -16,8 +16,159 @@
 <script src="../../../js/advertorial-locale.js"></script>
 <!-- PostHog -->
 <script>
-!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-posthog.init('phc_tidb5pyk3fbAfNR4jRPdBFQKYgPSH4opmbmPtzsz9Bdd', { api_host: 'https://us.i.posthog.com', person_profiles: 'identified_only' })
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="$i ji init en nn Ar tn an Yi capture calculateEventProperties dn register register_once register_for_session unregister unregister_for_session gn getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync mn identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty fn hn createPersonProfile setInternalOrTestUser pn Ji opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing un debug Dr vn getPageViewId captureTraceFeedback captureTraceMetric Zi".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+
+    // Nancy anonymous funnel tracking v1. A new persistence namespace prevents
+    // existing person profiles from making future anonymous traffic billable.
+    (function () {
+        var PH_TOKEN = 'phc_tidb5pyk3fbAfNR4jRPdBFQKYgPSH4opmbmPtzsz9Bdd';
+        var ID_KEY = 'nancy_ph_anon_v1';
+        var TOUCH_KEY = 'nancy_ph_first_touch_v1';
+        var UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[47][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+        var SESSION_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+        var ROOTS = ['hellonancy.com', 'feelnancy.com', 'modernwellnessinsider.com', 'wellnessinsiderguide.com', 'herdailyinsight.com', 'fiftieslifestyle.com', 'bestadulttoys.com', 'zenify.today', 'zenifytoday.com', 'shophellonancy.com', 'officialnancy.com', 'regulatetoday.com', 'manus.space', 'nancyflow.com', 'nancyflow.ca', 'nancyflow.de', 'nancyflow.fr', 'nancyflow.nl', 'nancyflow.se', 'nancyflow.co.nz', 'nancyflow.co.uk'];
+        // These receivers still use externally managed GTM identity code.
+        // Passing our fresh ID there would create a profile for that ID.
+        var LEGACY_RECEIVERS = ['bestadulttoys.com', 'www.bestadulttoys.com', 'unlock.hellonancy.com'];
+        var UTM_FIELDS = ['source', 'medium', 'campaign', 'content', 'term', 'id'];
+        var rawHash = (location.hash || '').replace(/^#/, '');
+        var hash = new URLSearchParams(rawHash);
+        var inboundId = hash.get('distinct_id');
+        var marked = hash.get('ph_cost_v') === '1' && UUID.test(inboundId || '');
+        function read(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+        function save(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
+        function validSession(value) {
+            if (!SESSION_UUID.test(value || '')) return false;
+            var started = parseInt(value.replace(/-/g, '').slice(0, 12), 16);
+            var age = Date.now() - started;
+            return age >= -300000 && age <= 86400000;
+        }
+        function freshId() {
+            if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.floor(Math.random() * 16);
+                return (c === 'x' ? r : (r & 3) | 8).toString(16);
+            });
+        }
+        var storedId = read(ID_KEY);
+        var distinctId = marked ? inboundId : (UUID.test(storedId || '') ? storedId : freshId());
+        save(ID_KEY, distinctId);
+        function safeLanding(raw) {
+            try {
+                var url = new URL(raw);
+                if (!/^https?:$/.test(url.protocol)) return null;
+                // First-touch attribution needs the page and campaign, not URL
+                // fragments or arbitrary query values that can contain identity.
+                return { initial_landing_url: url.origin + url.pathname, initial_landing_host: url.hostname, initial_landing_path: url.pathname };
+            } catch (e) { return null; }
+        }
+        var touch = null;
+        if (marked && hash.get('ph_landing_url')) {
+            touch = safeLanding(hash.get('ph_landing_url'));
+            if (touch) UTM_FIELDS.forEach(function (field) {
+                var value = hash.get('ph_utm_' + field);
+                if (value) touch['initial_utm_' + field] = value.slice(0, 500);
+            });
+        }
+        if (!touch && !marked) {
+            try {
+                var previous = JSON.parse(read(TOUCH_KEY) || 'null');
+                var previousProperties = previous && (previous.properties || previous);
+                if (previousProperties && (!previous.distinctID || previous.distinctID === distinctId) && safeLanding(previousProperties.initial_landing_url)) touch = previousProperties;
+            } catch (e) {}
+        }
+        if (!touch) {
+            touch = safeLanding(location.href) || {};
+            var query = new URLSearchParams(location.search);
+            UTM_FIELDS.forEach(function (field) {
+                var value = query.get('utm_' + field);
+                if (value) touch['initial_utm_' + field] = value.slice(0, 500);
+            });
+        }
+        save(TOUCH_KEY, JSON.stringify({ distinctID: distinctId, properties: touch }));
+        var bootstrap = { distinctID: distinctId, isIdentifiedID: false };
+        var inboundSession = marked ? hash.get('session_id') : null;
+        if (validSession(inboundSession)) bootstrap.sessionID = inboundSession;
+        var config = {
+            api_host: 'https://us.i.posthog.com',
+            defaults: '2026-05-30',
+            person_profiles: 'never',
+            persistence_name: 'nancy_anon_v1',
+            bootstrap: bootstrap,
+            cross_subdomain_cookie: true,
+            autocapture: false,
+            capture_dead_clicks: false,
+            capture_pageview: true,
+            capture_pageleave: false,
+            capture_performance: false,
+            capture_heatmaps: false,
+            rageclick: false,
+            // These funnels do not consume feature flags. Keep remote project
+            // configuration, while avoiding a billable flags request per load.
+            advanced_disable_feature_flags: true,
+            // Native session sampling uses the shared session ID. This local
+            // 1% rate overrides the project's rate rather than multiplying it.
+            session_recording: { sampleRate: 0.01 },
+            disable_session_recording: false,
+            loaded: function (ph) {
+                ph.register(touch);
+            },
+            before_send: function (event) {
+                if (window.NancyBridgeCroBeforeSend) event = window.NancyBridgeCroBeforeSend(event);
+                if (!event) return null;
+                event.properties = Object.assign({}, event.properties || {}, touch);
+                return event;
+            }
+        };
+        posthog.init(PH_TOKEN, config);
+        // Remove only the PostHog carrier fields. Other hash state and every
+        // query parameter used by the ad/router integrations remain intact.
+        if (hash.has('distinct_id') || hash.has('session_id') || hash.has('ph_cost_v')) {
+            var reserved = ['distinct_id', 'session_id', 'ph_cost_v', 'ph_anchor', 'ph_landing_url', 'ph_landing_host', 'ph_landing_path'];
+            UTM_FIELDS.forEach(function (field) { reserved.push('ph_utm_' + field); });
+            var restoredHash = marked && hash.has('ph_anchor') ? hash.get('ph_anchor') : rawHash.split('&').filter(function (part) {
+                var key = part.split('=')[0];
+                try { key = decodeURIComponent(key); } catch (e) {}
+                return reserved.indexOf(key) === -1;
+            }).join('&');
+            try {
+                var clean = new URL(location.href);
+                clean.hash = restoredHash;
+                history.replaceState(null, '', clean.toString());
+            } catch (e) {}
+        }
+        function inScope(host) { return ROOTS.some(function (root) { return host === root || host.endsWith('.' + root); }); }
+        function decorate(href) {
+            try {
+                var url = new URL(href, location.href);
+                if (!/^https?:$/.test(url.protocol) || !inScope(url.hostname) || LEGACY_RECEIVERS.indexOf(url.hostname) !== -1 || url.hostname === location.hostname) return null;
+                var originalHash = (url.hash || '').replace(/^#/, '');
+                var carrier = new URLSearchParams(originalHash.indexOf('=') === -1 ? '' : originalHash);
+                if (carrier.get('ph_cost_v') === '1' && carrier.has('ph_anchor')) originalHash = carrier.get('ph_anchor');
+                if (originalHash) carrier.set('ph_anchor', originalHash);
+                var ph = window.posthog;
+                // The local seed is available even before array.js has loaded.
+                carrier.set('distinct_id', distinctId);
+                carrier.set('ph_cost_v', '1');
+                var sessionId = ph && ph.get_session_id ? ph.get_session_id() : null;
+                if (validSession(sessionId)) carrier.set('session_id', sessionId);
+                if (touch.initial_landing_url) carrier.set('ph_landing_url', touch.initial_landing_url);
+                if (touch.initial_landing_host) carrier.set('ph_landing_host', touch.initial_landing_host);
+                if (touch.initial_landing_path) carrier.set('ph_landing_path', touch.initial_landing_path);
+                UTM_FIELDS.forEach(function (field) {
+                    if (touch['initial_utm_' + field]) carrier.set('ph_utm_' + field, touch['initial_utm_' + field]);
+                });
+                url.hash = carrier.toString();
+                return url.toString();
+            } catch (e) { return null; }
+        }
+        document.addEventListener('click', function (event) {
+            var anchor = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+            if (!anchor) return;
+            var next = decorate(anchor.getAttribute('href'));
+            if (next) anchor.setAttribute('href', next);
+        }, true);
+    })();
 </script>
 <!-- End PostHog -->
 <!-- Reddit Pixel -->
