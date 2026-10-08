@@ -133,9 +133,9 @@ test('unsupported, stale and future session IDs are omitted without losing the v
   }
 });
 
-test('GTM receivers cannot promote fresh anonymous funnel IDs to billable person profiles', () => {
+test('Legacy receivers cannot promote fresh anonymous funnel IDs to billable person profiles', () => {
   const source = run('https://feelnancy.com/start');
-  for (const host of ['bestadulttoys.com', 'www.bestadulttoys.com', 'unlock.hellonancy.com']) {
+  for (const host of ['bestadulttoys.com', 'www.bestadulttoys.com', 'unlock.hellonancy.com', 'read.modernwellnessinsider.com', 'zenify.today', 'www.zenify.today', 'nancylem.manus.space']) {
     const href = 'https://' + host + '/offer?utm_source=keep&fbclid=keep#details';
     assert.equal(source.click(href).href, href);
   }
