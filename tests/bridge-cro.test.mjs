@@ -79,7 +79,8 @@ for (const relativePath of ["../index.html", "../lem-lander/index.html"]) {
       "the off-screen sticky CTA must be inert before JavaScript initializes",
     )
     assert.match(html, /autocapture:\s*false/)
-    assert.match(html, /before_send:\s*window\.NancyBridgeCroBeforeSend/)
+    assert.match(html, /before_send:\s*function/)
+    assert.match(html, /event = window\.NancyBridgeCroBeforeSend\(event\)/)
     assert.doesNotMatch(
       html,
       /posthog\.capture\(['"]bridge_cta_click['"][^\n]*destination:/,
