@@ -55,6 +55,9 @@
         var UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[47][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
         var SESSION_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
         var ROOTS = ['hellonancy.com', 'feelnancy.com', 'modernwellnessinsider.com', 'wellnessinsiderguide.com', 'herdailyinsight.com', 'fiftieslifestyle.com', 'bestadulttoys.com', 'zenify.today', 'zenifytoday.com', 'shophellonancy.com', 'officialnancy.com', 'regulatetoday.com', 'manus.space', 'nancyflow.com', 'nancyflow.ca', 'nancyflow.de', 'nancyflow.fr', 'nancyflow.nl', 'nancyflow.se', 'nancyflow.co.nz', 'nancyflow.co.uk'];
+        // These receivers still use externally managed GTM identity code.
+        // Passing our fresh ID there would create a profile for that ID.
+        var LEGACY_RECEIVERS = ['bestadulttoys.com', 'www.bestadulttoys.com', 'unlock.hellonancy.com'];
         var UTM_FIELDS = ['source', 'medium', 'campaign', 'content', 'term', 'id'];
         var rawHash = (location.hash || '').replace(/^#/, '');
         var hash = new URLSearchParams(rawHash);
@@ -166,7 +169,7 @@
         function decorate(href) {
             try {
                 var url = new URL(href, location.href);
-                if (!/^https?:$/.test(url.protocol) || !inScope(url.hostname) || url.hostname === location.hostname) return null;
+                if (!/^https?:$/.test(url.protocol) || !inScope(url.hostname) || LEGACY_RECEIVERS.indexOf(url.hostname) !== -1 || url.hostname === location.hostname) return null;
                 var originalHash = (url.hash || '').replace(/^#/, '');
                 var carrier = new URLSearchParams(originalHash.indexOf('=') === -1 ? '' : originalHash);
                 if (carrier.get('ph_cost_v') === '1' && carrier.has('ph_anchor')) originalHash = carrier.get('ph_anchor');
