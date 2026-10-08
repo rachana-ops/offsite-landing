@@ -65,7 +65,7 @@ test('legacy profiled persistence and unmarked inbound IDs cannot migrate into t
   assert.equal(result.registered.initial_landing_path, '/pages/stress');
   assert.equal(result.registered.initial_utm_source, 'taboola');
   assert.equal(result.current.searchParams.get('fbclid'), 'keep');
-  for (const key of ['autocapture', 'capture_pageleave', 'capture_performance', 'capture_heatmaps', 'rageclick']) assert.equal(result.config[key], false, key);
+  for (const key of ['autocapture', 'capture_dead_clicks', 'capture_pageleave', 'capture_performance', 'capture_heatmaps', 'rageclick']) assert.equal(result.config[key], false, key);
   assert.equal(result.config.capture_pageview, true);
   assert.equal(result.config.advanced_disable_feature_flags, true);
   assert.equal(result.config.session_recording.sampleRate, 0.01);
