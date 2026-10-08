@@ -202,10 +202,10 @@ export default function Home() {
                 {[
                   ["Design", "Compact, lemon-shaped design"],
                   ["Settings", "12 adjustable air-pulse settings"],
-                  ["Material", "Soft silicone exterior"],
+                  ["Material", "Medical-grade silicone"],
                   ["Water resistance", "IPX7 waterproof rating"],
-                  ["Charging", "Rechargeable with a magnetic charging cable"],
-                  ["Storage", "Travel pouch included"],
+                  ["Charging", "USB-C or magnetic charging cable"],
+                  ["Storage", "Satin pouch included"],
                 ].map(([feature, detail]) => <tr key={feature}><th scope="row" className="border border-gray-300 p-4 text-left font-medium">{feature}</th><td className="border border-gray-300 p-4 bg-[#FFE14D]/10">{detail}</td></tr>)}
               </tbody>
             </table>
@@ -232,7 +232,7 @@ export default function Home() {
             </div>
 
             <p className="text-gray-700 leading-relaxed mb-3">
-              Personal self-care is your business. Lem's small size makes it easy to keep close or store in its travel pouch.
+              Personal self-care is your business. Lem's small size makes it easy to keep close or store in its satin pouch.
             </p>
             <p className="text-gray-700 leading-relaxed mb-3">
               Its playful shape and soft exterior are designed to fit naturally into a private self-care routine.
@@ -266,7 +266,7 @@ export default function Home() {
             <Card className="border-2 border-[#FFE14D]">
               <CardContent className="p-6 text-center space-y-3">
                 <div className="text-4xl">🏥</div>
-                <h3 className="font-bold text-lg text-gray-900">Soft Silicone Exterior</h3>
+                <h3 className="font-bold text-lg text-gray-900">Medical-grade silicone</h3>
                 <p className="text-gray-600 text-sm">
                   Clean according to the care instructions
                 </p>
@@ -276,7 +276,7 @@ export default function Home() {
             <Card className="border-2 border-[#FF1493]">
               <CardContent className="p-6 text-center space-y-3">
                 <div className="text-4xl">⚡</div>
-                <h3 className="font-bold text-lg text-gray-900">Magnetic Charging</h3>
+                <h3 className="font-bold text-lg text-gray-900">USB-C or Magnetic Charging</h3>
                 <p className="text-gray-600 text-sm">
                   Recharge with the supplied cable
                 </p>
@@ -314,11 +314,11 @@ export default function Home() {
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
-                    <span>Magnetic USB charging cable</span>
+                    <span>USB-C or magnetic charging cable</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
-                    <span>Soft velvet storage pouch (perfect for travel)</span>
+                    <span>Satin pouch included</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
@@ -341,7 +341,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Make Space for Your Self-Care</h2>
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>There is no one-size-fits-all routine. Choose a comfortable, private setting and take your time. Read the user guide before use and begin with a low intensity.</p>
-            <p>Keep Lem clean according to its care instructions, charge it with the supplied cable, and store it in its pouch when you are finished.</p>
+            <p>Keep Lem clean according to its care instructions, charge it with the supplied cable, and store it in its satin pouch when you are finished.</p>
             <p>Lem is intended for personal enjoyment. It does not diagnose, treat, cure, or prevent medical conditions.</p>
           </div>
         </div>
@@ -396,7 +396,7 @@ export default function Home() {
                   <div className="w-8 h-8 bg-[#FF1493] rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold">4</div>
                   <div>
                     <p className="font-semibold text-gray-900">Care and Storage</p>
-                    <p className="text-sm text-gray-600">Clean the device and store it in its pouch after use</p>
+                    <p className="text-sm text-gray-600">Clean the device and store it in its satin pouch after use</p>
                   </div>
                 </div>
               </div>
@@ -412,7 +412,7 @@ export default function Home() {
         <div className="my-12 bg-gradient-to-r from-[#FFE14D]/30 to-[#FF1493]/30 p-6 sm:p-8 rounded-xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Choose What Fits Your Routine</h2>
           <div className="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-lg text-gray-700">
-            <div><h3 className="font-bold text-lg mb-3">Things to Consider</h3><ul className="space-y-2"><li>✓ Adjustable air-pulse settings</li><li>✓ Compact design and rechargeable battery</li><li>✓ Discreet packaging and a travel pouch</li><li>✓ Your own preferences, comfort, and budget</li></ul></div>
+            <div><h3 className="font-bold text-lg mb-3">Things to Consider</h3><ul className="space-y-2"><li>✓ Adjustable air-pulse settings</li><li>✓ Compact design and rechargeable battery</li><li>✓ Discreet packaging and a satin pouch</li><li>✓ Your own preferences, comfort, and budget</li></ul></div>
             <div><h3 className="font-bold text-lg mb-3">Before You Buy</h3><p className="leading-relaxed">Explore the product details, customer reviews, and current shipping and return terms on HelloNancy. Taking your time is completely fine; you do not need to buy a device to care for yourself.</p></div>
           </div>
         </div>
@@ -476,11 +476,11 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0" />
-                    <span className="text-gray-700">Magnetic charging cable</span>
+                    <span className="text-gray-700">USB-C or magnetic charging cable</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0" />
-                    <span className="text-gray-700">Velvet travel pouch</span>
+                    <span className="text-gray-700">Satin pouch included</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0" />
@@ -796,7 +796,7 @@ export default function Home() {
               <div>
                 <h3 className="font-bold text-lg mb-4">Trust & Safety</h3>
                 <ul className="space-y-2 text-sm text-gray-400">
-                  <li>✓ Silicone exterior</li>
+                  <li>✓ Medical-grade silicone</li>
                   <li>✓ Discreet shipping</li>
                   <li>✓ Return terms on HelloNancy</li>
                   <li>✓ 12-month warranty</li>
