@@ -132,3 +132,13 @@ test('unsupported, stale and future session IDs are omitted without losing the v
     assert.equal(result.config.bootstrap.sessionID, undefined);
   }
 });
+
+test('GTM receivers cannot promote fresh anonymous funnel IDs to billable person profiles', () => {
+  const source = run('https://feelnancy.com/start');
+  for (const host of ['bestadulttoys.com', 'www.bestadulttoys.com', 'unlock.hellonancy.com']) {
+    const href = 'https://' + host + '/offer?utm_source=keep&fbclid=keep#details';
+    assert.equal(source.click(href).href, href);
+  }
+  const supported = source.click('https://shop.hellonancy.com/products/lem?utm_source=keep#details');
+  assert.equal(new URLSearchParams(supported.hash.slice(1)).get('ph_cost_v'), '1');
+});
