@@ -805,6 +805,7 @@ export default function Home() {
             </div>
             <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
               <p>© 2026 Wellness Insider. All rights reserved.</p>
+              <p className="mt-2">CRN No. 16519269</p>
               <p className="mt-2">Product featured: Nancy's Lem by Hello Nancy</p>
             </div>
           </div>
