@@ -12,23 +12,23 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToOffer = () => {
-    document.getElementById("offer-section")?.scrollIntoView({ behavior: "smooth" });
-  };
-
+  // Keep the reference's eight-image layout, using photos without reviews or claims.
   const galleryImages = [
-    { src: "/unlock/PDP.jpg", alt: "Nancy's Lem wellness device" },
-    { src: "/unlock/PDP-1.jpg", alt: "Lem with lifestyle setting" },
-    { src: "/unlock/PDP-2.jpg", alt: "Close-up of Lem design" },
-    { src: "/unlock/PDP-3.jpg", alt: "Lem product details" },
-    { src: "/unlock/PDP-5.jpg", alt: "Lem packaging and accessories" },
+    { src: "/unlock/PDP.jpg", alt: "Nancy's Lem held in two hands" },
+    { src: "/unlock/PDP-1.jpg", alt: "Lem on a yellow background" },
+    { src: "/unlock/PDP-2.jpg", alt: "Lem held above fresh lemons" },
+    { src: "/unlock/PDP-3.jpg", alt: "Lem beside another personal wellness device" },
+    { src: "/unlock/lem_product_packaging.webp", alt: "Lem in its presentation box" },
+    { src: "/unlock/PDP-5.jpg", alt: "A woman holding Lem beside her face" },
+    { src: "/unlock/lem_product_lemons.webp", alt: "Lem arranged with sliced lemons" },
+    { src: "/unlock/lem_product_cocktail.webp", alt: "Lem beside sunglasses and a glass on a pink background" },
   ];
 
   return (
     <div className="min-h-screen bg-white relative">
       {/* Editorial Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
-        <div className="container px-4 py-4">
+        <div className="container max-w-4xl px-4 py-4">
           <div className="flex items-center justify-between">
             <img 
               src="/unlock/wellness-insider-logo.png" 
@@ -36,7 +36,7 @@ export default function Home() {
               className="h-8 md:h-10"
             />
             <div className="text-right">
-              <p className="text-xs text-gray-500 font-medium">Personal Wellness & Self-Care</p>
+              <p className="text-xs text-gray-500 font-medium">Menopause & Personal Self-Care</p>
             </div>
           </div>
         </div>
@@ -45,16 +45,14 @@ export default function Home() {
       {/* Sticky CTA Bar */}
       {showStickyBar && (
         <div className="fixed top-[65px] md:top-[73px] left-0 right-0 z-40 box-border w-full max-w-[100vw] overflow-x-clip bg-[#FF1493] text-white py-2 shadow-lg animate-in slide-in-from-top">
-          <div className="container box-border flex w-full max-w-full items-center gap-2 px-2.5 sm:px-4">
+          <div className="container max-w-4xl box-border flex w-full items-center gap-2 px-2.5 sm:px-4">
             <div className="hidden md:flex items-center gap-2">
               <span className="text-sm font-medium">Nancy's Lem • Personal Wellness</span>
             </div>
             <div className="grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 md:ml-auto md:flex-none md:w-auto">
               <div className="flex flex-col items-start md:items-end">
                 <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
-                  <span className="text-lg font-bold">$89</span>
-                  <span className="text-sm line-through text-white/70">$159</span>
-                  <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">SAVE $70</span>
+                  <span className="text-sm font-medium">Explore Nancy's Lem</span>
                 </div>
 
               </div>
@@ -74,7 +72,7 @@ export default function Home() {
                 }}
               >
                 <Button className="bg-white text-[#FF1493] hover:bg-gray-100 font-bold">
-                  Shop Now
+                  View Product
                 </Button>
               </a>
             </div>
@@ -88,37 +86,37 @@ export default function Home() {
 
       {/* Article Metadata */}
       <section className="bg-white py-8 md:py-16 border-b border-gray-200">
-        <div className="container px-4">
+        <div className="container max-w-4xl px-4">
           <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-gray-600 mb-4">
-            <span className="text-[#FF1493] font-semibold bg-[#FF1493]/10 px-3 py-1 rounded-full">PERSONAL WELLNESS</span>
+            <span className="text-[#FF1493] font-semibold bg-[#FF1493]/10 px-3 py-1 rounded-full">MENOPAUSE & SELF-CARE</span>
             <span className="hidden sm:inline">•</span>
-            <span className="bg-gray-100 px-3 py-1 rounded-full">PRODUCT REVIEW</span>
+            <span className="bg-gray-100 px-3 py-1 rounded-full">ADVERTISEMENT</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
-            A Fresh Take on Self-Care: Meet Nancy's Lem Wellness Device
+            Self-Care During Menopause: A Closer Look at Nancy's Lem
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 mb-6 leading-relaxed">
-            Explore the design, adjustable air-pulse settings, and everyday features of this discreet, lemon-shaped personal wellness device.
+            Making space for personal self-care during menopause? Explore the design, adjustable air-pulse settings, and practical features of this lemon-shaped device at your own pace.
           </p>
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600 border-t border-gray-200 pt-4">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF1493] to-[#FFE14D]" />
               <div>
-                <p className="font-semibold text-gray-900">By Jessica Martinez</p>
-                <p className="text-xs sm:text-sm">Senior Wellness Editor</p>
+                <p className="font-semibold text-gray-900">Wellness Insider Guide</p>
+                <p className="text-xs sm:text-sm">Promotional product guide</p>
               </div>
             </div>
             <span className="hidden sm:inline">•</span>
-            <span>Last updated: Oct 8, 2026</span>
+            <span>Last updated: Oct 21, 2026</span>
             <span className="hidden sm:inline">•</span>
             <span>5 min read</span>
           </div>
         </div>
       </section>
 
-      {/* Editor's Note */}
+      {/* Advertising Disclosure */}
       <section className="bg-[#FFE14D]/20 py-3 border-b border-[#FFE14D]">
-        <div className="container">
+        <div className="container max-w-4xl">
           <div className="flex items-start gap-2">
             <div className="flex-shrink-0 mt-0.5">
               <div className="w-5 h-5 bg-[#FF1493] rounded-full flex items-center justify-center">
@@ -126,15 +124,15 @@ export default function Home() {
               </div>
             </div>
             <p className="text-gray-700 text-xs leading-tight">
-              <span className="font-bold text-gray-900 mr-1">Editor's Note:</span>
-              This article contains affiliate links. We may earn a commission if you purchase through them, at no extra cost to you. This guide describes product features and does not provide medical advice.
+              <span className="font-bold text-gray-900 mr-1">Advertisement:</span>
+              This promotional guide contains affiliate links. We may earn a commission if you purchase through them, at no extra cost to you. It describes product features and does not provide medical advice.
             </p>
           </div>
         </div>
       </section>
 
       {/* Hero Image */}
-      <section className="container py-8">
+      <section className="container max-w-4xl py-8">
         <img 
           src="/unlock/PDP.jpg" 
           alt="Nancy's Lem wellness device held in a hand"
@@ -145,38 +143,39 @@ export default function Home() {
 
       {/* Trust Indicators */}
       <section className="bg-white py-6 border-y border-gray-200">
-        <div className="container">
+        <div className="container max-w-4xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
             <div className="flex flex-col items-center gap-2">
               <Package className="w-6 h-6 text-[#FF1493]" />
               <p className="font-medium text-gray-900">Discreet Packaging</p>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <Truck className="w-6 h-6 text-[#FF1493]" />
-              <p className="font-medium text-gray-900">Shipping Options at Checkout</p>
+              <Check className="w-6 h-6 text-[#FF1493]" />
+              <p className="font-medium text-gray-900">Adjustable Settings</p>
             </div>
             <div className="flex flex-col items-center gap-2">
               <Check className="w-6 h-6 text-[#FF1493]" />
-              <p className="font-medium text-gray-900">30-Day Return Terms</p>
+              <p className="font-medium text-gray-900">Rechargeable Design</p>
             </div>
             <div className="flex flex-col items-center gap-2">
               <Shield className="w-6 h-6 text-[#FF1493]" />
-              <p className="font-medium text-gray-900">12-Month Warranty</p>
+              <p className="font-medium text-gray-900">Care Instructions Included</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Article Body */}
-      <article className="container py-12 space-y-8">
+      <article className="container max-w-4xl py-12 space-y-8">
         <div className="prose prose-lg max-w-none">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">A Fresh Approach to Personal Wellness</h2>
-          <p className="text-gray-700 leading-relaxed">Nancy's Lem brings a playful lemon-shaped design to personal self-care. Here, we look at its air-pulse settings, materials, practical features, and discreet packaging so you can decide whether it suits your routine.</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">A Personal Approach to Self-Care During Menopause</h2>
+          <p className="text-gray-700 leading-relaxed mb-4">Menopause is a personal experience. If you are taking a fresh look at your self-care routine at this stage of life, your own preferences, privacy, and pace are a place to start.</p>
+          <p className="text-gray-700 leading-relaxed">This guide introduces Nancy's Lem as one optional personal wellness accessory. We look at its design, adjustable settings, and everyday care so you can decide whether it interests you.</p>
         </div>
 
         <div className="bg-gray-50 p-6 sm:p-8 rounded-xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Self-Care at Your Own Pace</h2>
-          <p className="text-gray-700 leading-relaxed mb-4">Preferences and comfort are personal. A quiet setting, time to yourself, and a device with adjustable intensity can help you explore what feels right for you.</p>
+          <p className="text-gray-700 leading-relaxed mb-4">There is no set way to approach personal self-care during or after menopause. You might choose time alone, a conversation with a partner, or simply a closer look at the options available to you. Buying a device is a personal choice.</p>
           <p className="text-gray-700 leading-relaxed">Lem is a personal wellness device. It is not a medical treatment or a substitute for professional care. If you have pain, persistent discomfort, or concerns about changes in your body, speak with a qualified healthcare professional.</p>
         </div>
 
@@ -189,7 +188,7 @@ export default function Home() {
         <div className="bg-gradient-to-br from-[#FFE14D]/20 to-[#FF1493]/10 p-6 sm:p-8 rounded-xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">How Air Pulse Technology Feels Different</h2>
           <p className="text-gray-700 leading-relaxed mb-4">Lem uses pulses of air pressure around its opening. Place it as directed in the user guide, start with the lowest setting, and adjust gradually to your comfort.</p>
-          <p className="text-gray-700 leading-relaxed">Comfort and experiences vary. There is no promised response time or guaranteed result. Stop using the device if it feels uncomfortable.</p>
+          <p className="text-gray-700 leading-relaxed">Comfort and experiences vary from person to person. Follow the supplied instructions and stop using the device if it feels uncomfortable.</p>
         </div>
 
         <div>
@@ -202,7 +201,7 @@ export default function Home() {
                 {[
                   ["Design", "Compact, lemon-shaped design"],
                   ["Settings", "12 adjustable air-pulse settings"],
-                  ["Material", "Medical-grade silicone"],
+                  ["Material", "Silicone exterior"],
                   ["Water resistance", "IPX7 waterproof rating"],
                   ["Charging", "USB-C or magnetic charging cable"],
                   ["Storage", "Satin pouch included"],
@@ -214,13 +213,13 @@ export default function Home() {
 
         {/* Design Features */}
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">The "Anti-Shame" Design Philosophy</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">A Design for Your Personal Space</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
             The design is <em>intentionally</em> discreet. Lem is bright yellow, fits in the palm of your hand, and looks like a decorative lemon.
           </p>
           
           <div className="bg-[#FFE14D]/20 p-6 rounded-xl mb-6">
-            <h3 className="font-bold text-lg text-gray-900 mb-3">The "Nightstand Test"</h3>
+            <h3 className="font-bold text-lg text-gray-900 mb-3">A Closer Look at the Shape</h3>
             
             {/* Discretion Illustration */}
             <div className="max-w-md mx-auto mb-6">
@@ -246,9 +245,9 @@ export default function Home() {
             <Card className="border-2 border-[#FFE14D]">
               <CardContent className="p-6 text-center space-y-3">
                 <div className="text-4xl">🤫</div>
-                <h3 className="font-bold text-lg text-gray-900">Whisper Quiet</h3>
+                <h3 className="font-bold text-lg text-gray-900">Quiet Motor</h3>
                 <p className="text-gray-600 text-sm">
-                  A quiet motor for a private routine
+                  Sound varies with the setting and surroundings
                 </p>
               </CardContent>
             </Card>
@@ -265,8 +264,8 @@ export default function Home() {
 
             <Card className="border-2 border-[#FFE14D]">
               <CardContent className="p-6 text-center space-y-3">
-                <div className="text-4xl">🏥</div>
-                <h3 className="font-bold text-lg text-gray-900">Medical-grade silicone</h3>
+                <div className="text-4xl">🍋</div>
+                <h3 className="font-bold text-lg text-gray-900">Silicone Exterior</h3>
                 <p className="text-gray-600 text-sm">
                   Clean according to the care instructions
                 </p>
@@ -292,12 +291,12 @@ export default function Home() {
 
         {/* Unboxing Experience Section */}
         <div className="bg-gradient-to-r from-[#FFE14D]/20 to-white p-8 rounded-xl my-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">The Unboxing Experience: First Impressions Matter</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">Packaging and Everyday Essentials</h2>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <img 
-                src="/unlock/PDP-2.jpg"
-                alt="Lem device beside fresh lemons"
+                src="/unlock/lem_product_packaging.webp"
+                alt="Lem in its presentation box with printed guides"
                 className="w-full rounded-lg shadow-lg"
               />
             </div>
@@ -342,25 +341,25 @@ export default function Home() {
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>There is no one-size-fits-all routine. Choose a comfortable, private setting and take your time. Read the user guide before use and begin with a low intensity.</p>
             <p>Keep Lem clean according to its care instructions, charge it with the supplied cable, and store it in its satin pouch when you are finished.</p>
-            <p>Lem is intended for personal enjoyment. It does not diagnose, treat, cure, or prevent medical conditions.</p>
+            <p>Menopause-related health questions belong in a conversation with a qualified healthcare professional. This guide focuses on a personal wellness accessory, not menopause care.</p>
           </div>
         </div>
 
         {/* Shared Self-Care */}
         <div className="my-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">"But What About My Partner?" We Asked That Too</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">Making Space for a Conversation</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                One of the most common questions we received during our research: <em>"Will my partner feel threatened by this?"</em>
+                If you are revisiting personal self-care during menopause, you may want to talk with a partner about your preferences. What you choose to share is up to you.
               </p>
               <p>
                 Personal wellness can be enjoyed alone or shared with a partner. Talk about comfort and preferences, and decide together what feels right.
               </p>
               <div className="bg-[#FFE14D]/20 p-6 rounded-lg">
                 <p className="italic text-gray-900 mb-2">
-                  An open conversation about preferences can make shared self-care feel more comfortable.
+                Give each other space to talk about preferences and boundaries.
                 </p>
                 <p className="font-semibold text-gray-700">Take your time and communicate</p>
               </div>
@@ -369,7 +368,7 @@ export default function Home() {
               </p>
             </div>
             <div className="bg-gradient-to-br from-[#FF1493]/10 to-[#FFE14D]/10 p-8 rounded-xl">
-              <h3 className="font-bold text-xl text-gray-900 mb-4">Ways Couples Are Using Lem:</h3>
+              <h3 className="font-bold text-xl text-gray-900 mb-4">Things to Discuss Together</h3>
               <div className="space-y-4">
                 <div className="flex gap-3">
                   <div className="w-8 h-8 bg-[#FF1493] rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold">1</div>
@@ -402,7 +401,7 @@ export default function Home() {
               </div>
               <div className="mt-6 p-4 bg-white rounded-lg">
                 <p className="text-sm text-gray-700">
-                  <strong>Pro Tip:</strong> Keep communication open. Experiences and preferences vary from person to person.
+                  Keep communication open. Experiences and preferences vary from person to person.
                 </p>
               </div>
             </div>
@@ -413,7 +412,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Choose What Fits Your Routine</h2>
           <div className="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-lg text-gray-700">
             <div><h3 className="font-bold text-lg mb-3">Things to Consider</h3><ul className="space-y-2"><li>✓ Adjustable air-pulse settings</li><li>✓ Compact design and rechargeable battery</li><li>✓ Discreet packaging and a satin pouch</li><li>✓ Your own preferences, comfort, and budget</li></ul></div>
-            <div><h3 className="font-bold text-lg mb-3">Before You Buy</h3><p className="leading-relaxed">Explore the product details, customer reviews, and current shipping and return terms on HelloNancy. Taking your time is completely fine; you do not need to buy a device to care for yourself.</p></div>
+            <div><h3 className="font-bold text-lg mb-3">Before You Buy</h3><p className="leading-relaxed">Explore the product details and current shipping and return terms on HelloNancy. Take the time you need to decide whether a device belongs in your routine.</p></div>
           </div>
         </div>
 
@@ -421,23 +420,20 @@ export default function Home() {
 
 
 
-      {/* Pricing Section */}
+      {/* Product Details */}
       <section id="offer-section" className="bg-gradient-to-br from-[#FF1493]/10 to-[#FFE14D]/20 py-12 md:py-20">
         <div className="container px-4">
           <div className="max-w-4xl mx-auto mb-8">
             <h2 className="text-3xl md:text-5xl font-bold text-center text-gray-900 mb-4">
-              Our Verdict: Worth the Investment
+              Take a Closer Look at Nancy's Lem
             </h2>
             <p className="text-center text-xl text-gray-600">
-              If you are looking for an adjustable, discreet personal wellness device, explore Nancy's Lem and decide whether its features suit you.
+              Exploring personal self-care during menopause? Read the product details and decide whether Lem's design and settings suit your preferences.
             </p>
           </div>
 
           <div className="max-w-2xl mx-auto">
             <Card className="border-4 border-[#FF1493] shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-red-500 text-white px-6 py-2 rounded-bl-lg">
-                <p className="font-bold">SAVE $70</p>
-              </div>
               <CardContent className="space-y-5 p-4 sm:space-y-6 sm:p-8">
                 <div className="text-center">
                   <div className="inline-block bg-[#FFE14D] text-black px-6 py-3 rounded-full text-sm font-bold mb-4">
@@ -445,23 +441,13 @@ export default function Home() {
                   </div>
 
                   <h3 className="text-3xl font-bold text-gray-900 mb-2">Nancy's Lem Personal Wellness Device</h3>
-                  <div className="flex items-center justify-center gap-4 mb-4">
-                    <span className="text-6xl font-bold text-[#FF1493]">$89</span>
-                    <div className="text-left">
-                      <span className="text-3xl text-gray-400 line-through block">$159</span>
-                      <span className="text-sm text-green-600 font-bold">Save $70 (44% off)</span>
-                    </div>
-                  </div>
                   <div className="bg-gradient-to-r from-[#FF1493]/10 to-[#FFE14D]/10 p-4 rounded-lg mb-4">
                     <p className="text-center text-gray-900">
-                      <strong className="text-2xl text-[#FF1493]">Just $0.24/day</strong> over one year of use
+                      <strong className="text-xl text-[#FF1493]">Explore the details at your own pace</strong>
                     </p>
                     <p className="text-center text-sm text-gray-600 mt-1">
-                      A one-time purchase. See the product page for current pricing.
+                      See HelloNancy for current pricing, available currency, delivery options, and purchase terms for your location.
                     </p>
-                  </div>
-                  <div className="bg-[#FFE14D]/30 p-4 rounded-lg mb-4">
-                    <p className="text-gray-900 font-semibold">💡 READER TIP: Use code <span className="font-bold text-[#FF1493]">TIFFANY</span> or <span className="font-bold text-[#FF1493]">ISABELLA</span> at checkout for an extra surprise!</p>
                   </div>
                 </div>
 
@@ -488,17 +474,17 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0" />
-                    <span className="text-gray-700 font-bold">30-day return terms</span>
+                    <span className="text-gray-700">Current return policy on HelloNancy</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0" />
-                    <span className="text-gray-700">12-month warranty</span>
+                    <span className="text-gray-700">Warranty terms on the product page</span>
                   </div>
                 </div>
 
                 <a href="https://hellonancy.com/products/lem"   className="w-full">
                   <Button size="lg" className="w-full bg-[#FF1493] hover:bg-[#E01280] text-white text-xl h-auto min-h-14 w-full whitespace-normal py-4 shadow-xl">
-                    Shop Now - $89 (Save $70)
+                    View Lem Product Details
                   </Button>
                 </a>
 
@@ -508,7 +494,7 @@ export default function Home() {
                     Shipping & Returns
                   </p>
                   <p className="text-center text-sm text-green-700 mt-2">
-                    Review the current shipping and return terms on HelloNancy before purchase.
+                    Read the current shipping and return terms on HelloNancy before purchase, including the conditions for opened products.
                   </p>
                 </div>
 
@@ -534,18 +520,18 @@ export default function Home() {
 
       {/* Is This For You Section */}
       <section className="bg-gradient-to-br from-[#FFE14D]/10 via-white to-[#FF1493]/10 py-16 md:py-24">
-        <div className="container">
+        <div className="container max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
             Is Lem Right For You?
           </h2>
           <p className="text-center text-xl text-gray-600 mb-12">
-            Consider what matters most in your personal self-care routine:
+            Consider what matters to you in a self-care routine during or after menopause.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="border-2 border-[#FFE14D] bg-white hover:shadow-xl transition-shadow">
               <CardContent className="p-8 space-y-4">
-                <h3 className="font-bold text-xl text-gray-900 mb-4">🌸 Lem is for you if you're:</h3>
+                <h3 className="font-bold text-xl text-gray-900 mb-4">🌸 Features You May Want to Explore</h3>
                 <div className="space-y-3 text-gray-700">
                   <div className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
@@ -569,7 +555,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
-                    <span>Looking for a discreet wellness device (not an obvious "toy")</span>
+                    <span>Preferring a lemon-shaped design and a storage pouch</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
@@ -585,7 +571,7 @@ export default function Home() {
 
             <Card className="border-2 border-[#FF1493] bg-white hover:shadow-xl transition-shadow">
               <CardContent className="p-8 space-y-4">
-                <h3 className="font-bold text-xl text-gray-900 mb-4">💡 You'll especially love Lem if:</h3>
+                <h3 className="font-bold text-xl text-gray-900 mb-4">💡 Your Preferences Come First</h3>
                 <div className="space-y-3 text-gray-700">
                   <div className="flex items-start gap-3">
                     <Heart className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
@@ -605,7 +591,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-start gap-3">
                     <Heart className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
-                    <span>You're willing to <strong>invest in yourself</strong> (just $0.24/day over a year!)</span>
+                    <span>You want to consider <strong>your budget and the current purchase terms</strong></span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Heart className="w-5 h-5 text-[#FF1493] flex-shrink-0 mt-0.5" />
@@ -643,7 +629,7 @@ export default function Home() {
               }}
               >
                 <Button size="lg" className="bg-[#FF1493] hover:bg-[#E01280] text-white w-full h-auto min-h-12 whitespace-normal px-5 py-4 text-lg sm:w-auto sm:px-12">
-                  Yes, This Is Me - Shop Now
+                  Explore Nancy's Lem
                 </Button>
               </a>
             </div>
@@ -662,6 +648,15 @@ export default function Home() {
           <div className="space-y-6">
             <Card>
               <CardContent className="p-6">
+                <h3 className="font-bold text-lg text-gray-900 mb-2">Is this a menopause product?</h3>
+                <p className="text-gray-700">
+                  Lem is a personal wellness accessory. This guide discusses it in the context of personal self-care during menopause. It is not a medical device or a substitute for advice from a qualified healthcare professional.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
                 <h3 className="font-bold text-lg text-gray-900 mb-2">How should I get started?</h3>
                 <p className="text-gray-700">
                   Read the user guide and start on the lowest setting. Comfort varies, so adjust gradually and stop if you feel discomfort. If you have pain or a medical concern, ask a qualified healthcare professional before use.
@@ -671,7 +666,7 @@ export default function Home() {
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-bold text-lg text-gray-900 mb-2">Is the packaging embarrassing?</h3>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">How is it packaged?</h3>
                 <p className="text-gray-700">
                   HelloNancy describes its shipping as discreet. See the product page for current packaging and delivery details.
                 </p>
@@ -710,23 +705,20 @@ export default function Home() {
 
       {/* Final Editorial Note */}
       <section className="bg-gradient-to-r from-[#FFE14D] to-[#FF1493] py-12 md:py-20">
-        <div className="container px-4">
+        <div className="container max-w-4xl px-4">
           <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
-              Our Final Take
+              Your Self-Care, Your Choice
             </h2>
             <div className="text-white text-lg leading-relaxed space-y-4">
               <p>
                 Nancy's Lem combines a playful design, adjustable air-pulse settings, and rechargeable convenience in a compact personal wellness device.
               </p>
               <p>
-                Choose a self-care routine that fits your preferences and comfort. Experiences vary, and no particular result is guaranteed.
+                During or after menopause, your self-care choices are personal. Take your time, consider your preferences, and speak with a qualified healthcare professional about health concerns.
               </p>
               <p className="text-xl font-bold">
-                Visit HelloNancy for full product details, current pricing, customer reviews, and shipping and return information.
-              </p>
-              <p className="text-sm italic">
-                — Jessica Martinez, Senior Wellness Editor
+                Visit HelloNancy for full product details, current pricing, and shipping and return information.
               </p>
             </div>
             <div className="text-center pt-6">
@@ -748,7 +740,7 @@ export default function Home() {
                 }}
               >
                 <Button size="lg" className="bg-white text-[#FF1493] hover:bg-gray-100 text-xl h-auto min-h-14 w-full whitespace-normal px-5 py-4 shadow-2xl sm:w-auto sm:px-12">
-                Shop Nancy's Lem - $89
+                View Nancy's Lem
               </Button>
               </a>
               <p className="text-white/90 text-sm mt-4">✓ Return terms on HelloNancy ✓ Shipping options on HelloNancy ✓ Discreet packaging</p>
@@ -772,34 +764,34 @@ export default function Home() {
               <div>
                 <h3 className="font-bold text-lg mb-4">About Us</h3>
                 <p className="text-gray-400 text-sm">
-                  Wellness Insider shares personal wellness product guides and self-care information.
+                  Wellness Insider shares promotional product guides and personal self-care information, including self-care during menopause.
                 </p>
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-4">Categories</h3>
                 <ul className="space-y-2 text-sm text-gray-400">
-                  <li>Health</li>
+                  <li>Menopause & Self-Care</li>
                   <li>Wellness</li>
                   <li>Self-Care & Relationships</li>
-                  <li>Product Reviews</li>
+                  <li>Product Guides</li>
                 </ul>
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-4">About Nancy's Lem</h3>
                 <ul className="space-y-2 text-sm text-gray-400">
                   <li>Product Details</li>
-                  <li>Customer Reviews</li>
+                  <li>Product Care</li>
                   <li>Shipping & Returns</li>
-                  <li>Contact: care@hellonancy.com</li>
+                  <li><a href="mailto:care@hellonancy.com" className="underline hover:text-white">Contact: care@hellonancy.com</a></li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-4">Trust & Safety</h3>
+                <h3 className="font-bold text-lg mb-4">Purchase Information</h3>
                 <ul className="space-y-2 text-sm text-gray-400">
-                  <li>✓ Medical-grade silicone</li>
-                  <li>✓ Discreet shipping</li>
-                  <li>✓ Return terms on HelloNancy</li>
-                  <li>✓ 12-month warranty</li>
+                  <li><a href="https://hellonancy.com/policies/privacy-policy" className="underline hover:text-white">Privacy Policy</a></li>
+                  <li><a href="https://hellonancy.com/policies/terms-of-service" className="underline hover:text-white">Terms of Service</a></li>
+                  <li>Return terms on HelloNancy</li>
+                  <li>Warranty terms on the product page</li>
                 </ul>
               </div>
             </div>

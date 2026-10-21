@@ -11,8 +11,10 @@ const LEGACY_URL =
 //   <script data-cfasync="false" async src="https://sub.hellonancy.com/bridge/v1.js"></script>
 // Only that exact URL, quoted as the src attribute of a <script> element in an
 // HTML file, is exempt. The Wellness guide is also allowed to link directly
-// to the exact Lem product page, as requested for that separate funnel.
+// to the exact Lem product page and the merchant's two policy pages for that
+// separate funnel. Other bridge navigation still uses the storefront routes.
 const BRIDGE_SCRIPT_URL = "https://sub.hellonancy.com/bridge/v1.js"
+const WELLNESS_PATHS = new Set(["/products/lem", "/policies/privacy-policy", "/policies/terms-of-service"])
 
 function isBridgeScriptSrc(relativePath, source, match) {
   if (!relativePath.toLowerCase().endsWith(".html")) return false
@@ -65,7 +67,7 @@ for (const relativePath of files) {
     if (url.pathname.startsWith("/cdn/")) continue
     if (isBridgeScriptSrc(relativePath, source, match)) continue
     const isWellnessFile = relativePath === "unlock/index.html" || /^unlock\/assets\/index-.*\.js$/.test(relativePath)
-    if (isWellnessFile && url.origin === "https://hellonancy.com" && url.pathname === "/products/lem") continue
+    if (isWellnessFile && url.origin === "https://hellonancy.com" && WELLNESS_PATHS.has(url.pathname)) continue
 
     failures.push({
       file: relativePath.replace(/^\.\//, ""),
