@@ -13,7 +13,7 @@ const copy = readFileSync(join(root, "src/wellness/Home.tsx"), "utf8")
 
 test("the Wellness entry is a self-contained production build", () => {
   assert.match(html, /<html\s+lang=["']en["']/i)
-  assert.match(html, /<title>Nancy's Lem - Personal Wellness Guide<\/title>/)
+  assert.match(html, /<title>Self-Care During Menopause \| Wellness Insider Guide<\/title>/)
   assert.ok(script)
   assert.ok(stylesheet)
   assert.ok(existsSync(join(root, stylesheet)))
@@ -24,11 +24,11 @@ test("the Wellness entry is a self-contained production build", () => {
 })
 
 test("the entire guide avoids explicit headline wording, fake scarcity, and unsupported medical claims", () => {
-  assert.match(bundle, /A Fresh Take on Self-Care/)
+  assert.match(bundle, /Self-Care During Menopause: A Closer Look at Nancy's Lem/)
   assert.doesNotMatch(copy + html, /orgasms?|vibrators?|estrogen|atrophy|physiotherapy|countdown|showTimer|timeLeft|visitorCount|limited.time|Summer Sale|14,907|1M\+|Award.Winn/i)
   assert.doesNotMatch(copy, /promot(?:es|ing) health|improve tissue|increases blood flow|prevents tissue|nerve pathways active|sleep better|zero irritation|without side effects|3.Minute Miracle/i)
   assert.match(copy, /not a medical treatment/)
-  assert.match(copy, /Experiences vary/)
+  assert.match(copy, /experiences vary/i)
   assert.match(copy, /<th scope="col"/)
   assert.doesNotMatch(copy, /Cream|Doctor Recommended/)
 })
