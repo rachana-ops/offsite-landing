@@ -38,12 +38,6 @@
   // Explicit allowlist: carry attribution, never arbitrary visitor-provided
   // query parameters. utm_* is handled separately below.
   var TRACKING_PARAMS = {
-    tw_source: true,
-    tw_adid: true,
-    tw_campaign: true,
-    tw_adsetid: true,
-    fbadid: true,
-    gadid: true,
     fbclid: true,
     fbc: true,
     fbp: true,
