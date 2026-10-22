@@ -42,6 +42,11 @@
     var before = anchor.getAttribute('href');
     if (!before) return;
     var after = decorate(before);
+    // Resolve the latest campaign before writing so the two observers agree
+    // after an in-page navigation replaces the original landing campaign.
+    if (window.NancyTripleWhale && typeof window.NancyTripleWhale.decorate === 'function') {
+      after = window.NancyTripleWhale.decorate(after);
+    }
     if (after !== before) anchor.setAttribute('href', after);
   }
   function patchTree(root) {
