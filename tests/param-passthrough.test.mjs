@@ -186,7 +186,7 @@ test("quiz buttons navigate to the guarded localized Lem handoff", () => {
   const result = runBridge({
     hostname: "nancyflow.ca",
     locale: "fr",
-    search: "?utm_source=quiz",
+    search: "?utm_source=quiz&tw_source=facebook&tw_adid=ad-123&tw_campaign=campaign-456&tw_adsetid=set-789",
   })
   const button = {
     tagName: "BUTTON",
@@ -209,6 +209,10 @@ test("quiz buttons navigate to the guarded localized Lem handoff", () => {
   const url = new URL(result.window.location)
   assert.equal(url.origin + url.pathname, "https://get.nancyflow.ca/fr/products/lem")
   assert.equal(url.searchParams.get("utm_source"), "quiz")
+  assert.equal(url.searchParams.get("tw_source"), "facebook")
+  assert.equal(url.searchParams.get("tw_adid"), "ad-123")
+  assert.equal(url.searchParams.get("tw_campaign"), "campaign-456")
+  assert.equal(url.searchParams.get("tw_adsetid"), "set-789")
   assert.equal(button.attributes.onclick, "")
   assert.equal(prevented, true)
   assert.equal(stopped, true)
