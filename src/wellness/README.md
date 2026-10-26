@@ -1,5 +1,9 @@
 This English guide is served on wellnessinsiderguide.com and www.wellnessinsiderguide.com. Its editable article, UI, stylesheet, and HTML template live in this directory. `npm run build:wellness` regenerates the content-hashed files under `unlock/`.
 
+Jeanine's October 26 additions live in `components/WellnessEducation.tsx`, `components/LemMechanism.tsx`, and `components/ProductComparison.tsx`. Keep educational claims linked to their sources and product comparisons limited to mechanical and physical features. The anatomy SVG at `unlock/assets/clitoris-anatomy-labeled.svg` adapts the public-domain [Clitoris Anatomy illustration](https://commons.wikimedia.org/wiki/File:Clitoris_Anatomy.svg) by Amphis, Marnanel, and Xeror, retaining English labels and adding a responsive viewBox. The visible caption carries the credit.
+
+The section IDs and `data-wellness-section` / `data-wellness-cta` attributes remain stable for reader navigation and Clarity heatmap inspection. Clarity already loads in the template. These sections add no analytics events and preserve the existing PostHog sampling and anonymous tracking configuration. Browser verification should block external analytics during synthetic checks.
+
 Run `npm run wellness-build` to compile the guide, run all repository checks, and stage only public landing-page assets. Product CTAs go to `https://hellonancy.com/products/lem`; the dedicated parameter helper preserves UTM values, Taboola's `tblci`, other click IDs, custom fields, repeat values, and empty values. The existing Meta CAPI bridge carries raw cookie identifiers through its `hn_at` token.
 
 Taboola account 2079308 sends one `page_view` per document load and `lem_product_click` on primary or middle product-link clicks. This does not send purchase events. Conversion reporting for the custom click event depends on the account's conversion rules. Reference: https://developers.taboola.com/pixel/docs/add-the-base-pixel-to-an-spa

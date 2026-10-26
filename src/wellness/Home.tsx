@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, Package, Shield, Truck, Heart, Edit3 } from "lucide-react";
 import { ImageGallery } from "@/components/ImageGallery";
+import { GuideNavigation, MenopauseEducation, AnatomyEducation, GuideSources } from "@/components/WellnessEducation";
+import { LemMechanism } from "@/components/LemMechanism";
+import { ProductComparison } from "@/components/ProductComparison";
 
 export default function Home() {
   const [showStickyBar, setShowStickyBar] = useState(false);
@@ -107,9 +110,9 @@ export default function Home() {
               </div>
             </div>
             <span className="hidden sm:inline">•</span>
-            <span>Last updated: Oct 21, 2026</span>
+            <span>Last updated: Oct 27, 2026</span>
             <span className="hidden sm:inline">•</span>
-            <span>5 min read</span>
+            <span>7 min read</span>
           </div>
         </div>
       </section>
@@ -167,17 +170,17 @@ export default function Home() {
 
       {/* Article Body */}
       <article className="container max-w-4xl py-12 space-y-8">
+        <GuideNavigation />
+
         <div className="prose prose-lg max-w-none">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">A Personal Approach to Self-Care During Menopause</h2>
           <p className="text-gray-700 leading-relaxed mb-4">Menopause is a personal experience. If you are taking a fresh look at your self-care routine at this stage of life, your own preferences, privacy, and pace are a place to start.</p>
           <p className="text-gray-700 leading-relaxed">This guide introduces Nancy's Lem as one optional personal wellness accessory. We look at its design, adjustable settings, and everyday care so you can decide whether it interests you.</p>
         </div>
 
-        <div className="bg-gray-50 p-6 sm:p-8 rounded-xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Self-Care at Your Own Pace</h2>
-          <p className="text-gray-700 leading-relaxed mb-4">There is no set way to approach personal self-care during or after menopause. You might choose time alone, a conversation with a partner, or simply a closer look at the options available to you. Buying a device is a personal choice.</p>
-          <p className="text-gray-700 leading-relaxed">Lem is a personal wellness device. It is not a medical treatment or a substitute for professional care. If you have pain, persistent discomfort, or concerns about changes in your body, speak with a qualified healthcare professional.</p>
-        </div>
+        <MenopauseEducation />
+
+        <AnatomyEducation />
 
         <div>
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Meet Nancy's Lem</h2>
@@ -185,11 +188,9 @@ export default function Home() {
           <p className="text-gray-700 leading-relaxed">Its <strong>Air Pulse Technology</strong> offers an alternative sensation to direct vibration. With adjustable settings, you can start gently and choose the intensity you prefer.</p>
         </div>
 
-        <div className="bg-gradient-to-br from-[#FFE14D]/20 to-[#FF1493]/10 p-6 sm:p-8 rounded-xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">How Air Pulse Technology Feels Different</h2>
-          <p className="text-gray-700 leading-relaxed mb-4">Lem uses pulses of air pressure around its opening. Place it as directed in the user guide, start with the lowest setting, and adjust gradually to your comfort.</p>
-          <p className="text-gray-700 leading-relaxed">Comfort and experiences vary from person to person. Follow the supplied instructions and stop using the device if it feels uncomfortable.</p>
-        </div>
+        <LemMechanism />
+
+        <ProductComparison />
 
         <div>
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">A Closer Look at Lem's Features</h2>
@@ -201,7 +202,7 @@ export default function Home() {
                 {[
                   ["Design", "Compact, lemon-shaped design"],
                   ["Settings", "12 adjustable air-pulse settings"],
-                  ["Material", "Silicone exterior"],
+                  ["Material", "Medical-grade silicone"],
                   ["Water resistance", "IPX7 waterproof rating"],
                   ["Charging", "USB-C or magnetic charging cable"],
                   ["Storage", "Satin pouch included"],
@@ -265,7 +266,7 @@ export default function Home() {
             <Card className="border-2 border-[#FFE14D]">
               <CardContent className="p-6 text-center space-y-3">
                 <div className="text-4xl">🍋</div>
-                <h3 className="font-bold text-lg text-gray-900">Silicone Exterior</h3>
+                <h3 className="font-bold text-lg text-gray-900">Medical-grade Silicone</h3>
                 <p className="text-gray-600 text-sm">
                   Clean according to the care instructions
                 </p>
@@ -416,6 +417,7 @@ export default function Home() {
           </div>
         </div>
 
+        <GuideSources />
       </article>
 
 
