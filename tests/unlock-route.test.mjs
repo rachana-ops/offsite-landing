@@ -43,12 +43,15 @@ test("all product links go directly to HelloNancy with the dedicated parameter h
   assert.deepEqual(config.rewrites, [{ source: "/", destination: "/unlock/index.html" }])
 })
 
-test("Taboola initializes once for account 2079308 and the existing relay remains installed", () => {
-  assert.equal(html.split("name: 'page_view'").length - 1, 1)
+test("Taboola initializes once and sends page_view to both accounts (2079308 old, 2143240 new)", () => {
+  assert.equal(html.split("name: 'page_view'").length - 1, 2)
+  assert.match(html, /name: 'page_view', id: 2079308/)
+  assert.match(html, /name: 'page_view', id: 2143240/)
   assert.equal(html.split("cdn.taboola.com/libtrc/unip/2079308/tfa.js").length - 1, 1)
   assert.match(html, /if \(!window\.__wellnessTaboolaPageView\)/)
   assert.match(html, /<script data-cfasync="false" async src="https:\/\/sub\.hellonancy\.com\/bridge\/v1\.js"><\/script>/)
   const helper = readFileSync(join(root, "js/wellness-attribution.js"), "utf8")
   assert.match(helper, /name: 'lem_product_click', id: 2079308/)
+  assert.match(helper, /name: 'lem_product_click', id: 2143240/)
   assert.doesNotMatch(helper, /name: ['"]purchase['"]|name: ['"]add_to_cart['"]/)
 })

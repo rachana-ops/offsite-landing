@@ -54,9 +54,10 @@ test('Taboola records a product click once per primary or middle click and ignor
   env.listeners.get('click')({target:env.anchor,button:0});
   env.listeners.get('auxclick')({target:env.anchor,button:1});
   env.listeners.get('auxclick')({target:env.anchor,button:2});
-  assert.equal(env.window._tfa.length,2);
-  for(const event of env.window._tfa){assert.equal(event.name,'lem_product_click');assert.equal(event.id,2079308);}
-  vm.runInContext(source,env.context);assert.equal(env.window._tfa.length,2);
+  assert.equal(env.window._tfa.length,4);
+  for(const event of env.window._tfa)assert.equal(event.name,'lem_product_click');
+  assert.deepEqual(env.window._tfa.map(e=>e.id),[2079308,2143240,2079308,2143240]);
+  vm.runInContext(source,env.context);assert.equal(env.window._tfa.length,4);
 });
 
 test('unrelated product and external links remain unchanged',()=>{

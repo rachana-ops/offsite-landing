@@ -62,6 +62,7 @@
       if ((type === 'click' || type === 'auxclick') && event.button <= 1 && /^https:\/\/hellonancy\.com\/products\/lem(?:[?#]|$)/.test(anchor.href)) {
         window._tfa = window._tfa || [];
         window._tfa.push({ notify: 'event', name: 'lem_product_click', id: 2079308 });
+        window._tfa.push({ notify: 'event', name: 'lem_product_click', id: 2143240 });
       }
     }, true);
   });

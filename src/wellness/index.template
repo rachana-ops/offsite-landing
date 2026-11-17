@@ -221,7 +221,9 @@
       window._tfa = window._tfa || [];
       if (!window.__wellnessTaboolaPageView) {
         window.__wellnessTaboolaPageView = true;
-        window._tfa.push({notify: 'event', name: 'page_view', id: 2079308});
+        // Dual-account: one tfa.js serves both; each push is routed by its own id.
+        window._tfa.push({notify: 'event', name: 'page_view', id: 2079308}); // carebloom-usd-network (old)
+        window._tfa.push({notify: 'event', name: 'page_view', id: 2143240}); // hellonancy-network (new)
       }
       !function (t, f, a, x) {
              if (!document.getElementById(x)) {
