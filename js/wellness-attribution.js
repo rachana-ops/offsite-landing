@@ -54,11 +54,28 @@
     if (root.matches && root.matches('a[href]')) patch(root);
     root.querySelectorAll('a[href]').forEach(patch);
   }
+  // Taboola click_cta (account 2143240 only): counts every advertorial CTA click
+  // that leaves for the store, independent of the product page's cookie banner.
+  // Matches on hostname + path (not exact URL) so href decoration cannot break it.
+  var storeHost = /^(?:www\.|shop\.)?hellonancy\.com$|^get\.nancyflow\.com$/i;
+  var storePath = /^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?products\//i;
+  var ctaHandled = typeof WeakSet === 'function' ? new WeakSet() : null;
+  function trackCtaClick(event, anchor) {
+    try {
+      if (event.button > 1) return; // primary (incl. Cmd/Ctrl/Shift, Enter) or middle only
+      if (ctaHandled) { if (ctaHandled.has(event)) return; ctaHandled.add(event); }
+      var url = new URL(anchor.getAttribute('href'), window.location.href);
+      if (!storeHost.test(url.hostname) || !storePath.test(url.pathname)) return;
+      window._tfa = window._tfa || [];
+      window._tfa.push({ notify: 'event', name: 'click_cta', id: 2143240 });
+    } catch (_) { /* Tracking must never interfere with navigation. */ }
+  }
   ['click', 'auxclick', 'pointerdown', 'contextmenu', 'focusin'].forEach(function (type) {
     document.addEventListener(type, function (event) {
       var anchor = event.target.closest && event.target.closest('a[href]');
       if (!anchor) return;
       patch(anchor);
+      if (type === 'click' || type === 'auxclick') trackCtaClick(event, anchor);
       if ((type === 'click' || type === 'auxclick') && event.button <= 1 && /^https:\/\/hellonancy\.com\/products\/lem(?:[?#]|$)/.test(anchor.href)) {
         window._tfa = window._tfa || [];
         window._tfa.push({ notify: 'event', name: 'lem_product_click', id: 2079308 });

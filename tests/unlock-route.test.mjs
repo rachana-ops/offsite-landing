@@ -53,5 +53,8 @@ test("Taboola initializes once and sends page_view to both accounts (2079308 old
   const helper = readFileSync(join(root, "js/wellness-attribution.js"), "utf8")
   assert.match(helper, /name: 'lem_product_click', id: 2079308/)
   assert.match(helper, /name: 'lem_product_click', id: 2143240/)
+  assert.equal(helper.split("name: 'click_cta'").length - 1, 1)
+  assert.match(helper, /name: 'click_cta', id: 2143240 \}/)
+  assert.doesNotMatch(helper, /name: 'click_cta', id: 2079308/)
   assert.doesNotMatch(helper, /name: ['"]purchase['"]|name: ['"]add_to_cart['"]/)
 })

@@ -10,7 +10,7 @@ function run({search='',href='https://hellonancy.com/products/lem',stored='',blo
   const document={readyState:'complete',documentElement:{},querySelectorAll(){return [anchor]},addEventListener(k,fn){listeners.set(k,fn)}};
   const window={location:{href:'https://wellnessinsiderguide.com/'+search,search},_tfa:[]};
   const sessionStorage={getItem(k){if(blockedStorage)throw Error('blocked');return storage.get(k)},setItem(k,v){if(blockedStorage)throw Error('blocked');storage.set(k,v)}};
-  const context=vm.createContext({window,document,sessionStorage,URL,URLSearchParams,Set,MutationObserver:class{constructor(fn){mutation=fn}observe(){}}});
+  const context=vm.createContext({window,document,sessionStorage,URL,URLSearchParams,Set,WeakSet,MutationObserver:class{constructor(fn){mutation=fn}observe(){}}});
   vm.runInContext(source,context);
   return {anchor,window,storage,listeners,context,mutate(){mutation([{type:'attributes',target:anchor,addedNodes:[]}])}};
 }
@@ -54,10 +54,29 @@ test('Taboola records a product click once per primary or middle click and ignor
   env.listeners.get('click')({target:env.anchor,button:0});
   env.listeners.get('auxclick')({target:env.anchor,button:1});
   env.listeners.get('auxclick')({target:env.anchor,button:2});
-  assert.equal(env.window._tfa.length,4);
-  for(const event of env.window._tfa)assert.equal(event.name,'lem_product_click');
-  assert.deepEqual(env.window._tfa.map(e=>e.id),[2079308,2143240,2079308,2143240]);
-  vm.runInContext(source,env.context);assert.equal(env.window._tfa.length,4);
+  env.listeners.get('contextmenu')({target:env.anchor,button:2});
+  const lem=env.window._tfa.filter(e=>e.name==='lem_product_click');
+  assert.deepEqual(lem.map(e=>e.id),[2079308,2143240,2079308,2143240]);
+  assert.equal(env.window._tfa.length,6);
+  vm.runInContext(source,env.context);assert.equal(env.window._tfa.length,6);
+});
+
+test('click_cta goes to account 2143240 only, once per store-bound click, with the exact payload',()=>{
+  const env=run({search:'?tblci=current'});
+  const click={target:env.anchor,button:0};
+  env.listeners.get('click')(click);env.listeners.get('click')(click); // same event twice must not double fire
+  env.listeners.get('auxclick')({target:env.anchor,button:1});
+  env.listeners.get('auxclick')({target:env.anchor,button:2});
+  for(const type of ['pointerdown','focusin','contextmenu'])env.listeners.get(type)({target:env.anchor,button:0});
+  const cta=env.window._tfa.filter(e=>e.name==='click_cta');
+  assert.deepEqual(JSON.parse(JSON.stringify(cta)),[{notify:'event',name:'click_cta',id:2143240},{notify:'event',name:'click_cta',id:2143240}]);
+  assert.equal(typeof cta[0].id,'number');
+});
+
+test('click_cta matches store hosts and paths despite decoration, and ignores non-CTA links',()=>{
+  const fires=href=>{const env=run({href});env.listeners.get('click')({target:env.anchor,button:0});return env.window._tfa.some(e=>e.name==='click_cta')};
+  for(const href of ['https://hellonancy.com/products/lem','https://hellonancy.com/products/lem?tblci=x#hn_at=abc','https://www.hellonancy.com/en-gb/products/lem','https://get.nancyflow.com/products/lem','https://shop.hellonancy.com/products/lem?x=1'])assert.equal(fires(href),true,href);
+  for(const href of ['#details','/unlock/','https://hellonancy.com/policies/privacy-policy','https://hellonancy.com/policies/terms-of-service','mailto:care@hellonancy.com','tel:+441234','https://example.com/products/lem','https://www.nhs.uk/conditions/menopause-and-perimenopause/symptoms/','https://commons.wikimedia.org/wiki/File:Clitoris_Anatomy.svg'])assert.equal(fires(href),false,href);
 });
 
 test('unrelated product and external links remain unchanged',()=>{
