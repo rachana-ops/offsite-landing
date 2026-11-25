@@ -153,3 +153,17 @@ test("the /unlock bridge loads attribution handling and retains source analytics
     assert.ok(html.includes(analyticsMarker), `${analyticsMarker} tracking is missing`)
   }
 })
+
+test("the /unlock bridge fires Taboola click_cta (2143240 only) for store CTA clicks", () => {
+  assert.ok(
+    html.includes("window._tfa.push({notify: 'event', name: 'click_cta', id: 2143240});"),
+    "click_cta payload must be exactly id 2143240 (number)",
+  )
+  assert.equal(html.split("name: 'click_cta'").length - 1, 1, "exactly one click_cta push")
+  assert.doesNotMatch(html, /click_cta[^\n]*2079308/)
+  assert.equal(html.split("unip/").length - 1, 1, "one tfa.js loader only")
+  assert.match(html, /page_view', id: 2079308/, "existing page_view is untouched")
+  assert.match(html, /document\.addEventListener\('click', onClick, true\)/)
+  assert.match(html, /document\.addEventListener\('auxclick', onClick, true\)/)
+  assert.match(html, /__nancyTaboolaClickCta/)
+})

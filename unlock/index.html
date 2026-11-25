@@ -228,6 +228,38 @@
       '//cdn.taboola.com/libtrc/unip/2079308/tfa.js',
       'tb_tfa_script');
     </script>
+    <!-- Taboola click_cta (hellonancy-network 2143240): one capture-phase listener.
+         Counts every advertorial CTA click that leaves for the store, independent of
+         the product page's consent banner. Never blocks or delays navigation. -->
+    <script type='text/javascript'>
+      (function () {
+        if (window.__nancyTaboolaClickCta) return;
+        window.__nancyTaboolaClickCta = true;
+        var seen = typeof WeakSet === 'function' ? new WeakSet() : null;
+        // Store hosts (match host + path, not the exact URL, so bridge/param decoration
+        // cannot break it): get.nancyflow.<market>, nancyflow.com, hellonancy.com (+subdomains).
+        var STORE_HOST = /^(?:get\.nancyflow\.[a-z.]+|nancyflow\.com|(?:[a-z0-9-]+\.)*hellonancy\.com)$/i;
+        var PRODUCT_PATH = /\/products\/[^\/]/i;
+        function isCta(a) {
+          var u = new URL(a.getAttribute('href'), location.href);
+          return /^https?:$/.test(u.protocol) && STORE_HOST.test(u.hostname) && PRODUCT_PATH.test(u.pathname);
+        }
+        function onClick(e) {
+          try {
+            // click = primary button (incl. Cmd/Ctrl/Shift and keyboard Enter); auxclick = middle only.
+            if (e.type === 'click' ? e.button !== 0 : e.button !== 1) return;
+            if (seen) { if (seen.has(e)) return; seen.add(e); }
+            var t = e.target;
+            var a = t && t.closest ? t.closest('a[href]') : null;
+            if (!a || !isCta(a)) return;
+            window._tfa = window._tfa || [];
+            window._tfa.push({notify: 'event', name: 'click_cta', id: 2143240});
+          } catch (err) {}
+        }
+        document.addEventListener('click', onClick, true);
+        document.addEventListener('auxclick', onClick, true);
+      })();
+    </script>
     <!-- End of Taboola Pixel Code -->
     <script type="module" crossorigin src="/unlock/assets/index-CkkXzjkq.js"></script>
     <link rel="stylesheet" crossorigin href="/unlock/assets/index-DQu2hBXx.css">
